@@ -1,0 +1,21 @@
+# Virtual environment
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Vosk models (DO NOT UPLOAD)
+vosk/
+vosk-model-*/
+body/vosk-model-*/
+
+# OS / junk
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,23 @@
+speechrecognition==3.10.0
+pyttsx3==2.90
+gtts==2.4.0  # For online TTS
+firebase-admin==6.2.0
+pyautogui==0.9.54
+psutil==5.9.6
+schedule==1.2.0
+sympy==1.12
+googletrans==4.0.0-rc1
+pyqt6==6.5.0  # For desktop UI
+
+flask==3.0.0  # For web UI
+cryptography==41.0.7  # For encryption
+ollama
+google-generativeai
+openai
+kokoro
+TTS 
+sounddevice 
+soundfile
+
+ollama 
+google-generativeai
