@@ -1,0 +1,101 @@
+jarvis-ai/
+│
+├── main.py                     # Program entry point; boots Jarvis, starts core loop
+├── config.py                   # Global configuration (paths, flags, model choices)
+├── .env                        # Secrets (Firebase keys, API tokens) – never commit
+├── requirements.txt            # Python dependencies list
+│
+├── brain/                      # 🧠 DECISION & INTELLIGENCE LAYER
+│   ├── brain.py                # Central orchestrator: receives input, decides actions
+│   ├── intent.py               # Classifies user input into intents (command, question, etc.)
+│   ├── context.py              # Tracks conversation context (last interactions, references)
+│   ├── router.py               # Routes intents to system / services / features
+│   ├── personality.py          # Controls tone, style, humor, emotional response
+│   ├── cloud_llm.py            # Online AI (Gemini / DeepSeek / OpenRouter)
+│   ├── local_llm.py             # Offline AI fallback (Ollama / local model)
+│   └── utils.py                # Brain-related helpers (prompt building, cleanup)
+│
+├── body/                       # 🎙️ INPUT / OUTPUT (EARS & MOUTH)
+│   ├── listen.py               # Speech-to-text (Vosk offline / online fallback)
+│   ├── speak.py                # Text-to-speech (offline/online voices)
+│   ├── wake_word.py            # Wake-word detection (e.g., “Hey Jarvis”)
+│   ├── mic.py                  # Microphone stream handling & selection
+│   └── audio_utils.py          # Audio helpers (resample, normalize, mute, etc.)
+│
+├── memory/                     # 🧠 LONG-TERM & SHARED MEMORY (FIRESTORE)
+│   ├── firestore_client.py     # Firebase Firestore CRUD operations
+│   ├── local_cache.py          # Offline cache (SQLite/JSON) when internet is down
+│   ├── user_data.py            # User profile, preferences, habits, likes/dislikes
+│   ├── conversation.py         # Stores and retrieves conversation history
+│   ├── memory_retriever.py     # Search engine for memory (“remember when…?”)
+│   ├── auth.py                 # Authentication for sensitive memory access
+│   ├── sync_manager.py         # Syncs local cache ↔ Firestore (multi-device brain)
+│   └── device_state.py         # Remembers per-device behavior & usage patterns
+│
+├── vault/                      # 🔐 SECURE DOCUMENT VAULT
+│   ├── vault_manager.py        # High-level vault logic (store, fetch, list docs)
+│   ├── encrypt.py              # Client-side AES-256 encryption
+│   ├── decrypt.py              # Client-side AES-256 decryption
+│   ├── indexer.py              # Tags, metadata, searchable index (stored encrypted)
+│   └── auth.py                 # Secondary auth (vault password / biometrics)
+│
+├── system/                     # 💻📱 DEVICE-SPECIFIC CONTROLS (BODY)
+│   ├── router.py               # Routes system intents to laptop or mobile handlers
+│   ├── device_manager.py       # Abstract device interface (what this device can do)
+│   │
+│   ├── laptop/                 # 💻 Laptop-only system actions
+│   │   ├── app_manager.py      # Open, close, switch desktop apps
+│   │   ├── volume.py           # System volume control
+│   │   ├── brightness.py       # Screen brightness control
+│   │   ├── window_manager.py   # Window focus, minimize, maximize
+│   │   ├── process.py          # Kill / inspect running processes
+│   │   ├── file_manager.py     # Organize, move, delete files
+│   │   ├── screenshot.py       # Take screenshots
+│   │   └── run_code.py         # Execute scripts or terminal commands
+│   │
+│   └── mobile/                 # 📱 Mobile-only system actions
+│       ├── camera.py           # Access camera
+│       ├── document_scanner.py # Scan docs and send to secure vault
+│       ├── notifications.py    # Read system notifications
+│       ├── messaging.py        # Send messages (if permissions allow)
+│       └── gps.py              # Fetch location data
+│
+├── services/                   # ☁️ REAL-TIME INTERNET SERVICES
+│   ├── service_router.py       # Routes service-related intents
+│   ├── weather/                # Weather data fetch & formatting
+│   ├── news/                   # News headlines & summaries
+│   ├── crypto/                 # Crypto prices & alerts
+│   ├── time_date/              # Time, date, timezone utilities
+│   ├── youtube/                # YouTube search & playback
+│   ├── dictionary/             # Word meanings & definitions
+│   └── automation/             # IF-this-THEN-that rules & triggers
+│
+├── music/                      # 🎵 MUSIC ENGINE
+│   ├── local_player.py         # Play local audio files
+│   ├── youtube_player.py       # Stream music from YouTube
+│   ├── playlist.py             # Playlist handling
+│   └── mood_engine.py          # Mood-based music selection
+│
+├── features/                   # 🧩 HIGH-LEVEL USER FEATURES
+│   ├── daily_life.py           # Reminders, alarms, to-do lists
+│   ├── utilities.py            # Calculator, converters, translators
+│   ├── online_powers.py        # Combines multiple online services
+│   ├── personal_vault.py       # User-facing vault commands
+│   └── custom_commands.py      # User-defined custom commands & shortcuts
+│
+├── ui/                         # 🖥️📱 USER INTERFACES
+│   ├── desktop/                # Desktop GUI (Qt/PyQt)
+│   ├── mobile/                 # Mobile app UI
+│   └── web/                    # Web dashboard
+│
+├── utils/                      # 🧰 SHARED UTILITIES
+│   ├── logger.py               # Logging system
+│   ├── network.py              # Internet connectivity checks
+│   ├── threading.py            # Async & threading helpers
+│   └── constants.py            # Global constants & enums
+│
+├── database/                   # 🗄️ LOCAL STORAGE
+│   ├── cache.db                # Offline cache DB
+│   └── vault.db                # Local encrypted vault DB
+│
+└── tests/                      # 🧪 Unit & integration tests

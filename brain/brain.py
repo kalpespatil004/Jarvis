@@ -21,12 +21,12 @@ def brain_loop():
     This function never returns unless Jarvis is shut down.
     """
 
-    speak("Jarvis online. Systems stable.")
+  
 
     while True:
         try:
             # 1. LISTEN
-            command = listen()
+            command =input("You: ")  # Replace with listen() for actual voice input
 
             if not command:
                 continue
