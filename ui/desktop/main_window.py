@@ -40,6 +40,17 @@ class ListenWorker(QObject):
         except VoiceInputError as exc:
             self.error.emit(str(exc))
 
+class BrainWorker(QObject):
+    finished = pyqtSignal(str)
+
+    def __init__(self, text: str):
+        super().__init__()
+        self.text = text
+
+    def run(self):
+        response = process_text(self.text)
+        self.finished.emit(response or "")
+
 
 class MainWindow(QWidget):
     def __init__(self):
