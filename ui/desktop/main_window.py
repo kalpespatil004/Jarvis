@@ -1,16 +1,18 @@
+from PyQt6.QtCore import QObject, QThread, QTimer, pyqtSignal
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout,
-    QTextEdit, QLineEdit, QPushButton
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt6.QtCore import QThread, QObject, pyqtSignal
-from PyQt6.QtGui import QTextCursor
-from PyQt6.QtWidgets import QLabel
+
+from brain.brain import process_text
 
 
-
-# =====================================
-# Worker (runs brain in background)
-# =====================================
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
 
@@ -19,239 +21,184 @@ class BrainWorker(QObject):
         self.text = text
 
     def run(self):
-        from brain.brain import process_text
-        reply = process_text(self.text)
-        self.finished.emit(reply)
-
-# =====================================
-# voices recognition worker
-# =====================================
-class VoiceWorker(QObject):
-    finished = pyqtSignal(str)
-
-    def run(self):
-        from body.listen import listen
-        text = listen()
-        self.finished.emit(text or "")
-
-# =====================================
-# Speak Worker         
-# =====================================
-class SpeakWorker(QObject):
-    finished = pyqtSignal()
-
-    def __init__(self, text: str):
-        super().__init__()
-        self.text = text
-
-    def run(self):
-        from body.speak import speak
-        speak(self.text)
-        self.finished.emit()
-        print("[UI] SpeakWorker running")
+        response = process_text(self.text)
+        self.finished.emit(response or "")
 
 
-
-
-# =====================================
-# Main Window
-# =====================================
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("JARVIS")
-        self.setGeometry(300, 150, 900, 600)
+        self.setGeometry(250, 120, 1000, 640)
+
+        self.avatar_state = "idle"
+        self.speaking_tick = False
+        self._thread: QThread | None = None
+        self._worker: BrainWorker | None = None
+
+        self.avatar_map = {
+            "idle": "(＾▽＾)",
+            "thinking": "(・_・?)",
+            "speaking": "(＾◡＾)",
+            "speaking_alt": "(＾o＾)",
+            "listening": "( •̀ ω •́ )✧",
+        }
+
+        self.speaking_timer = QTimer(self)
+        self.speaking_timer.setInterval(120)
+        self.speaking_timer.timeout.connect(self._animate_speaking)
 
         self.init_ui()
+        self.set_avatar_state("idle")
 
     def init_ui(self):
-        layout = QVBoxLayout()
+        root_layout = QHBoxLayout()
 
-        # Chat display
+        # Avatar panel
+        avatar_panel = QFrame()
+        avatar_panel.setObjectName("avatarPanel")
+        avatar_layout = QVBoxLayout(avatar_panel)
+
+        title = QLabel("Jarvis Avatar")
+        title.setObjectName("avatarTitle")
+        self.avatar_label = QLabel()
+        self.avatar_label.setObjectName("avatarFace")
+        self.state_label = QLabel()
+        self.state_label.setObjectName("avatarState")
+
+        avatar_layout.addWidget(title)
+        avatar_layout.addWidget(self.avatar_label, 1)
+        avatar_layout.addWidget(self.state_label)
+
+        # Chat panel
+        chat_panel = QFrame()
+        chat_layout = QVBoxLayout(chat_panel)
+
         self.chat_area = QTextEdit()
         self.chat_area.setReadOnly(True)
-        self.chat_area.append("Jarvis: Online.")
-        layout.addWidget(self.chat_area)
+        self.chat_area.append("Jarvis: Online. UI avatar module initialized.")
 
-        
-        # Input row
         input_layout = QHBoxLayout()
-
         self.input_box = QLineEdit()
         self.input_box.setPlaceholderText("Type a command...")
         self.input_box.returnPressed.connect(self.send_message)
 
-        send_btn = QPushButton("Send")
-        send_btn.clicked.connect(self.send_message)
-
-        self.mic_btn = QPushButton("🎙️")
-        self.mic_btn.clicked.connect(self.start_listening)
+        self.send_btn = QPushButton("Send")
+        self.send_btn.clicked.connect(self.send_message)
 
         input_layout.addWidget(self.input_box)
-        input_layout.addWidget(send_btn)
-        input_layout.addWidget(self.mic_btn)
+        input_layout.addWidget(self.send_btn)
 
-        layout.addLayout(input_layout)
-        self.setLayout(layout)
+        chat_layout.addWidget(self.chat_area)
+        chat_layout.addLayout(input_layout)
 
-        # Status indicator
-        self.status_label = QLabel("● Idle")
-        self.status_label.setStyleSheet("color: #00ff88; font-weight: bold;")
-        layout.addWidget(self.status_label)
+        root_layout.addWidget(avatar_panel, 2)
+        root_layout.addWidget(chat_panel, 5)
+        self.setLayout(root_layout)
 
-    # =====================================
-    # Send message (NON-BLOCKING)
-    # =====================================
-    def send_message(self):
-        text = self.input_box.text().strip()
-        if not text:
-            return
-
-        # Show user message
-        self.chat_area.append(f"You: {text}")
-        self.input_box.clear()
-        self.input_box.setEnabled(False)
-
-        # Thinking indicator
-        self.set_status("thinking")
-
-        self.chat_area.append("Jarvis: Thinking...")
-
-        # Thread setup
-        self.thread = QThread()
-        self.worker = BrainWorker(text)
-        self.worker.moveToThread(self.thread)
-
-        self.thread.started.connect(self.worker.run)
-        self.worker.finished.connect(self.on_response)          # type: ignore
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-
-        self.thread.start()
-
-    # =====================================
-    # Handle response from brain
-    # =====================================
-    def on_response(self, reply: str):
-        # Remove "Thinking..." line
-        cursor = self.chat_area.textCursor()
-        cursor.movePosition(QTextCursor.MoveOperation.End)
-        cursor.select(QTextCursor.SelectionType.BlockUnderCursor)
-        cursor.removeSelectedText()
-        cursor.deletePreviousChar()
-
-        # Show response in UI
-        self.chat_area.append(f"Jarvis: {reply}")
-
-        # Auto-scroll
-        self.chat_area.verticalScrollBar().setValue(
-            self.chat_area.verticalScrollBar().maximum()
+        self.setStyleSheet(
+            """
+            QWidget {
+                background: #0f1419;
+                color: #e6edf3;
+                font-size: 14px;
+            }
+            #avatarPanel {
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            #avatarTitle {
+                font-size: 16px;
+                font-weight: 600;
+                color: #7ee787;
+            }
+            #avatarFace {
+                font-size: 54px;
+                border: 1px solid #30363d;
+                border-radius: 8px;
+                background: #0d1117;
+                qproperty-alignment: AlignCenter;
+                min-height: 240px;
+            }
+            #avatarState {
+                color: #79c0ff;
+                font-size: 13px;
+            }
+            QTextEdit, QLineEdit {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 8px;
+                padding: 8px;
+            }
+            QPushButton {
+                background: #238636;
+                color: white;
+                border-radius: 8px;
+                padding: 8px 14px;
+            }
+            QPushButton:disabled {
+                background: #2d333b;
+                color: #8b949e;
+            }
+            """
         )
 
-        # Speak reply (threaded)
-        self.start_speaking(reply)
+    def set_avatar_state(self, state: str):
+        self.avatar_state = state
 
-        self.input_box.setEnabled(True)
+        if state == "speaking":
+            self.speaking_tick = False
+            self.speaking_timer.start()
+            self.avatar_label.setText(self.avatar_map["speaking"])
+        else:
+            self.speaking_timer.stop()
+            self.avatar_label.setText(self.avatar_map.get(state, self.avatar_map["idle"]))
 
-    def start_listening(self):
-        self.input_box.setEnabled(False)
-        self.set_status("listening")
+        self.state_label.setText(f"State: {state}")
 
-        self.chat_area.append("Jarvis: Listening...")
+    def _animate_speaking(self):
+        self.speaking_tick = not self.speaking_tick
+        key = "speaking_alt" if self.speaking_tick else "speaking"
+        self.avatar_label.setText(self.avatar_map[key])
 
-        self.voice_thread = QThread()
-        self.voice_worker = VoiceWorker()
-        self.voice_worker.moveToThread(self.voice_thread)
-
-        self.voice_thread.started.connect(self.voice_worker.run)
-        self.voice_worker.finished.connect(self.on_voice_input)     # type: ignore
-        self.voice_worker.finished.connect(self.voice_thread.quit)
-        self.voice_worker.finished.connect(self.voice_worker.deleteLater)
-        self.voice_thread.finished.connect(self.voice_thread.deleteLater)
-
-        self.voice_thread.start()
-
-
-    def on_voice_input(self, text: str):
-        # Remove "Listening..." line
-        cursor = self.chat_area.textCursor()
-        cursor.movePosition(QTextCursor.MoveOperation.End)
-        cursor.select(QTextCursor.SelectionType.BlockUnderCursor)
-        cursor.removeSelectedText()
-        cursor.deletePreviousChar()
-
-        self.input_box.setEnabled(True)
-
-        if not text:
-            self.chat_area.append("Jarvis: I didn’t catch that.")
+    def send_message(self):
+        text = self.input_box.text().strip()
+        if not text or self._thread is not None:
             return
 
-        # Show recognized speech
         self.chat_area.append(f"You: {text}")
+        self.input_box.clear()
 
-        # Process like typed input
-        self.send_voice_text(text)
+        self.set_avatar_state("thinking")
+        self.send_btn.setDisabled(True)
+        self.input_box.setDisabled(True)
 
-    def send_voice_text(self, text: str):
-        self.input_box.setEnabled(False)
-        self.set_status("thinking")
+        self._thread = QThread(self)
+        self._worker = BrainWorker(text)
+        self._worker.moveToThread(self._thread)
 
-        self.chat_area.append("Jarvis: Thinking...")
+        self._thread.started.connect(self._worker.run)
+        self._worker.finished.connect(self._handle_response)
+        self._worker.finished.connect(self._thread.quit)
+        self._worker.finished.connect(self._worker.deleteLater)
+        self._thread.finished.connect(self._thread.deleteLater)
+        self._thread.finished.connect(self._on_thread_complete)
 
-        self.thread = QThread()
-        self.worker = BrainWorker(text)
-        self.worker.moveToThread(self.thread)
+        self._thread.start()
 
-        self.thread.started.connect(self.worker.run)
-        self.worker.finished.connect(self.on_response)              # type: ignore
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.thread.start()
+    def _handle_response(self, response: str):
+        if response:
+            self.chat_area.append(f"Jarvis: {response}")
+            self.set_avatar_state("speaking")
+            QTimer.singleShot(1200, lambda: self.set_avatar_state("idle"))
+        else:
+            self.set_avatar_state("idle")
 
-    def start_speaking(self, text: str):
-        self.mic_btn.setEnabled(False)
-        self.set_status("speaking")
-
-
-        self.speak_thread = QThread()
-        self.speak_worker = SpeakWorker(text)
-
-        # IMPORTANT: keep references
-        self.speak_worker.moveToThread(self.speak_thread)
-
-        self.speak_thread.started.connect(self.speak_worker.run)
-        self.speak_worker.finished.connect(self.on_speaking_done)
-        self.speak_worker.finished.connect(self.speak_thread.quit)
-        self.speak_worker.finished.connect(self.speak_worker.deleteLater)
-        self.speak_thread.finished.connect(self.speak_thread.deleteLater)
-
-        self.speak_thread.start()
-
-    def on_speaking_done(self):
-        self.mic_btn.setEnabled(True)
-        self.set_status("idle")
-
-
-
-    def set_status(self, state: str):
-        colors = {
-            "idle": "#00ff88",
-            "listening": "#00bfff",
-            "thinking": "#ffd700",
-            "speaking": "#ff0800",
-        }
-
-        labels = {
-            "idle": "● Idle",
-            "listening": "● Listening",
-            "thinking": "● Thinking",
-            "speaking": "● Speaking",
-        }
-
-        color = colors.get(state, "#ffffff")
-        label = labels.get(state, "● Unknown")
-
-        self.status_label.setText(label)
-        self.status_label.setStyleSheet(f"color: {color}; font-weight: bold;")
+    def _on_thread_complete(self):
+        self._thread = None
+        self._worker = None
+        self.send_btn.setDisabled(False)
+        self.input_box.setDisabled(False)
+        self.input_box.setFocus()
