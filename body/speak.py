@@ -61,7 +61,6 @@ import queue
 import threading
 import sounddevice as sd
 from TTS.api import TTS
-import random
 # ===============================
 # CONFIG
 # ===============================
@@ -104,12 +103,14 @@ def _tts_worker(text: str):
 
     print(f"Jarvis: {text}")
 
-    wav = _tts.tts(
-        text=text,
-        speaker=DEFAULT_SPEAKER
-    )
-
-    _audio_queue.put(wav)
+    try:
+        wav = _tts.tts(
+            text=text,
+            speaker=DEFAULT_SPEAKER
+        )
+        _audio_queue.put(wav)
+    except Exception as exc:
+        print(f"[TTS ERROR] Failed to synthesize speech: {exc}")
 
 # ===============================
 # PUBLIC SPEAK (NON-BLOCKING)
@@ -149,8 +150,11 @@ def audio_loop():
     """
     while True:
         wav = _audio_queue.get()
-        sd.play(wav, SAMPLE_RATE)
-        sd.wait()
+        try:
+            sd.play(wav, SAMPLE_RATE)
+            sd.wait()
+        except Exception as exc:
+            print(f"[TTS ERROR] Failed during audio playback: {exc}")
 
 # ===============================
 # WARM-UP (LEVEL 2)

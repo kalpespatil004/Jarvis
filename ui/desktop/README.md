@@ -33,10 +33,11 @@ You should see:
 
 - left panel: avatar face + state text,
 - right panel: chat log + input.
+- `🎤 Listen` button for one-shot voice input through your microphone.
 
 ## 3) How message flow works
 
-1. You type a message and press Enter / Send.
+1. You can either type a message (Enter / Send) or click `🎤 Listen` for voice input.
 2. UI immediately appends your text.
 3. UI state changes to `thinking`.
 4. `process_text(...)` runs in `BrainWorker` on `QThread`.
@@ -75,6 +76,9 @@ Then your avatar motion matches actual audio playback.
 
 - **UI shows response but no voice output**  
   Make sure `sounddevice`, `soundfile`, and `TTS` are installed, and your system audio output device works.
+
+- **Listen button fails**  
+  Install microphone dependencies (`SpeechRecognition`, `pyaudio`) and allow microphone permission in OS settings.
 
 - **UI freezes**  
   Keep long-running work off main thread (current worker-thread setup already does this).
