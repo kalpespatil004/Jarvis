@@ -79,6 +79,7 @@ Then your avatar motion matches actual audio playback.
 
 - **Listen button fails**  
   Install microphone dependencies (`SpeechRecognition`, `pyaudio`) and allow microphone permission in OS settings.
+  If missing, UI still opens and shows a clear in-chat error when `🎤 Listen` is pressed.
 
 - **UI freezes**  
   Keep long-running work off main thread (current worker-thread setup already does this).

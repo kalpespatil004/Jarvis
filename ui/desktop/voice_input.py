@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-import speech_recognition as sr
+try:
+    import speech_recognition as sr
+except Exception:  # dependency not installed
+    sr = None
 
 
 class VoiceInputError(RuntimeError):
@@ -15,6 +18,11 @@ def capture_voice_text(timeout: int = 5, phrase_time_limit: int = 7) -> str:
 
     Uses SpeechRecognition with Google Web Speech API for simple setup.
     """
+    if sr is None:
+        raise VoiceInputError(
+            "speech_recognition is not installed. Run: pip install SpeechRecognition pyaudio"
+        )
+
     recognizer = sr.Recognizer()
 
     try:
