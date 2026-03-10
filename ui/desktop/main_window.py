@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (
 )
 
 from brain.brain import process_text
-from ui.desktop.voice_input import VoiceInputError, capture_voice_text
+from body.listen import listen
 from ui.desktop.tts_bridge import speak_text
 
 
@@ -35,10 +35,13 @@ class ListenWorker(QObject):
 
     def run(self):
         try:
-            text = capture_voice_text()
-            self.success.emit(text)
-        except VoiceInputError as exc:
-            self.error.emit(str(exc))
+            text = listen()   # your Vosk listener
+            if text:
+                self.success.emit(text)
+            else:
+                self.error.emit("No command detected")
+        except Exception as e:
+            self.error.emit(str(e))
 
 
 class MainWindow(QWidget):
