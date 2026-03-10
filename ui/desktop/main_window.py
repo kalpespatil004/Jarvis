@@ -12,9 +12,9 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from body.speak import speak
 from brain.brain import process_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
+from ui.desktop.tts_bridge import speak_text
 
 
 class BrainWorker(QObject):
@@ -223,7 +223,9 @@ class MainWindow(QWidget):
         if response:
             self.chat_area.append(f"Jarvis: {response}")
             self.set_avatar_state("speaking")
-            speak(response)
+            error = speak_text(response)
+            if error:
+                self.chat_area.append(f"Jarvis: {error}")
             QTimer.singleShot(1800, lambda: self.set_avatar_state("idle"))
         else:
             self.set_avatar_state("idle")
