@@ -91,6 +91,8 @@ DEFAULT_SPEAKER = "p228"
 # ===============================
 
 _audio_queue = queue.Queue()
+_audio_loop_started = False
+_audio_loop_lock = threading.Lock()
 
 # ===============================
 # BACKGROUND TTS WORKER
@@ -114,12 +116,27 @@ def _tts_worker(text: str):
 # ===============================
 
 def speak(text: str):
+    ensure_audio_loop_started()
     text = text.replace("*", "")
     threading.Thread(
         target=_tts_worker,
         args=(text,),
         daemon=True
     ).start()
+
+
+def ensure_audio_loop_started():
+    """
+    Start audio playback loop once in a background daemon thread.
+    Needed for UI mode where `audio_loop()` is not running in `main.py`.
+    """
+    global _audio_loop_started
+    with _audio_loop_lock:
+        if _audio_loop_started:
+            return
+
+        threading.Thread(target=audio_loop, daemon=True).start()
+        _audio_loop_started = True
 
 # ===============================
 # AUDIO LOOP (MAIN THREAD)
