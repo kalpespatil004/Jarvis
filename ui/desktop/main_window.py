@@ -19,12 +19,7 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
-    def run(self):
-        try:
-            text = capture_voice_text()
-            self.success.emit(text)
-        except VoiceInputError as exc:
-            self.error.emit(str(exc))
+
 
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
