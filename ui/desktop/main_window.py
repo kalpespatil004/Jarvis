@@ -1,21 +1,37 @@
 from __future__ import annotations
 
-from PyQt6.QtCore import QObject, QThread, QTimer, pyqtSignal
+from pathlib import Path
+
+from PyQt6.QtCore import QObject, QThread, QTimer, Qt, QUrl, pyqtSignal
+from PyQt6.QtGui import QPalette
+from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
+from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
-    QFrame,
     QHBoxLayout,
     QLabel,
     QLineEdit,
     QPushButton,
-    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
 
 from brain.brain import process_text
-from body.listen import listen
 from ui.desktop.tts_bridge import speak_text
+from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
+class ListenWorker(QObject):
+    success = pyqtSignal(str)
+    error = pyqtSignal(str)
+
+    def run(self):
+        try:
+            text = listen()   # your Vosk listener
+            if text:
+                self.success.emit(text)
+            else:
+                self.error.emit("No command detected")
+        except Exception as e:
+            self.error.emit(str(e))
 
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
@@ -35,137 +51,195 @@ class ListenWorker(QObject):
 
     def run(self):
         try:
-            text = listen()   # your Vosk listener
-            if text:
-                self.success.emit(text)
-            else:
-                self.error.emit("No command detected")
-        except Exception as e:
-            self.error.emit(str(e))
+            text = capture_voice_text()
+            self.success.emit(text)
+        except VoiceInputError as exc:
+            self.error.emit(str(exc))
 
 
 class MainWindow(QWidget):
+    VIDEO_NAME_CANDIDATES = {
+        "idle": ["idle.mp4", "ideal.mp4"],
+        "listening": ["listening.mp4", "listnimg.mp4"],
+        "thinking": ["thinking.mp4"],
+        "speaking": ["speaking.mp4"],
+    }
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("JARVIS")
-        self.setGeometry(250, 120, 1000, 640)
 
-        self.avatar_state = "idle"
-        self.speaking_tick = False
         self._brain_thread: QThread | None = None
         self._brain_worker: BrainWorker | None = None
         self._listen_thread: QThread | None = None
         self._listen_worker: ListenWorker | None = None
 
-        self.avatar_map = {
-            "idle": "(＾▽＾)",
-            "thinking": "(・_・?)",
-            "speaking": "(＾◡＾)",
-            "speaking_alt": "(＾o＾)",
-            "listening": "( •̀ ω •́ )✧",
-        }
+        self.avatar_state = "idle"
+        self.video_paths = self._resolve_video_paths()
 
-        self.speaking_timer = QTimer(self)
-        self.speaking_timer.setInterval(120)
-        self.speaking_timer.timeout.connect(self._animate_speaking)
+        self.player = QMediaPlayer(self)
+        self.audio_output = QAudioOutput(self)
+        self.player.setAudioOutput(self.audio_output)
+        self.video_widget = QVideoWidget(self)
+        self.player.setVideoOutput(self.video_widget)
+
+        # Loop current state video forever.
+        self.player.mediaStatusChanged.connect(self._on_media_status_changed)
 
         self.init_ui()
+        self._apply_video_geometry_hint()
         self.set_avatar_state("idle")
 
+    def _resolve_video_paths(self) -> dict[str, Path]:
+        avatar_dir = Path(__file__).resolve().parents[2] / "assets" / "avatar"
+        resolved: dict[str, Path] = {}
+
+        for state, candidates in self.VIDEO_NAME_CANDIDATES.items():
+            for name in candidates:
+                path = avatar_dir / name
+                if path.exists():
+                    resolved[state] = path
+                    break
+
+        return resolved
+
+    def _apply_video_geometry_hint(self):
+        # Keep fixed window size based on avatar resolution (fallback to 560x840).
+        try:
+            import cv2  # type: ignore
+
+            probe = self.video_paths.get("idle") or next(iter(self.video_paths.values()))
+            cap = cv2.VideoCapture(str(probe))
+            ok, frame = cap.read()
+            cap.release()
+            if ok and frame is not None:
+                height, width = frame.shape[:2]
+                controls_height = 72
+                self.setFixedSize(width, height + controls_height)
+                return
+        except Exception:
+            pass
+
+        self.setFixedSize(560, 912)
+
     def init_ui(self):
-        root_layout = QHBoxLayout()
+        root = QVBoxLayout()
+        root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
 
-        avatar_panel = QFrame()
-        avatar_panel.setObjectName("avatarPanel")
-        avatar_layout = QVBoxLayout(avatar_panel)
+        video_container = QWidget(self)
+        video_layout = QVBoxLayout(video_container)
+        video_layout.setContentsMargins(0, 0, 0, 0)
+        video_layout.setSpacing(0)
+        video_layout.addWidget(self.video_widget)
 
-        title = QLabel("Jarvis Avatar")
-        title.setObjectName("avatarTitle")
-        self.avatar_label = QLabel()
-        self.avatar_label.setObjectName("avatarFace")
-        self.state_label = QLabel()
-        self.state_label.setObjectName("avatarState")
+        self.subtitle_label = QLabel("Jarvis: Online.", video_container)
+        self.subtitle_label.setWordWrap(True)
+        self.subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.subtitle_label.setStyleSheet(
+            """
+            QLabel {
+                color: white;
+                background-color: rgba(0, 0, 0, 160);
+                border-radius: 10px;
+                padding: 10px 14px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            """
+        )
+        self.subtitle_label.setMinimumHeight(56)
 
-        avatar_layout.addWidget(title)
-        avatar_layout.addWidget(self.avatar_label, 1)
-        avatar_layout.addWidget(self.state_label)
+        # Keep subtitles near bottom over video.
+        video_layout.addStretch(1)
+        video_layout.addWidget(self.subtitle_label)
+        video_layout.setAlignment(self.subtitle_label, Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom)
 
-        chat_panel = QFrame()
-        chat_layout = QVBoxLayout(chat_panel)
+        controls = QWidget(self)
+        controls.setFixedHeight(72)
+        controls.setObjectName("controlsPanel")
+        controls_layout = QHBoxLayout(controls)
+        controls_layout.setContentsMargins(10, 8, 10, 8)
+        controls_layout.setSpacing(8)
 
-        self.chat_area = QTextEdit()
-        self.chat_area.setReadOnly(True)
-        self.chat_area.append("Jarvis: Online. UI avatar module initialized.")
-
-        input_layout = QHBoxLayout()
         self.input_box = QLineEdit()
         self.input_box.setPlaceholderText("Type a command...")
         self.input_box.returnPressed.connect(self.send_message)
 
-        self.listen_btn = QPushButton("🎤 Listen")
+        self.listen_btn = QPushButton("Listen")
         self.listen_btn.clicked.connect(self.listen_once)
 
         self.send_btn = QPushButton("Send")
         self.send_btn.clicked.connect(self.send_message)
 
-        input_layout.addWidget(self.input_box)
-        input_layout.addWidget(self.listen_btn)
-        input_layout.addWidget(self.send_btn)
+        controls_layout.addWidget(self.input_box, 1)
+        controls_layout.addWidget(self.listen_btn)
+        controls_layout.addWidget(self.send_btn)
 
-        chat_layout.addWidget(self.chat_area)
-        chat_layout.addLayout(input_layout)
-
-        root_layout.addWidget(avatar_panel, 2)
-        root_layout.addWidget(chat_panel, 5)
-        self.setLayout(root_layout)
+        root.addWidget(video_container, 1)
+        root.addWidget(controls, 0)
+        self.setLayout(root)
 
         self.setStyleSheet(
             """
-            QWidget { background: #0f1419; color: #e6edf3; font-size: 14px; }
-            #avatarPanel { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 10px; }
-            #avatarTitle { font-size: 16px; font-weight: 600; color: #7ee787; }
-            #avatarFace {
-                font-size: 54px; border: 1px solid #30363d; border-radius: 8px;
-                background: #0d1117; qproperty-alignment: AlignCenter; min-height: 240px;
+            QWidget { background: #05070a; color: #e6edf3; }
+            #controlsPanel { background: #0f1419; border-top: 1px solid #30363d; }
+            QLineEdit {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 8px;
+                padding: 8px;
+                font-size: 14px;
             }
-            #avatarState { color: #79c0ff; font-size: 13px; }
-            QTextEdit, QLineEdit { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 8px; }
-            QPushButton { background: #238636; color: white; border-radius: 8px; padding: 8px 14px; }
+            QPushButton {
+                background: #238636;
+                color: white;
+                border-radius: 8px;
+                padding: 8px 14px;
+                font-size: 14px;
+            }
             QPushButton:disabled { background: #2d333b; color: #8b949e; }
             """
         )
 
-    def set_avatar_state(self, state: str):
-        self.avatar_state = state
-
-        if state == "speaking":
-            self.speaking_tick = False
-            self.speaking_timer.start()
-            self.avatar_label.setText(self.avatar_map["speaking"])
-        else:
-            self.speaking_timer.stop()
-            self.avatar_label.setText(self.avatar_map.get(state, self.avatar_map["idle"]))
-
-        self.state_label.setText(f"State: {state}")
-
-    def _animate_speaking(self):
-        self.speaking_tick = not self.speaking_tick
-        key = "speaking_alt" if self.speaking_tick else "speaking"
-        self.avatar_label.setText(self.avatar_map[key])
+        palette = self.video_widget.palette()
+        palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.black)
+        self.video_widget.setPalette(palette)
+        self.video_widget.setAutoFillBackground(True)
 
     def _set_inputs_enabled(self, enabled: bool):
         self.send_btn.setDisabled(not enabled)
-        self.input_box.setDisabled(not enabled)
         self.listen_btn.setDisabled(not enabled)
+        self.input_box.setDisabled(not enabled)
         if enabled:
             self.input_box.setFocus()
+
+    def _set_subtitle(self, speaker: str, text: str):
+        self.subtitle_label.setText(f"{speaker}: {text}")
+
+    def set_avatar_state(self, state: str):
+        self.avatar_state = state
+        source = self.video_paths.get(state) or self.video_paths.get("idle")
+
+        if source is None:
+            self._set_subtitle("Jarvis", "Avatar video files not found in assets/avatar/")
+            return
+
+        self.player.stop()
+        self.player.setSource(QUrl.fromLocalFile(str(source)))
+        self.player.play()
+
+    def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
+        if status == QMediaPlayer.MediaStatus.EndOfMedia:
+            self.player.setPosition(0)
+            self.player.play()
 
     def listen_once(self):
         if self._listen_thread is not None or self._brain_thread is not None:
             return
 
-        self.chat_area.append("Jarvis: Listening...")
         self.set_avatar_state("listening")
+        self._set_subtitle("Jarvis", "Listening...")
         self._set_inputs_enabled(False)
 
         self._listen_thread = QThread(self)
@@ -184,12 +258,12 @@ class MainWindow(QWidget):
         self._listen_thread.start()
 
     def _on_listen_success(self, text: str):
-        self.chat_area.append(f"You (voice): {text}")
         self.input_box.setText(text)
+        self._set_subtitle("You", text)
         self.send_message()
 
     def _on_listen_error(self, message: str):
-        self.chat_area.append(f"Jarvis: Listen error: {message}")
+        self._set_subtitle("Jarvis", f"Listen error: {message}")
         self.set_avatar_state("idle")
 
     def _on_listen_complete(self):
@@ -203,9 +277,8 @@ class MainWindow(QWidget):
         if not text or self._brain_thread is not None:
             return
 
-        self.chat_area.append(f"You: {text}")
         self.input_box.clear()
-
+        self._set_subtitle("You", text)
         self.set_avatar_state("thinking")
         self._set_inputs_enabled(False)
 
@@ -219,16 +292,15 @@ class MainWindow(QWidget):
         self._brain_worker.finished.connect(self._brain_worker.deleteLater)
         self._brain_thread.finished.connect(self._brain_thread.deleteLater)
         self._brain_thread.finished.connect(self._on_brain_complete)
-
         self._brain_thread.start()
 
     def _handle_response(self, response: str):
         if response:
-            self.chat_area.append(f"Jarvis: {response}")
+            self._set_subtitle("Jarvis", response)
             self.set_avatar_state("speaking")
             error = speak_text(response)
             if error:
-                self.chat_area.append(f"Jarvis: {error}")
+                self._set_subtitle("Jarvis", error)
             QTimer.singleShot(1800, lambda: self.set_avatar_state("idle"))
         else:
             self.set_avatar_state("idle")

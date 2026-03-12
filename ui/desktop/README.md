@@ -1,85 +1,52 @@
-# Desktop Anime-Style UI: How to use in your project
+# Desktop Avatar Video UI
 
-This folder now contains a starter desktop UI where Jarvis has:
+This desktop UI uses real avatar videos from `assets/avatar/` and overlays subtitles on the video.
 
-- a chat panel,
-- an avatar panel,
-- state transitions (`idle`, `thinking`, `speaking`),
-- and non-blocking message processing with a worker thread.
+## Required avatar videos
 
-## 1) Install dependencies
+Put these files in `assets/avatar/`:
 
-From the project root:
+- `idle.mp4` (or `ideal.mp4` fallback)
+- `listening.mp4` (or `listnimg.mp4` fallback)
+- `thinking.mp4`
+- `speaking.mp4`
 
-```bash
-pip install -r requirement.txt
-```
-
-If PyQt install fails on your machine, install these directly:
-
-```bash
-pip install pyqt6 PyQt6-Qt6 PyQt6-sip
-```
-
-## 2) Start the desktop UI
-
-From project root (`/workspace/Jarvis`):
+## Run
 
 ```bash
 python -m ui.desktop.app
 ```
 
-You should see:
+## Behavior
 
-- left panel: avatar face + state text,
-- right panel: chat log + input.
-- `🎤 Listen` button for one-shot voice input through your microphone.
+- Window size is fixed to avatar video resolution (+ small controls strip at bottom).
+- Avatar video occupies almost entire window.
+- Bottom panel includes only:
+  - input box
+  - `Listen` button
+  - `Send` button
+- Subtitles are shown on top of video near the bottom:
+  - `You: <message>`
+  - `Jarvis: <response>`
+- State videos switch automatically for:
+  - `idle`
+  - `listening`
+  - `thinking`
+  - `speaking`
 
-## 3) How message flow works
+## Voice notes
 
-1. You can either type a message (Enter / Send) or click `🎤 Listen` for voice input.
-2. UI immediately appends your text.
-3. UI state changes to `thinking`.
-4. `process_text(...)` runs in `BrainWorker` on `QThread`.
-5. Response is appended to chat.
-6. Avatar changes to `speaking` briefly, then returns to `idle`.
-7. Jarvis response is sent to `speak(...)` for voice playback.
+- If microphone dependency is missing, app still opens and `Listen` shows a clear error.
+- If TTS fails, subtitle shows a voice output error instead of crashing.
 
-## 4) Where to customize the avatar
+## Install hints
 
-Open `ui/desktop/main_window.py` and edit `self.avatar_map`:
+```bash
+pip install -r requirement.txt
+```
 
-- replace emoticons with your own text markers,
-- or change the avatar widget to use `QPixmap` images for each state.
+If needed:
 
-Good next step for anime style:
-
-- add PNG assets (for example `idle.png`, `thinking.png`, `speaking1.png`, `speaking2.png`),
-- swap image frames in `_animate_speaking`.
-
-## 5) Connect real speech events (recommended)
-
-Right now, speaking is timed in UI. For better realism, emit explicit events from TTS:
-
-- `on_speak_start` -> set state `speaking`,
-- `on_speak_end` -> set state `idle`.
-
-Then your avatar motion matches actual audio playback.
-
-## 6) Common issues
-
-- **`ModuleNotFoundError: No module named 'PyQt6'`**  
-  Install Qt dependencies with pip.
-
-- **UI opens but no answers appear**  
-  Verify `brain/process_text(...)` path and your model/API configs are working.
-
-- **UI shows response but no voice output**  
-  Make sure `sounddevice`, `soundfile`, and `TTS` are installed, and your system audio output device works.
-
-- **Listen button fails**  
-  Install microphone dependencies (`SpeechRecognition`, `pyaudio`) and allow microphone permission in OS settings.
-  If missing, UI still opens and shows a clear in-chat error when `🎤 Listen` is pressed.
-
-- **UI freezes**  
-  Keep long-running work off main thread (current worker-thread setup already does this).
+```bash
+pip install pyqt6 SpeechRecognition pyaudio
+```
