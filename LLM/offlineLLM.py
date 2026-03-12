@@ -2,7 +2,7 @@
 offlineLLM.py
 -------------
 Offline LLM chat using Ollama.
-Offline-first. Safe. Deterministic.
+
 """
 
 import subprocess

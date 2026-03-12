@@ -19,6 +19,19 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
+class ListenWorker(QObject):
+    success = pyqtSignal(str)
+    error = pyqtSignal(str)
+
+    def run(self):
+        try:
+            text = listen()   # your Vosk listener
+            if text:
+                self.success.emit(text)
+            else:
+                self.error.emit("No command detected")
+        except Exception as e:
+            self.error.emit(str(e))
 
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
