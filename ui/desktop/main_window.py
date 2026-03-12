@@ -19,19 +19,12 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
-class ListenWorker(QObject):
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
-
     def run(self):
         try:
-            text = listen()   # your Vosk listener
-            if text:
-                self.success.emit(text)
-            else:
-                self.error.emit("No command detected")
-        except Exception as e:
-            self.error.emit(str(e))
+            text = capture_voice_text()
+            self.success.emit(text)
+        except VoiceInputError as exc:
+            self.error.emit(str(exc))
 
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
@@ -58,6 +51,8 @@ class ListenWorker(QObject):
 
 
 class MainWindow(QWidget):
+    AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
+
     VIDEO_NAME_CANDIDATES = {
         "idle": ["idle.mp4", "ideal.mp4"],
         "listening": ["listening.mp4", "listnimg.mp4"],
@@ -91,16 +86,21 @@ class MainWindow(QWidget):
         self.set_avatar_state("idle")
 
     def _resolve_video_paths(self) -> dict[str, Path]:
-        avatar_dir = Path(__file__).resolve().parents[2] / "assets" / "avatar"
+        project_root = Path(__file__).resolve().parents[2]
+        search_dirs = [project_root / "assets" / name for name in self.AVATAR_DIR_CANDIDATES]
         resolved: dict[str, Path] = {}
 
         for state, candidates in self.VIDEO_NAME_CANDIDATES.items():
-            for name in candidates:
-                path = avatar_dir / name
-                if path.exists():
-                    resolved[state] = path
+            for folder in search_dirs:
+                for name in candidates:
+                    path = folder / name
+                    if path.exists():
+                        resolved[state] = path
+                        break
+                if state in resolved:
                     break
 
+        self._avatar_search_dirs = search_dirs
         return resolved
 
     def _apply_video_geometry_hint(self):
@@ -222,7 +222,8 @@ class MainWindow(QWidget):
         source = self.video_paths.get(state) or self.video_paths.get("idle")
 
         if source is None:
-            self._set_subtitle("Jarvis", "Avatar video files not found in assets/avatar/")
+            search_hint = ", ".join(str(p) for p in self._avatar_search_dirs)
+            self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
             return
 
         self.player.stop()

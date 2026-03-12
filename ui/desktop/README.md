@@ -4,7 +4,7 @@ This desktop UI uses real avatar videos from `assets/avatar/` and overlays subti
 
 ## Required avatar videos
 
-Put these files in `assets/avatar/`:
+Put these files in `assets/avatar/` (or `assets/avtar/`):
 
 - `idle.mp4` (or `ideal.mp4` fallback)
 - `listening.mp4` (or `listnimg.mp4` fallback)
