@@ -21,6 +21,7 @@ python -m ui.desktop.app
 
 - Window size is fixed to avatar video resolution (+ small controls strip at bottom).
 - Avatar video occupies almost entire window.
+- Avatar video audio is muted by default.
 - Bottom panel includes only:
   - input box
   - `Listen` button
@@ -50,3 +51,5 @@ If needed:
 ```bash
 pip install pyqt6 SpeechRecognition pyaudio
 ```
+
+- If your screen stays black but file exists, check subtitle for `Video error:` (codec/backend issue).
