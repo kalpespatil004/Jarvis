@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
     QLabel,
     QLineEdit,
     QPushButton,
+    QStackedLayout,
     QVBoxLayout,
     QWidget,
 )
@@ -18,7 +19,6 @@ from PyQt6.QtWidgets import (
 from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
-
 
 
 class BrainWorker(QObject):
@@ -70,11 +70,15 @@ class MainWindow(QWidget):
         self.player = QMediaPlayer(self)
         self.audio_output = QAudioOutput(self)
         self.player.setAudioOutput(self.audio_output)
+        self.audio_output.setMuted(True)
+        self.audio_output.setVolume(0.0)
+
         self.video_widget = QVideoWidget(self)
         self.player.setVideoOutput(self.video_widget)
 
         # Loop current state video forever.
         self.player.mediaStatusChanged.connect(self._on_media_status_changed)
+        self.player.errorOccurred.connect(self._on_player_error)
 
         self.init_ui()
         self._apply_video_geometry_hint()
@@ -123,19 +127,28 @@ class MainWindow(QWidget):
         root.setSpacing(0)
 
         video_container = QWidget(self)
-        video_layout = QVBoxLayout(video_container)
-        video_layout.setContentsMargins(0, 0, 0, 0)
-        video_layout.setSpacing(0)
-        video_layout.addWidget(self.video_widget)
+        stacked = QStackedLayout(video_container)
+        stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
+        stacked.setContentsMargins(0, 0, 0, 0)
 
-        self.subtitle_label = QLabel("Jarvis: Online.", video_container)
+        self.video_widget.setStyleSheet("background: black;")
+        stacked.addWidget(self.video_widget)
+
+        subtitle_overlay = QWidget(video_container)
+        subtitle_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
+        overlay_layout = QVBoxLayout(subtitle_overlay)
+        overlay_layout.setContentsMargins(16, 16, 16, 12)
+        overlay_layout.setSpacing(0)
+        overlay_layout.addStretch(1)
+
+        self.subtitle_label = QLabel("Jarvis: Online.", subtitle_overlay)
         self.subtitle_label.setWordWrap(True)
         self.subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.subtitle_label.setStyleSheet(
             """
             QLabel {
                 color: white;
-                background-color: rgba(0, 0, 0, 160);
+                background-color: rgba(0, 0, 0, 170);
                 border-radius: 10px;
                 padding: 10px 14px;
                 font-size: 18px;
@@ -144,11 +157,9 @@ class MainWindow(QWidget):
             """
         )
         self.subtitle_label.setMinimumHeight(56)
+        overlay_layout.addWidget(self.subtitle_label, 0, Qt.AlignmentFlag.AlignBottom)
 
-        # Keep subtitles near bottom over video.
-        video_layout.addStretch(1)
-        video_layout.addWidget(self.subtitle_label)
-        video_layout.setAlignment(self.subtitle_label, Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignBottom)
+        stacked.addWidget(subtitle_overlay)
 
         controls = QWidget(self)
         controls.setFixedHeight(72)
@@ -229,6 +240,10 @@ class MainWindow(QWidget):
         if status == QMediaPlayer.MediaStatus.EndOfMedia:
             self.player.setPosition(0)
             self.player.play()
+
+    def _on_player_error(self, _error):
+        message = self.player.errorString() or "Unable to render avatar video."
+        self._set_subtitle("Jarvis", f"Video error: {message}")
 
     def listen_once(self):
         if self._listen_thread is not None or self._brain_thread is not None:
