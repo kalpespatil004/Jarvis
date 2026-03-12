@@ -1,14 +1,4 @@
-"""
-Offline-first TTS module using Kokoro (preferred) with pyttsx3 fallback.
-Place as `body/speak.py`.
 
-Requirements (recommended):
-    pip install kokoro-onnx soundfile numpy sounddevice
-or
-    pip install kokoro-tts soundfile numpy sounddevice
-
-If kokoro isn't available, falls back to pyttsx3 (install with pip install pyttsx3).
-"""
 
 import os
 import sys
