@@ -1,12 +1,8 @@
 import sys
 from pathlib import Path
 
-from PyQt6.QtWidgets import QApplication
 
-from ui.desktop.main_window import MainWindow
-
-
-def _load_stylesheet(app: QApplication) -> None:
+def _load_stylesheet(app) -> None:
     """Load optional desktop stylesheet if present."""
     qss_path = Path(__file__).with_name("styles.qss")
     if qss_path.exists():
@@ -14,6 +10,14 @@ def _load_stylesheet(app: QApplication) -> None:
 
 
 def run() -> int:
+    try:
+        from PyQt6.QtWidgets import QApplication
+    except ModuleNotFoundError:
+        print("PyQt6 is not installed. Run: pip install pyqt6")
+        return 1
+
+    from ui.desktop.main_window import MainWindow
+
     app = QApplication(sys.argv)
     _load_stylesheet(app)
 

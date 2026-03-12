@@ -53,3 +53,5 @@ pip install pyqt6 SpeechRecognition pyaudio
 ```
 
 - If your screen stays black but file exists, check subtitle for `Video error:` (codec/backend issue).
+
+- Desktop mode no longer loads voice-only dependencies (Vosk/TTS) at startup; these are imported lazily in voice loop paths.
