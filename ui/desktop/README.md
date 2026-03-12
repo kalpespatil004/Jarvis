@@ -15,6 +15,8 @@ Put these files in `assets/avatar/` (or `assets/avtar/`):
 
 ```bash
 python -m ui.desktop.app
+# or compatibility alias:
+python -m desktop.ui.app
 ```
 
 ## Behavior
