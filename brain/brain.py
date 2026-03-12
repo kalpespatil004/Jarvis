@@ -10,8 +10,6 @@ Supports:
 
 import traceback
 
-from body.listen import listen
-from body.speak import speak
 from brain.intent_engine import detect_intent
 from brain.router import route
 
@@ -42,7 +40,7 @@ def process_text(command: str) -> str:
         print(f"[BRAIN:UI] Intent: {intent_data}")
 
         # Route intent and get response
-        response = route(intent_data, return_response=True) # type: ignore
+        response = route(intent_data, return_response=True)  # type: ignore
         return response or ""
 
     except Exception as e:
@@ -60,6 +58,9 @@ def brain_loop():
     Main Jarvis lifecycle loop.
     Voice-based, blocking, continuous.
     """
+    # Lazy imports keep desktop/UI text mode from requiring voice dependencies.
+    from body.listen import listen
+    from body.speak import speak
 
     while True:
         try:
