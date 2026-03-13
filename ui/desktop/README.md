@@ -23,12 +23,12 @@ python -m desktop.ui.app
 
 - Window size is fixed to avatar video resolution (+ small controls strip at bottom).
 - Avatar video occupies almost entire window.
-- Avatar video audio is muted by default.
+- Avatar video audio is disabled entirely (no MP4 audio output is attached).
 - Bottom panel includes only:
   - input box
   - `Listen` button
   - `Send` button
-- Subtitles are shown on top of video near the bottom:
+- Subtitles are shown on top of video near the bottom (forced overlay layer):
   - `You: <message>`
   - `Jarvis: <response>`
 - State videos switch automatically for:

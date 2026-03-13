@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, QTimer, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
-from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
+from PyQt6.QtMultimedia import QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
     QHBoxLayout,
@@ -68,10 +68,7 @@ class MainWindow(QWidget):
         self.video_paths = self._resolve_video_paths()
 
         self.player = QMediaPlayer(self)
-        self.audio_output = QAudioOutput(self)
-        self.player.setAudioOutput(self.audio_output)
-        self.audio_output.setMuted(True)
-        self.audio_output.setVolume(0.0)
+        # Intentionally no audio output for avatar videos (silent animation only).
 
         self.video_widget = QVideoWidget(self)
         self.player.setVideoOutput(self.video_widget)
@@ -136,10 +133,7 @@ class MainWindow(QWidget):
 
         subtitle_overlay = QWidget(video_container)
         subtitle_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
-        overlay_layout = QVBoxLayout(subtitle_overlay)
-        overlay_layout.setContentsMargins(16, 16, 16, 12)
-        overlay_layout.setSpacing(0)
-        overlay_layout.addStretch(1)
+        subtitle_overlay.setStyleSheet("background: transparent;")
 
         self.subtitle_label = QLabel("Jarvis: Online.", subtitle_overlay)
         self.subtitle_label.setWordWrap(True)
@@ -148,7 +142,7 @@ class MainWindow(QWidget):
             """
             QLabel {
                 color: white;
-                background-color: rgba(0, 0, 0, 170);
+                background-color: rgba(0, 0, 0, 190);
                 border-radius: 10px;
                 padding: 10px 14px;
                 font-size: 18px;
@@ -157,9 +151,9 @@ class MainWindow(QWidget):
             """
         )
         self.subtitle_label.setMinimumHeight(56)
-        overlay_layout.addWidget(self.subtitle_label, 0, Qt.AlignmentFlag.AlignBottom)
 
         stacked.addWidget(subtitle_overlay)
+        self._subtitle_overlay = subtitle_overlay
 
         controls = QWidget(self)
         controls.setFixedHeight(72)
@@ -212,6 +206,25 @@ class MainWindow(QWidget):
         palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.black)
         self.video_widget.setPalette(palette)
         self.video_widget.setAutoFillBackground(True)
+        self._layout_subtitle()
+
+    def _layout_subtitle(self):
+        if not hasattr(self, "_subtitle_overlay"):
+            return
+
+        self._subtitle_overlay.setGeometry(self.video_widget.geometry())
+        margin_x = 16
+        bottom_margin = 14
+        width = max(200, self._subtitle_overlay.width() - margin_x * 2)
+        height = max(56, self.subtitle_label.sizeHint().height())
+        x = margin_x
+        y = max(0, self._subtitle_overlay.height() - height - bottom_margin)
+        self.subtitle_label.setGeometry(x, y, width, height)
+        self.subtitle_label.raise_()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._layout_subtitle()
 
     def _set_inputs_enabled(self, enabled: bool):
         self.send_btn.setDisabled(not enabled)
@@ -222,6 +235,8 @@ class MainWindow(QWidget):
 
     def _set_subtitle(self, speaker: str, text: str):
         self.subtitle_label.setText(f"{speaker}: {text}")
+        self.subtitle_label.adjustSize()
+        self._layout_subtitle()
 
     def set_avatar_state(self, state: str):
         self.avatar_state = state
