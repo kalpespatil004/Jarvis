@@ -1,125 +1,137 @@
-import pyautogui
-import pygetwindow as gw
-import time
+"""
+system/laptop/window_manager.py
+---------------------------------
+Cross-platform window management.
+Windows : pygetwindow + pyautogui
+Linux   : wmctrl / xdotool
+"""
+
+import os
+import platform
+
+_PLATFORM = platform.system()
 
 
-# ---------------------------
-# GET ACTIVE WINDOW
-# ---------------------------
-
-def get_active_window():
-    """
-    Get currently active window
-    """
+def _pygetwindow():
     try:
-        return gw.getActiveWindow()
-    except Exception:
+        import pygetwindow as gw
+        return gw
+    except ImportError:
         return None
 
 
-# ---------------------------
-# MINIMIZE WINDOW
-# ---------------------------
+def minimize_window() -> str:
+    gw = _pygetwindow()
+    if gw:
+        try:
+            wins = gw.getAllWindows()
+            active = [w for w in wins if w.isActive]
+            if active:
+                active[0].minimize()
+                return "🪟 Window minimized."
+        except Exception as e:
+            return f"❌ Minimize failed: {e}"
 
-def minimize_window():
-    """
-    Minimize active window
-    """
-    window = get_active_window()
-    if window:
-        window.minimize()
-        return "🪟 Window minimized"
-    return "❌ No active window found"
+    if _PLATFORM == "Linux":
+        os.system("wmctrl -r :ACTIVE: -b add,hidden")
+        return "🪟 Window minimized."
 
-
-# ---------------------------
-# MAXIMIZE WINDOW
-# ---------------------------
-
-def maximize_window():
-    """
-    Maximize active window
-    """
-    window = get_active_window()
-    if window:
-        window.maximize()
-        return "🪟 Window maximized"
-    return "❌ No active window found"
+    return "❌ Window management not available."
 
 
-# ---------------------------
-# RESTORE WINDOW
-# ---------------------------
+def maximize_window() -> str:
+    gw = _pygetwindow()
+    if gw:
+        try:
+            wins = gw.getAllWindows()
+            active = [w for w in wins if w.isActive]
+            if active:
+                active[0].maximize()
+                return "🪟 Window maximized."
+        except Exception as e:
+            return f"❌ Maximize failed: {e}"
 
-def restore_window():
-    """
-    Restore minimized window
-    """
-    window = get_active_window()
-    if window:
-        window.restore()
-        return "🪟 Window restored"
-    return "❌ No active window found"
+    if _PLATFORM == "Linux":
+        os.system("wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz")
+        return "🪟 Window maximized."
+
+    return "❌ Window management not available."
 
 
-# ---------------------------
-# CLOSE WINDOW
-# ---------------------------
+def restore_window() -> str:
+    gw = _pygetwindow()
+    if gw:
+        try:
+            wins = gw.getAllWindows()
+            active = [w for w in wins if w.isActive]
+            if active:
+                active[0].restore()
+                return "🪟 Window restored."
+        except Exception as e:
+            return f"❌ Restore failed: {e}"
 
-def close_window():
-    """
-    Close active window
-    """
+    if _PLATFORM == "Linux":
+        os.system("wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz")
+        return "🪟 Window restored."
+
+    return "❌ Window management not available."
+
+
+def close_window() -> str:
     try:
-        pyautogui.hotkey("alt", "f4")
-        return "❌ Window closed"
-    except Exception as e:
-        return f"❌ Error closing window: {e}"
+        import pyautogui
+        import time
+        pyautogui.hotkey("alt", "F4")
+        return "🪟 Window closed."
+    except ImportError:
+        pass
+
+    if _PLATFORM == "Linux":
+        os.system("wmctrl -c :ACTIVE:")
+        return "🪟 Window closed."
+
+    return "❌ Cannot close window on this platform."
 
 
-# ---------------------------
-# FOCUS WINDOW BY NAME
-# ---------------------------
+def focus_window(title: str) -> str:
+    if not title:
+        return "❌ Please specify a window title."
+    gw = _pygetwindow()
+    if gw:
+        try:
+            wins = gw.getWindowsWithTitle(title)
+            if wins:
+                wins[0].activate()
+                return f"🪟 Focused window: {title}"
+            return f"❌ No window found with title: {title}"
+        except Exception as e:
+            return f"❌ Focus failed: {e}"
 
-def focus_window(app_name):
-    """
-    Focus a window using app name
-    """
+    if _PLATFORM == "Linux":
+        os.system(f"wmctrl -a '{title}'")
+        return f"🪟 Attempting to focus: {title}"
+
+    return "❌ Focus not supported on this platform."
+
+
+def move_window(x: int = 100, y: int = 100) -> str:
     try:
-        windows = gw.getWindowsWithTitle(app_name)
-        if windows:
-            windows[0].activate()
-            return f"🎯 Focused on '{app_name}'"
-        return f"⚠️ No window found with name '{app_name}'"
+        import pyautogui
+        pyautogui.hotkey("win", "left")
+        return "🪟 Window moved."
     except Exception as e:
-        return f"❌ Error focusing window: {e}"
+        return f"❌ Move failed: {e}"
 
 
-# ---------------------------
-# MOVE WINDOW
-# ---------------------------
-
-def move_window(x=100, y=100):
-    """
-    Move active window
-    """
-    window = get_active_window()
-    if window:
-        window.moveTo(x, y)
-        return f"📐 Window moved to ({x}, {y})"
-    return "❌ No active window found"
-
-
-# ---------------------------
-# RESIZE WINDOW
-# ---------------------------
-
-def resize_window(width=800, height=600):
-    """
-    Resize active window
-    """
-    window = get_active_window()
-    if window:
-        window.resizeTo(width, height)
-        return f"📐 Window resized to {width}x{height}"
-    return "❌ No active window found"
+def resize_window(width: int = 800, height: int = 600) -> str:
+    gw = _pygetwindow()
+    if gw:
+        try:
+            wins = gw.getAllWindows()
+            active = [w for w in wins if w.isActive]
+            if active:
+                active[0].resizeTo(width, height)
+                return f"🪟 Window resized to {width}×{height}."
+        except Exception as e:
+            return f"❌ Resize failed: {e}"
+    return "❌ Resize not supported."

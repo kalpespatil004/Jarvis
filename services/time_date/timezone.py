@@ -1,62 +1,39 @@
 """
-timezone.py
-------------
-Timezone conversion utilities
+services/time_date/timezone.py
+--------------------------------
+Timezone conversion utilities.
 """
 
-from datetime import datetime
-import pytz
+import datetime
+
+try:
+    import pytz
+    _PYTZ = True
+except ImportError:
+    _PYTZ = False
 
 
-def convert_timezone(
-    time_str: str,
-    from_timezone: str,
-    to_timezone: str,
-    format: str = "%Y-%m-%d %H:%M:%S"
-) -> dict:
-    """
-    Convert time from one timezone to another.
-
-    Args:
-        time_str (str): Time string
-        from_timezone (str): Source timezone (e.g. "Asia/Kolkata")
-        to_timezone (str): Target timezone (e.g. "UTC")
-        format (str): Datetime format
-
-    Returns:
-        dict: Converted time or error
-    """
+def convert_timezone(time_str: str, from_tz: str, to_tz: str) -> str:
+    if not _PYTZ:
+        return "pytz not installed. Run: pip install pytz"
 
     try:
-        source_tz = pytz.timezone(from_timezone)
-        target_tz = pytz.timezone(to_timezone)
+        from_zone = pytz.timezone(from_tz)
+        to_zone   = pytz.timezone(to_tz)
 
-        naive_dt = datetime.strptime(time_str, format)
-        source_dt = source_tz.localize(naive_dt)
-        target_dt = source_dt.astimezone(target_tz)
+        # Parse time string
+        naive_time = datetime.datetime.strptime(time_str.strip(), "%H:%M")
+        today = datetime.datetime.now().date()
+        aware_time = datetime.datetime(today.year, today.month, today.day,
+                                        naive_time.hour, naive_time.minute)
+        aware_time = from_zone.localize(aware_time)
+        converted  = aware_time.astimezone(to_zone)
 
-        return {
-            "success": True,
-            "from_timezone": from_timezone,
-            "to_timezone": to_timezone,
-            "original_time": time_str,
-            "converted_time": target_dt.strftime(format)
-        }
-
-    except pytz.UnknownTimeZoneError:
-        return {
-            "success": False,
-            "error": "Invalid timezone name"
-        }
-
-    except ValueError:
-        return {
-            "success": False,
-            "error": "Invalid time format"
-        }
-
+        return (
+            f"🕐 {time_str} {from_tz} = "
+            f"{converted.strftime('%I:%M %p')} {to_tz}"
+        )
+    except pytz.UnknownTimeZoneError as e:
+        return f"Unknown timezone: {e}"
     except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
+        return f"Timezone conversion error: {e}"

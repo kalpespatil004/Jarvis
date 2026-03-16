@@ -1,88 +1,89 @@
+"""
+system/laptop/run_code.py
+--------------------------
+Run shell commands and Python scripts.
+Cross-platform: Windows, Linux, macOS.
+"""
+
 import subprocess
+import sys
 import os
+import platform
+
+_PLATFORM = platform.system()
 
 
-# ---------------------------
-# RUN SYSTEM COMMAND
-# ---------------------------
-
-def run_command(command):
-    """
-    Run a system command and return output
-    """
+def run_command(command: str, timeout: int = 30) -> str:
+    """Run a shell command and return output."""
+    if not command:
+        return "❌ No command provided."
     try:
         result = subprocess.run(
             command,
             shell=True,
             capture_output=True,
-            text=True
+            text=True,
+            timeout=timeout
         )
+        out = result.stdout.strip()
+        err = result.stderr.strip()
 
-        if result.stdout:
-            return f"✅ Output:\n{result.stdout}"
-        if result.stderr:
-            return f"❌ Error:\n{result.stderr}"
-
-        return "✅ Command executed successfully"
-
+        if result.returncode != 0 and err:
+            return f"⚠️ Command output:\n{err}"
+        return f"✅ Output:\n{out}" if out else "✅ Command executed (no output)."
+    except subprocess.TimeoutExpired:
+        return "⏱️ Command timed out."
     except Exception as e:
-        return f"❌ Failed to run command: {e}"
+        return f"❌ Command failed: {e}"
 
 
-# ---------------------------
-# RUN PYTHON FILE
-# ---------------------------
-
-def run_python_file(file_path):
-    """
-    Run a Python script
-    """
+def run_python_file(filepath: str) -> str:
+    """Run a Python script file."""
+    if not filepath:
+        return "❌ No file path provided."
+    if not os.path.exists(filepath):
+        return f"❌ File not found: {filepath}"
     try:
-        if not os.path.exists(file_path):
-            return f"❌ File not found: {file_path}"
-
         result = subprocess.run(
-            ["python", file_path],
+            [sys.executable, filepath],
             capture_output=True,
-            text=True
+            text=True,
+            timeout=60
         )
-
-        if result.stdout:
-            return f"🐍 Python Output:\n{result.stdout}"
-        if result.stderr:
-            return f"❌ Python Error:\n{result.stderr}"
-
-        return "🐍 Python file executed successfully"
-
+        out = result.stdout.strip()
+        err = result.stderr.strip()
+        if err:
+            return f"⚠️ Script error:\n{err}"
+        return f"✅ Script output:\n{out}" if out else "✅ Script ran successfully."
+    except subprocess.TimeoutExpired:
+        return "⏱️ Script timed out."
     except Exception as e:
-        return f"❌ Error running Python file: {e}"
+        return f"❌ Script failed: {e}"
 
 
-# ---------------------------
-# OPEN COMMAND PROMPT
-# ---------------------------
-
-def open_cmd():
-    """
-    Open Windows Command Prompt
-    """
+def open_cmd() -> str:
+    """Open system terminal/command prompt."""
     try:
-        subprocess.Popen("cmd")
-        return "💻 Command Prompt opened"
+        if _PLATFORM == "Windows":
+            subprocess.Popen("start cmd", shell=True)
+        elif _PLATFORM == "Darwin":
+            subprocess.Popen(["open", "-a", "Terminal"])
+        else:
+            for terminal in ["gnome-terminal", "xterm", "konsole", "xfce4-terminal"]:
+                if subprocess.run(["which", terminal], capture_output=True).returncode == 0:
+                    subprocess.Popen([terminal])
+                    break
+        return "💻 Terminal opened."
     except Exception as e:
-        return f"❌ Error opening CMD: {e}"
+        return f"❌ Could not open terminal: {e}"
 
 
-# ---------------------------
-# OPEN POWERSHELL
-# ---------------------------
-
-def open_powershell():
-    """
-    Open Windows PowerShell
-    """
+def open_powershell() -> str:
+    """Open PowerShell (Windows only)."""
+    if _PLATFORM != "Windows":
+        return "PowerShell is only available on Windows."
     try:
-        subprocess.Popen("powershell")
-        return "💻 PowerShell opened"
+        subprocess.Popen("start powershell", shell=True)
+        return "💻 PowerShell opened."
     except Exception as e:
-        return f"❌ Error opening PowerShell: {e}"
+        return f"❌ Could not open PowerShell: {e}"

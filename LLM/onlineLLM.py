@@ -1,7 +1,7 @@
 """
 onlineLLM.py
 ------------
-Primary online LLM (Gemini).
+Primary online LLM: Google Gemini.
 Falls back to OpenRouter when Gemini fails.
 """
 
@@ -10,20 +10,32 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
-
-from LLM.openrouterLLM import chat as openrouter_chat
 
 load_dotenv()
 
-API_KEY = os.getenv("GEMINI_API_KEY")
+try:
+    from config import GEMINI_API_KEY, ONLINE_LLM_MODEL
+except ImportError:
+    GEMINI_API_KEY    = os.getenv("GEMINI_API_KEY", "")
+    ONLINE_LLM_MODEL  = "gemini-2.5-flash"
 
-if API_KEY:
-    genai.configure(api_key=API_KEY) # pyright: ignore[reportPrivateImportUsage]
-    model = genai.GenerativeModel("gemini-2.5-flash") # type: ignore
-    chat_session = model.start_chat(history=[])
+from LLM.openrouterLLM import chat as openrouter_chat
+
+# ── Gemini setup ────────────────────────────────────────────
+chat_session = None
+
+if GEMINI_API_KEY:
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEY)  # type: ignore
+        model = genai.GenerativeModel(ONLINE_LLM_MODEL)  # type: ignore
+        chat_session = model.start_chat(history=[])
+        print(f"[LLM] Gemini {ONLINE_LLM_MODEL} loaded.")
+    except Exception as e:
+        print(f"[LLM] Gemini init failed: {e}")
+        chat_session = None
 else:
-    chat_session = None
+    print("[LLM] No GEMINI_API_KEY set. Falling back to OpenRouter.")
 
 
 def chat(prompt: str) -> str:
@@ -36,6 +48,6 @@ def chat(prompt: str) -> str:
     try:
         response = chat_session.send_message(prompt)
         return response.text.strip()
-    except Exception:
-        # Explicit fallback
+    except Exception as e:
+        print(f"[LLM] Gemini error: {e}. Falling back to OpenRouter.")
         return openrouter_chat(prompt)

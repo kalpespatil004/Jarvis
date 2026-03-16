@@ -1,37 +1,28 @@
 """
-meanings.py
-------------
-Format dictionary meanings into readable output
+services/dictionary/meanings.py
+--------------------------------
+Format dictionary API response into readable text.
 """
 
 
 def format_meanings(data: dict) -> str:
-    """
-    Format dictionary lookup result.
+    if not data.get("success"):
+        return f"❌ Dictionary error: {data.get('error', 'Word not found')}"
 
-    Args:
-        data (dict): Output from lookup_word()
+    word     = data.get("word", "")
+    phonetic = data.get("phonetic", "")
+    meanings = data.get("meanings", [])
 
-    Returns:
-        str: Formatted meanings
-    """
+    if not meanings:
+        return f"No meanings found for '{word}'."
 
-    if not data or not data.get("success"):
-        return f"❌ Error: {data.get('error', 'Unknown error')}"
-
-    lines = []
-    lines.append(f"📖 Word: {data.get('word')}")
-
-    if data.get("phonetic"):
-        lines.append(f"🔊 Pronunciation: {data['phonetic']}")
-
-    lines.append("\nMeanings:")
-
-    for idx, meaning in enumerate(data.get("meanings", []), start=1):
-        lines.append(
-            f"{idx}. ({meaning['part_of_speech']}) {meaning['definition']}"
-        )
-        if meaning.get("example"):
-            lines.append(f"   👉 Example: {meaning['example']}")
+    lines = [f"📖 {word.upper()} {phonetic}"]
+    for i, m in enumerate(meanings[:5], 1):
+        pos  = m.get("part_of_speech", "")
+        defn = m.get("definition", "")
+        ex   = m.get("example", "")
+        lines.append(f"  {i}. [{pos}] {defn}")
+        if ex:
+            lines.append(f"      e.g. \"{ex}\"")
 
     return "\n".join(lines)

@@ -1,32 +1,66 @@
-speechrecognition==3.10.0
-pyttsx3==2.90
-gtts==2.4.0
-firebase-admin==6.2.0
-pyautogui==0.9.54
-psutil==5.9.6
-schedule==1.2.0
-sympy==1.12
-googletrans==4.0.0-rc1
-httpx==0.13.3
+# ============================================================
+# J.A.R.V.I.S — Python Requirements
+# Install: pip install -r requirement.txt
+# ============================================================
 
-pyqt6==6.5.0
-PyQt6-Qt6==6.5.0
-PyQt6-sip==13.5.2
-
-flask==3.0.0
-cryptography==41.0.7
-
-numpy==1.26.4
-requests==2.31.0
+# ── Core ─────────────────────────────────────────────────────
 python-dotenv==1.0.1
+requests==2.31.0
+numpy==1.26.4
+
+# ── Speech Recognition (STT) ─────────────────────────────────
+speechrecognition==3.10.0
 vosk==0.3.45
 pyaudio==0.2.14
 
-ollama==0.1.8
-google-generativeai==0.3.2
-openai==1.12.0
-
+# ── Text-to-Speech (TTS) ─────────────────────────────────────
+pyttsx3==2.90
 TTS==0.22.0
 kokoro-onnx==0.2.3
 sounddevice==0.4.6
 soundfile==0.12.1
+torch>=2.0.0
+
+# ── LLM Providers ─────────────────────────────────────────────
+google-generativeai==0.3.2
+openai==1.12.0
+ollama==0.1.8
+
+# ── Desktop GUI ──────────────────────────────────────────────
+pyqt6==6.5.0
+PyQt6-Qt6==6.5.0
+PyQt6-sip==13.5.2
+
+# ── System Control (Laptop) ──────────────────────────────────
+pyautogui==0.9.54
+psutil==5.9.6
+screen-brightness-control==0.23.0
+pygetwindow==0.0.9
+
+# ── Volume Control (Windows) ─────────────────────────────────
+# pycaw==20240210    # Windows only
+
+# ── Web / API ────────────────────────────────────────────────
+flask==3.0.0
+
+# ── Automation & Scheduling ──────────────────────────────────
+schedule==1.2.0
+
+# ── Security & Encryption ────────────────────────────────────
+cryptography==41.0.7
+
+# ── Data & Utilities ─────────────────────────────────────────
+sympy==1.12
+
+# ── Translation ──────────────────────────────────────────────
+googletrans==4.0.0-rc1
+httpx==0.13.3
+
+# ── Firebase (optional — cloud memory) ───────────────────────
+# firebase-admin==6.2.0
+
+# ── Timezone support ─────────────────────────────────────────
+pytz>=2024.1
+
+# ── gTTS (alternative TTS, no model required) ────────────────
+gtts==2.4.0

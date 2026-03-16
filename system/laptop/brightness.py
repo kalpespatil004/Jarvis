@@ -1,77 +1,95 @@
-try:
-    import screen_brightness_control as sbc
-except ImportError:
-    sbc = None
+"""
+system/laptop/brightness.py
+-----------------------------
+Cross-platform screen brightness control.
+Windows : screen_brightness_control library
+Linux   : brightnessctl or xrandr
+macOS   : brightness CLI or osascript
+"""
+
+import os
+import platform
+
+_PLATFORM = platform.system()
 
 
-# ---------------------------
-# BRIGHTNESS UP
-# ---------------------------
-
-def brightness_up(step=10):
-    """
-    Increase brightness by step%
-    """
-    if not sbc:
-        return "❌ screen_brightness_control not installed"
+def _get_sbc():
     try:
-        current = sbc.get_brightness(display=0)[0]
-        new = min(100, current + step)
-        sbc.set_brightness(new)
-        return f"💡 Brightness increased to {new}%"
-    except Exception as e:
-        return f"❌ Error: {e}"
+        import screen_brightness_control as sbc
+        return sbc
+    except ImportError:
+        return None
 
 
-# ---------------------------
-# BRIGHTNESS DOWN
-# ---------------------------
+def get_brightness() -> str:
+    sbc = _get_sbc()
+    if sbc:
+        try:
+            level = sbc.get_brightness(display=0)
+            val = level[0] if isinstance(level, list) else level
+            return f"💡 Current brightness is {val}%"
+        except Exception as e:
+            return f"❌ Brightness read failed: {e}"
 
-def brightness_down(step=10):
-    """
-    Decrease brightness by step%
-    """
-    if not sbc:
-        return "❌ screen_brightness_control not installed"
-    try:
-        current = sbc.get_brightness(display=0)[0]
-        new = max(0, current - step)
-        sbc.set_brightness(new)
-        return f"💡 Brightness decreased to {new}%"
-    except Exception as e:
-        return f"❌ Error: {e}"
+    if _PLATFORM == "Linux":
+        try:
+            result = os.popen("brightnessctl g").read().strip()
+            max_r  = os.popen("brightnessctl m").read().strip()
+            if result and max_r:
+                pct = int(int(result) / int(max_r) * 100)
+                return f"💡 Current brightness is {pct}%"
+        except Exception:
+            pass
 
-
-# ---------------------------
-# SET BRIGHTNESS
-# ---------------------------
-
-def set_brightness(value):
-    """
-    Set brightness to a specific value (0-100)
-    """
-    if not sbc:
-        return "❌ screen_brightness_control not installed"
-    try:
-        value = max(0, min(100, int(value)))
-        sbc.set_brightness(value)
-        return f"💡 Brightness set to {value}%"
-    except Exception as e:
-        return f"❌ Error: {e}"
+    return "❌ Brightness control not available on this system."
 
 
-# ---------------------------
-# GET BRIGHTNESS
-# ---------------------------
+def set_brightness(value: int) -> str:
+    value = max(0, min(100, int(value)))
+    sbc = _get_sbc()
+    if sbc:
+        try:
+            sbc.set_brightness(value, display=0)
+            return f"💡 Brightness set to {value}%"
+        except Exception as e:
+            return f"❌ Failed to set brightness: {e}"
 
-def get_brightness():
-    """
-    Get current brightness %
-    """
-    if not sbc:
-        return "❌ screen_brightness_control not installed"
-    try:
-        current = sbc.get_brightness(display=0)[0]
-        return f"💡 Current brightness is {current}%"
-    except Exception as e:
-        return f"❌ Error: {e}"
+    if _PLATFORM == "Linux":
+        try:
+            os.system(f"brightnessctl s {value}%")
+            return f"💡 Brightness set to {value}%"
+        except Exception as e:
+            return f"❌ brightnessctl error: {e}"
+
+    if _PLATFORM == "Darwin":
+        try:
+            os.system(f"brightness {value/100:.2f}")
+            return f"💡 Brightness set to {value}%"
+        except Exception:
+            pass
+
+    return "❌ Cannot set brightness on this platform."
+
+
+def brightness_up(step: int = 10) -> str:
+    sbc = _get_sbc()
+    if sbc:
+        try:
+            current = sbc.get_brightness(display=0)
+            val = current[0] if isinstance(current, list) else current
+            return set_brightness(min(100, val + step))
+        except Exception as e:
+            return f"❌ Brightness up failed: {e}"
+    return set_brightness(60)  # safe default
+
+
+def brightness_down(step: int = 10) -> str:
+    sbc = _get_sbc()
+    if sbc:
+        try:
+            current = sbc.get_brightness(display=0)
+            val = current[0] if isinstance(current, list) else current
+            return set_brightness(max(0, val - step))
+        except Exception as e:
+            return f"❌ Brightness down failed: {e}"
+    return set_brightness(40)  # safe default

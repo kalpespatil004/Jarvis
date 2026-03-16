@@ -1,28 +1,157 @@
+/* ============================================================
+   J.A.R.V.I.S  –  Global Qt Stylesheet
+   Iron Man / Holographic Dark Theme
+   ============================================================ */
+
+/* ── Global ─────────────────────────────────────────────── */
+* {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #e0e0ff;
+    selection-background-color: #003388;
+    selection-color: #ffffff;
+}
+
+QMainWindow {
+    background-color: #0a0a1a;
+}
+
 QWidget {
-    background-color: #0b0f14;
-    color: #e6e6e6;
-    font-size: 14px;
+    background-color: #0a0a1a;
+    color: #e0e0ff;
 }
 
-QTextEdit {
-    background-color: #0f1620;
-    border: 1px solid #1f2a38;
-    padding: 8px;
+/* ── Scrollbars ──────────────────────────────────────────── */
+QScrollBar:vertical {
+    background: #0f0f2e;
+    width: 6px;
+    border-radius: 3px;
+    margin: 0;
 }
 
+QScrollBar::handle:vertical {
+    background: #1a3060;
+    border-radius: 3px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #00BFFF;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background: #0f0f2e;
+    height: 6px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #1a3060;
+    border-radius: 3px;
+}
+
+/* ── Status Bar ──────────────────────────────────────────── */
+QStatusBar {
+    background: #0a0a1a;
+    color: #555577;
+    font-family: "Courier New";
+    font-size: 9px;
+    border-top: 1px solid #0a2040;
+}
+
+/* ── Tooltips ────────────────────────────────────────────── */
+QToolTip {
+    background-color: #0f0f2e;
+    color: #e0e0ff;
+    border: 1px solid #00BFFF;
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+/* ── Line Edits ──────────────────────────────────────────── */
 QLineEdit {
-    background-color: #0f1620;
-    border: 1px solid #00e5ff;
-    padding: 6px;
+    background: #0d1830;
+    color: #e0e0ff;
+    border: 2px solid #1a3060;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
 }
 
+QLineEdit:focus {
+    border-color: #00BFFF;
+    background: #0f1e3a;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
 QPushButton {
-    background-color: #00e5ff;
-    color: #000;
-    padding: 6px 12px;
-    border-radius: 4px;
+    background: #1a1a3e;
+    color: #e0e0ff;
+    border: 1px solid #1a3060;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 10px;
 }
 
 QPushButton:hover {
-    background-color: #00c4dd;
+    background: #1e2a50;
+    border-color: #00BFFF;
+    color: #00BFFF;
+}
+
+QPushButton:pressed {
+    background: #0d1830;
+    border-color: #003388;
+}
+
+QPushButton:disabled {
+    color: #333355;
+    border-color: #111133;
+    background: #0a0a1a;
+}
+
+/* ── Labels ──────────────────────────────────────────────── */
+QLabel {
+    color: #e0e0ff;
+    background: transparent;
+}
+
+/* ── Splitter ────────────────────────────────────────────── */
+QSplitter::handle {
+    background: #0a2040;
+}
+
+QSplitter::handle:horizontal {
+    width: 1px;
+}
+
+/* ── Scroll Area ─────────────────────────────────────────── */
+QScrollArea {
+    background: #0a0a1a;
+    border: none;
+}
+
+/* ── Menu Bar ────────────────────────────────────────────── */
+QMenuBar {
+    background: #0f0f2e;
+    color: #e0e0ff;
+    border-bottom: 1px solid #0a2040;
+}
+
+QMenuBar::item:selected {
+    background: #1a1a3e;
+    color: #00BFFF;
+}
+
+QMenu {
+    background: #0f0f2e;
+    border: 1px solid #0a2040;
+}
+
+QMenu::item:selected {
+    background: #1a2a50;
+    color: #00BFFF;
 }

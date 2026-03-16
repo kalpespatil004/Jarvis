@@ -1,55 +1,27 @@
 """
-time_utils.py
---------------
-Utility functions related to current date and time
+services/time_date/time_utils.py
+---------------------------------
+Current time and date utilities.
 """
 
-from datetime import datetime
+import datetime
 
 
-def current_time(format: str = "%Y-%m-%d %H:%M:%S") -> dict:
-    """
-    Get current system time.
-
-    Args:
-        format (str): Datetime format string
-
-    Returns:
-        dict: Current time data
-    """
-
-    try:
-        now = datetime.now()
-        return {
-            "success": True,
-            "timestamp": now.timestamp(),
-            "formatted": now.strftime(format),
-            "date": now.strftime("%Y-%m-%d"),
-            "time": now.strftime("%H:%M:%S")
-        }
-
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
+def current_time() -> str:
+    return datetime.datetime.now().strftime("%I:%M %p")
 
 
 def current_date() -> str:
-    """
-    Get current date only.
-
-    Returns:
-        str
-    """
-    return datetime.now().strftime("%Y-%m-%d")
+    return datetime.datetime.now().strftime("%A, %d %B %Y")
 
 
-def current_time_only() -> str:
-    """
-    Get current time only.
+def current_datetime() -> str:
+    return datetime.datetime.now().strftime("%A, %d %B %Y – %I:%M %p")
 
-    Returns:
-        str
-    """
-    return datetime.now().strftime("%H:%M:%S")
+
+def day_of_week() -> str:
+    return datetime.datetime.now().strftime("%A")
+
+
+def week_number() -> str:
+    return str(datetime.datetime.now().isocalendar()[1])

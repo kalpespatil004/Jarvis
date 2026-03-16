@@ -1,78 +1,58 @@
 """
-news_api.py
------------
-Fetch latest news using NewsAPI
+services/news/news_api.py
+--------------------------
+Fetch latest news using NewsAPI.
 """
 
 import requests
 
+try:
+    from config import NEWS_API_KEY, DEFAULT_NEWS_COUNTRY
+except ImportError:
+    import os
+    NEWS_API_KEY         = os.getenv("NEWS_API_KEY", "")
+    DEFAULT_NEWS_COUNTRY = "in"
 
-# ===================== CONFIG =====================
-API_KEY = "YOUR_NEWS_API_KEY"   # 🔑 Replace with your NewsAPI key
 BASE_URL = "https://newsapi.org/v2/top-headlines"
-TIMEOUT = 5
+TIMEOUT  = 5
 
 
-# ===================== MAIN FUNCTION =====================
-def get_news(category: str = "general", country: str = "in", limit: int = 5) -> dict:
-    """
-    Fetch top headlines.
+def get_news(category: str = "general", country: str = None, limit: int = 5) -> dict:
+    country = country or DEFAULT_NEWS_COUNTRY
 
-    Args:
-        category (str): business, sports, technology, etc.
-        country (str): Country code (default: in)
-        limit (int): Number of headlines
-
-    Returns:
-        dict: News data or error
-    """
+    if not NEWS_API_KEY:
+        return {"success": False, "error": "No NEWS_API_KEY configured in .env"}
 
     params = {
-        "apiKey": API_KEY,
+        "apiKey"  : NEWS_API_KEY,
         "category": category,
-        "country": country,
+        "country" : country,
         "pageSize": limit
     }
 
     try:
-        response = requests.get(
-            BASE_URL,
-            params=params,
-            timeout=TIMEOUT
-        )
+        response = requests.get(BASE_URL, params=params, timeout=TIMEOUT)
         response.raise_for_status()
         data = response.json()
 
         articles = []
         for article in data.get("articles", []):
             articles.append({
-                "title": article.get("title"),
-                "source": article["source"].get("name"),
-                "url": article.get("url"),
+                "title"    : article.get("title"),
+                "source"   : article["source"].get("name"),
+                "url"      : article.get("url"),
                 "published": article.get("publishedAt")
             })
 
         return {
-            "success": True,
-            "count": len(articles),
+            "success" : True,
+            "count"   : len(articles),
             "category": category,
-            "news": articles
+            "news"    : articles
         }
-
-    except requests.exceptions.HTTPError:
-        return {
-            "success": False,
-            "error": "Invalid request or API limit exceeded"
-        }
-
-    except requests.exceptions.Timeout:
-        return {
-            "success": False,
-            "error": "News service timeout"
-        }
-
-    except requests.exceptions.RequestException as e:
-        return {
-            "success": False,
-            "error": f"Request failed: {str(e)}"
-        }
+    except requests.HTTPError:
+        return {"success": False, "error": "Invalid request or API limit exceeded"}
+    except requests.Timeout:
+        return {"success": False, "error": "News service timeout"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
