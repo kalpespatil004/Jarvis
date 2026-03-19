@@ -6,8 +6,6 @@ pyautogui==0.9.54
 psutil==5.9.6
 schedule==1.2.0
 sympy==1.12
-googletrans==4.0.0-rc1
-httpx==0.13.3
 
 pyqt6==6.5.0
 PyQt6-Qt6==6.5.0

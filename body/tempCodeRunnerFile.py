@@ -16,7 +16,7 @@ COMMAND_GRAMMAR = [
     "exit"
 ]
 
-vosk_model = Model(r"D:\Jarvis\body\vosk-model-en-in-0.5")
+vosk_model = Model("C:\\Jarvis\\body\\vosk-model-en-in-0.5")
 
 rec = KaldiRecognizer(
     vosk_model,
