@@ -44,17 +44,6 @@ class ListenWorker(QObject):
         except VoiceInputError as exc:
             self.error.emit(str(exc))
 
-class ListenWorker(QObject):
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
-
-    def run(self):
-        try:
-            text = capture_voice_text()
-            self.success.emit(text)
-        except VoiceInputError as exc:
-            self.error.emit(str(exc))
-
 
 class MainWindow(QWidget):
     AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
