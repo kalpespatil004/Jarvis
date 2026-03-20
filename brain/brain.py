@@ -14,6 +14,8 @@ import traceback
 
 from brain.intent_engine import detect_intent
 from brain.router import route
+from body.listen import listen
+from body.speak import speak
 
 
 def process_text(command: str) -> str:

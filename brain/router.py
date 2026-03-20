@@ -11,7 +11,9 @@ from __future__ import annotations
 
 from services.service_router import dispatch_intent
 
-
+# =========================
+# CORE ROUTER
+# =========================
 def route(intent_data: dict, return_response: bool = False):
     """
     Route intent to the correct action.
@@ -22,7 +24,9 @@ def route(intent_data: dict, return_response: bool = False):
     reply = dispatch_intent(intent_data)
 
     if return_response:
-        return reply
+        return text
+
+    speak(text)
 
     from body.speak import speak
 

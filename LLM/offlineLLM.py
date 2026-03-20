@@ -2,7 +2,7 @@
 offlineLLM.py
 -------------
 Offline LLM chat using Ollama.
-Offline-first. Safe. Deterministic.
+
 """
 
 import subprocess
@@ -45,3 +45,7 @@ def chat(prompt: str) -> str:
 
     except Exception:
         return "Offline language model failed unexpectedly."
+
+if __name__ == "__main__":
+    test_prompt = "What is the capital of France?"
+    print(chat(test_prompt))
