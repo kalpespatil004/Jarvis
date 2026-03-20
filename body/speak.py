@@ -61,7 +61,6 @@ import queue
 import threading
 import sounddevice as sd
 from TTS.api import TTS
-import random
 # ===============================
 # CONFIG
 # ===============================
@@ -91,6 +90,8 @@ DEFAULT_SPEAKER = "p228"
 # ===============================
 
 _audio_queue = queue.Queue()
+_audio_loop_started = False
+_audio_loop_lock = threading.Lock()
 
 # ===============================
 # BACKGROUND TTS WORKER
@@ -102,24 +103,41 @@ def _tts_worker(text: str):
 
     print(f"Jarvis: {text}")
 
-    wav = _tts.tts(
-        text=text,
-        speaker=DEFAULT_SPEAKER
-    )
-
-    _audio_queue.put(wav)
+    try:
+        wav = _tts.tts(
+            text=text,
+            speaker=DEFAULT_SPEAKER
+        )
+        _audio_queue.put(wav)
+    except Exception as exc:
+        print(f"[TTS ERROR] Failed to synthesize speech: {exc}")
 
 # ===============================
 # PUBLIC SPEAK (NON-BLOCKING)
 # ===============================
 
 def speak(text: str):
+    ensure_audio_loop_started()
     text = text.replace("*", "")
     threading.Thread(
         target=_tts_worker,
         args=(text,),
         daemon=True
     ).start()
+
+
+def ensure_audio_loop_started():
+    """
+    Start audio playback loop once in a background daemon thread.
+    Needed for UI mode where `audio_loop()` is not running in `main.py`.
+    """
+    global _audio_loop_started
+    with _audio_loop_lock:
+        if _audio_loop_started:
+            return
+
+        threading.Thread(target=audio_loop, daemon=True).start()
+        _audio_loop_started = True
 
 # ===============================
 # AUDIO LOOP (MAIN THREAD)
@@ -132,8 +150,11 @@ def audio_loop():
     """
     while True:
         wav = _audio_queue.get()
-        sd.play(wav, SAMPLE_RATE)
-        sd.wait()
+        try:
+            sd.play(wav, SAMPLE_RATE)
+            sd.wait()
+        except Exception as exc:
+            print(f"[TTS ERROR] Failed during audio playback: {exc}")
 
 # ===============================
 # WARM-UP (LEVEL 2)

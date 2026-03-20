@@ -4,163 +4,128 @@ Intent Engine
 Converts raw user text into structured intent data.
 
 Design goals:
-- Rule-based (fast, offline, predictable)
-- Phrase-aware (avoid keyword traps like "time")
-- Extensible (easy to add new intents)
+- Rule-based NLP (fast, offline, predictable)
+- Phrase-aware matching (avoid weak keyword traps)
+- Extensible entity extraction for routing/services
 """
 
+from __future__ import annotations
+
 import re
-from typing import Dict
+from typing import Any
+
+_APP_ALIASES = {
+    "google chrome": "chrome",
+    "chrome browser": "chrome",
+    "microsoft edge": "edge",
+    "edge browser": "edge",
+    "calculator": "calculator",
+    "calc": "calculator",
+    "notepad": "notepad",
+}
+
+_APP_STOPWORDS = {
+    "app",
+    "application",
+    "named",
+    "please",
+    "for",
+    "me",
+    "the",
+    "a",
+    "an",
+    "to",
+    "jarvis",
+}
 
 
-def detect_intent(text: str) -> Dict:
-    """
-    Detect intent from user command.
-
-    Returns:
-    {
-        "intent": str,
-        optional metadata...,
-        "confidence": float
-    }
-    """
-
+def detect_intent(text: str) -> dict[str, Any]:
+    """Detect intent and lightweight entities from a user utterance."""
     if not text or not text.strip():
         return _unknown_intent()
 
-    text = text.lower().strip()
+    raw_text = text.strip()
+    normalized = _normalize(raw_text)
 
-    # =========================
-    # EXIT / SHUTDOWN
-    # =========================
-    if re.fullmatch(r"(exit|quit|shutdown|bye|goodbye)", text):
-        return {
-            "intent": "exit",
-            "confidence": 1.0
-        }
+    if re.fullmatch(r"(?:exit|quit|shutdown|bye|goodbye|close jarvis)", normalized):
+        return _intent("exit", raw_text, normalized, confidence=1.0)
 
-    # =========================
-    # ADVICE / BEST TIME (IMPORTANT: BEFORE CLOCK TIME)
-    # =========================
-    if re.search(r"\b(best time|good time|ideal time)\b", text):
-        return {
-            "intent": "advice_time",
-            "topic": text,
-            "confidence": 0.85
-        }
+    if re.search(r"\b(best time|good time|ideal time|when should i)\b", normalized):
+        return _intent("advice_time", raw_text, normalized, confidence=0.84, topic=raw_text)
 
-    # =========================
-    # CURRENT TIME (CLOCK)
-    # =========================
     if re.search(
-        r"\b(what\s+time\s+is\s+it|tell\s+me\s+the\s+time|current\s+time)\b",
-        text
+        r"\b(what\s+time\s+is\s+it|tell\s+me\s+the\s+time|current\s+time|time\s+now)\b",
+        normalized,
     ):
-        return {
-            "intent": "get_time",
-            "confidence": 0.95
-        }
+        return _intent("get_time", raw_text, normalized, confidence=0.96)
 
-    # =========================
-    # CURRENT DATE
-    # =========================
     if re.search(
-        r"\b(what\s+date\s+is\s+it|today'?s\s+date|current\s+date|today)\b",
-        text
+        r"\b(what\s+date\s+is\s+it|today'?s\s+date|current\s+date|date\s+today)\b",
+        normalized,
     ):
-        return {
-            "intent": "get_date",
-            "confidence": 0.95
-        }
+        return _intent("get_date", raw_text, normalized, confidence=0.96)
 
-    # =========================
-    # OPEN APPLICATION (ROBUST)
-    # =========================
-    if re.search(r"\bopen\b", text):
-        # Remove everything before 'open'
-        after_open = re.split(r"\bopen\b", text, maxsplit=1)[1]
+    app_name = _extract_app_name(normalized)
+    if app_name:
+        return _intent("open_app", raw_text, normalized, confidence=0.90, app=app_name)
 
-        # Words to ignore
-        ignore_words = {
-            "app", "application", "named", "please",
-            "for", "me", "the", "a", "an", "to"
-        }
+    if re.search(r"\b(play|start|resume)\b.*\b(music|song|songs|playlist)\b", normalized):
+        return _intent("play_music", raw_text, normalized, confidence=0.91)
 
-        # Tokenize
-        words = after_open.strip().split()
+    if re.search(r"\b(stop|pause)\b.*\b(music|song|songs|playlist)\b", normalized):
+        return _intent("stop_music", raw_text, normalized, confidence=0.91)
 
-        # Pick first meaningful word
-        for word in words:
-            if word not in ignore_words:
-                return {
-                    "intent": "open_app",
-                    "app": word,
-                    "confidence": 0.90
-                }
+    return _intent("chat", raw_text, normalized, confidence=0.45, text=raw_text)
 
 
-    # =========================
-    # PLAY MUSIC
-    # =========================
-    if re.search(
-        r"\b(play\s+music|play\s+song|start\s+music)\b",
-        text
-    ):
-        return {
-            "intent": "play_music",
-            "confidence": 0.90
-        }
-
-    # =========================
-    # STOP MUSIC
-    # =========================
-    if re.search(
-        r"\b(stop\s+music|pause\s+music|stop\s+song)\b",
-        text
-    ):
-        return {
-            "intent": "stop_music",
-            "confidence": 0.90
-        }
-
-    # =========================
-    # FALLBACK: GENERAL CHAT
-    # =========================
-    return {
-        "intent": "chat",
-        "text": text,
-        "confidence": 0.40
-    }
+def _normalize(text: str) -> str:
+    lowered = text.lower().strip()
+    lowered = re.sub(r"[^a-z0-9\s]", " ", lowered)
+    lowered = re.sub(r"\s+", " ", lowered)
+    return lowered
 
 
-# =========================
-# HELPERS
-# =========================
-def _unknown_intent() -> Dict:
-    return {
-        "intent": "unknown",
-        "confidence": 0.0
-    }
-
-
-# =========================
-# DEBUG / SELF TEST
-# =========================
-if __name__ == "__main__":
-    test_commands = [
-        "what time is it",
-        "tell me the time",
-        "best time for study",
-        "good time to sleep",
-        "hey jarvis i want to open chrome for browsing",
-        "can you open app named notepad please",
-        "play music on spotify",
-        "stop music",
-        "what is today's date",
-        "exit",
-        "how are you"
-        "gjhgjcfghjc hgchbjkchr hcwehfkujf"
+def _extract_app_name(text: str) -> str | None:
+    explicit_patterns = [
+        r"\bopen\s+(.+)$",
+        r"\blaunch\s+(.+)$",
+        r"\bstart\s+(.+)$",
+        r"\brun\s+(.+)$",
     ]
 
-    for cmd in test_commands:
-        print(f"{cmd}  ->  {detect_intent(cmd)}")
+    candidate: str | None = None
+    for pattern in explicit_patterns:
+        match = re.search(pattern, text)
+        if match:
+            candidate = match.group(1).strip()
+            break
+
+    if not candidate:
+        return None
+
+    tokens = [token for token in candidate.split() if token not in _APP_STOPWORDS]
+    if not tokens:
+        return None
+
+    cleaned = " ".join(tokens[:3]).strip()
+    return _APP_ALIASES.get(cleaned, cleaned)
+
+
+def _intent(intent: str, raw_text: str, normalized_text: str, confidence: float, **extra: Any) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "intent": intent,
+        "text": raw_text,
+        "normalized_text": normalized_text,
+        "confidence": confidence,
+    }
+    payload.update(extra)
+    return payload
+
+
+def _unknown_intent() -> dict[str, Any]:
+    return {
+        "intent": "unknown",
+        "text": "",
+        "normalized_text": "",
+        "confidence": 0.0,
+    }
