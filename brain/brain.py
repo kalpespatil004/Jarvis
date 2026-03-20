@@ -1,28 +1,14 @@
-"""
-Jarvis Brain
-------------
-Central control logic for Jarvis.
-
-Supports:
-- Voice mode (continuous loop)
-- UI/Text mode (single-turn processing)
-"""
-
 import traceback
-
 from brain.intent_engine import detect_intent
 from brain.router import route
+from body.listen import listen
+from body.speak import speak
 
 
 # ==================================================
-# UI / TEXT MODE (SAFE FOR GUI)
+# UI / TEXT MODE
 # ==================================================
-
 def process_text(command: str) -> str:
-    """
-    Process a single text command and return response.
-    Used by UI / Web / API.
-    """
 
     try:
         if not command or not command.strip():
@@ -31,15 +17,16 @@ def process_text(command: str) -> str:
         command = command.lower().strip()
         print(f"[BRAIN:UI] Heard: {command}")
 
-        # Exit handling
         if command in ("exit", "shutdown", "quit", "goodbye"):
             return "Shutting down. Take care."
 
-        # Intent detection
         intent_data = detect_intent(command)
         print(f"[BRAIN:UI] Intent: {intent_data}")
 
-        # Route intent and get response
+        # Confidence + unknown handling
+        if intent_data["confidence"] < 0.5 or intent_data["intent"] == "unknown":
+            return "I didn't understand that."
+
         response = route(intent_data, return_response=True)  # type: ignore
         return response or ""
 
@@ -50,17 +37,10 @@ def process_text(command: str) -> str:
 
 
 # ==================================================
-# VOICE MODE (CONTINUOUS LOOP)
+# VOICE MODE
 # ==================================================
-
 def brain_loop():
-    """
-    Main Jarvis lifecycle loop.
-    Voice-based, blocking, continuous.
-    """
-    # Lazy imports keep desktop/UI text mode from requiring voice dependencies.
-    from body.listen import listen
-    from body.speak import speak
+
 
     while True:
         try:
@@ -73,16 +53,21 @@ def brain_loop():
             command = command.lower().strip()
             print(f"[BRAIN] Heard: {command}")
 
-            # 2. EXIT SAFETY
+            # 2. EXIT
             if command in ("exit", "shutdown", "quit", "goodbye"):
                 speak("Shutting down. Take care.")
                 break
 
-            # 3. THINK
+            # 3. THINK (ONLY ONCE)
             intent_data = detect_intent(command)
             print(f"[BRAIN] Intent: {intent_data}")
 
-            # 4. ACT
+            # 4. VALIDATE
+            if intent_data["confidence"] < 0.5 or intent_data["intent"] == "unknown":
+                speak("I didn't understand that")
+                continue
+
+            # 5. ACT
             route(intent_data)
 
         except KeyboardInterrupt:
@@ -96,8 +81,7 @@ def brain_loop():
 
 
 # ==================================================
-# DEBUG MODE
+# DEBUG
 # ==================================================
-
 if __name__ == "__main__":
     brain_loop()

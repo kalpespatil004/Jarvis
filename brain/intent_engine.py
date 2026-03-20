@@ -8,22 +8,11 @@ Design goals:
 - Phrase-aware (avoid keyword traps like "time")
 - Extensible (easy to add new intents)
 """
-
 import re
 from typing import Dict
 
 
 def detect_intent(text: str) -> Dict:
-    """
-    Detect intent from user command.
-
-    Returns:
-    {
-        "intent": str,
-        optional metadata...,
-        "confidence": float
-    }
-    """
 
     if not text or not text.strip():
         return _unknown_intent()
@@ -31,136 +20,116 @@ def detect_intent(text: str) -> Dict:
     text = text.lower().strip()
 
     # =========================
-    # EXIT / SHUTDOWN
+    # EXIT
     # =========================
-    if re.fullmatch(r"(exit|quit|shutdown|bye|goodbye)", text):
+    if text in ("exit", "quit", "shutdown", "bye"):
         return {
             "intent": "exit",
             "confidence": 1.0
         }
+    
+    # =========================
+    # SAVE NAME
+    # =========================
+    import re
+
+    if "my name is" in text:
+        match = re.search(r"my name is ([a-zA-Z ]+)", text)
+
+        if match:
+            name = match.group(1).strip()
+
+            return {
+                "intent": "save_name",
+                "name": name,
+                "confidence": 0.95
+            }
 
     # =========================
-    # ADVICE / BEST TIME (IMPORTANT: BEFORE CLOCK TIME)
+    # ALTERNATIVE (I AM ...)
     # =========================
-    if re.search(r"\b(best time|good time|ideal time)\b", text):
+    if text.startswith("i am"):
+        name = text.replace("i am", "").strip()
+
         return {
-            "intent": "advice_time",
-            "topic": text,
-            "confidence": 0.85
+            "intent": "save_name",
+            "name": name,
+            "confidence": 0.9
         }
 
     # =========================
-    # CURRENT TIME (CLOCK)
+    # GET NAME
     # =========================
-    if re.search(
-        r"\b(what\s+time\s+is\s+it|tell\s+me\s+the\s+time|current\s+time)\b",
-        text
-    ):
+    if "my name" in text:
+        return {
+            "intent": "get_name",
+            "confidence": 0.9
+        }
+    # =========================
+    # OPEN APPS (STRICT)
+    # =========================
+    if text.startswith("open"):
+        parts = text.split()
+
+        if len(parts) >= 2:
+            app_name = " ".join(parts[1:])  # take full phrase
+
+            return {
+                "intent": "open_app",
+                "app": app_name,
+                "confidence": 0.95
+            }
+
+    # =========================
+    # PLAY MUSIC
+    # =========================
+    if text in ("play music",):
+        return {
+            "intent": "play_music",
+            "confidence": 0.95
+        }
+
+    # =========================
+    # STOP MUSIC
+    # =========================
+    if text in ("stop music",):
+        return {
+            "intent": "stop_music",
+            "confidence": 0.95
+        }
+
+    # =========================
+    # TIME
+    # =========================
+    if text in ("what time is it",):
         return {
             "intent": "get_time",
             "confidence": 0.95
         }
 
     # =========================
-    # CURRENT DATE
+    # UNKNOWN
     # =========================
-    if re.search(
-        r"\b(what\s+date\s+is\s+it|today'?s\s+date|current\s+date|today)\b",
-        text
-    ):
-        return {
-            "intent": "get_date",
-            "confidence": 0.95
-        }
-
-    # =========================
-    # OPEN APPLICATION (ROBUST)
-    # =========================
-    if re.search(r"\bopen\b", text):
-        # Remove everything before 'open'
-        after_open = re.split(r"\bopen\b", text, maxsplit=1)[1]
-
-        # Words to ignore
-        ignore_words = {
-            "app", "application", "named", "please",
-            "for", "me", "the", "a", "an", "to"
-        }
-
-        # Tokenize
-        words = after_open.strip().split()
-
-        # Pick first meaningful word
-        for word in words:
-            if word not in ignore_words:
-                return {
-                    "intent": "open_app",
-                    "app": word,
-                    "confidence": 0.90
-                }
+    return _unknown_intent()
 
 
-    # =========================
-    # PLAY MUSIC
-    # =========================
-    if re.search(
-        r"\b(play\s+music|play\s+song|start\s+music)\b",
-        text
-    ):
-        return {
-            "intent": "play_music",
-            "confidence": 0.90
-        }
-
-    # =========================
-    # STOP MUSIC
-    # =========================
-    if re.search(
-        r"\b(stop\s+music|pause\s+music|stop\s+song)\b",
-        text
-    ):
-        return {
-            "intent": "stop_music",
-            "confidence": 0.90
-        }
-
-    # =========================
-    # FALLBACK: GENERAL CHAT
-    # =========================
-    return {
-        "intent": "chat",
-        "text": text,
-        "confidence": 0.40
-    }
-
-
-# =========================
-# HELPERS
-# =========================
 def _unknown_intent() -> Dict:
     return {
         "intent": "unknown",
         "confidence": 0.0
     }
 
-
-# =========================
-# DEBUG / SELF TEST
-# =========================
 if __name__ == "__main__":
-    test_commands = [
-        "what time is it",
-        "tell me the time",
-        "best time for study",
-        "good time to sleep",
-        "hey jarvis i want to open chrome for browsing",
-        "can you open app named notepad please",
-        "play music on spotify",
+    test_phrases = [
+        "Open Chrome",
+        "open youtube",
+        "Play music",
         "stop music",
-        "what is today's date",
+        "What time is it",
         "exit",
-        "how are you"
-        "gjhgjcfghjc hgchbjkchr hcwehfkujf"
+        "open notepad"
     ]
 
-    for cmd in test_commands:
-        print(f"{cmd}  ->  {detect_intent(cmd)}")
+    for phrase in test_phrases:
+        intent = detect_intent(phrase)
+        print(f"Input: '{phrase}' -> Intent: {intent}")

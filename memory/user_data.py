@@ -1,5 +1,5 @@
-# memory/user_data.py
 from memory.local_cache import read_cache, write_cache
+from datetime import datetime
 
 USER_KEY = "user_profile"
 
@@ -14,8 +14,9 @@ def update_user_profile(**kwargs):
     profile = data.get(USER_KEY, {})
 
     profile.update(kwargs)
-    data[USER_KEY] = profile
+    profile["updated_at"] = datetime.now().isoformat()
 
+    data[USER_KEY] = profile
     write_cache(data)
 
 

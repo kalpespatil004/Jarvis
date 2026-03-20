@@ -10,7 +10,6 @@ Supports:
 - Voice mode (speaks)
 - UI mode (returns text)
 """
-
 import os
 import subprocess
 import datetime
@@ -19,17 +18,12 @@ import webbrowser
 from body.speak import speak
 from brain.response_picker import get_response
 from LLM.chatbot import chat
+from memory.user_data import set_preference, get_preference
 
-
+# =========================
+# CORE ROUTER
+# =========================
 def route(intent_data: dict, return_response: bool = False):
-    """
-    Route intent to the correct action.
-
-    If return_response=True:
-        → return text (for UI)
-    Else:
-        → speak text (for voice)
-    """
 
     intent = intent_data.get("intent")
 
@@ -37,114 +31,92 @@ def route(intent_data: dict, return_response: bool = False):
     # EXIT
     # =========================
     if intent == "exit":
-        reply = "Shutting down."
+        return _respond("Shutting down.", return_response, exit_program=True)
 
-        if return_response:
-            return reply
+    elif intent == "save_name":
+        name = intent_data.get("name")
+        set_preference("name", name)
+        return _respond(f"Got it. Your name is {name}.", return_response)
 
-        speak(reply)
-        raise SystemExit
+    elif intent == "get_name":
+        name = get_preference("name")
 
+        if name:
+            return _respond(f"Your name is {name}.", return_response)
+        else:
+            return _respond("I don't know your name yet.", return_response)
     # =========================
-    # GET CURRENT TIME
+    # TIME
     # =========================
-    if intent == "get_time":
+    elif intent == "get_time":
         now = datetime.datetime.now().strftime("%I:%M %p")
-        reply = get_response("get_time", now)
-
-        if return_response:
-            return reply
-
-        speak(reply)
-        return
+        return _respond(get_response("get_time", now), return_response)
 
     # =========================
-    # GET CURRENT DATE
+    # DATE
     # =========================
-    if intent == "get_date":
+    elif intent == "get_date":
         today = datetime.datetime.now().strftime("%A, %d %B %Y")
-        reply = get_response("get_date", today)
-
-        if return_response:
-            return reply
-
-        speak(reply)
-        return
+        return _respond(get_response("get_date", today), return_response)
 
     # =========================
-    # OPEN APPLICATION
+    # OPEN APP
     # =========================
-    if intent == "open_app":
+    elif intent == "open_app":
         app = intent_data.get("app")
-
-        if not app:
-            reply = get_response("fallback")
-
-            if return_response:
-                return reply
-
-            speak(reply)
-            return
-
         return _open_app(app, return_response)
 
     # =========================
-    # PLAY MUSIC
+    # MUSIC
     # =========================
-    if intent == "play_music":
-        reply = get_response("play_music")
-
-        if return_response:
-            return reply
-
-        speak(reply)
+    elif intent == "play_music":
         _play_music()
-        return
+        return _respond(get_response("play_music"), return_response)
 
-    # =========================
-    # STOP MUSIC
-    # =========================
-    if intent == "stop_music":
-        reply = get_response("stop_music")
-
-        if return_response:
-            return reply
-
-        speak(reply)
+    elif intent == "stop_music":
         _stop_music()
-        return
+        return _respond(get_response("stop_music"), return_response)
 
     # =========================
-    # CHAT / ADVICE / UNKNOWN
+    # CHAT / ADVICE
     # =========================
-    if intent in ("chat", "advice_time", "unknown"):
+    elif intent in ("chat", "advice_time"):
         reply = chat(intent_data.get("text", ""))
+        return _respond(reply, return_response)
 
-        if return_response:
-            return reply
-
-        speak(reply)
-        return
+    # =========================
+    # UNKNOWN (IMPORTANT FIX)
+    # =========================
+    elif intent == "unknown":
+        return _respond(get_response("fallback"), return_response)
 
     # =========================
     # SAFETY NET
     # =========================
-    reply = get_response("fallback")
+    return _respond(get_response("fallback"), return_response)
+
+
+# ==================================================
+# RESPONSE HANDLER (NEW - IMPORTANT)
+# ==================================================
+def _respond(text, return_response=False, exit_program=False):
 
     if return_response:
-        return reply
+        return text
 
-    speak(reply)
+    speak(text)
+
+    if exit_program:
+        raise SystemExit
 
 
 # ==================================================
-# HELPERS
+# APP HANDLER
 # ==================================================
-
 def _open_app(app: str, return_response: bool = False):
-    """
-    Open common Windows applications safely.
-    """
+
+    if not app:
+        return _respond(get_response("fallback"), return_response)
 
     app = app.lower()
 
@@ -152,59 +124,44 @@ def _open_app(app: str, return_response: bool = False):
         "notepad": "notepad.exe",
         "calculator": "calc.exe",
         "calc": "calc.exe",
-        "chrome": "chrome",
-        "edge": "msedge"
     }
 
-    # Browsers
-    if app in ("chrome", "edge"):
-        reply = get_response("open_app", app)
+    # =========================
+    # BROWSER HANDLING (FIXED)
+    # =========================
+    if app == "chrome":
+        path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+        return _launch_exe(path, app, return_response)
 
-        if return_response:
-            webbrowser.open(app)
-            return reply
+    if app == "edge":
+        path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+        return _launch_exe(path, app, return_response)
 
-        speak(reply)
-        webbrowser.open(app)
-        return
-
+    # =========================
+    # SIMPLE APPS
+    # =========================
     exe = app_map.get(app)
 
-    if not exe:
-        reply = f"I don't know how to open {app}."
+    if exe:
+        return _launch_exe(exe, app, return_response)
 
-        if return_response:
-            return reply
+    return _respond(f"I don't know how to open {app}.", return_response)
 
-        speak(reply)
-        return
 
+def _launch_exe(path, app, return_response):
     try:
-        subprocess.Popen(exe)
-        reply = get_response("open_app", app)
-
-        if return_response:
-            return reply
-
-        speak(reply)
-
+        subprocess.Popen(path)
+        return _respond(get_response("open_app", app), return_response)
     except Exception:
-        reply = f"Failed to open {app}."
-
-        if return_response:
-            return reply
-
-        speak(reply)
+        return _respond(f"Failed to open {app}.", return_response)
 
 
+# ==================================================
+# MUSIC
+# ==================================================
 def _play_music():
-    """
-    Opens the default Music folder.
-    """
-    music_dir = os.path.join(
-        os.path.expanduser("~"),
-        "Music"
-    )
+
+    music_dir = os.path.join(os.path.expanduser("~"), "Music")
 
     if not os.path.exists(music_dir):
         speak("Music folder not found.")
@@ -217,9 +174,7 @@ def _play_music():
 
 
 def _stop_music():
-    """
-    Stops common music players (basic but effective).
-    """
+
     players = ["wmplayer.exe", "vlc.exe"]
 
     for player in players:

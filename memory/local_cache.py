@@ -1,7 +1,8 @@
-# memory/local_cache.py
 import json
 import os
+import threading
 from threading import Lock
+from memory.firebase_sync import push_memory
 
 DATA_DIR = "database"
 CACHE_FILE = os.path.join(DATA_DIR, "cache.json")
@@ -23,8 +24,17 @@ def read_cache() -> dict:
             return json.load(f)
 
 
+def async_push(data):
+    thread = threading.Thread(target=push_memory, args=(data,))
+    thread.daemon = True
+    thread.start()
+
+
 def write_cache(data: dict):
     _ensure_file()
+
     with _lock:
         with open(CACHE_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
+
+    async_push(data)

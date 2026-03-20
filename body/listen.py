@@ -1,66 +1,32 @@
-import json
-import queue
-import sounddevice as sd
-from vosk import Model, KaldiRecognizer
-
-SAMPLE_RATE = 16000
-BLOCK_SIZE = 4000
-
-COMMAND_GRAMMAR = [
-    "open chrome",
-    "open youtube",
-    "play music",
-    "stop music",
-    "what time is it",
-    "shutdown",
-    "exit"
-]
-
-vosk_model = Model(r"D:\Jarvis\body\vosk-model-en-in-0.5")
-
-rec = KaldiRecognizer(
-    vosk_model,
-    SAMPLE_RATE,
-    json.dumps(COMMAND_GRAMMAR)
-)
-
-audio_queue = queue.Queue(maxsize=20)
-
-
-def audio_callback(indata, frames, time, status):
-    if status:
-        return
-
-    if not audio_queue.full():
-        audio_queue.put(bytes(indata))
+from body.listen_whisper import listen as whisper_listen
+from body.listen_vosk import listen as vosk_listen
 
 
 def listen():
 
-    print("Jarvis listening...")
+    print("[STT] Listening...")
 
-    with sd.RawInputStream(
-        samplerate=SAMPLE_RATE,
-        blocksize=BLOCK_SIZE,
-        dtype="int16",
-        channels=1,
-        callback=audio_callback
-    ):
+    try:
+        # 🔥 PRIMARY → Whisper
+        text = whisper_listen()
 
-        while True:
-            data = audio_queue.get()
+        if text:
+            return text
 
-            if rec.AcceptWaveform(data):
-                result = json.loads(rec.Result())
-                text = result.get("text", "").strip()
+        print("[STT] Whisper failed → fallback to Vosk")
 
-                if text:
-                    print("USER:", text)
-                    rec.Reset()
-                    return text
+        # ⚡ FALLBACK → Vosk
+        text = vosk_listen()
+
+        return text
+
+    except Exception as e:
+        print("[STT ERROR]", e)
+        print("[STT] Using Vosk fallback...")
+
+        return vosk_listen()
 
 
 if __name__ == "__main__":
-
     while True:
-        listen()
+        print("FINAL:", listen())
