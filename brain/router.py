@@ -15,7 +15,11 @@ from services.chat_service import chat_response
 from services.music_service import play_music_response, stop_music_response
 from services.time_service import get_current_date_response, get_current_time_response
 
+from services.service_router import dispatch_intent
 
+# =========================
+# CORE ROUTER
+# =========================
 def route(intent_data: dict, return_response: bool = False):
     """
     Route intent to the correct service.

@@ -13,6 +13,7 @@ load_dotenv()
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
 
+
 if API_KEY:
     client = OpenAI(
         api_key=API_KEY,
@@ -35,7 +36,7 @@ def chat(prompt: str) -> str:
 
     try:
         response = client.chat.completions.create(
-            model="deepseek/deepseek-r1-0528:free",
+            model="arcee-ai/trinity-large-preview:free",
             messages=[
                 {"role": "system", "content": "You are JARVIS. Be concise, calm, intelligent."},
                 {"role": "user", "content": prompt}
@@ -44,5 +45,11 @@ def chat(prompt: str) -> str:
             max_tokens=300,
         )
         return response.choices[0].message.content.strip() # type: ignore
-    except Exception:
-        return "OPENROUTER_UNAVAILABLE"
+    except Exception as e:
+       
+        print("OPENROUTER_UNAVAILABLE", e)
+        return 
+
+if __name__ == "__main__":
+    test_prompt = "what is the capital of France? and what is the capital of Germany?"
+    print(chat(test_prompt))

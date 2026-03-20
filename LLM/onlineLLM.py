@@ -39,3 +39,7 @@ def chat(prompt: str) -> str:
     except Exception:
         # Explicit fallback
         return openrouter_chat(prompt)
+
+if __name__ == "__main__":
+    test_prompt = "What is the capital of France?"
+    print(chat(test_prompt))

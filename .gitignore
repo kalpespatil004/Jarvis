@@ -19,3 +19,4 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+memory/firebase_key.json
