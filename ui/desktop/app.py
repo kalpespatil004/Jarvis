@@ -18,10 +18,21 @@ def _preload_voice_stack() -> None:
     # Preload listen path.
     try:
         from body.listen import listen as _listen  # noqa: F401
-        from body.listen_whisper import _get_model
+        print("[UI] Listen module preloaded.")
 
-        _get_model()
-        print("[UI] Listen stack preloaded.")
+        # Whisper native init can hard-exit on some CUDA setups before raising Python exceptions.
+        # Keep GUI startup safe by making model preload opt-in.
+        preload_whisper = os.environ.get("JARVIS_PRELOAD_WHISPER_MODEL", "0") == "1"
+        if preload_whisper:
+            if os.environ.get("JARVIS_PRELOAD_WHISPER_CPU", "1") == "1":
+                os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+
+            from body.listen_whisper import _get_model
+
+            _get_model()
+            print("[UI] Whisper model preloaded.")
+        else:
+            print("[UI] Whisper model preload skipped (set JARVIS_PRELOAD_WHISPER_MODEL=1 to enable).")
     except Exception as exc:
         print(f"[UI] Listen preload failed: {exc}")
 
