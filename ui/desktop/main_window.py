@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
-from PyQt6.QtMultimedia import QMediaPlayer
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
     QHBoxLayout,
@@ -72,17 +73,21 @@ class CycleWorker(QObject):
         self.state_changed.emit("idle")
 
 
+# =========================
+# MAIN UI
+# =========================
+
 class MainWindow(QWidget):
     state_signal = pyqtSignal(str)
     subtitle_signal = pyqtSignal(str, str)
 
     AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
 
-    VIDEO_NAME_CANDIDATES = {
-        "idle": ["idle.mp4", "ideal.mp4"],
-        "listening": ["listening.mp4", "listnimg.mp4"],
-        "thinking": ["thinking.mp4"],
-        "speaking": ["speaking.mp4"],
+    VIDEO_NAME = {
+        "idle": "idle.mp4",
+        "listening": "listening.mp4",
+        "thinking": "thinking.mp4",
+        "speaking": "speaking.mp4",
     }
 
     def __init__(self):
@@ -176,95 +181,55 @@ class MainWindow(QWidget):
     def init_ui(self):
         root = QVBoxLayout()
         root.setContentsMargins(0, 0, 0, 0)
-        root.setSpacing(0)
 
-        video_container = QWidget(self)
-        stacked = QStackedLayout(video_container)
-        stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
-        stacked.setContentsMargins(0, 0, 0, 0)
+        container = QWidget()
+        stack = QStackedLayout(container)
+        stack.setStackingMode(QStackedLayout.StackingMode.StackAll)
 
-        self.video_widget.setStyleSheet("background: black;")
-        stacked.addWidget(self.video_widget)
+        stack.addWidget(self.video_widget)
 
-        subtitle_overlay = QWidget(video_container)
-        subtitle_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
-        subtitle_overlay.setStyleSheet("background: transparent;")
+        # subtitle
+        self.subtitle = QLabel("Jarvis: Online")
+        self.subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.subtitle.setStyleSheet("""
+            background: rgba(0,0,0,180);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        """)
 
-        self.subtitle_label = QLabel("Jarvis: Online.", subtitle_overlay)
-        self.subtitle_label.setWordWrap(True)
-        self.subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.subtitle_label.setStyleSheet(
-            """
-            QLabel {
-                color: white;
-                background-color: rgba(0, 0, 0, 190);
-                border-radius: 10px;
-                padding: 10px 14px;
-                font-size: 18px;
-                font-weight: 600;
-            }
-            """
-        )
-        self.subtitle_label.setMinimumHeight(56)
+        stack.addWidget(self.subtitle)
 
-        stacked.addWidget(subtitle_overlay)
-        self._subtitle_overlay = subtitle_overlay
+        # controls
+        controls = QHBoxLayout()
 
-        controls = QWidget(self)
-        controls.setFixedHeight(72)
-        controls.setObjectName("controlsPanel")
-        controls_layout = QHBoxLayout(controls)
-        controls_layout.setContentsMargins(10, 8, 10, 8)
-        controls_layout.setSpacing(8)
-
-        self.input_box = QLineEdit()
-        self.input_box.setPlaceholderText("Type a command...")
-        self.input_box.returnPressed.connect(self.send_message)
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Type command...")
+        self.input.returnPressed.connect(self.send)
 
         self.listen_btn = QPushButton("Listen")
-        self.listen_btn.clicked.connect(self.listen_once)
+        self.listen_btn.clicked.connect(self.listen)
 
         self.send_btn = QPushButton("Send")
-        self.send_btn.clicked.connect(self.send_message)
+        self.send_btn.clicked.connect(self.send)
 
-        controls_layout.addWidget(self.input_box, 1)
-        controls_layout.addWidget(self.listen_btn)
-        controls_layout.addWidget(self.send_btn)
+        controls.addWidget(self.input)
+        controls.addWidget(self.listen_btn)
+        controls.addWidget(self.send_btn)
 
-        root.addWidget(video_container, 1)
-        root.addWidget(controls, 0)
+        root.addWidget(container)
+        root.addLayout(controls)
+
         self.setLayout(root)
+        self.resize(500, 800)
 
-        self.setStyleSheet(
-            """
-            QWidget { background: #05070a; color: #e6edf3; }
-            #controlsPanel { background: #0f1419; border-top: 1px solid #30363d; }
-            QLineEdit {
-                background: #0d1117;
-                border: 1px solid #30363d;
-                border-radius: 8px;
-                padding: 8px;
-                font-size: 14px;
-            }
-            QPushButton {
-                background: #238636;
-                color: white;
-                border-radius: 8px;
-                padding: 8px 14px;
-                font-size: 14px;
-            }
-            QPushButton:disabled { background: #2d333b; color: #8b949e; }
-            """
-        )
+    # =========================
+    # STATE CONTROL (IMPORTANT)
+    # =========================
 
-        palette = self.video_widget.palette()
-        palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.black)
-        self.video_widget.setPalette(palette)
-        self.video_widget.setAutoFillBackground(True)
-        self._layout_subtitle()
-
-    def _layout_subtitle(self):
-        if not hasattr(self, "_subtitle_overlay"):
+    def set_state(self, state: str):
+        if state == self.avatar_state:
             return
 
         self._subtitle_overlay.setGeometry(self.video_widget.geometry())
