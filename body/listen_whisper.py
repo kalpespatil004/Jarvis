@@ -1,18 +1,34 @@
 import time
 import sounddevice as sd
-import numpy as np
 from faster_whisper import WhisperModel
 
 SAMPLE_RATE = 16000
 DURATION = 3
 
-print("[WHISPER] Loading model...")
+_model = None
 
-model = WhisperModel(
-    "base",
-    device="cuda",
-    compute_type="int8_float16"
-)
+
+def _get_model():
+    global _model
+    if _model is not None:
+        return _model
+
+    print("[WHISPER] Loading model...")
+    try:
+        _model = WhisperModel(
+            "base",
+            device="cuda",
+            compute_type="int8_float16",
+        )
+    except Exception as exc:
+        print(f"[WHISPER] CUDA init failed ({exc}). Falling back to CPU.")
+        _model = WhisperModel(
+            "base",
+            device="cpu",
+            compute_type="int8",
+        )
+
+    return _model
 
 
 def record_audio():
@@ -31,6 +47,7 @@ def listen():
 
     audio = record_audio()
 
+    model = _get_model()
     segments, info = model.transcribe(
         audio,
         beam_size=1,

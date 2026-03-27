@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PyQt6.QtCore import QObject, QThread, QTimer, Qt, QUrl, pyqtSignal
+from PyQt6.QtCore import QObject, QThread, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
 from PyQt6.QtMultimedia import QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
@@ -20,73 +20,103 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
+DEFAULT_AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
+DEFAULT_VIDEO_NAME_CANDIDATES = {
+    "idle": ["idle.mp4", "ideal.mp4"],
+    "listening": ["listening.mp4", "listnimg.mp4"],
+    "thinking": ["thinking.mp4"],
+    "speaking": ["speaking.mp4"],
+}
 
-class BrainWorker(QObject):
-    finished = pyqtSignal(str)
 
-    def __init__(self, text: str):
+class CycleWorker(QObject):
+    state_changed = pyqtSignal(str)
+    subtitle_changed = pyqtSignal(str, str)
+    completed = pyqtSignal()
+
+    def __init__(self, mode: str, text: str = ""):
         super().__init__()
+        self.mode = mode
         self.text = text
 
     def run(self):
-        response = process_text(self.text)
-        self.finished.emit(response or "")
-
-
-class ListenWorker(QObject):
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
-
-    def run(self):
         try:
-            text = capture_voice_text()
-            self.success.emit(text)
-        except VoiceInputError as exc:
-            self.error.emit(str(exc))
+            self._process_cycle()
+        finally:
+            self.completed.emit()
+
+    def _process_cycle(self):
+        user_text = self.text.strip()
+
+        if self.mode == "voice":
+            self.state_changed.emit("listening")
+            self.subtitle_changed.emit("Jarvis", "Listening...")
+            try:
+                user_text = capture_voice_text()
+            except VoiceInputError as exc:
+                self.subtitle_changed.emit("Jarvis", f"Listen error: {exc}")
+                self.state_changed.emit("idle")
+                return
+
+        if not user_text:
+            self.state_changed.emit("idle")
+            return
+
+        self.subtitle_changed.emit("You", user_text)
+        self.state_changed.emit("thinking")
+
+        response = process_text(user_text)
+        if not response:
+            self.subtitle_changed.emit("Jarvis", "I could not generate a response.")
+            self.state_changed.emit("idle")
+            return
+
+        self.subtitle_changed.emit("Jarvis", response)
+        self.state_changed.emit("speaking")
+        error = speak_text(response)
+        if error:
+            self.subtitle_changed.emit("Jarvis", error)
+
+        self.state_changed.emit("idle")
 
 
 class MainWindow(QWidget):
-    AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
+    state_signal = pyqtSignal(str)
+    subtitle_signal = pyqtSignal(str, str)
 
-    VIDEO_NAME_CANDIDATES = {
-        "idle": ["idle.mp4", "ideal.mp4"],
-        "listening": ["listening.mp4", "listnimg.mp4"],
-        "thinking": ["thinking.mp4"],
-        "speaking": ["speaking.mp4"],
-    }
+    AVATAR_DIR_CANDIDATES = DEFAULT_AVATAR_DIR_CANDIDATES
+    VIDEO_NAME_CANDIDATES = DEFAULT_VIDEO_NAME_CANDIDATES
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("JARVIS")
 
-        self._brain_thread: QThread | None = None
-        self._brain_worker: BrainWorker | None = None
-        self._listen_thread: QThread | None = None
-        self._listen_worker: ListenWorker | None = None
+        self._cycle_thread: QThread | None = None
+        self._cycle_worker: CycleWorker | None = None
 
         self.avatar_state = "idle"
         self.video_paths = self._resolve_video_paths()
-
-        self.player = QMediaPlayer(self)
-        # Intentionally no audio output for avatar videos (silent animation only).
+        self.players: dict[str, QMediaPlayer] = {}
+        self._current_player: QMediaPlayer | None = None
 
         self.video_widget = QVideoWidget(self)
-        self.player.setVideoOutput(self.video_widget)
-
-        # Loop current state video forever.
-        self.player.mediaStatusChanged.connect(self._on_media_status_changed)
-        self.player.errorOccurred.connect(self._on_player_error)
 
         self.init_ui()
+        self.state_signal.connect(self.set_avatar_state)
+        self.subtitle_signal.connect(self._set_subtitle)
+
+        self._init_players()
         self._apply_video_geometry_hint()
         self.set_avatar_state("idle")
 
     def _resolve_video_paths(self) -> dict[str, Path]:
         project_root = Path(__file__).resolve().parents[2]
-        search_dirs = [project_root / "assets" / name for name in self.AVATAR_DIR_CANDIDATES]
+        avatar_dirs = getattr(self, "AVATAR_DIR_CANDIDATES", DEFAULT_AVATAR_DIR_CANDIDATES)
+        video_candidates = getattr(self, "VIDEO_NAME_CANDIDATES", DEFAULT_VIDEO_NAME_CANDIDATES)
+        search_dirs = [project_root / "assets" / name for name in avatar_dirs]
         resolved: dict[str, Path] = {}
 
-        for state, candidates in self.VIDEO_NAME_CANDIDATES.items():
+        for state, candidates in video_candidates.items():
             for folder in search_dirs:
                 for name in candidates:
                     path = folder / name
@@ -98,6 +128,36 @@ class MainWindow(QWidget):
 
         self._avatar_search_dirs = search_dirs
         return resolved
+
+    def _make_player(self, source: Path, state: str) -> QMediaPlayer:
+        player = QMediaPlayer(self)
+        player.setSource(QUrl.fromLocalFile(str(source)))
+        if hasattr(player, "setLoops"):
+            player.setLoops(-1)
+
+        def _status_handler(status: QMediaPlayer.MediaStatus):
+            if status == QMediaPlayer.MediaStatus.EndOfMedia and not hasattr(player, "setLoops"):
+                if player.isSeekable():
+                    player.setPosition(0)
+                    player.play()
+
+        def _error_handler(_error):
+            message = player.errorString() or "Unable to render avatar video."
+            self.subtitle_signal.emit("Jarvis", f"Video error [{state}]: {message}")
+
+        player.mediaStatusChanged.connect(_status_handler)
+        player.errorOccurred.connect(_error_handler)
+        return player
+
+    def _init_players(self):
+        idle_source = self.video_paths.get("idle")
+        if idle_source is None:
+            return
+
+        video_candidates = getattr(self, "VIDEO_NAME_CANDIDATES", DEFAULT_VIDEO_NAME_CANDIDATES)
+        for state in video_candidates:
+            source = self.video_paths.get(state, idle_source)
+            self.players[state] = self._make_player(source, state)
 
     def _apply_video_geometry_hint(self):
         # Keep fixed window size based on avatar resolution (fallback to 560x840).
@@ -124,6 +184,7 @@ class MainWindow(QWidget):
         root.setSpacing(0)
 
         video_container = QWidget(self)
+        container = video_container  # legacy local alias used by older layout code
         stacked = QStackedLayout(video_container)
         stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
         stacked.setContentsMargins(0, 0, 0, 0)
@@ -165,12 +226,16 @@ class MainWindow(QWidget):
         self.input_box = QLineEdit()
         self.input_box.setPlaceholderText("Type a command...")
         self.input_box.returnPressed.connect(self.send_message)
+        # Backward-compat aliases for older code paths.
+        self.input = self.input_box
 
         self.listen_btn = QPushButton("Listen")
         self.listen_btn.clicked.connect(self.listen_once)
+        self.listen = self.listen_once
 
         self.send_btn = QPushButton("Send")
         self.send_btn.clicked.connect(self.send_message)
+        self.send_button = self.send_btn
 
         controls_layout.addWidget(self.input_box, 1)
         controls_layout.addWidget(self.listen_btn)
@@ -239,100 +304,65 @@ class MainWindow(QWidget):
         self._layout_subtitle()
 
     def set_avatar_state(self, state: str):
-        self.avatar_state = state
-        source = self.video_paths.get(state) or self.video_paths.get("idle")
+        if self.avatar_state == state:
+            return
 
-        if source is None:
+        player = self.players.get(state) or self.players.get("idle")
+        if player is None:
             search_hint = ", ".join(str(p) for p in self._avatar_search_dirs)
             self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
             return
 
-        self.player.stop()
-        self.player.setSource(QUrl.fromLocalFile(str(source)))
-        self.player.play()
+        self.avatar_state = state
 
-    def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
-        if status == QMediaPlayer.MediaStatus.EndOfMedia:
-            self.player.setPosition(0)
-            self.player.play()
+        if self._current_player is not None and self._current_player is not player:
+            self._current_player.stop()
+            self._current_player.setVideoOutput(None)
 
-    def _on_player_error(self, _error):
-        message = self.player.errorString() or "Unable to render avatar video."
-        self._set_subtitle("Jarvis", f"Video error: {message}")
+        self._current_player = player
+        player.setVideoOutput(self.video_widget)
+        player.play()
 
-    def listen_once(self):
-        if self._listen_thread is not None or self._brain_thread is not None:
+    # Legacy method alias expected by older code paths.
+    def set_state(self, state: str):
+        self.set_avatar_state(state)
+
+    def _start_cycle(self, mode: str, text: str = ""):
+        if self._cycle_thread is not None:
             return
 
-        self.set_avatar_state("listening")
-        self._set_subtitle("Jarvis", "Listening...")
         self._set_inputs_enabled(False)
 
-        self._listen_thread = QThread(self)
-        self._listen_worker = ListenWorker()
-        self._listen_worker.moveToThread(self._listen_thread)
+        self._cycle_thread = QThread(self)
+        self._cycle_worker = CycleWorker(mode=mode, text=text)
+        self._cycle_worker.moveToThread(self._cycle_thread)
 
-        self._listen_thread.started.connect(self._listen_worker.run)
-        self._listen_worker.success.connect(self._on_listen_success)
-        self._listen_worker.error.connect(self._on_listen_error)
-        self._listen_worker.success.connect(self._listen_thread.quit)
-        self._listen_worker.error.connect(self._listen_thread.quit)
-        self._listen_worker.success.connect(self._listen_worker.deleteLater)
-        self._listen_worker.error.connect(self._listen_worker.deleteLater)
-        self._listen_thread.finished.connect(self._listen_thread.deleteLater)
-        self._listen_thread.finished.connect(self._on_listen_complete)
-        self._listen_thread.start()
+        self._cycle_thread.started.connect(self._cycle_worker.run)
+        self._cycle_worker.state_changed.connect(self.state_signal.emit)
+        self._cycle_worker.subtitle_changed.connect(self.subtitle_signal.emit)
+        self._cycle_worker.completed.connect(self._cycle_thread.quit)
+        self._cycle_worker.completed.connect(self._cycle_worker.deleteLater)
+        self._cycle_thread.finished.connect(self._cycle_thread.deleteLater)
+        self._cycle_thread.finished.connect(self._on_cycle_complete)
 
-    def _on_listen_success(self, text: str):
-        self.input_box.setText(text)
-        self._set_subtitle("You", text)
+        self._cycle_thread.start()
+
+    def _on_cycle_complete(self):
+        self._cycle_thread = None
+        self._cycle_worker = None
+        self._set_inputs_enabled(True)
+
+    def listen_once(self):
+        self._start_cycle("voice")
+
+    # Legacy method alias expected by older UI wiring.
+    def send(self):
         self.send_message()
-
-    def _on_listen_error(self, message: str):
-        self._set_subtitle("Jarvis", f"Listen error: {message}")
-        self.set_avatar_state("idle")
-
-    def _on_listen_complete(self):
-        self._listen_thread = None
-        self._listen_worker = None
-        if self._brain_thread is None:
-            self._set_inputs_enabled(True)
 
     def send_message(self):
         text = self.input_box.text().strip()
-        if not text or self._brain_thread is not None:
+        if not text:
             return
 
         self.input_box.clear()
-        self._set_subtitle("You", text)
-        self.set_avatar_state("thinking")
-        self._set_inputs_enabled(False)
-
-        self._brain_thread = QThread(self)
-        self._brain_worker = BrainWorker(text)
-        self._brain_worker.moveToThread(self._brain_thread)
-
-        self._brain_thread.started.connect(self._brain_worker.run)
-        self._brain_worker.finished.connect(self._handle_response)
-        self._brain_worker.finished.connect(self._brain_thread.quit)
-        self._brain_worker.finished.connect(self._brain_worker.deleteLater)
-        self._brain_thread.finished.connect(self._brain_thread.deleteLater)
-        self._brain_thread.finished.connect(self._on_brain_complete)
-        self._brain_thread.start()
-
-    def _handle_response(self, response: str):
-        if response:
-            self._set_subtitle("Jarvis", response)
-            self.set_avatar_state("speaking")
-            error = speak_text(response)
-            if error:
-                self._set_subtitle("Jarvis", error)
-            QTimer.singleShot(1800, lambda: self.set_avatar_state("idle"))
-        else:
-            self.set_avatar_state("idle")
-
-    def _on_brain_complete(self):
-        self._brain_thread = None
-        self._brain_worker = None
-        if self._listen_thread is None:
-            self._set_inputs_enabled(True)
+        self._start_cycle("text", text)
