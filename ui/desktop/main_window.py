@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
-from PyQt6.QtMultimedia import QMediaPlayer
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
     QHBoxLayout,
@@ -79,6 +80,9 @@ class CycleWorker(QObject):
 
         self.state_changed.emit("idle")
 
+# =========================
+# MAIN UI
+# =========================
 
 class MainWindow(QWidget):
     state_signal = pyqtSignal(str)
@@ -237,9 +241,8 @@ class MainWindow(QWidget):
         self.send_btn.clicked.connect(self.send_message)
         self.send_button = self.send_btn
 
-        controls_layout.addWidget(self.input_box, 1)
-        controls_layout.addWidget(self.listen_btn)
-        controls_layout.addWidget(self.send_btn)
+        root.addWidget(container)
+        root.addLayout(controls)
 
         root.addWidget(video_container, 1)
         # Defensive add: tolerate accidental widget/layout variable swaps.
@@ -248,37 +251,14 @@ class MainWindow(QWidget):
         else:
             root.addLayout(controls, 0)
         self.setLayout(root)
+        self.resize(500, 800)
 
-        self.setStyleSheet(
-            """
-            QWidget { background: #05070a; color: #e6edf3; }
-            #controlsPanel { background: #0f1419; border-top: 1px solid #30363d; }
-            QLineEdit {
-                background: #0d1117;
-                border: 1px solid #30363d;
-                border-radius: 8px;
-                padding: 8px;
-                font-size: 14px;
-            }
-            QPushButton {
-                background: #238636;
-                color: white;
-                border-radius: 8px;
-                padding: 8px 14px;
-                font-size: 14px;
-            }
-            QPushButton:disabled { background: #2d333b; color: #8b949e; }
-            """
-        )
+    # =========================
+    # STATE CONTROL (IMPORTANT)
+    # =========================
 
-        palette = self.video_widget.palette()
-        palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.black)
-        self.video_widget.setPalette(palette)
-        self.video_widget.setAutoFillBackground(True)
-        self._layout_subtitle()
-
-    def _layout_subtitle(self):
-        if not hasattr(self, "_subtitle_overlay"):
+    def set_state(self, state: str):
+        if state == self.avatar_state:
             return
 
         self._subtitle_overlay.setGeometry(self.video_widget.geometry())
