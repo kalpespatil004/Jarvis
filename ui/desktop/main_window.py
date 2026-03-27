@@ -5,7 +5,7 @@ from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
-from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
     QHBoxLayout,
@@ -100,10 +100,25 @@ class MainWindow(QWidget):
 
         self.avatar_state = "idle"
         self.video_paths = self._resolve_video_paths()
-        self.players: dict[str, QMediaPlayer] = {}
-        self._current_player: QMediaPlayer | None = None
+        self._current_video_source: Path | None = None
+        self._last_state_change_at = 0.0
+        self._state_min_interval_seconds = 0.30
+
+        self._idle_timer = QTimer(self)
+        self._idle_timer.setSingleShot(True)
+        self._idle_timer.timeout.connect(self._transition_to_idle)
+
+        self._audio_output = QAudioOutput(self)
+        self._audio_output.setVolume(0.0)
+
+        self.player = QMediaPlayer(self)
+        self.player.setAudioOutput(self._audio_output)
 
         self.video_widget = QVideoWidget(self)
+        self.player.setVideoOutput(self.video_widget)
+
+        self.player.mediaStatusChanged.connect(self._on_media_status_changed)
+        self.player.errorOccurred.connect(self._on_player_error)
 
         self.init_ui()
         self.state_signal.connect(self.set_avatar_state)
@@ -164,7 +179,6 @@ class MainWindow(QWidget):
             self.players[state] = self._make_player(source, state)
 
     def _apply_video_geometry_hint(self):
-        # Keep fixed window size based on avatar resolution (fallback to 560x840).
         try:
             import cv2  # type: ignore
 
@@ -288,20 +302,43 @@ class MainWindow(QWidget):
         self._layout_subtitle()
 
     def set_avatar_state(self, state: str):
-        if self.avatar_state == state:
+        now = time.monotonic()
+
+        if state == self.avatar_state and self.player.playbackState() == QMediaPlayer.PlaybackState.PlayingState:
             return
 
-        player = self.players.get(state) or self.players.get("idle")
-        if player is None:
+        if state != "idle" and (now - self._last_state_change_at) < self._state_min_interval_seconds:
+            return
+
+        self._last_state_change_at = now
+        if state != "idle" and self._idle_timer.isActive():
+            self._idle_timer.stop()
+
+        source = self.video_paths.get(state) or self.video_paths.get("idle")
+        if source is None:
             search_hint = ", ".join(str(p) for p in self._avatar_search_dirs)
             self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
             return
 
         self.avatar_state = state
 
-        if self._current_player is not None and self._current_player is not player:
-            self._current_player.stop()
-            self._current_player.setVideoOutput(None)
+        if self._current_video_source == source:
+            if self.player.playbackState() != QMediaPlayer.PlaybackState.PlayingState:
+                self.player.play()
+            return
+
+        self._current_video_source = source
+        self.player.setSource(QUrl.fromLocalFile(str(source)))
+        self.player.play()
+
+    def _transition_to_idle(self):
+        self.set_avatar_state("idle")
+
+    def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
+        # Loop by seek-reset only, never re-open source (avoids flashes).
+        if status == QMediaPlayer.MediaStatus.EndOfMedia and self.player.isSeekable():
+            self.player.setPosition(0)
+            self.player.play()
 
         self._current_player = player
         player.setVideoOutput(self.video_widget)
@@ -349,4 +386,35 @@ class MainWindow(QWidget):
             return
 
         self.input_box.clear()
-        self._start_cycle("text", text)
+        self._set_subtitle("You", text)
+        self.set_avatar_state("thinking")
+        self._set_inputs_enabled(False)
+
+        self._brain_thread = QThread(self)
+        self._brain_worker = BrainWorker(text)
+        self._brain_worker.moveToThread(self._brain_thread)
+
+        self._brain_thread.started.connect(self._brain_worker.run)
+        self._brain_worker.finished.connect(self._handle_response)
+        self._brain_worker.finished.connect(self._brain_thread.quit)
+        self._brain_worker.finished.connect(self._brain_worker.deleteLater)
+        self._brain_thread.finished.connect(self._brain_thread.deleteLater)
+        self._brain_thread.finished.connect(self._on_brain_complete)
+        self._brain_thread.start()
+
+    def _handle_response(self, response: str):
+        if response:
+            self._set_subtitle("Jarvis", response)
+            self.set_avatar_state("speaking")
+            error = speak_text(response)
+            if error:
+                self._set_subtitle("Jarvis", error)
+            self._idle_timer.start(200)
+        else:
+            self.set_avatar_state("idle")
+
+    def _on_brain_complete(self):
+        self._brain_thread = None
+        self._brain_worker = None
+        if self._listen_thread is None:
+            self._set_inputs_enabled(True)
