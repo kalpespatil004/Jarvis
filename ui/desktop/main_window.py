@@ -185,42 +185,60 @@ class MainWindow(QWidget):
     def init_ui(self):
         root = QVBoxLayout()
         root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
 
-        container = QWidget()
-        stack = QStackedLayout(container)
-        stack.setStackingMode(QStackedLayout.StackingMode.StackAll)
+        video_container = QWidget(self)
+        stacked = QStackedLayout(video_container)
+        stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
+        stacked.setContentsMargins(0, 0, 0, 0)
 
-        stack.addWidget(self.video_widget)
+        self.video_widget.setStyleSheet("background: black;")
+        stacked.addWidget(self.video_widget)
 
-        # subtitle
-        self.subtitle = QLabel("Jarvis: Online")
-        self.subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.subtitle.setStyleSheet("""
-            background: rgba(0,0,0,180);
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 10px;
-        """)
+        subtitle_overlay = QWidget(video_container)
+        subtitle_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
+        subtitle_overlay.setStyleSheet("background: transparent;")
 
-        stack.addWidget(self.subtitle)
+        self.subtitle_label = QLabel("Jarvis: Online.", subtitle_overlay)
+        self.subtitle_label.setWordWrap(True)
+        self.subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.subtitle_label.setStyleSheet(
+            """
+            QLabel {
+                color: white;
+                background-color: rgba(0, 0, 0, 190);
+                border-radius: 10px;
+                padding: 10px 14px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            """
+        )
+        self.subtitle_label.setMinimumHeight(56)
 
-        # controls
-        controls = QHBoxLayout()
+        stacked.addWidget(subtitle_overlay)
+        self._subtitle_overlay = subtitle_overlay
 
-        self.input = QLineEdit()
-        self.input.setPlaceholderText("Type command...")
-        self.input.returnPressed.connect(self.send)
+        controls = QWidget(self)
+        controls.setFixedHeight(72)
+        controls.setObjectName("controlsPanel")
+        controls_layout = QHBoxLayout(controls)
+        controls_layout.setContentsMargins(10, 8, 10, 8)
+        controls_layout.setSpacing(8)
+
+        self.input_box = QLineEdit()
+        self.input_box.setPlaceholderText("Type a command...")
+        self.input_box.returnPressed.connect(self.send_message)
+        # Backward-compat aliases for older code paths.
+        self.input = self.input_box
 
         self.listen_btn = QPushButton("Listen")
-        self.listen_btn.clicked.connect(self.listen)
+        self.listen_btn.clicked.connect(self.listen_once)
+        self.listen = self.listen_once
 
         self.send_btn = QPushButton("Send")
-        self.send_btn.clicked.connect(self.send)
-
-        controls.addWidget(self.input)
-        controls.addWidget(self.listen_btn)
-        controls.addWidget(self.send_btn)
+        self.send_btn.clicked.connect(self.send_message)
+        self.send_button = self.send_btn
 
         root.addWidget(container)
         root.addLayout(controls)
@@ -282,6 +300,10 @@ class MainWindow(QWidget):
         player.setVideoOutput(self.video_widget)
         player.play()
 
+    # Legacy method alias expected by older code paths.
+    def set_state(self, state: str):
+        self.set_avatar_state(state)
+
     def _start_cycle(self, mode: str, text: str = ""):
         if self._cycle_thread is not None:
             return
@@ -309,6 +331,10 @@ class MainWindow(QWidget):
 
     def listen_once(self):
         self._start_cycle("voice")
+
+    # Legacy method alias expected by older UI wiring.
+    def send(self):
+        self.send_message()
 
     def send_message(self):
         text = self.input_box.text().strip()
