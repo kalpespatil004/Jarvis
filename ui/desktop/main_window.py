@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, QTimer, Qt, QUrl, pyqtSignal
@@ -66,6 +67,12 @@ class MainWindow(QWidget):
 
         self.avatar_state = "idle"
         self.video_paths = self._resolve_video_paths()
+        self._current_video_source: Path | None = None
+        self._last_state_change_at = 0.0
+        self._state_min_interval_seconds = 0.25
+        self._idle_timer = QTimer(self)
+        self._idle_timer.setSingleShot(True)
+        self._idle_timer.timeout.connect(self._transition_to_idle)
 
         self.player = QMediaPlayer(self)
         # Intentionally no audio output for avatar videos (silent animation only).
@@ -76,6 +83,10 @@ class MainWindow(QWidget):
         # Loop current state video forever.
         self.player.mediaStatusChanged.connect(self._on_media_status_changed)
         self.player.errorOccurred.connect(self._on_player_error)
+        self._supports_native_looping = hasattr(self.player, "setLoops")
+        if self._supports_native_looping:
+            # Use native looping when available. It is smoother than manual seek-reset.
+            self.player.setLoops(-1)
 
         self.init_ui()
         self._apply_video_geometry_hint()
@@ -239,6 +250,14 @@ class MainWindow(QWidget):
         self._layout_subtitle()
 
     def set_avatar_state(self, state: str):
+        now = time.monotonic()
+        if state != "idle" and (now - self._last_state_change_at) < self._state_min_interval_seconds:
+            return
+
+        self._last_state_change_at = now
+        if state != "idle" and self._idle_timer.isActive():
+            self._idle_timer.stop()
+
         self.avatar_state = state
         source = self.video_paths.get(state) or self.video_paths.get("idle")
 
@@ -247,14 +266,25 @@ class MainWindow(QWidget):
             self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
             return
 
+        # Avoid unnecessary source reloads that can cause visual flicker.
+        if self._current_video_source == source and self.player.playbackState() == QMediaPlayer.PlaybackState.PlayingState:
+            return
+
+        self._current_video_source = source
         self.player.stop()
         self.player.setSource(QUrl.fromLocalFile(str(source)))
         self.player.play()
 
+    def _transition_to_idle(self):
+        self.set_avatar_state("idle")
+
     def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
-        if status == QMediaPlayer.MediaStatus.EndOfMedia:
-            self.player.setPosition(0)
-            self.player.play()
+        if status == QMediaPlayer.MediaStatus.EndOfMedia and not self._supports_native_looping:
+            # Fallback for older backends: re-open source instead of seek-reset
+            # (seek-reset can cause magenta/black flashes on some codecs).
+            if self._current_video_source is not None:
+                self.player.setSource(QUrl.fromLocalFile(str(self._current_video_source)))
+                self.player.play()
 
     def _on_player_error(self, _error):
         message = self.player.errorString() or "Unable to render avatar video."
@@ -327,7 +357,7 @@ class MainWindow(QWidget):
             error = speak_text(response)
             if error:
                 self._set_subtitle("Jarvis", error)
-            QTimer.singleShot(1800, lambda: self.set_avatar_state("idle"))
+            self._idle_timer.start(200)
         else:
             self.set_avatar_state("idle")
 
