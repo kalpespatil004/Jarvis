@@ -21,6 +21,14 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
+DEFAULT_AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
+DEFAULT_VIDEO_NAME_CANDIDATES = {
+    "idle": ["idle.mp4", "ideal.mp4"],
+    "listening": ["listening.mp4", "listnimg.mp4"],
+    "thinking": ["thinking.mp4"],
+    "speaking": ["speaking.mp4"],
+}
+
 
 class CycleWorker(QObject):
     state_changed = pyqtSignal(str)
@@ -72,7 +80,6 @@ class CycleWorker(QObject):
 
         self.state_changed.emit("idle")
 
-
 # =========================
 # MAIN UI
 # =========================
@@ -81,14 +88,8 @@ class MainWindow(QWidget):
     state_signal = pyqtSignal(str)
     subtitle_signal = pyqtSignal(str, str)
 
-    AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
-
-    VIDEO_NAME = {
-        "idle": "idle.mp4",
-        "listening": "listening.mp4",
-        "thinking": "thinking.mp4",
-        "speaking": "speaking.mp4",
-    }
+    AVATAR_DIR_CANDIDATES = DEFAULT_AVATAR_DIR_CANDIDATES
+    VIDEO_NAME_CANDIDATES = DEFAULT_VIDEO_NAME_CANDIDATES
 
     def __init__(self):
         super().__init__()
@@ -114,10 +115,12 @@ class MainWindow(QWidget):
 
     def _resolve_video_paths(self) -> dict[str, Path]:
         project_root = Path(__file__).resolve().parents[2]
-        search_dirs = [project_root / "assets" / name for name in self.AVATAR_DIR_CANDIDATES]
+        avatar_dirs = getattr(self, "AVATAR_DIR_CANDIDATES", DEFAULT_AVATAR_DIR_CANDIDATES)
+        video_candidates = getattr(self, "VIDEO_NAME_CANDIDATES", DEFAULT_VIDEO_NAME_CANDIDATES)
+        search_dirs = [project_root / "assets" / name for name in avatar_dirs]
         resolved: dict[str, Path] = {}
 
-        for state, candidates in self.VIDEO_NAME_CANDIDATES.items():
+        for state, candidates in video_candidates.items():
             for folder in search_dirs:
                 for name in candidates:
                     path = folder / name
@@ -155,7 +158,8 @@ class MainWindow(QWidget):
         if idle_source is None:
             return
 
-        for state in self.VIDEO_NAME_CANDIDATES:
+        video_candidates = getattr(self, "VIDEO_NAME_CANDIDATES", DEFAULT_VIDEO_NAME_CANDIDATES)
+        for state in video_candidates:
             source = self.video_paths.get(state, idle_source)
             self.players[state] = self._make_player(source, state)
 
