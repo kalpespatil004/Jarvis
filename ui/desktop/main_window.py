@@ -66,6 +66,7 @@ class MainWindow(QWidget):
 
         self.avatar_state = "idle"
         self.video_paths = self._resolve_video_paths()
+        self._current_video_source: Path | None = None
 
         self.player = QMediaPlayer(self)
         # Intentionally no audio output for avatar videos (silent animation only).
@@ -76,6 +77,10 @@ class MainWindow(QWidget):
         # Loop current state video forever.
         self.player.mediaStatusChanged.connect(self._on_media_status_changed)
         self.player.errorOccurred.connect(self._on_player_error)
+        self._supports_native_looping = hasattr(self.player, "setLoops")
+        if self._supports_native_looping:
+            # Use native looping when available. It is smoother than manual seek-reset.
+            self.player.setLoops(-1)
 
         self.init_ui()
         self._apply_video_geometry_hint()
@@ -247,14 +252,22 @@ class MainWindow(QWidget):
             self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
             return
 
+        # Avoid unnecessary source reloads that can cause visual flicker.
+        if self._current_video_source == source and self.player.playbackState() == QMediaPlayer.PlaybackState.PlayingState:
+            return
+
+        self._current_video_source = source
         self.player.stop()
         self.player.setSource(QUrl.fromLocalFile(str(source)))
         self.player.play()
 
     def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
-        if status == QMediaPlayer.MediaStatus.EndOfMedia:
-            self.player.setPosition(0)
-            self.player.play()
+        if status == QMediaPlayer.MediaStatus.EndOfMedia and not self._supports_native_looping:
+            # Fallback for older backends: re-open source instead of seek-reset
+            # (seek-reset can cause magenta/black flashes on some codecs).
+            if self._current_video_source is not None:
+                self.player.setSource(QUrl.fromLocalFile(str(self._current_video_source)))
+                self.player.play()
 
     def _on_player_error(self, _error):
         message = self.player.errorString() or "Unable to render avatar video."
