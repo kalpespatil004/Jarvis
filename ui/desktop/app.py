@@ -1,4 +1,5 @@
 import sys
+import os
 from pathlib import Path
 
 
@@ -10,6 +11,12 @@ def _load_stylesheet(app) -> None:
 
 
 def run() -> int:
+    # Qt FFmpeg on Windows can exhaust DXVA/D3D11 decode surfaces on some H264 assets,
+    # producing repeating "Static surface pool size exceeded" errors.
+    # Allow users to override externally; otherwise default to software decoding for stability.
+    if sys.platform.startswith("win"):
+        os.environ.setdefault("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "")
+
     try:
         from PyQt6.QtWidgets import QApplication
     except ModuleNotFoundError:
