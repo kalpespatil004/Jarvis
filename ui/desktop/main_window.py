@@ -280,8 +280,13 @@ class MainWindow(QWidget):
 
     def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
         if status == QMediaPlayer.MediaStatus.EndOfMedia and not self._supports_native_looping:
-            # Fallback for older backends: re-open source instead of seek-reset
-            # (seek-reset can cause magenta/black flashes on some codecs).
+            # Prefer seek-reset for fallback loops to avoid repeatedly re-opening
+            # decoders and exhausting hardware frame pools on some FFmpeg backends.
+            if self.player.isSeekable():
+                self.player.setPosition(0)
+                self.player.play()
+                return
+
             if self._current_video_source is not None:
                 self.player.setSource(QUrl.fromLocalFile(str(self._current_video_source)))
                 self.player.play()
