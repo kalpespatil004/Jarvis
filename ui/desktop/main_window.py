@@ -80,8 +80,6 @@ class CycleWorker(QObject):
 
         self.state_changed.emit("idle")
 
-        self.state_changed.emit("idle")
-
 # =========================
 # MAIN UI
 # =========================
@@ -246,6 +244,12 @@ class MainWindow(QWidget):
         root.addWidget(container)
         root.addLayout(controls)
 
+        root.addWidget(video_container, 1)
+        # Defensive add: tolerate accidental widget/layout variable swaps.
+        if isinstance(controls, QWidget):
+            root.addWidget(controls, 0)
+        else:
+            root.addLayout(controls, 0)
         self.setLayout(root)
         self.resize(500, 800)
 
