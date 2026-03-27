@@ -5,7 +5,7 @@ from pathlib import Path
 
 from PyQt6.QtCore import QObject, QThread, QTimer, Qt, QUrl, pyqtSignal
 from PyQt6.QtGui import QPalette
-from PyQt6.QtMultimedia import QMediaPlayer
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtWidgets import (
     QHBoxLayout,
@@ -21,6 +21,10 @@ from brain.brain import process_text
 from ui.desktop.tts_bridge import speak_text
 from ui.desktop.voice_input import VoiceInputError, capture_voice_text
 
+
+# =========================
+# WORKERS
+# =========================
 
 class BrainWorker(QObject):
     finished = pyqtSignal(str)
@@ -46,328 +50,224 @@ class ListenWorker(QObject):
             self.error.emit(str(exc))
 
 
-class MainWindow(QWidget):
-    AVATAR_DIR_CANDIDATES = ("avatar", "avtar")
+# =========================
+# MAIN UI
+# =========================
 
-    VIDEO_NAME_CANDIDATES = {
-        "idle": ["idle.mp4", "ideal.mp4"],
-        "listening": ["listening.mp4", "listnimg.mp4"],
-        "thinking": ["thinking.mp4"],
-        "speaking": ["speaking.mp4"],
+class MainWindow(QWidget):
+
+    VIDEO_NAME = {
+        "idle": "idle.mp4",
+        "listening": "listening.mp4",
+        "thinking": "thinking.mp4",
+        "speaking": "speaking.mp4",
     }
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("JARVIS")
 
-        self._brain_thread: QThread | None = None
-        self._brain_worker: BrainWorker | None = None
-        self._listen_thread: QThread | None = None
-        self._listen_worker: ListenWorker | None = None
+        self.avatar_state = None
+        self._current_video = None
 
-        self.avatar_state = "idle"
-        self.video_paths = self._resolve_video_paths()
-        self._current_video_source: Path | None = None
-        self._last_state_change_at = 0.0
-        self._state_min_interval_seconds = 0.25
-        self._idle_timer = QTimer(self)
-        self._idle_timer.setSingleShot(True)
-        self._idle_timer.timeout.connect(self._transition_to_idle)
+        self._brain_thread = None
+        self._listen_thread = None
+
+        self.video_paths = self._load_videos()
+
+        # ===== PLAYER =====
+        self.audio = QAudioOutput(self)
+        self.audio.setVolume(0)
 
         self.player = QMediaPlayer(self)
-        # Intentionally no audio output for avatar videos (silent animation only).
+        self.player.setAudioOutput(self.audio)
 
         self.video_widget = QVideoWidget(self)
         self.player.setVideoOutput(self.video_widget)
 
-        # Loop current state video forever.
-        self.player.mediaStatusChanged.connect(self._on_media_status_changed)
-        self.player.errorOccurred.connect(self._on_player_error)
-        self._supports_native_looping = hasattr(self.player, "setLoops")
-        if self._supports_native_looping:
-            # Use native looping when available. It is smoother than manual seek-reset.
-            self.player.setLoops(-1)
+        self.player.mediaStatusChanged.connect(self._loop_video)
+
+        # ===== TIMER =====
+        self.idle_timer = QTimer(self)
+        self.idle_timer.setSingleShot(True)
+        self.idle_timer.timeout.connect(lambda: self.set_state("idle"))
 
         self.init_ui()
-        self._apply_video_geometry_hint()
-        self.set_avatar_state("idle")
+        self.set_state("idle")
 
-    def _resolve_video_paths(self) -> dict[str, Path]:
-        project_root = Path(__file__).resolve().parents[2]
-        search_dirs = [project_root / "assets" / name for name in self.AVATAR_DIR_CANDIDATES]
-        resolved: dict[str, Path] = {}
+    # =========================
+    # LOAD VIDEOS
+    # =========================
 
-        for state, candidates in self.VIDEO_NAME_CANDIDATES.items():
-            for folder in search_dirs:
-                for name in candidates:
-                    path = folder / name
-                    if path.exists():
-                        resolved[state] = path
-                        break
-                if state in resolved:
-                    break
+    def _load_videos(self):
+        base = Path(__file__).resolve().parents[2] / "assets" / "avatar"
+        paths = {}
 
-        self._avatar_search_dirs = search_dirs
-        return resolved
+        for k, v in self.VIDEO_NAME.items():
+            p = base / v
+            if p.exists():
+                paths[k] = p
 
-    def _apply_video_geometry_hint(self):
-        # Keep fixed window size based on avatar resolution (fallback to 560x840).
-        try:
-            import cv2  # type: ignore
+        return paths
 
-            probe = self.video_paths.get("idle") or next(iter(self.video_paths.values()))
-            cap = cv2.VideoCapture(str(probe))
-            ok, frame = cap.read()
-            cap.release()
-            if ok and frame is not None:
-                height, width = frame.shape[:2]
-                controls_height = 72
-                self.setFixedSize(width, height + controls_height)
-                return
-        except Exception:
-            pass
-
-        self.setFixedSize(560, 912)
+    # =========================
+    # UI
+    # =========================
 
     def init_ui(self):
         root = QVBoxLayout()
         root.setContentsMargins(0, 0, 0, 0)
-        root.setSpacing(0)
 
-        video_container = QWidget(self)
-        stacked = QStackedLayout(video_container)
-        stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
-        stacked.setContentsMargins(0, 0, 0, 0)
+        container = QWidget()
+        stack = QStackedLayout(container)
+        stack.setStackingMode(QStackedLayout.StackingMode.StackAll)
 
-        self.video_widget.setStyleSheet("background: black;")
-        stacked.addWidget(self.video_widget)
+        stack.addWidget(self.video_widget)
 
-        subtitle_overlay = QWidget(video_container)
-        subtitle_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
-        subtitle_overlay.setStyleSheet("background: transparent;")
+        # subtitle
+        self.subtitle = QLabel("Jarvis: Online")
+        self.subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.subtitle.setStyleSheet("""
+            background: rgba(0,0,0,180);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        """)
 
-        self.subtitle_label = QLabel("Jarvis: Online.", subtitle_overlay)
-        self.subtitle_label.setWordWrap(True)
-        self.subtitle_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.subtitle_label.setStyleSheet(
-            """
-            QLabel {
-                color: white;
-                background-color: rgba(0, 0, 0, 190);
-                border-radius: 10px;
-                padding: 10px 14px;
-                font-size: 18px;
-                font-weight: 600;
-            }
-            """
-        )
-        self.subtitle_label.setMinimumHeight(56)
+        stack.addWidget(self.subtitle)
 
-        stacked.addWidget(subtitle_overlay)
-        self._subtitle_overlay = subtitle_overlay
+        # controls
+        controls = QHBoxLayout()
 
-        controls = QWidget(self)
-        controls.setFixedHeight(72)
-        controls.setObjectName("controlsPanel")
-        controls_layout = QHBoxLayout(controls)
-        controls_layout.setContentsMargins(10, 8, 10, 8)
-        controls_layout.setSpacing(8)
-
-        self.input_box = QLineEdit()
-        self.input_box.setPlaceholderText("Type a command...")
-        self.input_box.returnPressed.connect(self.send_message)
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Type command...")
+        self.input.returnPressed.connect(self.send)
 
         self.listen_btn = QPushButton("Listen")
-        self.listen_btn.clicked.connect(self.listen_once)
+        self.listen_btn.clicked.connect(self.listen)
 
         self.send_btn = QPushButton("Send")
-        self.send_btn.clicked.connect(self.send_message)
+        self.send_btn.clicked.connect(self.send)
 
-        controls_layout.addWidget(self.input_box, 1)
-        controls_layout.addWidget(self.listen_btn)
-        controls_layout.addWidget(self.send_btn)
+        controls.addWidget(self.input)
+        controls.addWidget(self.listen_btn)
+        controls.addWidget(self.send_btn)
 
-        root.addWidget(video_container, 1)
-        root.addWidget(controls, 0)
+        root.addWidget(container)
+        root.addLayout(controls)
+
         self.setLayout(root)
+        self.resize(500, 800)
 
-        self.setStyleSheet(
-            """
-            QWidget { background: #05070a; color: #e6edf3; }
-            #controlsPanel { background: #0f1419; border-top: 1px solid #30363d; }
-            QLineEdit {
-                background: #0d1117;
-                border: 1px solid #30363d;
-                border-radius: 8px;
-                padding: 8px;
-                font-size: 14px;
-            }
-            QPushButton {
-                background: #238636;
-                color: white;
-                border-radius: 8px;
-                padding: 8px 14px;
-                font-size: 14px;
-            }
-            QPushButton:disabled { background: #2d333b; color: #8b949e; }
-            """
-        )
+    # =========================
+    # STATE CONTROL (IMPORTANT)
+    # =========================
 
-        palette = self.video_widget.palette()
-        palette.setColor(QPalette.ColorRole.Window, Qt.GlobalColor.black)
-        self.video_widget.setPalette(palette)
-        self.video_widget.setAutoFillBackground(True)
-        self._layout_subtitle()
-
-    def _layout_subtitle(self):
-        if not hasattr(self, "_subtitle_overlay"):
+    def set_state(self, state: str):
+        if state == self.avatar_state:
             return
-
-        self._subtitle_overlay.setGeometry(self.video_widget.geometry())
-        margin_x = 16
-        bottom_margin = 14
-        width = max(200, self._subtitle_overlay.width() - margin_x * 2)
-        height = max(56, self.subtitle_label.sizeHint().height())
-        x = margin_x
-        y = max(0, self._subtitle_overlay.height() - height - bottom_margin)
-        self.subtitle_label.setGeometry(x, y, width, height)
-        self.subtitle_label.raise_()
-
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-        self._layout_subtitle()
-
-    def _set_inputs_enabled(self, enabled: bool):
-        self.send_btn.setDisabled(not enabled)
-        self.listen_btn.setDisabled(not enabled)
-        self.input_box.setDisabled(not enabled)
-        if enabled:
-            self.input_box.setFocus()
-
-    def _set_subtitle(self, speaker: str, text: str):
-        self.subtitle_label.setText(f"{speaker}: {text}")
-        self.subtitle_label.adjustSize()
-        self._layout_subtitle()
-
-    def set_avatar_state(self, state: str):
-        now = time.monotonic()
-        if state != "idle" and (now - self._last_state_change_at) < self._state_min_interval_seconds:
-            return
-
-        self._last_state_change_at = now
-        if state != "idle" and self._idle_timer.isActive():
-            self._idle_timer.stop()
 
         self.avatar_state = state
+
         source = self.video_paths.get(state) or self.video_paths.get("idle")
-
-        if source is None:
-            search_hint = ", ".join(str(p) for p in self._avatar_search_dirs)
-            self._set_subtitle("Jarvis", f"Avatar videos not found. Checked: {search_hint}")
+        if not source:
             return
 
-        # Avoid unnecessary source reloads that can cause visual flicker.
-        if self._current_video_source == source and self.player.playbackState() == QMediaPlayer.PlaybackState.PlayingState:
+        if self._current_video != source:
+            self._current_video = source
+            self.player.setSource(QUrl.fromLocalFile(str(source)))
+            self.player.play()
+
+    def _loop_video(self, status):
+        if status == QMediaPlayer.MediaStatus.EndOfMedia:
+            self.player.setPosition(0)
+            self.player.play()
+
+    # =========================
+    # SUBTITLE
+    # =========================
+
+    def set_subtitle(self, speaker, text):
+        self.subtitle.setText(f"{speaker}: {text}")
+
+    # =========================
+    # LISTEN
+    # =========================
+
+    def listen(self):
+        if self._listen_thread:
             return
 
-        self._current_video_source = source
-        self.player.stop()
-        self.player.setSource(QUrl.fromLocalFile(str(source)))
-        self.player.play()
+        self.set_state("listening")
+        self.set_subtitle("Jarvis", "Listening...")
 
-    def _transition_to_idle(self):
-        self.set_avatar_state("idle")
+        self._listen_thread = QThread()
+        worker = ListenWorker()
+        worker.moveToThread(self._listen_thread)
 
-    def _on_media_status_changed(self, status: QMediaPlayer.MediaStatus):
-        if status == QMediaPlayer.MediaStatus.EndOfMedia and not self._supports_native_looping:
-            # Prefer seek-reset for fallback loops to avoid repeatedly re-opening
-            # decoders and exhausting hardware frame pools on some FFmpeg backends.
-            if self.player.isSeekable():
-                self.player.setPosition(0)
-                self.player.play()
-                return
+        self._listen_thread.started.connect(worker.run)
+        worker.success.connect(self.on_listen_success)
+        worker.error.connect(self.on_listen_error)
 
-            if self._current_video_source is not None:
-                self.player.setSource(QUrl.fromLocalFile(str(self._current_video_source)))
-                self.player.play()
+        worker.success.connect(self._listen_thread.quit)
+        worker.error.connect(self._listen_thread.quit)
 
-    def _on_player_error(self, _error):
-        message = self.player.errorString() or "Unable to render avatar video."
-        self._set_subtitle("Jarvis", f"Video error: {message}")
+        self._listen_thread.finished.connect(lambda: setattr(self, "_listen_thread", None))
 
-    def listen_once(self):
-        if self._listen_thread is not None or self._brain_thread is not None:
-            return
-
-        self.set_avatar_state("listening")
-        self._set_subtitle("Jarvis", "Listening...")
-        self._set_inputs_enabled(False)
-
-        self._listen_thread = QThread(self)
-        self._listen_worker = ListenWorker()
-        self._listen_worker.moveToThread(self._listen_thread)
-
-        self._listen_thread.started.connect(self._listen_worker.run)
-        self._listen_worker.success.connect(self._on_listen_success)
-        self._listen_worker.error.connect(self._on_listen_error)
-        self._listen_worker.success.connect(self._listen_thread.quit)
-        self._listen_worker.error.connect(self._listen_thread.quit)
-        self._listen_worker.success.connect(self._listen_worker.deleteLater)
-        self._listen_worker.error.connect(self._listen_worker.deleteLater)
-        self._listen_thread.finished.connect(self._listen_thread.deleteLater)
-        self._listen_thread.finished.connect(self._on_listen_complete)
         self._listen_thread.start()
 
-    def _on_listen_success(self, text: str):
-        self.input_box.setText(text)
-        self._set_subtitle("You", text)
-        self.send_message()
+    def on_listen_success(self, text):
+        self.input.setText(text)
+        self.set_subtitle("You", text)
 
-    def _on_listen_error(self, message: str):
-        self._set_subtitle("Jarvis", f"Listen error: {message}")
-        self.set_avatar_state("idle")
+        # small delay so animation shows
+        QTimer.singleShot(500, self.send)
 
-    def _on_listen_complete(self):
-        self._listen_thread = None
-        self._listen_worker = None
-        if self._brain_thread is None:
-            self._set_inputs_enabled(True)
+    def on_listen_error(self, err):
+        self.set_subtitle("Jarvis", err)
+        self.set_state("idle")
 
-    def send_message(self):
-        text = self.input_box.text().strip()
-        if not text or self._brain_thread is not None:
+    # =========================
+    # SEND
+    # =========================
+
+    def send(self):
+        text = self.input.text().strip()
+        if not text or self._brain_thread:
             return
 
-        self.input_box.clear()
-        self._set_subtitle("You", text)
-        self.set_avatar_state("thinking")
-        self._set_inputs_enabled(False)
+        self.input.clear()
 
-        self._brain_thread = QThread(self)
-        self._brain_worker = BrainWorker(text)
-        self._brain_worker.moveToThread(self._brain_thread)
+        self.set_subtitle("You", text)
+        self.set_state("thinking")
 
-        self._brain_thread.started.connect(self._brain_worker.run)
-        self._brain_worker.finished.connect(self._handle_response)
-        self._brain_worker.finished.connect(self._brain_thread.quit)
-        self._brain_worker.finished.connect(self._brain_worker.deleteLater)
-        self._brain_thread.finished.connect(self._brain_thread.deleteLater)
-        self._brain_thread.finished.connect(self._on_brain_complete)
+        self._brain_thread = QThread()
+        worker = BrainWorker(text)
+        worker.moveToThread(self._brain_thread)
+
+        self._brain_thread.started.connect(worker.run)
+        worker.finished.connect(self.on_response)
+
+        worker.finished.connect(self._brain_thread.quit)
+        self._brain_thread.finished.connect(lambda: setattr(self, "_brain_thread", None))
+
         self._brain_thread.start()
 
-    def _handle_response(self, response: str):
-        if response:
-            self._set_subtitle("Jarvis", response)
-            self.set_avatar_state("speaking")
-            error = speak_text(response)
-            if error:
-                self._set_subtitle("Jarvis", error)
-            self._idle_timer.start(200)
-        else:
-            self.set_avatar_state("idle")
+    # =========================
+    # RESPONSE
+    # =========================
 
-    def _on_brain_complete(self):
-        self._brain_thread = None
-        self._brain_worker = None
-        if self._listen_thread is None:
-            self._set_inputs_enabled(True)
+    def on_response(self, response):
+        if not response:
+            self.set_state("idle")
+            return
+
+        self.set_subtitle("Jarvis", response)
+        self.set_state("speaking")
+
+        speak_text(response)
+
+        # 🔥 dynamic speaking duration
+        duration = max(1500, len(response) * 60)
+        self.idle_timer.start(duration)
