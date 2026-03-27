@@ -80,6 +80,8 @@ class CycleWorker(QObject):
 
         self.state_changed.emit("idle")
 
+        self.state_changed.emit("idle")
+
 # =========================
 # MAIN UI
 # =========================
@@ -188,6 +190,7 @@ class MainWindow(QWidget):
         root.setSpacing(0)
 
         video_container = QWidget(self)
+        container = video_container  # legacy local alias used by older layout code
         stacked = QStackedLayout(video_container)
         stacked.setStackingMode(QStackedLayout.StackingMode.StackAll)
         stacked.setContentsMargins(0, 0, 0, 0)
