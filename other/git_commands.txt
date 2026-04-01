@@ -1,0 +1,17 @@
+## pull request ##
+git reset --hard origin/main
+
+git pull origin main
+
+## git push code ##
+
+git status
+
+for all edited files = git add .
+
+if specific file = git add filename.py
+
+git commit -m "your message"
+
+git push origin main
+

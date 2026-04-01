@@ -1,0 +1,59 @@
+brightness control
+brightness_down(step=10):
+brightness_up(step=10):
+set_brightness(value)
+get_brightness()
+
+file manager 
+
+list_files(path=".")
+create_folder(folder_name, path=".")
+create_file(file_name, path=".")
+delete_item(name, path=".")
+file_info(file_name, path=".")
+search_file(filename, path=".")
+copy_file(file_name, destination, path=".")
+move_file(file_name, destination, path=".")
+
+task manager
+
+list_processes(limit=15)
+kill_process_by_name(name)
+kill_process_by_pid(pid)
+is_process_running(name)
+
+code run
+
+run_command(command)
+run_python_file(file_path)
+open_cmd()
+open_powershell()
+
+screenshot
+
+take_screenshot()
+take_active_window()
+take_region(x, y, width, height)
+list_screenshots()
+
+volume 
+
+ GET AUDIO DEVICE
+# ---------------------------
+
+def get_speaker():
+volume_up(step=0.05)
+volume_down(step=0.05)
+set_volume(value)
+get_volume()
+
+window management
+
+get_active_window()
+minimize_window() Minimize active window
+maximize_window() Maximize active window
+restore_window() Restore minimized window
+close_window()
+focus_window(app_name)
+move_window(x=100, y=100)
+resize_window(width=800, height=600)

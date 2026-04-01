@@ -1,6 +1,5 @@
 import os
 import sys
-import os
 from pathlib import Path
 
 
@@ -12,46 +11,29 @@ def _load_stylesheet(app) -> None:
 
 
 def _preload_voice_stack() -> None:
-    """Preload STT/TTS stack before showing the UI window."""
-    print("[UI] Preloading voice stack (listen + speak)...")
+    """Preload the same STT/TTS path used by the desktop UI before showing the window."""
+    print("[UI] Preloading voice stack (desktop listen + speak)...")
 
-    # Preload listen path.
     try:
         from body.listen import listen as _listen  # noqa: F401
-        print("[UI] Listen module preloaded.")
+        from body.listen_whisper import _get_model
 
-        # Whisper native init can hard-exit on some CUDA setups before raising Python exceptions.
-        # Keep GUI startup safe by making model preload opt-in.
-        preload_whisper = os.environ.get("JARVIS_PRELOAD_WHISPER_MODEL", "0") == "1"
-        if preload_whisper:
-            if os.environ.get("JARVIS_PRELOAD_WHISPER_CPU", "1") == "1":
-                os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
-
-            from body.listen_whisper import _get_model
-
-            _get_model()
-            print("[UI] Whisper model preloaded.")
-        else:
-            print("[UI] Whisper model preload skipped (set JARVIS_PRELOAD_WHISPER_MODEL=1 to enable).")
+        _get_model()
+        print("[UI] Listen stack preloaded.")
     except Exception as exc:
         print(f"[UI] Listen preload failed: {exc}")
 
-    # Preload speak path.
     try:
-        from body.speak import ensure_audio_loop_started, speak, warm_up
+        from body.speak import ensure_audio_loop_started, warm_up
 
         ensure_audio_loop_started()
         warm_up()
-        speak("System online.")
         print("[UI] Speak stack preloaded.")
     except Exception as exc:
         print(f"[UI] Speak preload failed: {exc}")
 
 
 def run() -> int:
-    # Qt FFmpeg on Windows can exhaust DXVA/D3D11 decode surfaces on some H264 assets,
-    # producing repeating "Static surface pool size exceeded" errors.
-    # Allow users to override externally; otherwise default to software decoding for stability.
     if sys.platform.startswith("win"):
         os.environ.setdefault("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "")
 

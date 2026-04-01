@@ -31,6 +31,8 @@ def route(intent_data: dict, return_response: bool = False):
 
     if intent == "exit":
         reply = "Shutting down."
+    elif intent == "greeting":
+        reply = "Hello, sir."
     elif intent == "get_time":
         reply = get_current_time_response()
     elif intent == "get_date":

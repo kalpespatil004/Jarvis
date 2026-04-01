@@ -18,12 +18,6 @@ from system.laptop.file_manager import (
 from system.laptop.run_code import run_command, run_python_file, open_cmd, open_powershell
 from system.laptop.screenshot import take_screenshot
 
-# Mobile modules
-from system.mobile.camera import open_camera, capture_photo
-from system.mobile.document_scanner import scan_document
-from system.mobile.notifications import show_notification, read_notification, log_notification
-from system.mobile.gps import get_location, get_maps_link
-from system.mobile.messaging import send_sms
 
 # ---------------------------
 # ROUTE FUNCTION
@@ -109,25 +103,7 @@ def route(intent, name=None, content=None, destination=None):
         elif intent == "take_screenshot":
             return take_screenshot()
 
-        # ----------------- Mobile -----------------
-        elif intent == "open_camera":
-            return open_camera()
-        elif intent == "take_photo":
-            return capture_photo()
-        elif intent == "scan_document":
-            return scan_document()
-        elif intent == "notify":
-            return show_notification("Jarvis", name)
-        elif intent == "read_notification":
-            return read_notification(name)
-        elif intent == "log_notification":
-            return log_notification("Jarvis", name)
-        elif intent == "send_sms":
-            return send_sms(name, content)
-        elif intent == "get_location":
-            return get_location()
-        elif intent == "get_map":
-            return get_maps_link()
+        
 
         else:
             return "❓ Command not supported"
