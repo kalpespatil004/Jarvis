@@ -33,6 +33,11 @@ AVAILABLE_INTENTS = [
     # Alerts & Automation
     "check_price_alert", "schedule_task",
     "evaluate_trigger", "apply_rules",
+
+    # Music Intents
+    "play_music", "stop_music", "resume_music",
+    "next_track", "previous_track",
+    "play_by_mood", "play_artist", "play_playlist",
 ]
 
 # =========================
@@ -40,7 +45,15 @@ AVAILABLE_INTENTS = [
 # =========================
 _APP_STOPWORDS = {"the", "a", "an", "please", "for", "me", "app", "application"}
 
-
+_MOODS = [
+    "sleeping", "sleep", "relax", "relaxing", "calm", "chill", "peaceful",
+    "meditation", "focus", "study", "studying", "concentration", "work",
+    "coding", "productive", "workout", "gym", "energy", "morning", "running",
+    "dance", "party", "happy", "sad", "romantic", "love", "angry", "nostalgic",
+    "lonely", "motivated", "lofi", "jazz", "classical", "pop", "rock", "rap",
+    "bollywood", "punjabi", "devotional", "instrumental", "acoustic", "edm",
+    "night", "evening", "afternoon"
+]
 # =========================
 # MAIN DETECTOR
 # =========================
@@ -181,14 +194,52 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     # PLAY MUSIC
     # =========================
+
+    # PLAY MUSIC
     if re.search(r"\b(play|start|resume)\b.*\b(music|song|songs|playlist|audio)\b", normalized):
         return _intent("play_music", raw_text, normalized, 0.91)
 
-    # =========================
     # STOP MUSIC
-    # =========================
     if re.search(r"\b(stop|pause)\b.*\b(music|song|songs|playlist|audio)\b", normalized):
         return _intent("stop_music", raw_text, normalized, 0.91)
+
+    # RESUME MUSIC
+    if re.search(r"\b(resume|continue|unpause)\b.*\b(music|song|play)\b", normalized):
+        return _intent("resume_music", raw_text, normalized, 0.92)
+
+   # NEXT TRACK
+    
+    if re.search(r"\b(next|skip|next song|next track)\b", normalized):
+        return _intent("next_track", raw_text, normalized, 0.92)
+
+
+    # PREVIOUS TRACK
+    
+    if re.search(r"\b(previous|prev|last song|go back|previous track)\b", normalized):
+        return _intent("previous_track", raw_text, normalized, 0.92)
+
+    # PLAY BY MOOD 
+
+    if any(mood in normalized for mood in _MOODS):
+        mood_match = next((m for m in _MOODS if m in normalized), None)
+        return _intent("play_by_mood", raw_text, normalized, 0.91, mood=mood_match)
+
+    # STOP MUSIC
+    
+    if re.search(r"\b(stop|pause)\b.*\b(music|song|songs|playlist|audio)\b", normalized):
+        return _intent("stop_music", raw_text, normalized, 0.91)
+    
+    # PLAY ARTIST
+    
+    if re.search(r"\b(play|put on)\b.*\b(by|songs by|music by)\b", normalized):
+        artist_match = re.sub(r"\b(play|put on|songs|music|by)\b", "", normalized).strip()
+        return _intent("play_artist", raw_text, normalized, 0.90, artist=artist_match)
+
+    # PLAY PLAYLIST OR GENRE
+
+    if re.search(r"\bplaylist\b", normalized):
+        genre = re.sub(r"\b(play|playlist|music|songs|jarvis)\b", "", normalized).strip()
+        return _intent("play_playlist", raw_text, normalized, 0.90, genre=genre)
 
     # =========================
     # OPEN APP

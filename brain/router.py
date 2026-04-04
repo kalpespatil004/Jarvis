@@ -31,7 +31,17 @@ from system.laptop.file_manager import create_folder, delete_item, move_file, co
 from system.laptop.process import list_processes, kill_process_by_name
 
 # ── Music ─────────────────────────────────────
-from services.music_service import play_music_response, stop_music_response
+# IMPORT
+from services.music.music_services import (
+    play_music_response,
+    stop_music_response,
+    next_track_response,
+    previous_track_response,
+    play_music_by_mood,
+    play_artist,
+    play_playlist,
+    resume_music_response
+)
 
 # ── YouTube ───────────────────────────────────
 from services.youtube.play import play_video
@@ -199,11 +209,28 @@ def route(intent_data: dict, return_response: bool = False) -> str:
     # MUSIC                                        ← FIXED: were missing
     # ─────────────────────────────────────────
     elif intent == "play_music":
-        reply = play_music_response()
+        reply = play_music_response(intent_data.get("text", ""))
 
     elif intent == "stop_music":
         reply = stop_music_response()
 
+    elif intent == "resume_music":
+        reply = resume_music_response()
+
+    elif intent == "next_track":
+        reply = next_track_response()
+
+    elif intent == "previous_track":
+        reply = previous_track_response()
+
+    elif intent == "play_by_mood":
+        reply = play_music_by_mood(intent_data.get("mood", ""))
+
+    elif intent == "play_artist":
+        reply = play_artist(intent_data.get("artist", ""))
+
+    elif intent == "play_playlist":
+        reply = play_playlist(intent_data.get("genre", ""))
     # ─────────────────────────────────────────
     # APP LAUNCHER                                 ← FIXED: open_application → open_app
     # ─────────────────────────────────────────
