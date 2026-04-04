@@ -2,16 +2,12 @@
 offlineLLM.py
 -------------
 Offline LLM chat using Ollama.
-
 """
 
 import subprocess
-import threading
-import queue
 
-
-_MODEL_NAME = "phi"  # or "llama3.2:3b"
-_TIMEOUT = 60  # seconds
+_MODEL_NAME = "llama3.2:3b"
+_TIMEOUT = 60  # increased for model load time
 
 
 def chat(prompt: str) -> str:
@@ -24,9 +20,10 @@ def chat(prompt: str) -> str:
     try:
         result = subprocess.run(
             ["C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\ollama.exe", "run", _MODEL_NAME, prompt],
-
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             timeout=_TIMEOUT
         )
 
@@ -46,6 +43,9 @@ def chat(prompt: str) -> str:
     except Exception:
         return "Offline language model failed unexpectedly."
 
+
 if __name__ == "__main__":
-    test_prompt = "What is the capital of France?"
-    print(chat(test_prompt))
+    while True:
+        user_input = input("You: ")
+        response = chat(user_input)
+        print(f"Jarvis: {response}")
