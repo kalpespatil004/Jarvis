@@ -28,8 +28,8 @@ def minimize_window():
     window = get_active_window()
     if window:
         window.minimize()
-        return "🪟 Window minimized"
-    return "❌ No active window found"
+        return " Window minimized"
+    return " No active window found"
 
 
 # ---------------------------
@@ -43,8 +43,8 @@ def maximize_window():
     window = get_active_window()
     if window:
         window.maximize()
-        return "🪟 Window maximized"
-    return "❌ No active window found"
+        return " Window maximized"
+    return " No active window found"
 
 
 # ---------------------------
@@ -58,8 +58,8 @@ def restore_window():
     window = get_active_window()
     if window:
         window.restore()
-        return "🪟 Window restored"
-    return "❌ No active window found"
+        return " Window restored"
+    return " No active window found"
 
 
 # ---------------------------
@@ -72,9 +72,9 @@ def close_window():
     """
     try:
         pyautogui.hotkey("alt", "f4")
-        return "❌ Window closed"
+        return " Window closed"
     except Exception as e:
-        return f"❌ Error closing window: {e}"
+        return f" Error closing window: {e}"
 
 
 # ---------------------------
@@ -92,7 +92,7 @@ def focus_window(app_name):
             return f"🎯 Focused on '{app_name}'"
         return f"⚠️ No window found with name '{app_name}'"
     except Exception as e:
-        return f"❌ Error focusing window: {e}"
+        return f" Error focusing window: {e}"
 
 
 # ---------------------------
@@ -107,7 +107,7 @@ def move_window(x=100, y=100):
     if window:
         window.moveTo(x, y)
         return f"📐 Window moved to ({x}, {y})"
-    return "❌ No active window found"
+    return " No active window found"
 
 
 # ---------------------------
@@ -122,4 +122,24 @@ def resize_window(width=800, height=600):
     if window:
         window.resizeTo(width, height)
         return f"📐 Window resized to {width}x{height}"
-    return "❌ No active window found"
+    return " No active window found"
+
+if __name__ == "__main__":
+    import time
+    time.sleep(5)  
+    print(get_active_window())
+    time.sleep(5)
+    print(maximize_window())
+    time.sleep(5)
+    print(minimize_window())
+    time.sleep(5)
+    print(restore_window())
+    time.sleep(5)
+    print(focus_window("Chrome"))
+    time.sleep(5)
+    print(move_window(100, 100))
+    time.sleep(5)
+    print(resize_window(800, 600))
+    time.sleep(5)
+    print(close_window())
+

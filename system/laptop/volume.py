@@ -14,9 +14,12 @@ except ImportError:
 def get_speaker():
     if not AudioUtilities:
         return None
+
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(
-        IAudioEndpointVolume._iid_, CLSCTX_ALL, None
+        IAudioEndpointVolume._iid_,
+        CLSCTX_ALL,
+        None
     )
     volume = cast(interface, POINTER(IAudioEndpointVolume))
     return volume
@@ -29,11 +32,11 @@ def get_speaker():
 def volume_up(step=0.05):
     volume = get_speaker()
     if not volume:
-        return "❌ pycaw not installed"
+        return " pycaw not installed"
     current = volume.GetMasterVolumeLevelScalar()
     new = min(1.0, current + step)
     volume.SetMasterVolumeLevelScalar(new, None)
-    return f"🔊 Volume increased to {int(new*100)}%"
+    return f" Volume increased to {int(new*100)}%"
 
 
 # ---------------------------
@@ -43,7 +46,7 @@ def volume_up(step=0.05):
 def volume_down(step=0.05):
     volume = get_speaker()
     if not volume:
-        return "❌ pycaw not installed"
+        return " pycaw not installed"
     current = volume.GetMasterVolumeLevelScalar()
     new = max(0.0, current - step)
     volume.SetMasterVolumeLevelScalar(new, None)
@@ -60,10 +63,10 @@ def set_volume(value):
     """
     volume = get_speaker()
     if not volume:
-        return "❌ pycaw not installed"
+        return " pycaw not installed"
     value = max(0, min(100, int(value)))
     volume.SetMasterVolumeLevelScalar(value/100, None)
-    return f"🔊 Volume set to {value}%"
+    return f" Volume set to {value}%"
 
 
 # ---------------------------
@@ -76,6 +79,11 @@ def get_volume():
     """
     volume = get_speaker()
     if not volume:
-        return "❌ pycaw not installed"
+        return " pycaw not installed"
     current = int(volume.GetMasterVolumeLevelScalar()*100)
-    return f"🔊 Current volume is {current}%"
+    return f" Current volume is {current}%"
+
+
+if __name__ == "__main__":
+
+    print(get_volume())

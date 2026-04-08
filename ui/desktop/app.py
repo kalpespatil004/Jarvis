@@ -24,7 +24,15 @@ def _preload_voice_stack() -> None:
         print(f"[UI] Listen preload failed: {exc}")
 
     try:
-        from body.speak import ensure_audio_loop_started, warm_up
+        if os.environ.get("JARVIS_USE_EDGE_TTS", "").strip().lower() in (
+            "1",
+            "true",
+            "yes",
+            "edge",
+        ):
+            from body.speak_edgetts import ensure_audio_loop_started, warm_up
+        else:
+            from body.speak import ensure_audio_loop_started, warm_up
 
         ensure_audio_loop_started()
         warm_up()

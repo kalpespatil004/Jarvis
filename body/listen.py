@@ -2,31 +2,29 @@ from body.listen_whisper import listen as whisper_listen
 from body.listen_vosk import listen as vosk_listen
 
 
-def listen():
+def listen_command():
+    """
+    Listen ONLY for a single command.
+    Used AFTER wake word.
+    """
 
-    print("[STT] Listening...")
+    print("[STT] Listening for command...")
 
     try:
-        # 🔥 PRIMARY → Whisper
         text = whisper_listen()
 
-        if text:
+        if text and text.strip():
             return text
 
         print("[STT] Whisper failed → fallback to Vosk")
 
-        # ⚡ FALLBACK → Vosk
-        text = vosk_listen()
-
-        return text
+        return vosk_listen()
 
     except Exception as e:
         print("[STT ERROR]", e)
-        print("[STT] Using Vosk fallback...")
-
         return vosk_listen()
 
 
 if __name__ == "__main__":
     while True:
-        print("FINAL:", listen())
+        print("FINAL:", listen_command())

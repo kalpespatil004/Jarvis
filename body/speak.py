@@ -1,182 +1,162 @@
-
-
-
-# import os
-# import tempfile
-# import sounddevice as sd
-# import soundfile as sf
-# from TTS.api import TTS
-
-# # Load model ONCE at startup (important for speed)
-# _tts = TTS("tts_models/en/vctk/vits")
-# _JARVIS_SPEAKER = "p226"   # your chosen voice
-
-# def speak(text: str, verbose: bool = True):
-#     """
-#     Offline TTS using Coqui TTS.
-#     Fixed male Jarvis voice: p230
-#     """
-
-#     if not text or not text.strip():
-#         return
-
-#     if verbose:
-#         print(f"Jarvis: {text}")
-
-#     # temp wav file
-#     out_path = os.path.join(
-#         tempfile.gettempdir(),
-#         "jarvis_voice.wav"
-#     )
-
-#     # generate speech
-#     _tts.tts_to_file(
-#         text=text,
-#         speaker=_JARVIS_SPEAKER,
-#         file_path=out_path
-#     )
-
-#     # play audio
-#     data, sr = sf.read(out_path)
-#     sd.play(data, sr)
-#     sd.wait()
-
-
 """
-Jarvis TTS – Level 2 Upgrade
----------------------------
-• Offline
-• GPU accelerated
-• Male voice
-• Non-blocking TTS generation
-• Windows-safe audio playback
-• Model warm-up
-• Standalone test support
-"""
-import warnings
-warnings.filterwarnings("ignore")
+Hybrid TTS router for Jarvis.
 
-import torch
-import queue
+- Online: use ``body.speak_edgetts`` (edge-tts backend)
+- Offline: use ``body.speak_TTS`` (local Coqui backend)
+
+Public API mirrors both backends: ``speak``, ``ensure_audio_loop_started``,
+``audio_loop``, ``warm_up``.
+"""
+
+from __future__ import annotations
+import importlib
+import socket
+import sys
 import threading
-import sounddevice as sd
-from TTS.api import TTS
-# ===============================
-# CONFIG
-# ===============================
+import time
+from pathlib import Path
+from types import ModuleType
+from typing import Optional
 
-MODEL_NAME = "tts_models/en/vctk/vits"
-SAMPLE_RATE = 22050
-USE_GPU = torch.cuda.is_available()
+# Repo root must be on path so ``body.speak_TTS`` / ``body.speak_edgetts`` always
+# resolve to this project (not a third-party ``speak_TTS`` on sys.path).
+_ROOT = Path(__file__).resolve().parent.parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
-MALE_SPEAKERS_PRIORITY = [
-    "p230", "p232", "p237", "p243",
-    "p254", "p256", "p258", "p270",
-    "p226", "p228"
-]
+_state_lock = threading.Lock()
+_backend_name: Optional[str] = None
+_backend_module: Optional[ModuleType] = None
+_warmup_done = {"edge": False, "offline": False}
 
-# ===============================
-# LOAD MODEL ONCE
-# ===============================
-
-print("[TTS] Initializing voice engine...")
-_tts = TTS(MODEL_NAME, gpu=USE_GPU)
-
-DEFAULT_SPEAKER = "p228"
+_connectivity_cache_ttl_s = 3.0
+_last_connectivity_check = 0.0
+_last_connectivity_result = False
 
 
-# ===============================
-# AUDIO QUEUE
-# ===============================
+def _internet_available(timeout_s: float = 0.8) -> bool:
+    """Quick internet check with short-lived cache."""
+    global _last_connectivity_check, _last_connectivity_result
+    now = time.monotonic()
+    if now - _last_connectivity_check < _connectivity_cache_ttl_s:
+        return _last_connectivity_result
 
-_audio_queue = queue.Queue()
-_audio_loop_started = False
-_audio_loop_lock = threading.Lock()
-
-# ===============================
-# BACKGROUND TTS WORKER
-# ===============================
-
-def _tts_worker(text: str):
-    if not text or not text.strip():
-        return
-
-    print(f"Jarvis: {text}")
-
+    ok = False
     try:
-        wav = _tts.tts(
-            text=text,
-            speaker=DEFAULT_SPEAKER
-        )
-        _audio_queue.put(wav)
-    except Exception as exc:
-        print(f"[TTS ERROR] Failed to synthesize speech: {exc}")
+        with socket.create_connection(("1.1.1.1", 53), timeout=timeout_s):
+            ok = True
+    except OSError:
+        ok = False
 
-# ===============================
-# PUBLIC SPEAK (NON-BLOCKING)
-# ===============================
-
-def speak(text: str):
-    ensure_audio_loop_started()
-    text = text.replace("*", "")
-    threading.Thread(
-        target=_tts_worker,
-        args=(text,),
-        daemon=True
-    ).start()
+    _last_connectivity_check = now
+    _last_connectivity_result = ok
+    return ok
 
 
-def ensure_audio_loop_started():
+def _import_backend(name: str) -> ModuleType:
+    if name == "edge":
+        return importlib.import_module("body.speak_edgetts")
+    return importlib.import_module("body.speak_TTS")
+
+
+def _get_backend() -> tuple[str, ModuleType]:
     """
-    Start audio playback loop once in a background daemon thread.
-    Needed for UI mode where `audio_loop()` is not running in `main.py`.
+    Choose backend dynamically.
+    - online -> edge
+    - offline -> local TTS
+    Falls back to local TTS if edge backend import fails.
     """
-    global _audio_loop_started
-    with _audio_loop_lock:
-        if _audio_loop_started:
+    global _backend_name, _backend_module
+
+    preferred = "edge" if _internet_available() else "offline"
+
+    with _state_lock:
+        if _backend_name == preferred and _backend_module is not None:
+            return _backend_name, _backend_module
+
+        try:
+            module = _import_backend(preferred)
+            chosen = preferred
+        except Exception as exc:
+            if preferred == "edge":
+                print(f"[TTS] Edge backend unavailable, falling back offline: {exc}")
+                module = _import_backend("offline")
+                chosen = "offline"
+            else:
+                raise
+
+        if chosen != _backend_name:
+            print(f"[TTS] Using backend: {chosen}")
+
+        _backend_name = chosen
+        _backend_module = module
+        return chosen, module
+
+
+def ensure_audio_loop_started() -> None:
+    _, backend = _get_backend()
+    fn = getattr(backend, "ensure_audio_loop_started", None)
+    if callable(fn):
+        fn()
+
+
+def audio_loop() -> None:
+    """
+    Keep compatibility with existing callers.
+    Delegates to active backend implementation.
+    """
+    _, backend = _get_backend()
+    fn = getattr(backend, "audio_loop", None)
+    if callable(fn):
+        fn()
+
+
+def speak(text: str) -> None:
+    _, backend = _get_backend()
+    fn = getattr(backend, "speak")
+    fn(text)
+
+
+def warm_up(force: bool = False) -> None:
+    """
+    Warm up current backend once (unless force=True).
+    This avoids warming up on every function call.
+    """
+    name, backend = _get_backend()
+    with _state_lock:
+        if _warmup_done.get(name, False) and not force:
             return
 
-        threading.Thread(target=audio_loop, daemon=True).start()
-        _audio_loop_started = True
+    fn = getattr(backend, "warm_up", None)
+    if callable(fn):
+        fn()
 
-# ===============================
-# AUDIO LOOP (MAIN THREAD)
-# ===============================
+    with _state_lock:
+        _warmup_done[name] = True
 
-def audio_loop():
+
+def wait_until_done(timeout: float | None = None) -> bool:
     """
-    Must run in main thread.
-    Handles all playback safely.
+    Wait for current backend queue to finish speaking.
+    Returns True when completed, False on timeout.
     """
-    while True:
-        wav = _audio_queue.get()
-        try:
-            sd.play(wav, SAMPLE_RATE)
-            sd.wait()
-        except Exception as exc:
-            print(f"[TTS ERROR] Failed during audio playback: {exc}")
+    _, backend = _get_backend()
+    fn = getattr(backend, "wait_until_done", None)
+    if callable(fn):
+        return bool(fn(timeout=timeout))
+    return True
 
-# ===============================
-# WARM-UP (LEVEL 2)
-# ===============================
 
-def warm_up():
-    """
-    Prime GPU + model to remove first-lag.
-    """
-    print("[TTS] Warming up...")
-    _tts.tts("System online.", speaker=DEFAULT_SPEAKER) # type: ignore
-    print("[TTS] Warm-up complete.")
+def stop_audio_loop() -> None:
+    _, backend = _get_backend()
+    fn = getattr(backend, "stop_audio_loop", None)
+    if callable(fn):
+        fn()
 
-# ===============================
-# STANDALONE TEST
-# ===============================
 
 if __name__ == "__main__":
-    print("[TTS] Running standalone test")
-
     warm_up()
-
-    speak("Hello. This is Jarvis. Text to speech is online.")
-    # Start audio loop in main thread
-    audio_loop()
+    speak("Hello. Hybrid TTS is online.")
+    speak("If internet is available, I use Edge voice.")
+    speak("If internet is unavailable, I switch to offline TTS.")
+    wait_until_done(timeout=120.0)

@@ -17,10 +17,18 @@ AVAILABLE_INTENTS = [
     # Time & Date
     "get_time", "get_date", "advice_time", "convert_timezone",
 
-    # System Control
-    "open_app", "brightness_control", "volume_control",
-    "window_control", "screenshot", "run_code",
+    # System (laptop) — names aligned with system/router.py
+    "open_app",
+    "minimize", "maximize", "restore", "close", "focus", "move_window", "resize_window",
+    "volume_up", "volume_down", "set_volume", "get_volume",
+    "brightness_up", "brightness_down", "set_brightness", "get_brightness",
+    "volume_control", "brightness_control",
+    "window_control",
+    "list_processes", "kill_process", "kill_pid", "check_process",
+    "list_files", "create_folder", "create_file", "delete", "move", "copy", "search", "file_info",
     "file_manager", "process_manager",
+    "run_command", "run_python", "run_code", "open_cmd", "open_powershell",
+    "screenshot", "take_screenshot",
 
     # Media
     "play_music", "stop_music",
@@ -28,17 +36,58 @@ AVAILABLE_INTENTS = [
 
     # Info Services
     "get_weather", "get_news",
-    "lookup_word", "get_crypto_price",
+    "lookup_word",  # rule-based only; not offered to LLM classifier
+    "get_crypto_price",
 
     # Alerts & Automation
     "check_price_alert", "schedule_task",
     "evaluate_trigger", "apply_rules",
 
-    # Music Intents
-    "play_music", "stop_music", "resume_music",
+    # Music
+    "resume_music",
     "next_track", "previous_track",
     "play_by_mood", "play_artist", "play_playlist",
 ]
+
+# Intents the LLM may return in _llm_fallback. Excludes lookup_word: dictionary is
+# only triggered by explicit patterns above (define, meaning of, what does X mean, …).
+# General questions ("what is …", "why …", trivia) must use chat.
+_LLM_CLASSIFIER_INTENTS = [i for i in AVAILABLE_INTENTS if i != "lookup_word"]
+_LLM_CLASSIFIER_INTENTS_SET = frozenset(_LLM_CLASSIFIER_INTENTS)
+
+# Chat: conversational Q&A, trivia, explanations (not device commands or tool intents).
+_CHAT_START = re.compile(
+    r"^(what|who|whom|whose|why|how|when|where|which|"
+    r"can you|could you|would you|will you|"
+    r"tell me|explain|describe|discuss|"
+    r"do you know|do you think|is it true|are you sure|"
+    r"i want to know|i need to know|i wonder|i m curious|im curious|"
+    r"give me|help me understand|walk me through)\b"
+)
+_CHAT_PHRASE = re.compile(
+    r"\b("
+    r"full form of|full name of|short for|stand for|stands for|"
+    r"abbreviation (for|of)|acronym for|meaning of life|"
+    r"how come|what happened|what s the story|what is the story|"
+    r"reason (why|for)"
+    r")\b"
+)
+
+# "What is the volume / current brightness" → get_* (not general chat).
+_VOLUME_LEVEL_QUERY = re.compile(
+    r"\b("
+    r"current\s+volume|volume\s+level|volume\s+percentage|volume\s+now|"
+    r"what\s+(is|s)\s+the\s+volume|what\s+s\s+the\s+volume|"
+    r"how\s+loud\s+(is|are|s)|what\s+is\s+my\s+volume|get\s+volume"
+    r")\b"
+)
+_BRIGHTNESS_LEVEL_QUERY = re.compile(
+    r"\b("
+    r"current\s+brightness|brightness\s+level|brightness\s+now|"
+    r"what\s+(is|s)\s+the\s+brightness|what\s+s\s+the\s+brightness|"
+    r"screen\s+brightness\s+(level|now|percentage)|what\s+is\s+my\s+brightness|get\s+brightness"
+    r")\b"
+)
 
 # =========================
 # APP STOPWORDS
@@ -54,6 +103,41 @@ _MOODS = [
     "bollywood", "punjabi", "devotional", "instrumental", "acoustic", "edm",
     "night", "evening", "afternoon"
 ]
+
+
+def _is_explanatory_chat(norm: str) -> bool:
+    """True when the user is asking for an explanation / conversation, not a hardware command."""
+    if _VOLUME_LEVEL_QUERY.search(norm) or _BRIGHTNESS_LEVEL_QUERY.search(norm):
+        return False
+    if _CHAT_START.match(norm) or _CHAT_PHRASE.search(norm):
+        return True
+    if re.match(r"^what\s+(is|are|was|were)\s+", norm):
+        return True
+    return False
+
+
+def _try_dictionary_intent(raw: str, norm: str) -> dict[str, Any] | None:
+    """
+    Dictionary API: single-token lookups only (define X, meaning of X, what does X mean).
+    Multi-word phrases ('what does the full name of jarvis mean') are not dictionary intents.
+    """
+    if "youtube" in norm or re.search(r"\byt\b", norm):
+        return None
+    m = re.search(r"\bdefine\s+([a-z]{2,})\b", norm)
+    if m:
+        return _intent("lookup_word", raw, norm, 0.92, word=m.group(1))
+    m = re.search(r"\b(?:meaning of|definition of)\s+([a-z]{2,})\b", norm)
+    if m:
+        return _intent("lookup_word", raw, norm, 0.92, word=m.group(1))
+    m = re.search(r"\bwhat\s+does\s+([a-z]{2,})\s+mean\b", norm)
+    if m:
+        return _intent("lookup_word", raw, norm, 0.92, word=m.group(1))
+    m = re.search(r"^look\s+up\s+([a-z]{2,})\s*$", norm)
+    if m:
+        return _intent("lookup_word", raw, norm, 0.88, word=m.group(1))
+    return None
+
+
 # =========================
 # MAIN DETECTOR
 # =========================
@@ -80,13 +164,25 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     # TIME QUERY
     # =========================
-    if re.search(r"\b(what\s+time\s+is\s+it|tell\s+me\s+the\s+time|current\s+time|time\s+now)\b", normalized):
+    if re.search(
+        r"\b("
+        r"what\s+time\s+is\s+it|what\s+is\s+the\s+time|what\s+s\s+the\s+time|"
+        r"tell\s+me\s+the\s+time|current\s+time|time\s+now"
+        r")\b",
+        normalized,
+    ):
         return _intent("get_time", raw_text, normalized, 0.96)
 
     # =========================
     # DATE QUERY
     # =========================
-    if re.search(r"\b(what\s+date\s+is\s+it|today'?s\s+date|current\s+date|date\s+today|what day is it)\b", normalized):
+    if re.search(
+        r"\b("
+        r"what\s+date\s+is\s+it|what\s+is\s+the\s+date|what\s+is\s+today\s+s\s+date|"
+        r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|what day is it"
+        r")\b",
+        normalized,
+    ):
         return _intent("get_date", raw_text, normalized, 0.96)
 
     # =========================
@@ -123,15 +219,6 @@ def detect_intent(text: str) -> dict[str, Any]:
                 category = cat
                 break
         return _intent("get_news", raw_text, normalized, 0.91, category=category)
-
-    # =========================
-    # DICTIONARY / WORD LOOKUP
-    # e.g. "meaning of serendipity", "define eloquent"
-    # =========================
-    if re.search(r"\b(meaning of|define|definition of|what does .+ mean|look up)\b", normalized):
-        word_match = re.search(r"\b(?:meaning of|define|definition of|look up)\s+([a-z]+)", normalized)
-        word = word_match.group(1) if word_match else None
-        return _intent("lookup_word", raw_text, normalized, 0.92, word=word)
 
     # =========================
     # CRYPTO PRICE
@@ -192,6 +279,13 @@ def detect_intent(text: str) -> dict[str, Any]:
         return _intent("search_youtube", raw_text, normalized, 0.92, query=query_match)
 
     # =========================
+    # DICTIONARY (single-token only; after YouTube so "look up … on youtube" is not a word lookup)
+    # =========================
+    dict_hit = _try_dictionary_intent(raw_text, normalized)
+    if dict_hit:
+        return dict_hit
+
+    # =========================
     # PLAY MUSIC
     # =========================
 
@@ -207,19 +301,15 @@ def detect_intent(text: str) -> dict[str, Any]:
     if re.search(r"\b(resume|continue|unpause)\b.*\b(music|song|play)\b", normalized):
         return _intent("resume_music", raw_text, normalized, 0.92)
 
-   # NEXT TRACK
-    
+    # NEXT TRACK
     if re.search(r"\b(next|skip|next song|next track)\b", normalized):
         return _intent("next_track", raw_text, normalized, 0.92)
 
-
     # PREVIOUS TRACK
-    
     if re.search(r"\b(previous|prev|last song|go back|previous track)\b", normalized):
         return _intent("previous_track", raw_text, normalized, 0.92)
 
-    # PLAY BY MOOD 
-
+    # PLAY BY MOOD
     if any(mood in normalized for mood in _MOODS):
         mood_match = next((m for m in _MOODS if m in normalized), None)
         return _intent("play_by_mood", raw_text, normalized, 0.91, mood=mood_match)
@@ -249,30 +339,63 @@ def detect_intent(text: str) -> dict[str, Any]:
         return _intent("open_app", raw_text, normalized, 0.90, app=app_name)
 
     # =========================
-    # BRIGHTNESS CONTROL
+    # GET VOLUME / GET BRIGHTNESS (current level)
     # =========================
-    if "brightness" in normalized:
-        if "max" in normalized or "full" in normalized:
-            return _intent("brightness_control", raw_text, normalized, 0.95, level=100)
-        if "min" in normalized or "zero" in normalized:
-            return _intent("brightness_control", raw_text, normalized, 0.95, level=0)
-        match = re.search(r"(\d+)", normalized)
-        if match:
-            return _intent("brightness_control", raw_text, normalized, 0.9, level=int(match.group(1)))
-        return _intent("brightness_control", raw_text, normalized, 0.7)
+    if _VOLUME_LEVEL_QUERY.search(normalized):
+        return _intent("get_volume", raw_text, normalized, 0.94)
+    if _BRIGHTNESS_LEVEL_QUERY.search(normalized):
+        return _intent("get_brightness", raw_text, normalized, 0.94)
 
     # =========================
-    # VOLUME CONTROL
+    # VOLUME STEP
     # =========================
-    if "volume" in normalized:
+    if re.search(
+        r"\b(volume\s+up|increase\s+volume|turn\s+up\s+(the\s+)?volume|louder|more\s+volume)\b",
+        normalized,
+    ):
+        return _intent("volume_up", raw_text, normalized, 0.93)
+    if re.search(
+        r"\b(volume\s+down|decrease\s+volume|turn\s+down\s+(the\s+)?volume|quieter|less\s+volume)\b",
+        normalized,
+    ):
+        return _intent("volume_down", raw_text, normalized, 0.93)
+
+    # =========================
+    # BRIGHTNESS STEP
+    # =========================
+    if re.search(
+        r"\b(brightness\s+up|increase\s+brightness|brighter|more\s+brightness)\b",
+        normalized,
+    ):
+        return _intent("brightness_up", raw_text, normalized, 0.93)
+    if re.search(
+        r"\b(brightness\s+down|decrease\s+brightness|dimmer|less\s+brightness)\b",
+        normalized,
+    ):
+        return _intent("brightness_down", raw_text, normalized, 0.93)
+
+    # =========================
+    # SET BRIGHTNESS / SET VOLUME (same names as system/router.py)
+    # =========================
+    if "brightness" in normalized and not _is_explanatory_chat(normalized):
         if "max" in normalized or "full" in normalized:
-            return _intent("volume_control", raw_text, normalized, 0.95, level=100)
-        if "min" in normalized or "mute" in normalized:
-            return _intent("volume_control", raw_text, normalized, 0.95, level=0)
+            return _intent("set_brightness", raw_text, normalized, 0.95, level=100)
+        if "min" in normalized or "zero" in normalized:
+            return _intent("set_brightness", raw_text, normalized, 0.95, level=0)
         match = re.search(r"(\d+)", normalized)
         if match:
-            return _intent("volume_control", raw_text, normalized, 0.9, level=int(match.group(1)))
-        return _intent("volume_control", raw_text, normalized, 0.7)
+            return _intent("set_brightness", raw_text, normalized, 0.9, level=int(match.group(1)))
+        return _intent("set_brightness", raw_text, normalized, 0.7)
+
+    if "volume" in normalized and not _is_explanatory_chat(normalized):
+        if "max" in normalized or "full" in normalized:
+            return _intent("set_volume", raw_text, normalized, 0.95, level=100)
+        if "min" in normalized or "mute" in normalized:
+            return _intent("set_volume", raw_text, normalized, 0.95, level=0)
+        match = re.search(r"(\d+)", normalized)
+        if match:
+            return _intent("set_volume", raw_text, normalized, 0.9, level=int(match.group(1)))
+        return _intent("set_volume", raw_text, normalized, 0.7)
 
     # =========================
     # FILE MANAGEMENT
@@ -302,22 +425,37 @@ def detect_intent(text: str) -> dict[str, Any]:
         return _intent("process_manager", raw_text, normalized, 0.88, action="list")
 
     # =========================
-    # WINDOW CONTROL
+    # WINDOW (aligned with system/router.py)
     # =========================
     if "minimize" in normalized:
-        return _intent("window_control", raw_text, normalized, 0.9, action="minimize")
+        return _intent("minimize", raw_text, normalized, 0.9)
 
     if "maximize" in normalized:
-        return _intent("window_control", raw_text, normalized, 0.9, action="maximize")
+        return _intent("maximize", raw_text, normalized, 0.9)
 
     if re.search(r"\bclose\s+window\b", normalized):
-        return _intent("window_control", raw_text, normalized, 0.9, action="close")
+        return _intent("close", raw_text, normalized, 0.9)
+
+    if re.search(r"\brestore\s+window\b", normalized) or normalized.strip() == "restore":
+        return _intent("restore", raw_text, normalized, 0.88)
+
+    focus_match = re.search(r"\bfocus\s+(?:on\s+)?(.+)$", normalized)
+    if focus_match:
+        fname = re.sub(r"\b(please|window|the)\b", "", focus_match.group(1)).strip()
+        if fname:
+            return _intent("focus", raw_text, normalized, 0.88, name=fname)
+
+    if re.search(r"\bmove\s+window\b", normalized):
+        return _intent("move_window", raw_text, normalized, 0.85)
+
+    if re.search(r"\bresize\s+window\b", normalized):
+        return _intent("resize_window", raw_text, normalized, 0.85)
 
     # =========================
     # SCREENSHOT
     # =========================
     if "screenshot" in normalized or "take a snap" in normalized:
-        return _intent("screenshot", raw_text, normalized, 0.9)
+        return _intent("take_screenshot", raw_text, normalized, 0.9)
 
     # =========================
     # RUN CODE
@@ -340,7 +478,13 @@ def detect_intent(text: str) -> dict[str, Any]:
         return _intent("apply_rules", raw_text, normalized, 0.80, query=raw_text)
 
     # =========================
-    # LLM FALLBACK
+    # CHAT — clear Q&A / explanation (everything above failed; do not guess a tool intent)
+    # =========================
+    if _is_explanatory_chat(normalized):
+        return _intent("chat", raw_text, normalized, 0.9)
+
+    # =========================
+    # LLM INTENT CLASSIFIER (commands / ambiguous phrasing not matched above)
     # =========================
     return _llm_fallback(raw_text)
 
@@ -353,8 +497,16 @@ def _llm_fallback(text: str) -> dict:
     prompt = f"""
 You are an intent classifier for a personal AI assistant called Jarvis.
 
-Available intents:
-{AVAILABLE_INTENTS}
+Allowed intents (exact strings only):
+{_LLM_CLASSIFIER_INTENTS}
+
+Decision policy:
+1) Prefer a specific tool intent only when the user is clearly giving a COMMAND or requesting a
+   built-in service (open app, set volume, weather in a city, play music, reminder, etc.).
+2) Use "chat" when the user wants conversation: opinions, stories, how/why questions, homework-style
+   questions, "what should I…", small talk, or anything that is not clearly one of the tools above.
+3) If unsure between a tool and "chat", choose "chat".
+4) Never output "lookup_word" or any intent not in the allowed list.
 
 Return ONLY valid JSON with no extra text, no markdown, no explanation.
 
@@ -367,7 +519,7 @@ Format:
 Examples:
 User: set brightness to max
 Output:
-{{"intent": "brightness_control", "parameters": {{"level": 100}}}}
+{{"intent": "set_brightness", "parameters": {{"level": 100}}}}
 
 User: open chrome
 Output:
@@ -381,6 +533,10 @@ User: weather in mumbai
 Output:
 {{"intent": "get_weather", "parameters": {{"city": "mumbai"}}}}
 
+User: what is the full form of NASA and why was it created
+Output:
+{{"intent": "chat", "parameters": {{}}}}
+
 User: {text}
 Output:
 """
@@ -390,12 +546,18 @@ Output:
     try:
         clean = re.sub(r"```(?:json)?|```", "", response).strip()
         parsed = json.loads(clean)
+        intent_name = parsed.get("intent", "chat")
+        if intent_name == "lookup_word" or intent_name not in _LLM_CLASSIFIER_INTENTS_SET:
+            intent_name = "chat"
+            params: dict[str, Any] = {}
+        else:
+            params = parsed.get("parameters", {}) or {}
         return _intent(
-            parsed.get("intent", "chat"),
+            intent_name,
             text,
             _normalize(text),
             0.6,
-            **parsed.get("parameters", {})
+            **params
         )
     except Exception:
         return _intent("chat", text, _normalize(text), 0.3, text=text)

@@ -1,3 +1,4 @@
+import imp
 import os
 import subprocess
 
@@ -99,3 +100,17 @@ def is_process_running(name):
 
     except Exception as e:
         return f"❌ Error checking process: {e}"
+
+if __name__ == "__main__":
+    import time
+    time.sleep(5)   
+    print(list_processes())
+    time.sleep(5)
+    print(kill_process_by_pid(14544))
+    time.sleep(5)
+    print(is_process_running("Chrome")) 
+    time.sleep(5)
+    print(kill_process_by_name("Chrome"))
+    time.sleep(5)
+    print(list_processes())
+    

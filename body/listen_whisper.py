@@ -7,62 +7,85 @@ import numpy as np
 import sounddevice as sd
 from faster_whisper import WhisperModel
 
+# =========================
+# CONFIG
+# =========================
 SAMPLE_RATE = 16000
 DEFAULT_MAX_DURATION = 8.0
 DEFAULT_WAIT_TIMEOUT = 5.0
+
 BLOCK_DURATION = 0.1
-START_THRESHOLD = 0.015
-SILENCE_TIMEOUT = 1.0
 PRE_ROLL_BLOCKS = 4
+
+BASE_THRESHOLD = 0.01   # dynamic baseline
+SILENCE_TIMEOUT = 1.0
 
 _model = None
 
 
 class WhisperListenError(RuntimeError):
-    """Raised when Whisper command capture cannot produce usable speech."""
+    pass
 
 
+# =========================
+# MODEL LOADER
+# =========================
 def _get_model():
     global _model
     if _model is not None:
         return _model
 
     print("[WHISPER] Loading model...")
-    requested_device = os.getenv("JARVIS_WHISPER_DEVICE", "cpu").strip().lower() or "cpu"
-    requested_model = os.getenv("JARVIS_WHISPER_MODEL", "base").strip() or "base"
 
-    device = requested_device if requested_device in {"cpu", "cuda"} else "cpu"
-    compute_type = "int8_float16" if device == "cuda" else "int8"
+    device = "cuda" if os.getenv("JARVIS_WHISPER_DEVICE") == "cuda" else "cpu"
+    model_name = os.getenv("JARVIS_WHISPER_MODEL", "base")
 
-    print(f"[WHISPER] Using device={device}, model={requested_model}")
+    compute = "int8_float16" if device == "cuda" else "int8"
+
+    print(f"[WHISPER] device={device}, model={model_name}")
+
     _model = WhisperModel(
-        requested_model,
+        model_name,
         device=device,
-        compute_type=compute_type,
+        compute_type=compute,
     )
 
     return _model
 
 
-def _record_command_audio(
-    max_duration: float = DEFAULT_MAX_DURATION,
-    wait_timeout: float = DEFAULT_WAIT_TIMEOUT,
-) -> np.ndarray:
+# =========================
+# AUDIO NORMALIZATION
+# =========================
+def _normalize_audio(audio: np.ndarray) -> np.ndarray:
+    max_val = np.max(np.abs(audio))
+    if max_val > 0:
+        audio = audio / max_val
+    return audio.astype("float32")
+
+
+# =========================
+# RECORD WITH SMART VAD
+# =========================
+def _record_command_audio(max_duration, wait_timeout):
+
     block_size = int(SAMPLE_RATE * BLOCK_DURATION)
     audio_queue: queue.Queue[np.ndarray] = queue.Queue(maxsize=64)
-    pre_roll: deque[np.ndarray] = deque(maxlen=PRE_ROLL_BLOCKS)
+    pre_roll = deque(maxlen=PRE_ROLL_BLOCKS)
 
-    def audio_callback(indata, frames, callback_time, status):
+    def callback(indata, frames, time_info, status):
         if status:
             return
-        block = indata.copy().reshape(-1)
         if not audio_queue.full():
-            audio_queue.put(block)
+            audio_queue.put(indata.copy().reshape(-1))
 
     print("[WHISPER] Listening for command...")
-    heard_speech = False
-    heard_blocks: list[np.ndarray] = []
+
+    heard = False
+    collected = []
     silence_blocks = 0
+
+    energy_history = deque(maxlen=20)
+
     speech_deadline = time.monotonic() + wait_timeout
     hard_deadline = speech_deadline + max_duration
 
@@ -71,13 +94,15 @@ def _record_command_audio(
         blocksize=block_size,
         channels=1,
         dtype="float32",
-        callback=audio_callback,
+        callback=callback,
     ):
         while True:
             now = time.monotonic()
-            if not heard_speech and now > speech_deadline:
-                raise WhisperListenError("No speech detected after wake word.")
-            if heard_speech and now > hard_deadline:
+
+            if not heard and now > speech_deadline:
+                raise WhisperListenError("No speech detected.")
+
+            if heard and now > hard_deadline:
                 break
 
             try:
@@ -86,18 +111,25 @@ def _record_command_audio(
                 continue
 
             energy = float(np.abs(block).mean())
+            energy_history.append(energy)
 
-            if not heard_speech:
+            # 🔥 dynamic threshold
+            dynamic_threshold = max(BASE_THRESHOLD, np.mean(energy_history) * 1.5)
+
+            if not heard:
                 pre_roll.append(block)
-                if energy >= START_THRESHOLD:
-                    heard_speech = True
-                    heard_blocks.extend(pre_roll)
-                    heard_blocks.append(block)
+
+                if energy > dynamic_threshold:
+                    heard = True
+                    collected.extend(pre_roll)
+                    collected.append(block)
                     hard_deadline = time.monotonic() + max_duration
+
                 continue
 
-            heard_blocks.append(block)
-            if energy < START_THRESHOLD * 0.7:
+            collected.append(block)
+
+            if energy < dynamic_threshold * 0.6:
                 silence_blocks += 1
             else:
                 silence_blocks = 0
@@ -105,20 +137,24 @@ def _record_command_audio(
             if silence_blocks >= int(SILENCE_TIMEOUT / BLOCK_DURATION):
                 break
 
-    if not heard_blocks:
-        raise WhisperListenError("No speech detected after wake word.")
+    if not collected:
+        raise WhisperListenError("Empty audio.")
 
-    audio = np.concatenate(heard_blocks).astype("float32", copy=False)
-    return audio
+    audio = np.concatenate(collected)
+    return _normalize_audio(audio)
 
 
-def listen(duration: int | float = DEFAULT_MAX_DURATION):
+# =========================
+# MAIN LISTEN
+# =========================
+def listen(duration=DEFAULT_MAX_DURATION):
     start = time.time()
 
-    audio = _record_command_audio(max_duration=float(duration))
+    audio = _record_command_audio(duration, DEFAULT_WAIT_TIMEOUT)
 
     model = _get_model()
-    segments, info = model.transcribe(
+
+    segments, _ = model.transcribe(
         audio,
         beam_size=1,
         language="en",
@@ -126,25 +162,29 @@ def listen(duration: int | float = DEFAULT_MAX_DURATION):
     )
 
     text = " ".join(seg.text for seg in segments).strip().lower()
+
     elapsed = time.time() - start
 
-    if not text:
+    print(f"[DEBUG] Text: '{text}' | Time: {elapsed:.2f}s")
+
+    # ✅ only reject truly empty
+    if not text or text.strip() == "":
         return None
 
-    if elapsed > (float(duration) + 8):
-        print("[WHISPER] Too slow")
-        return None
-
-    if len(text) < 2:
-        return None
+    # ❌ removed stupid filters
+    # no length check
+    # no aggressive timeout
 
     print("[WHISPER USER]:", text)
     return text
 
 
+# =========================
+# TEST
+# =========================
 if __name__ == "__main__":
     while True:
         try:
             print(listen())
-        except WhisperListenError as exc:
-            print(f"[WHISPER ERROR] {exc}")
+        except WhisperListenError as e:
+            print("[WHISPER ERROR]", e)

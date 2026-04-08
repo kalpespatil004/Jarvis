@@ -20,15 +20,61 @@ from LLM.chatbot import chat as llm_chat
 from services.time_date.time_utils import current_time_only, current_date
 from services.time_date.timezone import convert_timezone
 
-# ── System ────────────────────────────────────
-from system.laptop.app_launcher import open_app                          # FIXED: was open_application
-from system.laptop.brightness import set_brightness
-from system.laptop.volume import set_volume
-from system.laptop.window_manager import minimize_window, maximize_window, close_window
+# ── System (aligned with system/router.py) ───────────────────────────────
+from system.laptop.app_launcher import open_app
+from system.laptop.brightness import (
+    set_brightness,
+    get_brightness,
+    brightness_up,
+    brightness_down,
+)
+from system.laptop.volume import set_volume, get_volume, volume_up, volume_down
+from system.laptop.window_manager import (
+    minimize_window,
+    maximize_window,
+    restore_window,
+    close_window,
+    focus_window,
+    move_window,
+    resize_window,
+)
 from system.laptop.screenshot import take_screenshot
-from system.laptop.run_code import run_python_file
-from system.laptop.file_manager import create_folder, delete_item, move_file, copy_file
-from system.laptop.process import list_processes, kill_process_by_name
+from system.laptop.run_code import run_python_file, run_command, open_cmd, open_powershell
+from system.laptop.file_manager import (
+    create_folder,
+    delete_item,
+    move_file,
+    copy_file,
+    list_files,
+    create_file,
+    search_file,
+    file_info,
+)
+from system.laptop.process import (
+    list_processes,
+    kill_process_by_name,
+    kill_process_by_pid,
+    is_process_running,
+)
+
+
+def _numeric_level(intent_data: dict) -> int | None:
+    v = intent_data.get("level")
+    if v is not None:
+        try:
+            return int(float(str(v).strip()))
+        except (TypeError, ValueError):
+            pass
+    n = intent_data.get("name")
+    if n is not None:
+        s = str(n).strip()
+        if s.replace(".", "", 1).isdigit():
+            try:
+                return int(float(s))
+            except ValueError:
+                pass
+    return None
+
 
 # ── Music ─────────────────────────────────────
 # IMPORT
@@ -232,7 +278,7 @@ def route(intent_data: dict, return_response: bool = False) -> str:
     elif intent == "play_playlist":
         reply = play_playlist(intent_data.get("genre", ""))
     # ─────────────────────────────────────────
-    # APP LAUNCHER                                 ← FIXED: open_application → open_app
+    # APP LAUNCHER
     # ─────────────────────────────────────────
     elif intent == "open_app":
         app = intent_data.get("app")
@@ -242,28 +288,82 @@ def route(intent_data: dict, return_response: bool = False) -> str:
             reply = open_app(app)
 
     # ─────────────────────────────────────────
-    # BRIGHTNESS
+    # VOLUME / BRIGHTNESS (system/router.py names)
     # ─────────────────────────────────────────
-    elif intent == "brightness_control":
-        level = intent_data.get("level")
-        if level is not None:
-            reply = set_brightness(level)
-        else:
-            reply = "Please specify a brightness level between 0 and 100."
+    elif intent == "get_volume":
+        reply = get_volume()
 
-    # ─────────────────────────────────────────
-    # VOLUME
-    # ─────────────────────────────────────────
-    elif intent == "volume_control":
-        level = intent_data.get("level")
-        if level is not None:
-            reply = set_volume(level)
-        else:
+    elif intent == "get_brightness":
+        reply = get_brightness()
+
+    elif intent == "volume_up":
+        reply = volume_up()
+
+    elif intent == "volume_down":
+        reply = volume_down()
+
+    elif intent == "brightness_up":
+        reply = brightness_up()
+
+    elif intent == "brightness_down":
+        reply = brightness_down()
+
+    elif intent == "set_volume":
+        lv = _numeric_level(intent_data)
+        if lv is None:
             reply = "Please specify a volume level between 0 and 100."
+        else:
+            reply = set_volume(lv)
+
+    elif intent == "set_brightness":
+        lv = _numeric_level(intent_data)
+        if lv is None:
+            reply = "Please specify a brightness level between 0 and 100."
+        else:
+            reply = set_brightness(lv)
+
+    elif intent == "volume_control":
+        lv = _numeric_level(intent_data)
+        if lv is None:
+            reply = "Please specify a volume level between 0 and 100."
+        else:
+            reply = set_volume(lv)
+
+    elif intent == "brightness_control":
+        lv = _numeric_level(intent_data)
+        if lv is None:
+            reply = "Please specify a brightness level between 0 and 100."
+        else:
+            reply = set_brightness(lv)
 
     # ─────────────────────────────────────────
-    # WINDOW CONTROL
+    # WINDOW
     # ─────────────────────────────────────────
+    elif intent == "minimize":
+        reply = minimize_window()
+
+    elif intent == "maximize":
+        reply = maximize_window()
+
+    elif intent == "restore":
+        reply = restore_window()
+
+    elif intent == "close":
+        reply = close_window()
+
+    elif intent == "focus":
+        fname = intent_data.get("name", "")
+        if not fname:
+            reply = "Which window should I focus?"
+        else:
+            reply = focus_window(fname)
+
+    elif intent == "move_window":
+        reply = move_window()
+
+    elif intent == "resize_window":
+        reply = resize_window()
+
     elif intent == "window_control":
         action = intent_data.get("action", "")
         if action == "minimize":
@@ -278,11 +378,14 @@ def route(intent_data: dict, return_response: bool = False) -> str:
     # ─────────────────────────────────────────
     # SCREENSHOT
     # ─────────────────────────────────────────
+    elif intent == "take_screenshot":
+        reply = take_screenshot()
+
     elif intent == "screenshot":
         reply = take_screenshot()
 
     # ─────────────────────────────────────────
-    # RUN CODE
+    # RUN / SHELL
     # ─────────────────────────────────────────
     elif intent == "run_code":
         file = intent_data.get("file", "")
@@ -290,6 +393,115 @@ def route(intent_data: dict, return_response: bool = False) -> str:
             reply = "Please specify a Python file to run."
         else:
             reply = run_python_file(file)
+
+    elif intent == "run_python":
+        path = intent_data.get("file") or intent_data.get("path") or intent_data.get("name", "")
+        if not path:
+            reply = "Please specify a Python file to run."
+        else:
+            reply = run_python_file(path)
+
+    elif intent == "run_command":
+        cmd = intent_data.get("command") or intent_data.get("name", "")
+        if not cmd:
+            reply = "Please specify a command to run."
+        else:
+            reply = run_command(cmd)
+
+    elif intent == "open_cmd":
+        reply = open_cmd()
+
+    elif intent == "open_powershell":
+        reply = open_powershell()
+
+    # ─────────────────────────────────────────
+    # PROCESS (granular intents)
+    # ─────────────────────────────────────────
+    elif intent == "list_processes":
+        reply = list_processes()
+
+    elif intent == "kill_process":
+        pname = intent_data.get("name", "")
+        if not pname:
+            reply = "Please specify a process name to kill."
+        else:
+            reply = kill_process_by_name(pname)
+
+    elif intent == "kill_pid":
+        raw = intent_data.get("pid") if intent_data.get("pid") is not None else intent_data.get("name")
+        if raw is None or str(raw).strip() == "":
+            reply = "Please specify a process ID."
+        else:
+            try:
+                reply = kill_process_by_pid(int(str(raw).strip()))
+            except ValueError:
+                reply = "Invalid process ID."
+
+    elif intent == "check_process":
+        pname = intent_data.get("name", "")
+        if not pname:
+            reply = "Please specify a process name to check."
+        else:
+            reply = is_process_running(pname)
+
+    # ─────────────────────────────────────────
+    # FILES (granular intents)
+    # ─────────────────────────────────────────
+    elif intent == "list_files":
+        path = intent_data.get("path") or intent_data.get("name") or "."
+        reply = list_files(path)
+
+    elif intent == "create_folder":
+        name = intent_data.get("name", "")
+        if not name:
+            reply = "Please specify a folder name."
+        else:
+            reply = create_folder(name)
+
+    elif intent == "create_file":
+        name = intent_data.get("name", "")
+        if not name:
+            reply = "Please specify a file name."
+        else:
+            reply = create_file(name)
+
+    elif intent == "delete":
+        name = intent_data.get("name", "")
+        if not name:
+            reply = "Please specify what to delete."
+        else:
+            reply = delete_item(name)
+
+    elif intent == "move":
+        name = intent_data.get("name", "")
+        destination = intent_data.get("destination", "")
+        if not name or not destination:
+            reply = "Please specify a file name and destination."
+        else:
+            reply = move_file(name, destination)
+
+    elif intent == "copy":
+        name = intent_data.get("name", "")
+        destination = intent_data.get("destination", "")
+        if not name or not destination:
+            reply = "Please specify a file name and destination."
+        else:
+            reply = copy_file(name, destination)
+
+    elif intent == "search":
+        name = intent_data.get("name", "")
+        path = intent_data.get("path", ".")
+        if not name:
+            reply = "Please specify a file name to search."
+        else:
+            reply = search_file(name, path)
+
+    elif intent == "file_info":
+        name = intent_data.get("name", "")
+        if not name:
+            reply = "Please specify a file name."
+        else:
+            reply = file_info(name)
 
     # ─────────────────────────────────────────
     # FILE MANAGER

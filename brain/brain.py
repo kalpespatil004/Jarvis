@@ -2,13 +2,15 @@ from __future__ import annotations
 import traceback
 import time
 
+from body.listen import listen_command
+from body.speak import speak
+from body.wake_word import listen_for_wake_word
+
 from brain.intent_engine import detect_intent
 from brain.router import route
 
 from brain.context import context
 from brain.events import trigger_event
-from utils.async_executor import run_async
-
 
 CONFIDENCE_THRESHOLD = 0.6
 
@@ -26,7 +28,7 @@ def _handle_intent(intent_data: dict, voice_mode: bool = False):
     # ---------- CONTEXT ----------
     context.update(intent_data)
 
-    # ---------- EVENT TRIGGER ----------
+    # ---------- EVENT ----------
     trigger_event("intent_detected", intent_data)
 
     # ---------- LOW CONFIDENCE ----------
@@ -42,7 +44,7 @@ def _handle_intent(intent_data: dict, voice_mode: bool = False):
 
 
 # =========================
-# UI PROCESS
+# TEXT MODE (UI / API)
 # =========================
 def process_text(command: str) -> str:
 
@@ -66,7 +68,7 @@ def process_text(command: str) -> str:
 
 
 # =========================
-# VOICE EXECUTION
+# VOICE EXECUTION (SYNC)
 # =========================
 def _execute(command: str):
 
@@ -76,49 +78,52 @@ def _execute(command: str):
 
         intent_data = detect_intent(cleaned)
 
-        # ⚡ ASYNC EXECUTION
-        run_async(_handle_intent, intent_data, True)
+        # 🔥 NO ASYNC (prevents duplicate execution bugs)
+        _handle_intent(intent_data, voice_mode=True)
 
     except Exception as exc:
         print("[BRAIN ERROR]", exc)
         traceback.print_exc()
-
-        from body.speak import speak
         speak("Something went wrong.")
 
 
 # =========================
-# MAIN LOOP
+# MAIN LOOP (STATE CONTROL)
 # =========================
 def brain_loop():
 
-    from body.listen import listen
-    from body.speak import speak
-
     speak("Jarvis online.")
-
-    idle = 0
 
     while True:
         try:
-            command = listen()
+            # =========================
+            # 🧠 IDLE MODE (WAIT FOR WAKE WORD)
+            # =========================
+            
 
+            # prevent wake-word bleed into command
+            time.sleep(0.5)
+
+            # =========================
+            # 🧠 ACTIVE MODE (ONE COMMAND ONLY)
+            # =========================
+            command = input("[BRAIN] Type a command: ").strip()
             if not command:
-                idle += 1
-                if idle > 5:
-                    print("[BRAIN] Idle...")
-                    idle = 0
+                print("[BRAIN] No command detected.")
+                speak("I didn't catch that.")
                 continue
 
-            idle = 0
+            print(f"[BRAIN] Heard → {command}")
 
+            # =========================
+            # EXECUTE COMMAND
+            # =========================
             _execute(command)
+
+            # 🔥 AUTO RESET → back to wake mode
 
         except KeyboardInterrupt:
             speak("Shutting down.")
-            break
-
-        except SystemExit:
             break
 
         except Exception as exc:
@@ -128,5 +133,8 @@ def brain_loop():
             time.sleep(1)
 
 
+# =========================
+# ENTRY POINT
+# =========================
 if __name__ == "__main__":
     brain_loop()
