@@ -1,6 +1,7 @@
 from __future__ import annotations
 import traceback
 import time
+import threading
 
 from body.listen import listen_command
 from body.speak import speak
@@ -13,6 +14,7 @@ from brain.context import context
 from brain.events import trigger_event
 
 CONFIDENCE_THRESHOLD = 0.6
+PROCESS_LOCK = threading.Lock()
 
 
 # =========================
@@ -51,6 +53,9 @@ def process_text(command: str) -> str:
     if not command or not command.strip():
         return "Say something meaningful."
 
+    if not PROCESS_LOCK.acquire(blocking=False):
+        return "Still processing the previous command. Please wait a moment."
+
     try:
         cleaned = command.strip()
         print(f"[BRAIN:UI] Heard → {cleaned}")
@@ -65,12 +70,19 @@ def process_text(command: str) -> str:
         print("[BRAIN:UI ERROR]", exc)
         traceback.print_exc()
         return "System error occurred."
+    finally:
+        if PROCESS_LOCK.locked():
+            PROCESS_LOCK.release()
 
 
 # =========================
 # VOICE EXECUTION (SYNC)
 # =========================
 def _execute(command: str):
+
+    if not PROCESS_LOCK.acquire(blocking=False):
+        speak("Still processing the previous command. Please wait.")
+        return
 
     try:
         cleaned = command.strip()
@@ -85,6 +97,9 @@ def _execute(command: str):
         print("[BRAIN ERROR]", exc)
         traceback.print_exc()
         speak("Something went wrong.")
+    finally:
+        if PROCESS_LOCK.locked():
+            PROCESS_LOCK.release()
 
 
 # =========================

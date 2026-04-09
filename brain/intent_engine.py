@@ -10,53 +10,13 @@ from brain.context import context
 from system.laptop.app_launcher import canonicalize_app_name
 
 
-# =========================
-# AVAILABLE INTENTS (FOR LLM)
-# =========================
-AVAILABLE_INTENTS = [
-    # Core
-    "exit", "greeting", "chat",
+from brain.nlu.classifier import IntentClassifier
+from brain.nlu.slot_filler import SlotFiller
+from brain.nlu.schema import LLM_CLASSIFIER_INTENTS, LLM_CLASSIFIER_INTENTS_SET, REQUIRED_SLOTS
 
-    # Time & Date
-    "get_time", "get_date", "advice_time", "convert_timezone",
 
-    # System (laptop) — names aligned with system/router.py
-    "open_app",
-    "minimize", "maximize", "restore", "close", "focus", "move_window", "resize_window",
-    "volume_up", "volume_down", "set_volume", "get_volume",
-    "brightness_up", "brightness_down", "set_brightness", "get_brightness",
-    "volume_control", "brightness_control",
-    "window_control",
-    "list_processes", "kill_process", "kill_pid", "check_process",
-    "list_files", "create_folder", "create_file", "delete", "move", "copy", "search", "file_info",
-    "file_manager", "process_manager",
-    "run_command", "run_python", "run_code", "open_cmd", "open_powershell",
-    "screenshot", "take_screenshot",
-
-    # Media
-    "play_music", "stop_music",
-    "play_youtube", "search_youtube",
-
-    # Info Services
-    "get_weather", "get_news",
-    "lookup_word",  # rule-based only; not offered to LLM classifier
-    "get_crypto_price",
-
-    # Alerts & Automation
-    "check_price_alert", "schedule_task",
-    "evaluate_trigger", "apply_rules",
-
-    # Music
-    "resume_music",
-    "next_track", "previous_track",
-    "play_by_mood", "play_artist", "play_playlist",
-]
-
-# Intents the LLM may return in _llm_fallback. Excludes lookup_word: dictionary is
-# only triggered by explicit patterns above (define, meaning of, what does X mean, …).
-# General questions ("what is …", "why …", trivia) must use chat.
-_LLM_CLASSIFIER_INTENTS = [i for i in AVAILABLE_INTENTS if i != "lookup_word"]
-_LLM_CLASSIFIER_INTENTS_SET = frozenset(_LLM_CLASSIFIER_INTENTS)
+NLU_CLASSIFIER = IntentClassifier()
+SLOT_FILLER = SlotFiller()
 
 # Chat: conversational Q&A, trivia, explanations (not device commands or tool intents).
 _CHAT_START = re.compile(
@@ -300,10 +260,24 @@ def _resolve_active_domain_followup(raw: str, norm: str) -> dict[str, Any] | Non
     return None
 
 
+def _resolve_relative_date_followup(raw: str, norm: str) -> dict[str, Any] | None:
+    """Handle short follow-ups around date/day queries, including common misspellings."""
+    if context.get_last_intent() != "get_date":
+        return None
+
+    if re.search(r"\b(and\s+)?(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="tomorrow")
+    if re.search(r"\b(and\s+)?(today|todays|todays\s+day|today\s+day)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="today")
+    if re.search(r"\b(and\s+)?(yesterday|yestarday)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="yesterday")
+    return None
+
+
 # =========================
 # MAIN DETECTOR
 # =========================
-def detect_intent(text: str) -> dict[str, Any]:
+def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
 
     if not text or not text.strip():
         return _unknown_intent()
@@ -345,11 +319,18 @@ def detect_intent(text: str) -> dict[str, Any]:
     if re.search(
         r"\b("
         r"what\s+date\s+is\s+it|what\s+is\s+the\s+date|what\s+is\s+today\s+s\s+date|"
-        r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|what day is it"
+        r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|"
+        r"what\s+day\s+is\s+it|what\s+is\s+today\s+day|today\s+day|"
+        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day|tommorow|tomarow|tomarrows|tomorrows|todays\s+day"
         r")\b",
         normalized,
     ):
-        return _intent("get_date", raw_text, normalized, 0.96)
+        date_ref = "today"
+        if re.search(r"\b(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", normalized):
+            date_ref = "tomorrow"
+        elif re.search(r"\b(yesterday|yestarday)\b", normalized):
+            date_ref = "yesterday"
+        return _intent("get_date", raw_text, normalized, 0.96, date_ref=date_ref)
 
     # =========================
     # ADVICE TIME
@@ -504,7 +485,12 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     app_name = _extract_app_name(normalized)
     if app_name:
-        return _intent("open_app", raw_text, normalized, 0.90, app=app_name)
+        post_actions: list[str] = []
+        if "maximize" in normalized:
+            post_actions.append("maximize")
+        if "minimize" in normalized:
+            post_actions.append("minimize")
+        return _intent("open_app", raw_text, normalized, 0.90, app=app_name, post_actions=post_actions)
 
     # =========================
     # GET VOLUME / GET BRIGHTNESS (current level)
@@ -688,7 +674,83 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     # LLM INTENT CLASSIFIER (commands / ambiguous phrasing not matched above)
     # =========================
-    return _llm_fallback(raw_text)
+    return None
+
+
+# =========================
+# ORCHESTRATED DETECTOR
+# =========================
+def detect_intent(text: str) -> dict[str, Any]:
+
+    if not text or not text.strip():
+        return _unknown_intent()
+
+    raw_text = text.strip()
+    normalized = _normalize(raw_text)
+
+    # deterministic quick checks (exit/safety)
+    if re.fullmatch(r"(?:exit|quit|shutdown|bye|goodbye|close jarvis)", normalized):
+        return _intent("exit", raw_text, normalized, 1.0, source="deterministic", model_confidence=1.0)
+
+    if re.search(r"\b(emergency stop|panic stop|abort all)\b", normalized):
+        return _intent("exit", raw_text, normalized, 0.98, source="deterministic", model_confidence=0.98)
+
+    follow = _resolve_active_domain_followup(raw_text, normalized)
+    if follow is not None:
+        follow.setdefault("source", "context_followup")
+        follow.setdefault("model_confidence", follow.get("confidence", 0.0))
+        follow.setdefault("disambiguation_needed", False)
+        return follow
+
+    date_follow = _resolve_relative_date_followup(raw_text, normalized)
+    if date_follow is not None:
+        date_follow.setdefault("source", "context_followup")
+        date_follow.setdefault("model_confidence", date_follow.get("confidence", 0.0))
+        date_follow.setdefault("disambiguation_needed", False)
+        return date_follow
+
+    cls = NLU_CLASSIFIER.classify(raw_text, normalized)
+    slots = SLOT_FILLER.fill(intent=cls.intent, raw_text=raw_text, normalized=normalized)
+
+    required = REQUIRED_SLOTS.get(cls.intent, ())
+    disambiguation_needed = any(not slots.get(key) for key in required)
+
+    if cls.confidence >= 0.78 and not disambiguation_needed:
+        return _intent(
+            cls.intent,
+            raw_text,
+            normalized,
+            cls.confidence,
+            source=cls.source,
+            model_confidence=cls.confidence,
+            disambiguation_needed=False,
+            **slots,
+        )
+
+    regex_hit = _regex_fallback_intent(raw_text)
+    if regex_hit is not None:
+        regex_hit["source"] = "regex_fallback"
+        regex_hit["model_confidence"] = regex_hit.get("confidence", 0.0)
+        regex_hit["disambiguation_needed"] = False
+        return regex_hit
+
+    if cls.confidence >= 0.62:
+        return _intent(
+            cls.intent,
+            raw_text,
+            normalized,
+            cls.confidence,
+            source=cls.source,
+            model_confidence=cls.confidence,
+            disambiguation_needed=disambiguation_needed,
+            **slots,
+        )
+
+    llm = _llm_fallback(raw_text)
+    llm["source"] = "llm_fallback"
+    llm["model_confidence"] = llm.get("confidence", 0.0)
+    llm["disambiguation_needed"] = False
+    return llm
 
 
 # =========================
@@ -700,7 +762,7 @@ def _llm_fallback(text: str) -> dict:
 You are an intent classifier for a personal AI assistant called Jarvis.
 
 Allowed intents (exact strings only):
-{_LLM_CLASSIFIER_INTENTS}
+{LLM_CLASSIFIER_INTENTS}
 
 Decision policy:
 1) Prefer a specific tool intent only when the user is clearly giving a COMMAND or requesting a
@@ -749,7 +811,7 @@ Output:
         clean = re.sub(r"```(?:json)?|```", "", response).strip()
         parsed = json.loads(clean)
         intent_name = parsed.get("intent", "chat")
-        if intent_name == "lookup_word" or intent_name not in _LLM_CLASSIFIER_INTENTS_SET:
+        if intent_name == "lookup_word" or intent_name not in LLM_CLASSIFIER_INTENTS_SET:
             intent_name = "chat"
             params: dict[str, Any] = {}
         else:
@@ -792,8 +854,8 @@ def _extract_app_name(text: str) -> str | None:
                 best = (start, candidate)
     if not best:
         return None
-    candidate = best[1]
-    tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS]
+    candidate = re.split(r"\b(and|then)\b", best[1], maxsplit=1)[0].strip()
+    tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS and t != "it"]
     if not tokens:
         return None
     raw_name = " ".join(tokens[:5])
@@ -806,6 +868,9 @@ def _intent(intent: str, raw: str, norm: str, confidence: float, **extra: Any) -
         "text": raw,
         "normalized_text": norm,
         "confidence": confidence,
+        "source": "unknown",
+        "model_confidence": confidence,
+        "disambiguation_needed": False,
     }
     data.update(extra)
     return data
@@ -816,7 +881,10 @@ def _unknown_intent() -> dict:
         "intent": "unknown",
         "text": "",
         "normalized_text": "",
-        "confidence": 0.0
+        "confidence": 0.0,
+        "source": "none",
+        "model_confidence": 0.0,
+        "disambiguation_needed": True,
     }
 
 

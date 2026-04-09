@@ -12,12 +12,13 @@ from __future__ import annotations
 import threading
 
 from brain.response_picker import get_response
+from brain.nlu.schema import AVAILABLE_INTENTS
 
 # ── LLM Chat ─────────────────────────────────
 from LLM.chatbot import chat as llm_chat
 
 # ── Time & Date ───────────────────────────────
-from services.time_date.time_utils import current_time_only, current_date
+from services.time_date.time_utils import current_time_only, current_date, current_weekday
 from services.time_date.timezone import convert_timezone
 
 # ── System (aligned with system/router.py) ───────────────────────────────
@@ -126,6 +127,9 @@ def route(intent_data: dict, return_response: bool = False) -> str:
     intent = intent_data.get("intent", "unknown")
     reply = ""
 
+    if intent not in AVAILABLE_INTENTS and intent != "unknown":
+        intent = "chat"
+
     # ─────────────────────────────────────────
     # CORE
     # ─────────────────────────────────────────
@@ -148,7 +152,10 @@ def route(intent_data: dict, return_response: bool = False) -> str:
         reply = f"Current time is {current_time_only()}."
 
     elif intent == "get_date":
-        reply = f"Today's date is {current_date()}."
+        date_ref = intent_data.get("date_ref", "today")
+        date_value = current_date(date_ref)
+        weekday = current_weekday(date_ref)
+        reply = f"{date_ref.capitalize()} is {weekday}, {date_value}."
 
     elif intent == "advice_time":
         reply = llm_chat(intent_data.get("topic", intent_data.get("text", "")))
@@ -286,6 +293,14 @@ def route(intent_data: dict, return_response: bool = False) -> str:
             reply = "Which app should I open?"
         else:
             reply = open_app(app)
+            actions = intent_data.get("post_actions") or []
+            if isinstance(actions, str):
+                actions = [actions]
+            for action in actions:
+                if action == "maximize":
+                    maximize_window()
+                elif action == "minimize":
+                    minimize_window()
 
     # ─────────────────────────────────────────
     # VOLUME / BRIGHTNESS (system/router.py names)

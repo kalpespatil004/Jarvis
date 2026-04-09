@@ -4,7 +4,9 @@ time_utils.py
 Utility functions related to current date and time
 """
 
-from datetime import datetime
+from __future__ import annotations
+
+from datetime import datetime, timedelta
 
 
 def current_time(format: str = "%Y-%m-%d %H:%M:%S") -> dict:
@@ -35,14 +37,25 @@ def current_time(format: str = "%Y-%m-%d %H:%M:%S") -> dict:
         }
 
 
-def current_date() -> str:
-    """
-    Get current date only.
+def date_for_ref(date_ref: str = "today") -> datetime:
+    """Return datetime for a relative day reference (today/tomorrow/yesterday)."""
+    base = datetime.now()
+    ref = (date_ref or "today").strip().lower()
+    if ref == "tomorrow":
+        return base + timedelta(days=1)
+    if ref == "yesterday":
+        return base - timedelta(days=1)
+    return base
 
-    Returns:
-        str
-    """
-    return datetime.now().strftime("%Y-%m-%d")
+
+def current_date(date_ref: str = "today") -> str:
+    """Get current date (or relative date) in YYYY-MM-DD format."""
+    return date_for_ref(date_ref).strftime("%Y-%m-%d")
+
+
+def current_weekday(date_ref: str = "today") -> str:
+    """Get weekday name for a relative date reference."""
+    return date_for_ref(date_ref).strftime("%A")
 
 
 def current_time_only() -> str:
