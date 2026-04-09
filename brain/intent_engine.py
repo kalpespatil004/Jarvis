@@ -260,6 +260,20 @@ def _resolve_active_domain_followup(raw: str, norm: str) -> dict[str, Any] | Non
     return None
 
 
+def _resolve_relative_date_followup(raw: str, norm: str) -> dict[str, Any] | None:
+    """Handle short follow-ups around date/day queries, including common misspellings."""
+    if context.get_last_intent() != "get_date":
+        return None
+
+    if re.search(r"\b(and\s+)?(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="tomorrow")
+    if re.search(r"\b(and\s+)?(today|todays|todays\s+day|today\s+day)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="today")
+    if re.search(r"\b(and\s+)?(yesterday|yestarday)\b", norm):
+        return _intent("get_date", raw, norm, 0.95, date_ref="yesterday")
+    return None
+
+
 # =========================
 # MAIN DETECTOR
 # =========================
@@ -307,11 +321,15 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
         r"what\s+date\s+is\s+it|what\s+is\s+the\s+date|what\s+is\s+today\s+s\s+date|"
         r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|"
         r"what\s+day\s+is\s+it|what\s+is\s+today\s+day|today\s+day|"
-        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day"
+        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day|tommorow|tomarow|tomarrows|tomorrows|todays\s+day"
         r")\b",
         normalized,
     ):
-        date_ref = "tomorrow" if "tomorrow" in normalized else ("yesterday" if "yesterday" in normalized else "today")
+        date_ref = "today"
+        if re.search(r"\b(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", normalized):
+            date_ref = "tomorrow"
+        elif re.search(r"\b(yesterday|yestarday)\b", normalized):
+            date_ref = "yesterday"
         return _intent("get_date", raw_text, normalized, 0.96, date_ref=date_ref)
 
     # =========================
@@ -683,6 +701,13 @@ def detect_intent(text: str) -> dict[str, Any]:
         follow.setdefault("model_confidence", follow.get("confidence", 0.0))
         follow.setdefault("disambiguation_needed", False)
         return follow
+
+    date_follow = _resolve_relative_date_followup(raw_text, normalized)
+    if date_follow is not None:
+        date_follow.setdefault("source", "context_followup")
+        date_follow.setdefault("model_confidence", date_follow.get("confidence", 0.0))
+        date_follow.setdefault("disambiguation_needed", False)
+        return date_follow
 
     cls = NLU_CLASSIFIER.classify(raw_text, normalized)
     slots = SLOT_FILLER.fill(intent=cls.intent, raw_text=raw_text, normalized=normalized)

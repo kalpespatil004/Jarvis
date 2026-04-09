@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-09T09:24:39.087714+00:00",
+  "generated_at": "2026-04-09T13:20:05.760087+00:00",
   "platform": "Linux",
-  "count": 10,
+  "count": 12,
   "apps": [
     {
       "name": "calculator",
@@ -20,6 +20,12 @@
       "location": "C:\\Windows\\system32\\cmd.exe",
       "source": "builtin",
       "tag": "utility"
+    },
+    {
+      "name": "code",
+      "location": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "source": "builtin",
+      "tag": "dev"
     },
     {
       "name": "edge",
@@ -56,6 +62,12 @@
       "location": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
       "source": "builtin",
       "tag": "utility"
+    },
+    {
+      "name": "vscode",
+      "location": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "source": "builtin",
+      "tag": "dev"
     },
     {
       "name": "word",

@@ -15,6 +15,8 @@ CACHE_TTL_HOURS = 24
 # Optional: predefined paths for common apps
 APP_PATHS = {
     "chrome": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    "vscode": r"C:\Users\%USERNAME%\AppData\Local\Programs\Microsoft VS Code\Code.exe",
+    "code": r"C:\Users\%USERNAME%\AppData\Local\Programs\Microsoft VS Code\Code.exe",
     "edge": r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
     "notepad": r"C:\Windows\system32\notepad.exe",
     "calculator": r"C:\Windows\System32\calc.exe",
@@ -38,6 +40,16 @@ APP_ALIASES = {
     "microsoft edge": "edge",
     "edge browser": "edge",
     "terminal": "cmd",
+    "vs code": "vscode",
+    "visual studio code": "vscode",
+    "code editor": "vscode",
+    "settings": "windows_settings",
+    "windows settings": "windows_settings",
+    "whatsapp": "whatsapp",
+}
+
+APP_SPECIAL_URIS = {
+    "windows_settings": "ms-settings:",
 }
 
 
@@ -53,7 +65,7 @@ def _tag_for_name(name: str) -> str:
         return "dev"
     if any(k in n for k in ("steam", "epic", "game", "valorant", "minecraft")):
         return "game"
-    if any(k in n for k in ("spotify", "vlc", "music", "player")):
+    if any(k in n for k in ("spotify", "vlc", "music", "player", "whatsapp")):
         return "media"
     if any(k in n for k in ("word", "excel", "powerpoint", "office")):
         return "productivity"
@@ -77,7 +89,7 @@ def canonicalize_app_name(name: str) -> str:
     if n in APP_ALIASES:
         return APP_ALIASES[n]
     for alias, canonical in sorted(APP_ALIASES.items(), key=lambda x: -len(x[0])):
-        if n == alias:
+        if n == alias or n.startswith(alias + " ") or n.endswith(" " + alias):
             return canonical
     pool = _known_app_names()
     matches = difflib.get_close_matches(n, pool, n=1, cutoff=0.72)
@@ -109,9 +121,9 @@ def _collect_registry_apps() -> list[dict[str, Any]]:
     if platform.system() != "Windows":
         return []
     cmd = (
-        "$paths=@('HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*',"
-        "'HKLM:\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*',"
-        "'HKCU:\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*');"
+        "$paths=@('HKLM:\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall\\\\*',"
+        "'HKLM:\\Software\\\\WOW6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall\\\\*',"
+        "'HKCU:\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Uninstall\\\\*');"
         "$apps=Get-ItemProperty $paths -ErrorAction SilentlyContinue | "
         "Where-Object {$_.DisplayName} | "
         "Select-Object DisplayName,DisplayIcon,InstallLocation,Publisher;"
@@ -293,10 +305,19 @@ def open_app(name: str) -> str:
     3. Fallback to `start` command (Windows)
     """
     canonical = canonicalize_app_name(name)
+
+    if canonical in APP_SPECIAL_URIS and platform.system() == "Windows":
+        uri = APP_SPECIAL_URIS[canonical]
+        try:
+            subprocess.Popen(f'start "" {uri}', shell=True)
+            return f"✅ Opening {canonical}"
+        except Exception as e:
+            return f"❌ Failed to open {canonical}: {e}"
+
     resolved = resolve_app(canonical)
 
     if resolved:
-        location = str(resolved.get("location", "")).strip()
+        location = os.path.expandvars(str(resolved.get("location", "")).strip())
         app_name = resolved.get("name", canonical)
 
         # UWP AppID launch
@@ -317,6 +338,7 @@ def open_app(name: str) -> str:
 
     # predefined fallback
     path = APP_PATHS.get(canonical)
+    path = os.path.expandvars(path) if path else None
     if path and os.path.exists(path):
         try:
             subprocess.Popen(path)
@@ -326,7 +348,7 @@ def open_app(name: str) -> str:
 
     if platform.system() == "Windows":
         try:
-            subprocess.Popen(f"start {canonical}", shell=True)
+            subprocess.Popen(f'start "" {canonical}', shell=True)
             return f"✅ Trying to open {canonical}"
         except Exception as e:
             return f"❌ Failed to open {canonical} using start command: {e}"

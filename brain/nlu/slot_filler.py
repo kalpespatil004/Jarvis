@@ -28,9 +28,9 @@ class SlotFiller:
                 slots["level"] = level
 
         elif intent == "get_date":
-            if "tomorrow" in normalized:
+            if re.search(r"\b(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", normalized):
                 slots["date_ref"] = "tomorrow"
-            elif "yesterday" in normalized:
+            elif re.search(r"\b(yesterday|yestarday)\b", normalized):
                 slots["date_ref"] = "yesterday"
             else:
                 slots["date_ref"] = "today"
