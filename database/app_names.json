@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-04-09T09:24:39.087714+00:00",
+  "platform": "Linux",
+  "count": 10,
+  "apps": [
+    {
+      "name": "calculator",
+      "location": "C:\\Windows\\System32\\calc.exe",
+      "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "chrome",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "source": "builtin",
+      "tag": "browser"
+    },
+    {
+      "name": "cmd",
+      "location": "C:\\Windows\\system32\\cmd.exe",
+      "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "edge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "source": "builtin",
+      "tag": "browser"
+    },
+    {
+      "name": "excel",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+      "source": "builtin",
+      "tag": "productivity"
+    },
+    {
+      "name": "notepad",
+      "location": "C:\\Windows\\system32\\notepad.exe",
+      "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "paint",
+      "location": "C:\\Windows\\system32\\mspaint.exe",
+      "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "powerpoint",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+      "source": "builtin",
+      "tag": "productivity"
+    },
+    {
+      "name": "powershell",
+      "location": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "word",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "source": "builtin",
+      "tag": "productivity"
+    }
+  ]
+}
