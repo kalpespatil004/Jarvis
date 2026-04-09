@@ -12,6 +12,7 @@ from __future__ import annotations
 import threading
 
 from brain.response_picker import get_response
+from brain.nlu.schema import AVAILABLE_INTENTS
 
 # ── LLM Chat ─────────────────────────────────
 from LLM.chatbot import chat as llm_chat
@@ -125,6 +126,9 @@ def route(intent_data: dict, return_response: bool = False) -> str:
 
     intent = intent_data.get("intent", "unknown")
     reply = ""
+
+    if intent not in AVAILABLE_INTENTS and intent != "unknown":
+        intent = "chat"
 
     # ─────────────────────────────────────────
     # CORE
