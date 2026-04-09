@@ -6,6 +6,9 @@ from typing import Any
 
 from LLM.offlineLLM import chat as llm_chat
 
+from brain.context import context
+from system.laptop.app_launcher import canonicalize_app_name
+
 
 # =========================
 # AVAILABLE INTENTS (FOR LLM)
@@ -92,7 +95,7 @@ _BRIGHTNESS_LEVEL_QUERY = re.compile(
 # =========================
 # APP STOPWORDS
 # =========================
-_APP_STOPWORDS = {"the", "a", "an", "please", "for", "me", "app", "application"}
+_APP_STOPWORDS = {"the", "a", "an", "please", "for", "me", "my", "app", "application"}
 
 _MOODS = [
     "sleeping", "sleep", "relax", "relaxing", "calm", "chill", "peaceful",
@@ -138,6 +141,165 @@ def _try_dictionary_intent(raw: str, norm: str) -> dict[str, Any] | None:
     return None
 
 
+def _clamp_level(value: int) -> int:
+    return max(0, min(100, value))
+
+
+_CRYPTO_LONG = ("bitcoin", "ethereum", "dogecoin", "litecoin", "ripple")
+_CRYPTO_SHORT = ("btc", "eth", "doge")
+
+
+def _first_crypto_coin_mention(norm: str) -> str | None:
+    """Match coin names; short tickers use word boundaries (avoid 'eth' inside 'something')."""
+    for c in _CRYPTO_LONG:
+        if c in norm:
+            return c
+    for c in _CRYPTO_SHORT:
+        if re.search(rf"\b{re.escape(c)}\b", norm):
+            return c
+    return None
+
+
+def _resolve_active_domain_followup(raw: str, norm: str) -> dict[str, Any] | None:
+    """
+    Short follow-ups after volume/brightness commands, e.g. "set to 100%" without saying "volume".
+    Skips when the utterance looks like explanatory chat ("what is 100%").
+    """
+    domain = context.active_domain
+    if not domain:
+        return None
+    if _is_explanatory_chat(norm):
+        return None
+    if domain == "volume" and re.search(r"\bbrightness\b", norm):
+        return None
+    if domain == "brightness" and re.search(r"\bvolume\b", norm) and not re.search(
+        r"\bbrightness\b", norm
+    ):
+        return None
+
+    n = norm.strip()
+
+    if domain == "volume":
+        if re.search(
+            r"\b(a bit louder|turn it up|turn up|more loud)\b", n
+        ) or n == "louder":
+            return _intent("volume_up", raw, norm, 0.91)
+        if re.search(
+            r"\b(a bit quieter|turn it down|turn down|less loud)\b", n
+        ) or n == "quieter":
+            return _intent("volume_down", raw, norm, 0.91)
+
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+to\s+(max|full|maximum|min|mute|zero|silent)$",
+            n,
+        )
+        if m:
+            key = m.group(1)
+            if key in ("max", "full", "maximum"):
+                return _intent("set_volume", raw, norm, 0.93, level=100)
+            return _intent("set_volume", raw, norm, 0.93, level=0)
+
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+to\s+(\d{1,3})(?:\s*(?:%|percent))?$",
+            n,
+        )
+        if m:
+            return _intent(
+                "set_volume",
+                raw,
+                norm,
+                0.92,
+                level=_clamp_level(int(m.group(1))),
+            )
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+at\s+(\d{1,3})(?:\s*(?:%|percent))?$",
+            n,
+        )
+        if m:
+            return _intent(
+                "set_volume",
+                raw,
+                norm,
+                0.92,
+                level=_clamp_level(int(m.group(1))),
+            )
+        m = re.match(r"^(\d{1,3})(?:\s*(?:%|percent))?$", n)
+        if m:
+            return _intent(
+                "set_volume",
+                raw,
+                norm,
+                0.9,
+                level=_clamp_level(int(m.group(1))),
+            )
+        if re.match(r"^(max|full|maximum)$", n):
+            return _intent("set_volume", raw, norm, 0.93, level=100)
+        if re.match(r"^(min|mute|zero|silent)$", n):
+            return _intent("set_volume", raw, norm, 0.93, level=0)
+
+    if domain == "brightness":
+        if re.search(r"\b(a bit brighter|turn it up|turn up|brighter|more bright)\b", n) or n in (
+            "brighter",
+            "bright",
+        ):
+            return _intent("brightness_up", raw, norm, 0.91)
+        if re.search(
+            r"\b(a bit dimmer|turn it down|turn down|dimmer|less bright|darker)\b",
+            n,
+        ) or n in ("dimmer", "dim"):
+            return _intent("brightness_down", raw, norm, 0.91)
+
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+to\s+(max|full|maximum|min|zero)$",
+            n,
+        )
+        if m:
+            key = m.group(1)
+            if key in ("max", "full", "maximum"):
+                return _intent("set_brightness", raw, norm, 0.93, level=100)
+            return _intent("set_brightness", raw, norm, 0.93, level=0)
+
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+to\s+(\d{1,3})(?:\s*(?:%|percent))?$",
+            n,
+        )
+        if m:
+            return _intent(
+                "set_brightness",
+                raw,
+                norm,
+                0.92,
+                level=_clamp_level(int(m.group(1))),
+            )
+        m = re.match(
+            r"^(?:set|put|make)(?:\s+it)?\s+at\s+(\d{1,3})(?:\s*(?:%|percent))?$",
+            n,
+        )
+        if m:
+            return _intent(
+                "set_brightness",
+                raw,
+                norm,
+                0.92,
+                level=_clamp_level(int(m.group(1))),
+            )
+        m = re.match(r"^(\d{1,3})(?:\s*(?:%|percent))?$", n)
+        if m:
+            return _intent(
+                "set_brightness",
+                raw,
+                norm,
+                0.9,
+                level=_clamp_level(int(m.group(1))),
+            )
+        if re.match(r"^(max|full|maximum)$", n):
+            return _intent("set_brightness", raw, norm, 0.93, level=100)
+        if re.match(r"^(min|zero)$", n):
+            return _intent("set_brightness", raw, norm, 0.93, level=0)
+
+    return None
+
+
 # =========================
 # MAIN DETECTOR
 # =========================
@@ -148,6 +310,10 @@ def detect_intent(text: str) -> dict[str, Any]:
 
     raw_text = text.strip()
     normalized = _normalize(raw_text)
+
+    follow = _resolve_active_domain_followup(raw_text, normalized)
+    if follow is not None:
+        return follow
 
     # =========================
     # EXIT
@@ -223,10 +389,12 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     # CRYPTO PRICE
     # e.g. "bitcoin price", "ethereum in inr"
+    # Short tickers (eth, btc, doge) must be word-boundary — avoid "eth" in "something".
     # =========================
-    _COINS = ["bitcoin", "ethereum", "dogecoin", "litecoin", "ripple", "btc", "eth", "doge"]
-    if any(coin in normalized for coin in _COINS) or re.search(r"\b(crypto|coin)\b", normalized):
-        coin_match = next((c for c in _COINS if c in normalized), "bitcoin")
+    coin_match = _first_crypto_coin_mention(normalized)
+    if coin_match is None and re.search(r"\b(crypto|coin)\b", normalized):
+        coin_match = "bitcoin"
+    if coin_match:
         currency = "inr"
         for cur in ["usd", "eur", "inr"]:
             if cur in normalized:
@@ -377,24 +545,58 @@ def detect_intent(text: str) -> dict[str, Any]:
     # =========================
     # SET BRIGHTNESS / SET VOLUME (same names as system/router.py)
     # =========================
-    if "brightness" in normalized and not _is_explanatory_chat(normalized):
+    bright_explicit = "brightness" in normalized and not _is_explanatory_chat(normalized)
+    bright_session = (
+        context.active_domain == "brightness"
+        and not _is_explanatory_chat(normalized)
+        and "brightness" not in normalized
+        and (
+            re.search(r"\b(set|put|make)\b", normalized)
+            or re.search(r"\b(max|full|min|zero)\b", normalized)
+            or re.match(r"^(\d{1,3})(?:\s*(?:%|percent))?$", normalized.strip())
+        )
+    )
+    if bright_explicit or bright_session:
         if "max" in normalized or "full" in normalized:
             return _intent("set_brightness", raw_text, normalized, 0.95, level=100)
         if "min" in normalized or "zero" in normalized:
             return _intent("set_brightness", raw_text, normalized, 0.95, level=0)
         match = re.search(r"(\d+)", normalized)
         if match:
-            return _intent("set_brightness", raw_text, normalized, 0.9, level=int(match.group(1)))
+            return _intent(
+                "set_brightness",
+                raw_text,
+                normalized,
+                0.9,
+                level=_clamp_level(int(match.group(1))),
+            )
         return _intent("set_brightness", raw_text, normalized, 0.7)
 
-    if "volume" in normalized and not _is_explanatory_chat(normalized):
+    vol_explicit = "volume" in normalized and not _is_explanatory_chat(normalized)
+    vol_session = (
+        context.active_domain == "volume"
+        and not _is_explanatory_chat(normalized)
+        and "volume" not in normalized
+        and (
+            re.search(r"\b(set|put|make)\b", normalized)
+            or re.search(r"\b(max|full|min|mute|zero)\b", normalized)
+            or re.match(r"^(\d{1,3})(?:\s*(?:%|percent))?$", normalized.strip())
+        )
+    )
+    if vol_explicit or vol_session:
         if "max" in normalized or "full" in normalized:
             return _intent("set_volume", raw_text, normalized, 0.95, level=100)
         if "min" in normalized or "mute" in normalized:
             return _intent("set_volume", raw_text, normalized, 0.95, level=0)
         match = re.search(r"(\d+)", normalized)
         if match:
-            return _intent("set_volume", raw_text, normalized, 0.9, level=int(match.group(1)))
+            return _intent(
+                "set_volume",
+                raw_text,
+                normalized,
+                0.9,
+                level=_clamp_level(int(match.group(1))),
+            )
         return _intent("set_volume", raw_text, normalized, 0.7)
 
     # =========================
@@ -552,6 +754,8 @@ Output:
             params: dict[str, Any] = {}
         else:
             params = parsed.get("parameters", {}) or {}
+        if intent_name == "open_app" and isinstance(params.get("app"), str):
+            params = {**params, "app": canonicalize_app_name(params["app"])}
         return _intent(
             intent_name,
             text,
@@ -578,16 +782,22 @@ def _extract_app_name(text: str) -> str | None:
         r"\bopen\s+(.+)$",
         r"\blaunch\s+(.+)$",
         r"\bstart\s+(.+)$",
-        r"\brun\s+(.+)$"
+        r"\brun\s+(.+)$",
     ]
+    best: tuple[int, str] | None = None
     for p in patterns:
-        match = re.search(p, text)
-        if match:
-            candidate = match.group(1).strip()
-            tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS]
-            if tokens:
-                return " ".join(tokens[:3])
-    return None
+        for m in re.finditer(p, text):
+            start, candidate = m.start(), m.group(1).strip()
+            if best is None or start >= best[0]:
+                best = (start, candidate)
+    if not best:
+        return None
+    candidate = best[1]
+    tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS]
+    if not tokens:
+        return None
+    raw_name = " ".join(tokens[:5])
+    return canonicalize_app_name(raw_name)
 
 
 def _intent(intent: str, raw: str, norm: str, confidence: float, **extra: Any) -> dict:

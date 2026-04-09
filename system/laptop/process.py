@@ -111,6 +111,4 @@ if __name__ == "__main__":
     print(is_process_running("Chrome")) 
     time.sleep(5)
     print(kill_process_by_name("Chrome"))
-    time.sleep(5)
-    print(list_processes())
-    
+   
