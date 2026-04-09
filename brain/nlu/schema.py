@@ -7,10 +7,10 @@ INTENT_SCHEMA: Final[dict[str, tuple[str, ...]]] = {
     "greeting": (),
     "chat": (),
     "get_time": (),
-    "get_date": (),
+    "get_date": ("date_ref",),
     "advice_time": ("topic",),
     "convert_timezone": ("query",),
-    "open_app": ("app",),
+    "open_app": ("app", "post_actions"),
     "minimize": (),
     "maximize": (),
     "restore": (),
@@ -75,7 +75,7 @@ LLM_CLASSIFIER_INTENTS: Final[list[str]] = [name for name in AVAILABLE_INTENTS i
 LLM_CLASSIFIER_INTENTS_SET: Final[frozenset[str]] = frozenset(LLM_CLASSIFIER_INTENTS)
 
 REQUIRED_SLOTS: Final[dict[str, tuple[str, ...]]] = {
-    "open_app": ("app",),
+    "open_app": ("app", "post_actions"),
     "set_volume": ("level",),
     "set_brightness": ("level",),
     "lookup_word": ("word",),

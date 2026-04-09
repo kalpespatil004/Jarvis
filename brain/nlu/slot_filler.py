@@ -14,11 +14,26 @@ class SlotFiller:
             app = self._extract_app(normalized)
             if app:
                 slots["app"] = app
+            actions: list[str] = []
+            if re.search(r"\bmaximize\b", normalized):
+                actions.append("maximize")
+            if re.search(r"\bminimize\b", normalized):
+                actions.append("minimize")
+            if actions:
+                slots["post_actions"] = actions
 
         elif intent in {"set_volume", "set_brightness"}:
             level = self._extract_level(normalized)
             if level is not None:
                 slots["level"] = level
+
+        elif intent == "get_date":
+            if "tomorrow" in normalized:
+                slots["date_ref"] = "tomorrow"
+            elif "yesterday" in normalized:
+                slots["date_ref"] = "yesterday"
+            else:
+                slots["date_ref"] = "today"
 
         elif intent == "get_weather":
             city_match = re.search(r"\b(?:in|for|at)\s+([a-z]+(?:\s+[a-z]+)?)", normalized)
@@ -89,7 +104,8 @@ class SlotFiller:
         for pat in patterns:
             m = re.search(pat, normalized)
             if m:
-                app = re.sub(r"\b(the|a|an|please|for|me|my|app|application)\b", "", m.group(1)).strip()
+                candidate = re.split(r"\b(and|then)\b", m.group(1), maxsplit=1)[0]
+                app = re.sub(r"\b(the|a|an|please|for|me|my|app|application|it)\b", "", candidate).strip()
                 if app:
                     return canonicalize_app_name(" ".join(app.split()[:5]))
         return None

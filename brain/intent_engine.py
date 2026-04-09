@@ -305,11 +305,14 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
     if re.search(
         r"\b("
         r"what\s+date\s+is\s+it|what\s+is\s+the\s+date|what\s+is\s+today\s+s\s+date|"
-        r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|what day is it"
+        r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|"
+        r"what\s+day\s+is\s+it|what\s+is\s+today\s+day|today\s+day|"
+        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day"
         r")\b",
         normalized,
     ):
-        return _intent("get_date", raw_text, normalized, 0.96)
+        date_ref = "tomorrow" if "tomorrow" in normalized else ("yesterday" if "yesterday" in normalized else "today")
+        return _intent("get_date", raw_text, normalized, 0.96, date_ref=date_ref)
 
     # =========================
     # ADVICE TIME
@@ -464,7 +467,12 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
     # =========================
     app_name = _extract_app_name(normalized)
     if app_name:
-        return _intent("open_app", raw_text, normalized, 0.90, app=app_name)
+        post_actions: list[str] = []
+        if "maximize" in normalized:
+            post_actions.append("maximize")
+        if "minimize" in normalized:
+            post_actions.append("minimize")
+        return _intent("open_app", raw_text, normalized, 0.90, app=app_name, post_actions=post_actions)
 
     # =========================
     # GET VOLUME / GET BRIGHTNESS (current level)
@@ -821,8 +829,8 @@ def _extract_app_name(text: str) -> str | None:
                 best = (start, candidate)
     if not best:
         return None
-    candidate = best[1]
-    tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS]
+    candidate = re.split(r"\b(and|then)\b", best[1], maxsplit=1)[0].strip()
+    tokens = [t for t in candidate.split() if t not in _APP_STOPWORDS and t != "it"]
     if not tokens:
         return None
     raw_name = " ".join(tokens[:5])

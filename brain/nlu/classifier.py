@@ -51,7 +51,7 @@ class IntentClassifier:
             (re.compile(r"\b(youtube|yt)\b.*\b(play|watch)\b|\b(play|watch)\b.*\b(youtube|yt)\b"), "play_youtube", 0.82),
             (re.compile(r"\b(search|find|look up)\b.*\b(youtube|yt)\b"), "search_youtube", 0.82),
             (re.compile(r"\b(what\s+time|current\s+time|time\s+now)\b"), "get_time", 0.9),
-            (re.compile(r"\b(what\s+date|today\'?s\s+date|current\s+date)\b"), "get_date", 0.9),
+            (re.compile(r"\b(what\s+date|today\'?s\s+date|current\s+date|what\s+day|tomorrow\s+date|tomorrow\s+day|what\s+is\s+tomorrow)\b"), "get_date", 0.9),
             (re.compile(r"\b(play|start)\b.*\b(music|song|playlist)\b"), "play_music", 0.82),
             (re.compile(r"\b(stop|pause)\b.*\b(music|song|playlist)\b"), "stop_music", 0.82),
             (re.compile(r"\b(volume)\b.*\b(set|to|percent|%)\b"), "set_volume", 0.8),
