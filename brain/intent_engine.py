@@ -882,6 +882,7 @@ def _unknown_intent() -> dict:
         "text": "",
         "normalized_text": "",
         "confidence": 0.0,
+        
         "source": "none",
         "model_confidence": 0.0,
         "disambiguation_needed": True,
