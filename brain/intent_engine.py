@@ -7,6 +7,7 @@ from typing import Any
 from LLM.offlineLLM import chat as llm_chat
 
 from brain.context import context
+from brain.followup_resolver import FOLLOWUP_RESOLVER
 from system.laptop.app_launcher import canonicalize_app_name
 
 
@@ -708,11 +709,43 @@ def detect_intent(text: str) -> dict[str, Any]:
         date_follow.setdefault("model_confidence", date_follow.get("confidence", 0.0))
         date_follow.setdefault("disambiguation_needed", False)
         return date_follow
+    temporal_follow = FOLLOWUP_RESOLVER.resolve_temporal_followup(
+        raw_text, normalized, context.get_last_intent()
+    )
+    if temporal_follow is not None:
+        return _intent(
+            temporal_follow.get("intent", "get_date"),
+            raw_text,
+            normalized,
+            0.9,
+            source="context_followup",
+            model_confidence=0.9,
+            disambiguation_needed=False,
+            **{k: v for k, v in temporal_follow.items() if k != "intent"},
+        )
 
     cls = NLU_CLASSIFIER.classify(raw_text, normalized)
     slots = SLOT_FILLER.fill(intent=cls.intent, raw_text=raw_text, normalized=normalized)
 
     required = REQUIRED_SLOTS.get(cls.intent, ())
+    slots, follow_meta = FOLLOWUP_RESOLVER.resolve_slots(
+        raw_text=raw_text,
+        normalized=normalized,
+        intent=cls.intent,
+        slots=slots,
+        required_slots=required,
+    )
+    if follow_meta.get("ambiguity"):
+        return _intent(
+            "chat",
+            raw_text,
+            normalized,
+            0.95,
+            source="context_followup",
+            model_confidence=0.95,
+            disambiguation_needed=True,
+            response=follow_meta["ambiguity"],
+        )
     disambiguation_needed = any(not slots.get(key) for key in required)
 
     if cls.confidence >= 0.78 and not disambiguation_needed:
@@ -887,5 +920,4 @@ def _unknown_intent() -> dict:
         "model_confidence": 0.0,
         "disambiguation_needed": True,
     }
-
 
