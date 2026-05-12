@@ -1,10 +1,15 @@
 # for start server : uvicorn api.main:app --reload 
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
+
 from fastapi import FastAPI
 from brain.brain import process_text
 from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+executor = ThreadPoolExecutor(max_workers=1)
+ASK_TIMEOUT_SECONDS = 25
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,6 +22,15 @@ def home():
     return {"status": "Jarvis API running"}
 
 @app.get("/ask")
-def ask(query: str):
-    response = process_text(query)
+async def ask(query: str):
+    loop = asyncio.get_running_loop()
+
+    try:
+        response = await asyncio.wait_for(
+            loop.run_in_executor(executor, process_text, query),
+            timeout=ASK_TIMEOUT_SECONDS,
+        )
+    except asyncio.TimeoutError:
+        response = "Jarvis took too long to respond. Please try a shorter command."
+
     return {"response": response}

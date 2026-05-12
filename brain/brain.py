@@ -15,6 +15,7 @@ from brain.events import trigger_event
 
 CONFIDENCE_THRESHOLD = 0.6
 PROCESS_LOCK = threading.Lock()
+API_LOCK_WAIT_SECONDS = 30
 
 
 # =========================
@@ -53,8 +54,9 @@ def process_text(command: str) -> str:
     if not command or not command.strip():
         return "Say something meaningful."
 
-    if not PROCESS_LOCK.acquire(blocking=False):
-        return "Still processing the previous command. Please wait a moment."
+    acquired = PROCESS_LOCK.acquire(timeout=API_LOCK_WAIT_SECONDS)
+    if not acquired:
+        return "Jarvis is still finishing the previous command. Try again in a moment."
 
     try:
         cleaned = command.strip()
@@ -71,7 +73,7 @@ def process_text(command: str) -> str:
         traceback.print_exc()
         return "System error occurred."
     finally:
-        if PROCESS_LOCK.locked():
+        if acquired:
             PROCESS_LOCK.release()
 
 
@@ -80,7 +82,8 @@ def process_text(command: str) -> str:
 # =========================
 def _execute(command: str):
 
-    if not PROCESS_LOCK.acquire(blocking=False):
+    acquired = PROCESS_LOCK.acquire(blocking=False)
+    if not acquired:
         speak("Still processing the previous command. Please wait.")
         return
 
@@ -98,7 +101,7 @@ def _execute(command: str):
         traceback.print_exc()
         speak("Something went wrong.")
     finally:
-        if PROCESS_LOCK.locked():
+        if acquired:
             PROCESS_LOCK.release()
 
 

@@ -1,21 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Jarvis</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Command Console</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="shell">
+        <section class="hud">
+            <div>
+                <p class="eyebrow">AI Command Interface</p>
+                <h1>Jarvis</h1>
+            </div>
+            <div class="status-strip" aria-label="System status">
+                <span class="status-dot"></span>
+                <span id="connectionStatus">Ready</span>
+            </div>
+        </section>
 
-    <div class="container">
-        <h1>Jarvis AI</h1>
+        <section class="console">
+            <aside class="side-panel" aria-label="Jarvis status">
+                <div class="core">
+                    <div class="core-ring"></div>
+                    <div class="core-pulse"></div>
+                </div>
 
-        <div class="input-area">
-            <input id="input" placeholder="Ask something..." />
-            <button onclick="send()">Send</button>
-        </div>
+                <div class="metric">
+                    <span>Mode</span>
+                    <strong id="modeLabel">Text + Voice</strong>
+                </div>
+                <div class="metric">
+                    <span>Input</span>
+                    <strong id="inputStatus">Standby</strong>
+                </div>
+                <div class="metric">
+                    <span>Voice Out</span>
+                    <button id="voiceToggle" class="toggle active" type="button" aria-pressed="true">
+                        Enabled
+                    </button>
+                </div>
+            </aside>
 
-        <div id="chat"></div>
-    </div>
+            <section class="chat-panel" aria-label="Conversation">
+                <div id="chat" class="chat">
+                    <article class="message bot">
+                        <span class="role">Jarvis</span>
+                        <p>Systems ready. Type a command or use voice input.</p>
+                    </article>
+                </div>
+
+                <form id="commandForm" class="composer">
+                    <button id="micButton" class="icon-button" type="button" title="Start voice input" aria-label="Start voice input">
+                        <span class="mic-icon"></span>
+                    </button>
+                    <input id="input" autocomplete="off" placeholder="Ask Jarvis anything..." />
+                    <button id="sendButton" class="send-button" type="submit">Send</button>
+                </form>
+            </section>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
