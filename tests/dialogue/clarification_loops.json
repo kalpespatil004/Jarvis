@@ -1,0 +1,54 @@
+{
+  "name": "clarification_loops",
+  "description": "Missing-slot and confirmation loops should ask concise follow-ups, merge slot-only answers, and cancel safely.",
+  "turns": [
+    {
+      "user": "open an app",
+      "expect": {
+        "intent": "open_app",
+        "dialogue": {"action": "follow_up", "follow_up_type": "slot_request", "missing_slots": ["app"]},
+        "clarification": "ask_slot"
+      }
+    },
+    {
+      "user": "Chrome",
+      "expect": {
+        "dialogue": {"action": "execute", "command_intent": "open_app", "command_slots": {"app": "chrome"}},
+        "context_carryover": true,
+        "clarification": "resolved"
+      }
+    },
+    {
+      "user": "set volume",
+      "expect": {
+        "intent": "set_volume",
+        "dialogue": {"action": "follow_up", "follow_up_type": "slot_request", "missing_slots": ["level"]},
+        "clarification": "ask_slot"
+      }
+    },
+    {
+      "user": "85 percent",
+      "expect": {
+        "dialogue": {"action": "execute", "command_intent": "set_volume", "command_slots": {"level": 85}},
+        "context_carryover": true,
+        "clarification": "resolved"
+      }
+    },
+    {
+      "user": "delete notes.txt",
+      "expect": {
+        "intent": "file_manager",
+        "slots": {"action": "delete", "name": "notes txt"},
+        "dialogue": {"action": "follow_up", "follow_up_type": "confirmation"},
+        "clarification": "ask_confirmation"
+      }
+    },
+    {
+      "user": "cancel",
+      "expect": {
+        "dialogue": {"action": "cancelled"},
+        "clarification": "resolved"
+      }
+    }
+  ]
+}

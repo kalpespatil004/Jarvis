@@ -1,0 +1,38 @@
+{
+  "name": "volume_followup",
+  "description": "Volume commands followed by elliptical adjustments that rely on the active volume domain.",
+  "turns": [
+    {
+      "user": "set volume to 30 percent",
+      "expect": {
+        "intent": "set_volume",
+        "slots": {"level": 30},
+        "context_carryover": false
+      }
+    },
+    {
+      "user": "make it 80%",
+      "expect": {
+        "intent": "set_volume",
+        "slots": {"level": 80},
+        "source": "context_followup",
+        "context_carryover": true
+      }
+    },
+    {
+      "user": "turn it down",
+      "expect": {
+        "intent": "volume_down",
+        "source": "context_followup",
+        "context_carryover": true
+      }
+    },
+    {
+      "user": "what is 100 percent volume?",
+      "expect": {
+        "intent": "chat",
+        "context_carryover": false
+      }
+    }
+  ]
+}
