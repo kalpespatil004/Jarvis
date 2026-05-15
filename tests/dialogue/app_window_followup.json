@@ -1,0 +1,37 @@
+{
+  "name": "app_window_followup",
+  "description": "App launch followed by window operations and a risky close confirmation loop.",
+  "turns": [
+    {
+      "user": "open chrome",
+      "expect": {
+        "intent": "open_app",
+        "slots": {"app": "chrome"},
+        "dialogue": {"action": "execute", "command_intent": "open_app"}
+      }
+    },
+    {
+      "user": "maximize it",
+      "expect": {
+        "intent": "maximize",
+        "dialogue": {"action": "execute", "command_intent": "maximize"},
+        "context_carryover": false
+      }
+    },
+    {
+      "user": "close window",
+      "expect": {
+        "intent": "close",
+        "dialogue": {"action": "follow_up", "follow_up_type": "confirmation"},
+        "clarification": "ask_confirmation"
+      }
+    },
+    {
+      "user": "no",
+      "expect": {
+        "dialogue": {"action": "cancelled"},
+        "clarification": "resolved"
+      }
+    }
+  ]
+}

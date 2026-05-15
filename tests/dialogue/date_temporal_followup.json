@@ -1,0 +1,40 @@
+{
+  "name": "date_temporal_followup",
+  "description": "Date requests followed by relative temporal fragments that should reuse date/time context.",
+  "turns": [
+    {
+      "user": "what date is it today",
+      "expect": {
+        "intent": "get_date",
+        "slots": {"date_ref": "today", "resolved_date_label": "today", "temporal_kind": "date"}
+      }
+    },
+    {
+      "user": "what about tomorrow",
+      "expect": {
+        "intent": "get_date",
+        "slots": {"date_ref": "tomorrow", "resolved_date_label": "tomorrow", "temporal_followup": true},
+        "source": "context_followup",
+        "context_carryover": true
+      }
+    },
+    {
+      "user": "and next week",
+      "expect": {
+        "intent": "get_date",
+        "slots": {"date_ref": "next week", "resolved_date_label": "next week", "temporal_kind": "date_range", "temporal_followup": true},
+        "source": "context_followup",
+        "context_carryover": true
+      }
+    },
+    {
+      "user": "next monday",
+      "expect": {
+        "intent": "get_date",
+        "slots": {"date_ref": "next monday", "resolved_date_label": "next Monday"},
+        "source": "context_followup",
+        "context_carryover": true
+      }
+    }
+  ]
+}

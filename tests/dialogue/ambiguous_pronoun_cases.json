@@ -1,0 +1,43 @@
+{
+  "name": "ambiguous_pronoun_cases",
+  "description": "Pronoun-heavy turns that should not over-resolve to stale context unless the domain has an explicit follow-up rule.",
+  "turns": [
+    {
+      "user": "set volume to 45",
+      "expect": {
+        "intent": "set_volume",
+        "slots": {"level": 45}
+      }
+    },
+    {
+      "user": "what is it",
+      "expect": {
+        "intent": "chat",
+        "context_carryover": false,
+        "clarification": "none"
+      }
+    },
+    {
+      "user": "weather in Paris",
+      "expect": {
+        "intent": "get_weather",
+        "slots": {"city": "paris"}
+      }
+    },
+    {
+      "user": "what about there",
+      "expect": {
+        "intent": "chat",
+        "context_carryover": false,
+        "clarification": "none"
+      }
+    },
+    {
+      "user": "focus chrome",
+      "expect": {
+        "intent": "focus",
+        "slots": {"name": "chrome"}
+      }
+    }
+  ]
+}
