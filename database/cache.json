@@ -2,5 +2,108 @@
   "user_profile": {
     "name": "Kalpesh",
     "updated_at": "2026-03-19T23:47:16.109033"
-  }
+  },
+  "working_memory": {},
+  "conversation_history": [
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-05-15T13:05:23.123545",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex_fallback",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-05-15T13:05:23.123545",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "open vscode",
+      "time": "2026-05-15T13:05:53.871973",
+      "metadata": {
+        "intent": "open_app",
+        "text": "open vscode",
+        "normalized_text": "open vscode",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "app": "vscode",
+        "post_actions": [],
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "\u2705 Trying to open vscode",
+      "time": "2026-05-15T13:05:53.871973",
+      "metadata": {
+        "status": "success",
+        "intent": "open_app"
+      }
+    },
+    {
+      "role": "user",
+      "text": "open calculator",
+      "time": "2026-05-15T13:06:12.936575",
+      "metadata": {
+        "intent": "open_app",
+        "text": "open calculator",
+        "normalized_text": "open calculator",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "app": "calculator",
+        "post_actions": [],
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "\u2705 Opening calculator",
+      "time": "2026-05-15T13:06:12.936575",
+      "metadata": {
+        "status": "success",
+        "intent": "open_app"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is time",
+      "time": "2026-05-15T13:06:33.827735",
+      "metadata": {
+        "intent": "chat",
+        "text": "what is time",
+        "normalized_text": "what is time",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Time, Sir, is the fundamental dimension that orders the sequence of events. It quantifies duration and change, an intrinsic component of our universe's fabric.",
+      "time": "2026-05-15T13:06:33.827735",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    }
+  ]
 }

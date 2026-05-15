@@ -1,8 +1,350 @@
 {
-  "generated_at": "2026-04-09T13:20:05.760087+00:00",
-  "platform": "Linux",
-  "count": 12,
+  "generated_at": "2026-05-15T07:35:53.851522+00:00",
+  "platform": "Windows",
+  "count": 649,
   "apps": [
+    {
+      "name": "${{arpdisplayname}}",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "7zr",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\arm64\\7zr.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "7zr",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\x64\\7zr.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "__nvcc_device_query",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\__nvcc_device_query.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aapt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\aapt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\aapt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt2",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aapt2.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt2",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\aapt2.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt2",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\aapt2.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aarch64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aarch64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aarch64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\aarch64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aarch64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\aarch64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "actionsmcphost",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\ActionsMcpHost.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "actionsmcphost",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\ActionsMcpHost.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adb",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe after effects 2026",
+      "location": "C:\\Program Files\\Adobe",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe after effects 2026",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Adobe\\Adobe After Effects 2026\\Support Files\\AfterFX.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe analysis server",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\Adobe Analysis Server.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe illustrator 2026",
+      "location": "C:\\illustrater\\Adobe Illustrator 2026",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe illustrator 2026",
+      "location": "C:\\illustrater\\Adobe Illustrator 2026\\Support Files\\Contents\\Windows\\Illustrator.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe photoshop 2021",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe photoshop 2021",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Adobe\\Adobe Photoshop 2021\\Photoshop.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe refresh manager",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe update helper",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\Adobe Update Helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe_licensing_helper",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\LCC\\adobe_licensing_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe_licensing_wf",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Adobe Desktop Common\\NGL\\adobe_licensing_wf.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe_licensing_wf_helper",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Adobe Desktop Common\\NGL\\adobe_licensing_wf_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobearm",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\AdobeARM.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobearmhelper",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\AdobeARMHelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobeipcbroker",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\IPCBox\\AdobeIPCBroker.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aerender",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\aerender.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "afterfx",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\AfterFX.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aidl",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aidl.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aidl",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\aidl.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aidl",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\aidl.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "amd software",
+      "location": "AdvancedMicroDevicesInc-2.AMDRadeonSoftware_0a9344xs7nr4m!AMDRadeonsoftwareUWP",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "amdlinkuwp",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\amdlinkuwp.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "amdlinkuwp",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\AdvancedMicroDevicesInc-2.AMDRadeonSoftware_0a9344xs7nr4m\\amdlinkuwp.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "amecommand",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\DynamicLinkMediaServer\\amecommand.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "android studio",
+      "location": "C:\\Android Studio\\bin\\studio.exe",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "android studio",
+      "location": "C:\\Android Studio\\bin\\studio64.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "appvcleaner",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\appvcleaner.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "appvdllsurrogate",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "appvdllsurrogate32",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate32.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "appvdllsurrogate64",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "appvlp",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVLP.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "appvshnotify",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\AppVShNotify.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "arm-linux-androideabi-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\arm-linux-androideabi-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "arm-linux-androideabi-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\arm-linux-androideabi-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "arm-linux-androideabi-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\arm-linux-androideabi-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "armsvc",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\armsvc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "bcc_compat",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\bcc_compat.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "bcc_compat",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\bcc_compat.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "bcc_compat",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\bcc_compat.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "bin2c",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\bin2c.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "calculator",
+      "location": "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
     {
       "name": "calculator",
       "location": "C:\\Windows\\System32\\calc.exe",
@@ -10,15 +352,81 @@
       "tag": "utility"
     },
     {
+      "name": "ccxprocess",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Creative Cloud Experience\\CCXProcess.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cephtmlengine",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\CEPHtmlEngine\\CEPHtmlEngine.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "character map",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\charmap.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "chatgpt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\chatgpt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "chatgpt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\OpenAI.ChatGPT-Desktop_2p2nqsd0c76g0\\chatgpt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "chatgpt",
+      "location": "OpenAI.ChatGPT-Desktop_2p2nqsd0c76g0!ChatGPT",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
       "name": "chrome",
       "location": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      "source": "builtin",
+      "source": "program_files",
       "tag": "browser"
+    },
+    {
+      "name": "chrome_proxy",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\chrome_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "chrome_pwa_launcher",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\chrome_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "click to do",
+      "location": "MicrosoftWindows.Client.CoreAI_cw5n1h2txyewy!ClickToDoApp",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "clview",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\CLVIEW.EXE",
+      "source": "program_files",
+      "tag": "utility"
     },
     {
       "name": "cmd",
       "location": "C:\\Windows\\system32\\cmd.exe",
       "source": "builtin",
+      "tag": "utility"
+    },
+    {
+      "name": "cnfnot32",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\CNFNOT32.EXE",
+      "source": "program_files",
       "tag": "utility"
     },
     {
@@ -28,16 +436,1828 @@
       "tag": "dev"
     },
     {
+      "name": "codesetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561.exe",
+      "source": "program_files",
+      "tag": "dev"
+    },
+    {
+      "name": "command prompt",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cmd.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "component services",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\comexp.msc",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "compute sanitizer",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "compute-sanitizer",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\compute-sanitizer\\compute-sanitizer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "computer management",
+      "location": "Microsoft.AutoGenerated.{8ABD94FB-E7D6-84A6-A997-C918EDDE0AE5}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "configsecuritypolicy",
+      "location": "C:\\Program Files\\Windows Defender\\ConfigSecurityPolicy.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "configserviceagent",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ConfigServiceAgent.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "console rar manual",
+      "location": "C:\\WinRAR\\Rar.txt",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "control panel",
+      "location": "Microsoft.Windows.ControlPanel",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "convert",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\convert.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot_setup",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\Installer\\copilot_setup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot_setup",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\Installer\\copilot_setup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilotupdate",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\CopilotUpdate.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilotupdate",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\CopilotUpdate.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "coresync",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\CoreSync.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "coresynccustomhook",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\customhook\\CoreSyncCustomHook.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "coresynccustomhook",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\CoreSyncExtension\\customhook\\CoreSyncCustomHook.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crashpad_handler",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\crashpad_handler.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crashpad_handler",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\uninstaller_804e345e\\data\\installer_uninstaller_windows.assets\\crashpad_handler.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crashreport",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\crashreport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crlogtransport",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\CRLogTransport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crlogtransport",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\CRLogTransport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crlogtransport",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\IPCBox\\CRLogTransport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crt development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\IPCBox\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ctadvisor",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "ctadvisor",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\ctadvisor.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cu++filt",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\cu++filt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cublas development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cublas runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuda cccl",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuda documentation",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuda profiler api",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cudafe++",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\cudafe++.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cudart runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cudart tileir",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cufft development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuobjdump",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuobjdump",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\cuobjdump.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cupti",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "curand development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "curand runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cusolver development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cusolver runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cusparse development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cusparse runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "cuxxfilt",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "defragment and optimize drives",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\dfrgui.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "developer command prompt for vs",
+      "location": "Microsoft.AutoGenerated.{B01147A4-E554-761F-B533-FF3E10213F31}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "developer powershell for vs",
+      "location": "Microsoft.AutoGenerated.{D857AE22-B96C-7CBD-0840-774DB1D50C24}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "dexdump",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\dexdump.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dexdump",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\dexdump.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dexdump",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\dexdump.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "disassembler",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "disk cleanup",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\cleanmgr.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "dlpuseragent",
+      "location": "C:\\Program Files\\Windows Defender\\DlpUserAgent.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "documentation",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\VideoLAN\\VLC\\Documentation.url",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "droplet template",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\Droplet Template.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dump64",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\Feedback\\dump64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dump64a",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\Feedback\\dump64a.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dvaapprelauncher",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\dvaapprelauncher.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dynamiclinkmanager",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\dynamiclinkmanager.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dynamiclinkmanager",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\DynamicLinkMediaServer\\dynamiclinkmanager.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dynamiclinkmediaserver",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\DynamicLinkMediaServer\\dynamiclinkmediaserver.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "e2fsck",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\bin64\\e2fsck.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "edge",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
       "source": "builtin",
       "tag": "browser"
     },
     {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Microsoft\\EdgeWebView\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "emulator",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "emulator-check",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\emulator-check.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "espeak ng text-to-speech 64-bit",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "espeak-ng",
+      "location": "C:\\Program Files\\eSpeak NG\\espeak-ng.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "etc1tool",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\etc1tool.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "event viewer",
+      "location": "Microsoft.AutoGenerated.{BB044BFD-25B7-2FAA-22A8-6371A93E0456}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
       "name": "excel",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-      "source": "builtin",
+      "source": "program_files",
       "tag": "productivity"
+    },
+    {
+      "name": "excel",
+      "location": "Microsoft.Office.EXCEL.EXE.15",
+      "source": "uwp",
+      "tag": "productivity"
+    },
+    {
+      "name": "excelcnv",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\excelcnv.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "extexport",
+      "location": "C:\\Program Files\\Internet Explorer\\ExtExport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "extexport",
+      "location": "C:\\Program Files (x86)\\Internet Explorer\\ExtExport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "fastboot",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\fastboot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "fatbinary",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\fatbinary.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "feedback",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\feedback.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "file explorer",
+      "location": "Microsoft.Windows.Explorer",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "flitetranscoder",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\flitetranscoder.exe",
+      "source": "program_files",
+      "tag": "dev"
+    },
+    {
+      "name": "free fire max",
+      "location": "googleplaygames://launch/?id=com.dts.freefiremax&lid=1&pid=1",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "fvcontainer",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\FvContainer\\FvContainer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "fvcontainer.system",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\FvContainer\\FvContainer.System.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "fvsdktestclient_public",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\SDK\\FvSDKTestClient_Public.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "get started",
+      "location": "MicrosoftWindows.Client.CBS_cw5n1h2txyewy!WebExperienceHost",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "gfw-install-azrmobez",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\gfw-install-azrmoBEZ.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "git",
+      "location": "C:\\Git\\",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "git bash",
+      "location": "Microsoft.AutoGenerated.{840E0456-ED7C-86F0-3C71-40AFA13B1859}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "git cmd",
+      "location": "Microsoft.AutoGenerated.{49BA7ABC-1759-BAB6-2012-9BE6E5578808}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "git faqs (frequently asked questions)",
+      "location": "https://gitforwindows.org/faq",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "git for windows",
+      "location": "GitForWindows.Updater",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "git gui",
+      "location": "C:\\Git\\cmd\\git-gui.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "git release notes",
+      "location": "C:\\Git\\ReleaseNotes.html",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "google chrome",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application",
+      "source": "registry",
+      "tag": "browser"
+    },
+    {
+      "name": "google chrome",
+      "location": "Chrome",
+      "source": "uwp",
+      "tag": "browser"
+    },
+    {
+      "name": "googleupdate",
+      "location": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "gpusniffer",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\GPUSniffer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "graph",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\GRAPH.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "hdhelper",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\HDHelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "hprof-conv",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\hprof-conv.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "i686-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\i686-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "i686-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\i686-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "i686-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\i686-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "idle (python 3.11 64-bit)",
+      "location": "Microsoft.AutoGenerated.{A3FA0EDF-42FC-0265-BCA9-37C902B0BD9A}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "idle (python 3.14 64-bit)",
+      "location": "Microsoft.AutoGenerated.{EA2B4F21-2CAB-6DF3-ABE8-2F2BC7A17218}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "ie_to_edge_stub",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\BHO\\ie_to_edge_stub.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "ie_to_edge_stub",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\BHO\\ie_to_edge_stub.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "iediagcmd",
+      "location": "C:\\Program Files\\Internet Explorer\\iediagcmd.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ieinstal",
+      "location": "C:\\Program Files\\Internet Explorer\\ieinstal.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ieinstal",
+      "location": "C:\\Program Files (x86)\\Internet Explorer\\ieinstal.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ielowutil",
+      "location": "C:\\Program Files\\Internet Explorer\\ielowutil.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ielowutil",
+      "location": "C:\\Program Files (x86)\\Internet Explorer\\ielowutil.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "iexplore",
+      "location": "C:\\Program Files\\Internet Explorer\\iexplore.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "iexplore",
+      "location": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "imagingdevices",
+      "location": "C:\\Program Files\\Windows Photo Viewer\\ImagingDevices.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "imagingdevices",
+      "location": "C:\\Program Files (x86)\\Windows Photo Viewer\\ImagingDevices.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "importerredserver",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\DynamicLinkMediaServer\\ImporterREDServer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "inspectorofficegadget",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\InspectorOfficeGadget.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "instagram",
+      "location": "www.instagram.com-E4B7766F_ysfa6mcnwr1rw!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "install additional tools for node.js",
+      "location": "Microsoft.AutoGenerated.{04770C2D-34E6-BE94-EFAD-FA817237D6E9}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "installcleanup",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\InstallCleanup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "integratedoffice",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\IntegratedOffice.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "integratedoffice",
+      "location": "C:\\Program Files\\Microsoft Office 15\\ClientX64\\IntegratedOffice.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "integrator",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Integrator.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "iscsi initiator",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\iscsicpl.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "kilo",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\JetBrains\\acp-agents\\kilo\\7.1.20\\kilo.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo vantage",
+      "location": "E046963F.LenovoCompanion_k1h2ywk1493x8!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo vantage service",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\\\4.2601.21.0",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantage.addinhost",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantage.addinhost.amd64",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.Amd64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantage.addinhost.x86",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.x86.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantage.addinhostex",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHostEx.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantage.addininstaller",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinInstaller.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovo.vantageservice.installerhelper",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.VantageService.InstallerHelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(batterywidgetaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(BatteryWidgetAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(consumeraddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ConsumerAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(devicesettingsheartbeataddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(DeviceSettingsHeartbeatAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(devicesettingssystemaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(DeviceSettingsSystemAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(genericmessagingaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(GenericMessagingAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(generictelemetryaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(GenericTelemetryAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(ideakbdmanageraddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(IdeaKBDManagerAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(ideanotebookaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(IdeaNotebookAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovoaccountaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoAccountAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovoauthenticationaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoAuthenticationAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovocompanionappaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoCompanionAppAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovogamingsystemaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoGamingSystemAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovogaminguseraddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoGamingUserAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovohardwarescanaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoHardwareScanAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovoproductivitysystemaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoProductivitySystemAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovosecurityaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoSecurityAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovoservicebridgeaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoServiceBridgeAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(lenovosystemupdateaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoSystemUpdateAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(modernpreloadaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ModernPreloadAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(multimediaaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(MultimediaAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(seheartbeataddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SEHeartBeatAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(settingswidgetaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SettingsWidgetAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartbeaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartBEAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartdisplayaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartDisplayAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartinteractaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartInteractAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartnoisecancelledaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartNoiseCancelledAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartpaneladdin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPanelAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartperformanceaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPerformanceAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(smartperformanceuseraddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPerformanceUserAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(thinksmartsenseaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ThinkSmartSenseAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantage-(vantagecoreaddin)",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(VantageCoreAddin).exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lenovovantageservice",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantageService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "libnvptxcompiler development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "license (english)",
+      "location": "C:\\Oracle\\VirtualBox\\License_en_US.rtf",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "live captions",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\LiveCaptions.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "livecapture",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\livecapture.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lively wallpaper",
+      "location": "12030rocksdanister.LivelyWallpaper_97hta09mmv6hy!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "lld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\lld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\lld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\lld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "llvm-rs-cc",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\llvm-rs-cc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "llvm-rs-cc",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\llvm-rs-cc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "llvm-rs-cc",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\llvm-rs-cc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "logcollector",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\logcollector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "logcollectortool",
+      "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\LogCollectorTool\\LogCollectorTool.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "magnifier",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\magnify.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "make_f2fs",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\make_f2fs.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "make_f2fs_casefold",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\make_f2fs_casefold.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mavinject32",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\MavInject32.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft edge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application",
+      "source": "registry",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoft edge",
+      "location": "MSEdge",
+      "source": "uwp",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoft edge webview2 runtime",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application",
+      "source": "registry",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoft office home and student 2021 - en-gb",
+      "location": "C:\\Program Files\\Microsoft Office",
+      "source": "registry",
+      "tag": "productivity"
+    },
+    {
+      "name": "microsoft store",
+      "location": "Microsoft.WindowsStore_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x64 additional runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x64 debug runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x64 minimum runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x86 additional runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x86 debug runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ 2022 x86 minimum runtime - 14.50.35719",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ v14 redistributable (x64) - 14.50.35719",
+      "location": "C:\\ProgramData\\Package Cache\\{91ee571b-0e8a-4c65-9eaf-2e2f5fc60c00}\\VC_redist.x64.exe,0",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual c++ v14 redistributable (x86) - 14.50.35719",
+      "location": "C:\\ProgramData\\Package Cache\\{0e4ccf1b-d073-4cfe-8a24-e86185719b56}\\VC_redist.x86.exe,0",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft visual studio code (user)",
+      "location": "C:\\Microsoft VS Code\\",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "microsoft visual studio installer",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "microsoft visual studio setup configuration",
+      "location": "",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "microsoft visual studio setup wmi provider",
+      "location": "",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "microsoft.visualstudio.setup.toastnotification",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\Microsoft.VisualStudio.Setup.ToastNotification.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoftedgecomregistershellarm64",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeComRegisterShellARM64.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdate",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\MicrosoftEdgeUpdate.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdate",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdate.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdatebroker",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateBroker.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdatecomregistershell64",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateComRegisterShell64.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdatecore",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateCore.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdateondemand",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateOnDemand.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftedgeupdatesetup",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateSetup.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "microsoftstore",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\microsoftstore.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoftstore",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.WindowsStore_8wekyb3d8bbwe\\microsoftstore.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoftwindows.desktopstickereditorcentennial",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\MicrosoftWindows.DesktopStickerEditorCentennial.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoftwindows.desktopstickereditorcentennial",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\MicrosoftWindows.DesktopStickerEditorCentennial.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mingw installation manager",
+      "location": "C:\\MinGW\\libexec\\mingw-get\\guimain.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "mipdlp",
+      "location": "C:\\Program Files\\Windows Defender\\MipDlp.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mipsel-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\mipsel-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mipsel-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\mipsel-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mipsel-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\mipsel-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "misc",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\misc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mixed reality portal",
+      "location": "Microsoft.MixedReality.Portal_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "mke2fs",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\mke2fs.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mksdcard",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\mksdcard.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpcmdrun",
+      "location": "C:\\Program Files\\Windows Defender\\MpCmdRun.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpcmdrun",
+      "location": "C:\\Program Files (x86)\\Windows Defender\\MpCmdRun.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpcopyaccelerator",
+      "location": "C:\\Program Files\\Windows Defender\\MpCopyAccelerator.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpdefendercoreservice",
+      "location": "C:\\Program Files\\Windows Defender\\MpDefenderCoreService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpdlpcmd",
+      "location": "C:\\Program Files\\Windows Defender\\MpDlpCmd.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpdlpservice",
+      "location": "C:\\Program Files\\Windows Defender\\MpDlpService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mpextms",
+      "location": "C:\\Program Files\\Windows Defender\\mpextms.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Microsoft\\EdgeWebView\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msinfo32",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\MSInfo\\msinfo32.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msinfo32",
+      "location": "C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\MSInfo\\msinfo32.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msmpeng",
+      "location": "C:\\Program Files\\Windows Defender\\MsMpEng.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msoadfsb",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoadfsb.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msoasb",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoasb.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msohtmed",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSOHTMED.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msosrec",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSOSREC.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msqry32",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSQRY32.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nahimic",
+      "location": "A-Volute.Nahimic_w2gh52qy24etm!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "nahimic companion",
+      "location": "A-Volute.NahimicCompanion.nahimic",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "nahimicnotifsys",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\NhNotifSys\\nahimic\\nahimicNotifSys.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "namecontrolserver",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\NAMECONTROLSERVER.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "narrator",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\narrator.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "netsimd",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\netsimd.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nimble_bridge",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\nimble_bridge.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nissrv",
+      "location": "C:\\Program Files\\Windows Defender\\NisSrv.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "node",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\node.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "node",
+      "location": "C:\\Program Files\\nodejs\\node.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "node.js",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "node.js",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\nodejs\\node.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "node.js command prompt",
+      "location": "Microsoft.AutoGenerated.{499EE7CA-7ED5-EBC9-AB09-80DC143D7B90}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "node.js documentation",
+      "location": "https://nodejs.org/download/release/v24.15.0/docs/api/",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "node.js website",
+      "location": "https://nodejs.org/",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "notepad",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\notepad.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notepad",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\notepad.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notepad",
+      "location": "Microsoft.WindowsNotepad_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
     },
     {
       "name": "notepad",
@@ -46,10 +2266,472 @@
       "tag": "utility"
     },
     {
+      "name": "notification_click_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\notification_click_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Microsoft\\EdgeWebView\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "npp development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "npp runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvcc",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvcc",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\nvcc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvdisasm",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\nvdisasm.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvfatbin runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvfvsdksvc_x64",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\nvfvsdksvc_x64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia control panel",
+      "location": "NVIDIACorp.NVIDIAControlPanel_56jybvy8sckqj!NVIDIACorp.NVIDIAControlPanel",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia cuda development 13.2",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia cuda documentation 13.2",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia cuda runtime 13.2",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\Installer2\\CUDARuntimes_13.2.{1EC8195D-7F66-430A-BF3C-E967976EB596}",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia cuda toolkit 13.2",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia cuda visual studio integration 13.2",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "nvidia frameview sdk 1.5.11821.36727370",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia graphics driver 595.79",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\Installer2\\Display.Driver.{22F3FB39-1CFE-479B-81F4-50F1CC06EEEF}",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia install application",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\Installer2\\InstallerCore",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia physx system software 9.23.1019",
+      "location": "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvidia platform controllers and framework",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\Installer2\\NVPCF.{0B7A577A-611C-4EBF-9274-2B90B8BFD3A0}",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvjitlink runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvjpeg development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvjpeg runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvlink",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\nvlink.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvml development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvprune",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvprune",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\nvprune.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvrla",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\bin\\nvrla.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "nvrtc development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvrtc runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvtx development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "nvvm development",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "occupancy calculator",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "odbc data sources (32-bit)",
+      "location": "{D65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\odbcad32.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "odbc data sources (64-bit)",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\odbcad32.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "office 16 click-to-run extensibility component",
+      "location": "",
+      "source": "registry",
+      "tag": "productivity"
+    },
+    {
+      "name": "office language preferences",
+      "location": "Microsoft.Office.SETLANG.EXE.15",
+      "source": "uwp",
+      "tag": "productivity"
+    },
+    {
+      "name": "officeappguardwin32",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\officeappguardwin32.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officec2rclient",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\OfficeC2RClient.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officeclicktorun",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\OfficeClickToRun.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officeclicktorun",
+      "location": "C:\\Program Files\\Microsoft Office 15\\ClientX64\\OfficeClickToRun.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officescrbroker",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OfficeScrBroker.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officescrsanbroker",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OfficeScrSanBroker.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "officesvcmgr",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\officesvcmgr.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "offlinescannershell",
+      "location": "C:\\Program Files\\Windows Defender\\Offline\\OfflineScannerShell.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ollama",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\ollama.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ollama",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\ollama app.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "ollama app",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\ollama app.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ollama version 0.18.2",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "on-screen keyboard",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\osk.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrive.app",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.App.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onenote",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ONENOTE.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onenote",
+      "location": "Microsoft.Office.ONENOTE.EXE.15",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "onenotem",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ONENOTEM.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "opencl runtime",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "oracle virtualbox",
+      "location": "C:\\Oracle\\VirtualBox\\VirtualBox.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "oracle virtualbox 7.2.8",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "orgchart",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ORGCHART.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "os_update_handler",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\os_update_handler.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ospprearm",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OSPPREARM.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "paint",
       "location": "C:\\Windows\\system32\\mspaint.exe",
       "source": "builtin",
       "tag": "utility"
+    },
+    {
+      "name": "passkey_authenticator_plugin",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\passkey_authenticator_plugin.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pdfreflow",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PDFREFLOW.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "perfboost",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PerfBoost.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "performance monitor",
+      "location": "Microsoft.AutoGenerated.{8AA47365-B2B3-1961-69EB-F866E376B12F}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "photos",
+      "location": "Microsoft.Windows.Photos_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "photoshop",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Photoshop.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "photoshopprefsmanager",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\PhotoshopPrefsManager.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pipanel",
+      "location": "C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\ink\\pipanel.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "platform_experience_helper",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\PlatformExperienceHelper\\platform_experience_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pngquant",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\pngquant.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "powerpnt",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "powerpoint",
+      "location": "Microsoft.Office.POWERPNT.EXE.15",
+      "source": "uwp",
+      "tag": "productivity"
     },
     {
       "name": "powerpoint",
@@ -64,16 +2746,1156 @@
       "tag": "utility"
     },
     {
+      "name": "pptico",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PPTICO.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "presentmon_x64",
+      "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\bin\\PresentMon_x64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "protocolhandler",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\protocolhandler.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ps_2021_ex_22.0",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\UXP\\PS_2021_Ex_22.0.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "ptxas",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\ptxas.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\\python.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11 (64-bit)",
+      "location": "C:\\Python311\\python.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11 manuals (64-bit)",
+      "location": "C:\\Python311\\Doc\\html\\index.html",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11 module docs (64-bit)",
+      "location": "Microsoft.AutoGenerated.{41E2CB89-6801-7C26-2C3C-90DC27A58717}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 (64-bit)",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Package Cache\\{7f8381ad-2e42-4432-8de5-c7beebe1009f}\\python-3.11.0-amd64.exe,0",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 add to path (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 core interpreter (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 development libraries (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 documentation (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 executables (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 pip bootstrap (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 standard library (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 tcl/tk support (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 test suite (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.11.0 utility scripts (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14 (64-bit)",
+      "location": "C:\\Python314\\python.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14 manuals (64-bit)",
+      "location": "C:\\Python314\\Doc\\html\\index.html",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14 module docs (64-bit)",
+      "location": "Microsoft.AutoGenerated.{2AD88A19-430D-1BB6-5461-9708F456DF10}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 (64-bit)",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Package Cache\\{21bd423a-1cbb-41b4-b464-5e7c059ec5a4}\\python-3.14.4-amd64.exe,0",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 add to path (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 core interpreter (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 development libraries (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 documentation (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 executables (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 pip bootstrap (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 standard library (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 tcl/tk support (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python 3.14.4 test suite (64-bit)",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python launcher",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "python-3.11.0-amd64",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Package Cache\\{7f8381ad-2e42-4432-8de5-c7beebe1009f}\\python-3.11.0-amd64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python-3.14.4-amd64",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Package Cache\\{21bd423a-1cbb-41b4-b464-5e7c059ec5a4}\\python-3.14.4-amd64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python3",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\python3.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "python3",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\\python3.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "qemu-img",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\qemu-img.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "qsn",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\qsn.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "quick assist",
+      "location": "MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "realtek audio console",
+      "location": "RealtekSemiconductorCorp.RealtekAudioControl_dt26b99r8h8gj!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "recovery drive",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\RecoveryDrive.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "registry editor",
+      "location": "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\\regedit.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "release notes",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\VideoLAN\\VLC\\NEWS.txt",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "remote desktop connection",
+      "location": "Microsoft.Windows.RemoteDesktop",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "resize2fs",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\bin64\\resize2fs.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "resource monitor",
+      "location": "Microsoft.AutoGenerated.{C804BBA7-FA5F-CBF7-8B55-2096E5F972CB}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "run",
+      "location": "Microsoft.Windows.Shell.RunDialog",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "rustup: the rust toolchain installer",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "scheduleeventaction",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ScheduleEventAction.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "sdxhelper",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SDXHelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "sdxhelperbgt",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SDXHelperBgt.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "selfcert",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SELFCERT.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "sendctrlc.x64.b02191cb70385b094c410a8c27775aba",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\JetBrains\\PyCharm2026.1\\tmp\\sendctrlc.x64.B02191CB70385B094C410A8C27775ABA.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "servicecontroller",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ServiceController.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "services",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\services.msc",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "set-up",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\Set-up.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "setlang",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SETLANG.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "settings",
+      "location": "windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "setup_wm",
+      "location": "C:\\Program Files\\Windows Media Player\\setup_wm.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "setup_wm",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\setup_wm.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "skypeserver",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SkypeSrv\\SKYPESERVER.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "snapchat",
+      "location": "www.snapchat.com-42CD23B2_7yxfaf5zmzrp4!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "sniffer",
+      "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\sniffer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "spider-man remastered",
+      "location": "C:\\Spider-man Remastered\\",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "split-select",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\split-select.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "split-select",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\split-select.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "split-select",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\split-select.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "sqlite3",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\sqlite3.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "squirrel",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\AnthropicClaude\\app-1.1.9134\\squirrel.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "steps recorder",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\psr.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "sticky notes (new)",
+      "location": "Microsoft.Office.OneNote.MemoryPreview",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "store",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\store.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "store",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.WindowsStore_8wekyb3d8bbwe\\store.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "system configuration",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\msconfig.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "system information",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\msinfo32.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "tabtip",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ink\\TabTip.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "tabtip32",
+      "location": "C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\ink\\TabTip32.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "task manager",
+      "location": "Microsoft.AutoGenerated.{923DD477-5846-686B-A659-0FCCD73851A8}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "task scheduler",
+      "location": "Microsoft.AutoGenerated.{C1C6F8AC-40A3-0F5C-146F-65A9DC70BBB4}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "teamprojectslocalhub",
+      "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\TeamProjectsLocalHub.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "tileiras",
+      "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\tileiras.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "tokenresolverx64",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\TokenResolverx64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "tune2fs",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\bin64\\tune2fs.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "unins000",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Programs\\Ollama\\unins000.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uninstall node.js",
+      "location": "Microsoft.AutoGenerated.{1D719D94-D041-5E2F-1BF6-98EEDE508FBF}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "uninstaller",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\Uninstaller.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "universal crt redistributable",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "updater",
+      "location": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\148.0.7730.0\\updater.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "user manual (pdf, english)",
+      "location": "C:\\Oracle\\VirtualBox\\doc\\UserManual.pdf",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "uxp webview support",
+      "location": "C:\\Program Files\\Common Files\\Adobe\\Microsoft\\EdgeWebView",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "vantageservicesetup",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\VantageServiceSetup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vantageserviceuninst",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\VantageServiceUninst.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vc_redist.x64",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Addons\\vc_redist.x64.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vc_redist.x86",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Addons\\vc_redist.x86.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vcpp_crt.redist.clickonce",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "videolan website",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\VideoLAN\\VLC\\VideoLAN Website.url",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "visual studio build tools 2026",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools",
+      "source": "registry",
+      "tag": "dev"
+    },
+    {
+      "name": "visual studio code",
+      "location": "Microsoft.VisualStudioCode",
+      "source": "uwp",
+      "tag": "dev"
+    },
+    {
+      "name": "visual studio installer",
+      "location": "Microsoft.VisualStudio.Installer",
+      "source": "uwp",
+      "tag": "dev"
+    },
+    {
+      "name": "vlc",
+      "location": "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
+      "source": "program_files",
+      "tag": "media"
+    },
+    {
+      "name": "vlc media player",
+      "location": "C:\\Program Files\\VideoLAN\\VLC",
+      "source": "registry",
+      "tag": "media"
+    },
+    {
+      "name": "vlc media player",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\VideoLAN\\VLC\\vlc.exe",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "vlc media player - reset preferences and cache files",
+      "location": "Microsoft.AutoGenerated.{51325390-AE6A-68FC-A315-0950CC83A166}",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "vlc media player skinned",
+      "location": "Microsoft.AutoGenerated.{30BD9A02-CB9A-93FD-A859-09C8803F2346}",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "vlc-cache-gen",
+      "location": "C:\\Program Files\\VideoLAN\\VLC\\vlc-cache-gen.exe",
+      "source": "program_files",
+      "tag": "media"
+    },
+    {
+      "name": "voice access",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\voiceaccess.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "vpreview",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\VPREVIEW.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vs_filetracker_singleton",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "vs_installer",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_installer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vs_installer.windows",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_installer.windows.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vs_installershell",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_installershell.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vs_layout",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_layout.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "vscode",
       "location": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
       "source": "builtin",
       "tag": "dev"
     },
     {
+      "name": "vsinstallerelevationservice",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\VSInstallerElevationService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vstoinstaller",
+      "location": "C:\\Program Files\\Common Files\\microsoft shared\\VSTO\\10.0\\VSTOInstaller.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vstoinstaller",
+      "location": "C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTO\\10.0\\VSTOInstaller.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "vswhere",
+      "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wab",
+      "location": "C:\\Program Files\\Windows Mail\\wab.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wab",
+      "location": "C:\\Program Files (x86)\\Windows Mail\\wab.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wabmig",
+      "location": "C:\\Program Files\\Windows Mail\\wabmig.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wabmig",
+      "location": "C:\\Program Files (x86)\\Windows Mail\\wabmig.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "what is new in the latest version",
+      "location": "C:\\WinRAR\\WhatsNew.txt",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "whatsapp beta",
+      "location": "5319275A.51895FA4EA97F_cv1g1gvanyjgm!App",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "whatsapp web",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\_crx_hnpfjngllnobngcgfapefoaidbinmjnm\\WhatsApp Web.ico",
+      "source": "registry",
+      "tag": "media"
+    },
+    {
+      "name": "whatsapp web",
+      "location": "Chrome._crx_hnpfjngllnfapefoaidbinmjnm",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "windows backup",
+      "location": "MicrosoftWindows.Client.CBS_cw5n1h2txyewy!WindowsBackup",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows defender firewall with advanced security",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WF.msc",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows fax and scan",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WFS.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows media player legacy",
+      "location": "Microsoft.Windows.MediaPlayer32",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "windows memory diagnostic",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\MdSched.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows powershell",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows powershell (x86)",
+      "location": "{D65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows powershell ise",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows powershell ise (x86)",
+      "location": "{D65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows sdk addon",
+      "location": "",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "windows security",
+      "location": "Microsoft.SecHealthUI_8wekyb3d8bbwe!SecHealthUI",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windows tools",
+      "location": "Microsoft.Windows.AdministrativeTools",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "windowspackagemanagermcpserver",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\WindowsPackageManagerMCPServer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "windowspackagemanagermcpserver",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\\WindowsPackageManagerMCPServer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "windowspackagemanagerserver",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\WindowsPackageManagerServer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "windowspackagemanagerserver",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\\WindowsPackageManagerServer.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "winget",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\winget.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "winget",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\\winget.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "winrar",
+      "location": "C:\\WinRAR\\WinRAR.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "winrar 7.20 (64-bit)",
+      "location": "C:\\WinRAR",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "winrar help",
+      "location": "C:\\WinRAR\\WinRAR.chm",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "winword",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "wmlaunch",
+      "location": "C:\\Program Files\\Windows Media Player\\wmlaunch.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmlaunch",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\wmlaunch.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmpconfig",
+      "location": "C:\\Program Files\\Windows Media Player\\wmpconfig.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmpconfig",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\wmpconfig.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmplayer",
+      "location": "C:\\Program Files\\Windows Media Player\\wmplayer.exe",
+      "source": "program_files",
+      "tag": "media"
+    },
+    {
+      "name": "wmplayer",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\wmplayer.exe",
+      "source": "program_files",
+      "tag": "media"
+    },
+    {
+      "name": "wmpnetwk",
+      "location": "C:\\Program Files\\Windows Media Player\\wmpnetwk.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmpnscfg",
+      "location": "C:\\Program Files\\Windows Media Player\\wmpnscfg.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmprph",
+      "location": "C:\\Program Files\\Windows Media Player\\wmprph.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmprph",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\wmprph.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmpshare",
+      "location": "C:\\Program Files\\Windows Media Player\\wmpshare.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "wmpshare",
+      "location": "C:\\Program Files (x86)\\Windows Media Player\\wmpshare.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "word",
+      "location": "Microsoft.Office.WINWORD.EXE.15",
+      "source": "uwp",
+      "tag": "productivity"
+    },
+    {
       "name": "word",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
       "source": "builtin",
       "tag": "productivity"
+    },
+    {
+      "name": "wordconv",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\Wordconv.exe",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "wordicon",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WORDICON.EXE",
+      "source": "program_files",
+      "tag": "productivity"
+    },
+    {
+      "name": "writingassistant",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WritingAssistant\\WritingAssistant.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "x64 native tools command prompt for vs",
+      "location": "Microsoft.AutoGenerated.{6921898D-05BF-461D-B4E6-B8E2A808B41E}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "x64_x86 cross tools command prompt for vs",
+      "location": "Microsoft.AutoGenerated.{B92AB045-948B-BA7F-FF3E-5C1484A1E7A2}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "x86 native tools command prompt for vs",
+      "location": "Microsoft.AutoGenerated.{53C68C1A-51C4-C1B8-62DE-CAB902A40A61}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "x86_64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\x86_64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "x86_64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\x86_64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "x86_64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\x86_64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "x86_x64 cross tools command prompt for vs",
+      "location": "Microsoft.AutoGenerated.{70C6B808-39B6-1F28-0212-7F45EB21EF97}",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "xlicons",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\XLICONS.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "xps viewer",
+      "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\xpsrchvw.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "youtube",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\_crx_agimnkijcaahngcdmfeangaknmldooml\\YouTube.ico",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "youtube",
+      "location": "Chrome._crx_agimnkijcamfeangaknmldooml",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "youtube music",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\_crx_cinhimbnkkaeohfgghhklpknlkffjgod\\YouTube Music.ico",
+      "source": "registry",
+      "tag": "media"
+    },
+    {
+      "name": "youtube music",
+      "location": "Chrome._crx_cinhimbnkkghhklpknlkffjgod",
+      "source": "uwp",
+      "tag": "media"
+    },
+    {
+      "name": "zipalign",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\zipalign.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "zipalign",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.1.0\\zipalign.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "zipalign",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\zipalign.exe",
+      "source": "program_files",
+      "tag": "utility"
     }
   ]
 }
