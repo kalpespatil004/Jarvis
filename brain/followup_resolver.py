@@ -19,6 +19,7 @@ class FollowupResolver:
         intent: str,
         slots: dict[str, Any],
         required_slots: tuple[str, ...],
+        memory_context: dict[str, Any] | None = None,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
         meta: dict[str, Any] = {"resolved": False, "ambiguity": None}
         if not required_slots:
@@ -32,7 +33,7 @@ class FollowupResolver:
         if not needs_context:
             return slots, meta
 
-        candidates = self._candidate_frames(intent, missing)
+        candidates = self._candidate_frames(intent, missing, memory_context or {})
         if not candidates:
             return slots, meta
         if len(candidates) > 1:
@@ -95,13 +96,32 @@ class FollowupResolver:
         return labels
 
     @staticmethod
-    def _candidate_frames(intent: str, missing: list[str]) -> list[dict[str, Any]]:
+    def _candidate_frames(intent: str, missing: list[str], memory_context: dict[str, Any]) -> list[dict[str, Any]]:
         frames = []
-        for frame in reversed(context.get_history()):
-            if frame.get("intent") != intent:
-                continue
+        seen: set[tuple[str, str]] = set()
+
+        def add_frame(frame: dict[str, Any]):
+            key = (str(frame.get("intent", "")), str(frame.get("text", "")))
+            if key in seen or frame.get("intent") != intent:
+                return
             if all(frame.get(k) for k in missing):
                 frames.append(frame)
+                seen.add(key)
+
+        for frame in reversed(context.get_history()):
+            add_frame(frame)
+            if len(frames) == 3:
+                return frames
+
+        for turn in reversed(memory_context.get("recent_turns", []) or []):
+            if not isinstance(turn, dict):
+                continue
+            user_msg = turn.get("user") or {}
+            metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
+            if isinstance(metadata, dict):
+                frame = dict(metadata)
+                frame.setdefault("text", user_msg.get("text", ""))
+                add_frame(frame)
             if len(frames) == 3:
                 break
         return frames

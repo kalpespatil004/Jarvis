@@ -681,13 +681,14 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
 # =========================
 # ORCHESTRATED DETECTOR
 # =========================
-def detect_intent(text: str) -> dict[str, Any]:
+def detect_intent(text: str, memory_context: dict[str, Any] | None = None) -> dict[str, Any]:
 
     if not text or not text.strip():
         return _unknown_intent()
 
     raw_text = text.strip()
     normalized = _normalize(raw_text)
+    memory_context = memory_context or {}
 
     # deterministic quick checks (exit/safety)
     if re.fullmatch(r"(?:exit|quit|shutdown|bye|goodbye|close jarvis)", normalized):
@@ -710,7 +711,7 @@ def detect_intent(text: str) -> dict[str, Any]:
         date_follow.setdefault("disambiguation_needed", False)
         return date_follow
     temporal_follow = FOLLOWUP_RESOLVER.resolve_temporal_followup(
-        raw_text, normalized, context.get_last_intent()
+        raw_text, normalized, _last_intent_from_memory(memory_context) or context.get_last_intent()
     )
     if temporal_follow is not None:
         return _intent(
@@ -734,6 +735,7 @@ def detect_intent(text: str) -> dict[str, Any]:
         intent=cls.intent,
         slots=slots,
         required_slots=required,
+        memory_context=memory_context,
     )
     if follow_meta.get("ambiguity"):
         return _intent(
@@ -779,7 +781,7 @@ def detect_intent(text: str) -> dict[str, Any]:
             **slots,
         )
 
-    llm = _llm_fallback(raw_text)
+    llm = _llm_fallback(raw_text, memory_context=memory_context)
     llm["source"] = "llm_fallback"
     llm["model_confidence"] = llm.get("confidence", 0.0)
     llm["disambiguation_needed"] = False
@@ -789,13 +791,17 @@ def detect_intent(text: str) -> dict[str, Any]:
 # =========================
 # LLM INTENT CLASSIFIER
 # =========================
-def _llm_fallback(text: str) -> dict:
+def _llm_fallback(text: str, memory_context: dict[str, Any] | None = None) -> dict:
 
+    context_block = _format_memory_context(memory_context or {})
     prompt = f"""
 You are an intent classifier for a personal AI assistant called Jarvis.
 
 Allowed intents (exact strings only):
 {LLM_CLASSIFIER_INTENTS}
+
+Recent conversation context (use only to resolve references/follow-ups, not to invent slots):
+{context_block}
 
 Decision policy:
 1) Prefer a specific tool intent only when the user is clearly giving a COMMAND or requesting a
@@ -865,6 +871,51 @@ Output:
 # =========================
 # HELPERS
 # =========================
+
+def _last_intent_from_memory(memory_context: dict[str, Any]) -> str | None:
+    for turn in reversed(memory_context.get("recent_turns", []) or []):
+        user_msg = turn.get("user") if isinstance(turn, dict) else {}
+        metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
+        intent = metadata.get("intent") if isinstance(metadata, dict) else None
+        if intent:
+            return str(intent)
+    return None
+
+
+def _format_memory_context(memory_context: dict[str, Any]) -> str:
+    parts: list[str] = []
+    summary = str(memory_context.get("summary") or "").strip()
+    if summary:
+        parts.append(f"Summary: {summary[:1000]}")
+
+    preferences = memory_context.get("preferences")
+    if isinstance(preferences, dict) and preferences:
+        pref_list = preferences.get("preferences")
+        if isinstance(pref_list, list) and pref_list:
+            parts.append("Long-term preferences: " + "; ".join(str(p)[:120] for p in pref_list[-5:]))
+
+    turns = memory_context.get("recent_turns") or []
+    if turns:
+        lines = []
+        for turn in turns[-6:]:
+            if not isinstance(turn, dict):
+                continue
+            user_msg = turn.get("user") or {}
+            assistant_msg = turn.get("assistant") or {}
+            user_text = str(user_msg.get("text", "")).strip()[:160]
+            assistant_text = str(assistant_msg.get("text", "")).strip()[:160] if isinstance(assistant_msg, dict) else ""
+            metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
+            intent = metadata.get("intent") if isinstance(metadata, dict) else None
+            suffix = f" [intent={intent}]" if intent else ""
+            if user_text:
+                lines.append(f"User: {user_text}{suffix}")
+            if assistant_text:
+                lines.append(f"Assistant: {assistant_text}")
+        if lines:
+            parts.append("Recent turns:\n" + "\n".join(lines))
+
+    return "\n".join(parts) if parts else "No prior context."
+
 def _normalize(text: str) -> str:
     text = text.lower().strip()
     text = re.sub(r"[^a-z0-9\s]", " ", text)
