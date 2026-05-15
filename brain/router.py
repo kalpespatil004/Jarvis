@@ -13,6 +13,7 @@ import threading
 
 from brain.response_picker import get_response
 from brain.nlu.schema import AVAILABLE_INTENTS
+from brain.context import context
 
 # ── LLM Chat ─────────────────────────────────
 from LLM.chatbot import chat as llm_chat
@@ -57,6 +58,82 @@ from system.laptop.process import (
     kill_process_by_pid,
     is_process_running,
 )
+
+
+def _as_action_payload(result, *, action: str, entity_type: str, entity_label: str | None = None) -> dict:
+    if isinstance(result, dict):
+        payload = dict(result)
+        payload.setdefault("success", False)
+        payload.setdefault("entity_type", entity_type)
+        payload.setdefault("entity_id", payload.get("entity_label") or entity_label)
+        payload.setdefault("entity_label", entity_label or payload.get("entity_id"))
+        payload.setdefault("action", action)
+        return payload
+    text = str(result or "").strip()
+    success = not text.startswith(("❌", "⚠️")) and "not found" not in text.lower() and "error" not in text.lower()
+    return {
+        "success": success,
+        "entity_type": entity_type,
+        "entity_id": entity_label,
+        "entity_label": entity_label,
+        "action": action,
+        "legacy_message": text,
+    }
+
+
+def _format_action_response(payload: dict, *, fallback_success: str, fallback_failure: str) -> str:
+    if payload.get("legacy_message"):
+        return str(payload["legacy_message"])
+    label = payload.get("entity_label") or payload.get("entity_id")
+    if payload.get("success"):
+        return fallback_success.format(label=label or "the target")
+    error = payload.get("error")
+    if error:
+        return f"{fallback_failure.format(label=label or 'the target')}: {error}"
+    return fallback_failure.format(label=label or "the target")
+
+
+def _remember_active_referent(payload: dict) -> None:
+    if not payload.get("success"):
+        return
+    entity_type = payload.get("entity_type")
+    referent = {
+        "entity_type": entity_type,
+        "entity_id": payload.get("entity_id"),
+        "entity_label": payload.get("entity_label"),
+    }
+    if entity_type == "app":
+        context.active_app = referent
+        context.active_window = {**referent, "entity_type": "window"}
+    elif entity_type == "window":
+        context.active_window = referent
+
+
+def _target_entity(intent_data: dict) -> dict | str | None:
+    for key in ("target_entity", "resolved_entity", "entity", "referent"):
+        value = intent_data.get(key)
+        if value:
+            return value
+    for key in ("name", "app"):
+        value = intent_data.get(key)
+        if value:
+            return str(value)
+    return getattr(context, "active_window", None) or getattr(context, "active_app", None)
+
+
+def _call_window_action(func, target=None):
+    try:
+        return func(target)
+    except TypeError:
+        return func()
+
+
+def _call_focus_window(target):
+    try:
+        return focus_window(target=target)
+    except TypeError:
+        label = (target.get("entity_label") or target.get("entity_id")) if isinstance(target, dict) else target
+        return focus_window(label)
 
 
 def _numeric_level(intent_data: dict) -> int | None:
@@ -316,15 +393,23 @@ def route(command: dict, return_response: bool = False) -> str:
         if not app:
             reply = "Which app should I open?"
         else:
-            reply = open_app(app)
-            actions = intent_data.get("post_actions") or []
-            if isinstance(actions, str):
-                actions = [actions]
-            for action in actions:
-                if action == "maximize":
-                    maximize_window()
-                elif action == "minimize":
-                    minimize_window()
+            action_data = _as_action_payload(open_app(app), action="open_app", entity_type="app", entity_label=str(app))
+            _remember_active_referent(action_data)
+            reply = _format_action_response(
+                action_data,
+                fallback_success="✅ Opening {label}",
+                fallback_failure="❌ Failed to open {label}",
+            )
+            if action_data.get("success"):
+                actions = intent_data.get("post_actions") or []
+                if isinstance(actions, str):
+                    actions = [actions]
+                target = getattr(context, "active_window", None) or action_data
+                for action in actions:
+                    if action == "maximize":
+                        _remember_active_referent(_as_action_payload(_call_window_action(maximize_window, target), action="maximize", entity_type="window"))
+                    elif action == "minimize":
+                        _remember_active_referent(_as_action_payload(_call_window_action(minimize_window, target), action="minimize", entity_type="window"))
 
     # ─────────────────────────────────────────
     # VOLUME / BRIGHTNESS (system/router.py names)
@@ -379,38 +464,89 @@ def route(command: dict, return_response: bool = False) -> str:
     # WINDOW
     # ─────────────────────────────────────────
     elif intent == "minimize":
-        reply = minimize_window()
+        action_data = _as_action_payload(_call_window_action(minimize_window, _target_entity(intent_data)), action="minimize", entity_type="window")
+        _remember_active_referent(action_data)
+        reply = _format_action_response(
+            action_data,
+            fallback_success="Window minimized",
+            fallback_failure="No active window found",
+        )
 
     elif intent == "maximize":
-        reply = maximize_window()
+        action_data = _as_action_payload(_call_window_action(maximize_window, _target_entity(intent_data)), action="maximize", entity_type="window")
+        _remember_active_referent(action_data)
+        reply = _format_action_response(
+            action_data,
+            fallback_success="Window maximized",
+            fallback_failure="No active window found",
+        )
 
     elif intent == "restore":
-        reply = restore_window()
+        action_data = _as_action_payload(restore_window(), action="restore", entity_type="window")
+        _remember_active_referent(action_data)
+        reply = _format_action_response(
+            action_data,
+            fallback_success="Window restored",
+            fallback_failure="No active window found",
+        )
 
     elif intent == "close":
-        reply = close_window()
+        action_data = _as_action_payload(close_window(), action="close", entity_type="window")
+        reply = _format_action_response(
+            action_data,
+            fallback_success="Window closed",
+            fallback_failure="Error closing window",
+        )
 
     elif intent == "focus":
-        fname = intent_data.get("name", "")
-        if not fname:
+        target = _target_entity(intent_data)
+        if not target:
             reply = "Which window should I focus?"
         else:
-            reply = focus_window(fname)
+            action_data = _as_action_payload(_call_focus_window(target), action="focus", entity_type="window")
+            _remember_active_referent(action_data)
+            reply = _format_action_response(
+                action_data,
+                fallback_success="🎯 Focused on {label}",
+                fallback_failure="⚠️ No window found",
+            )
 
     elif intent == "move_window":
-        reply = move_window()
+        action_data = _as_action_payload(move_window(), action="move", entity_type="window")
+        _remember_active_referent(action_data)
+        reply = _format_action_response(
+            action_data,
+            fallback_success="📐 Window moved",
+            fallback_failure="No active window found",
+        )
 
     elif intent == "resize_window":
-        reply = resize_window()
+        action_data = _as_action_payload(resize_window(), action="resize", entity_type="window")
+        _remember_active_referent(action_data)
+        reply = _format_action_response(
+            action_data,
+            fallback_success="📐 Window resized",
+            fallback_failure="No active window found",
+        )
 
     elif intent == "window_control":
         action = intent_data.get("action", "")
+        target = _target_entity(intent_data)
         if action == "minimize":
-            reply = minimize_window()
+            action_data = _as_action_payload(_call_window_action(minimize_window, target), action="minimize", entity_type="window")
+            _remember_active_referent(action_data)
+            reply = _format_action_response(action_data, fallback_success="Window minimized", fallback_failure="No active window found")
         elif action == "maximize":
-            reply = maximize_window()
+            action_data = _as_action_payload(_call_window_action(maximize_window, target), action="maximize", entity_type="window")
+            _remember_active_referent(action_data)
+            reply = _format_action_response(action_data, fallback_success="Window maximized", fallback_failure="No active window found")
+        elif action == "focus":
+            action_data = _as_action_payload(_call_focus_window(target), action="focus", entity_type="window")
+            _remember_active_referent(action_data)
+            reply = _format_action_response(action_data, fallback_success="🎯 Focused on {label}", fallback_failure="⚠️ No window found")
         elif action == "close":
-            reply = close_window()
+            action_data = _as_action_payload(close_window(), action="close", entity_type="window")
+            reply = _format_action_response(action_data, fallback_success="Window closed", fallback_failure="Error closing window")
         else:
             reply = "Unknown window action."
 
