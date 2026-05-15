@@ -13,6 +13,12 @@ from brain.dialogue_manager import dialogue_manager
 
 from brain.context import context
 from brain.events import trigger_event
+from memory.conversation import (
+    add_turn,
+    clear_working_memory,
+    get_nlu_context,
+    set_working_memory,
+)
 
 CONFIDENCE_THRESHOLD = 0.6
 PROCESS_LOCK = threading.Lock()
@@ -22,7 +28,7 @@ API_LOCK_WAIT_SECONDS = 30
 # =========================
 # INTENT HANDLER
 # =========================
-def _handle_intent(intent_data: dict, voice_mode: bool = False):
+def _handle_intent(intent_data: dict, voice_mode: bool = False) -> str | None:
 
     intent = intent_data.get("intent", "unknown")
     confidence = intent_data.get("confidence", 0)
@@ -44,16 +50,38 @@ def _handle_intent(intent_data: dict, voice_mode: bool = False):
     dialogue = dialogue_manager.handle(intent_data, context)
 
     if dialogue.action in {"follow_up", "cancelled"}:
+        response = dialogue.response or "Please clarify."
         if voice_mode:
-            speak(dialogue.response or "Please clarify.")
-            return None
-        return dialogue.response or "Please clarify."
+            speak(response)
+        return response
 
     # ---------- EXECUTION ----------
-    if voice_mode:
-        route(dialogue.command)
-    else:
-        return route(dialogue.command, return_response=True)
+    return route(dialogue.command, return_response=not voice_mode)
+
+
+def _remember_exchange(
+    user_text: str,
+    assistant_text: str,
+    *,
+    intent_data: dict | None = None,
+    status: str = "success",
+    error: str | None = None,
+):
+    user_metadata = dict(intent_data or {})
+    if status:
+        user_metadata["execution_status"] = status
+    assistant_metadata = {
+        "status": status,
+        "intent": user_metadata.get("intent"),
+    }
+    if error:
+        assistant_metadata["error"] = error
+    add_turn(
+        user_text,
+        assistant_text,
+        user_metadata=user_metadata or None,
+        assistant_metadata=assistant_metadata,
+    )
 
 
 # =========================
@@ -64,24 +92,34 @@ def process_text(command: str) -> str:
     if not command or not command.strip():
         return "Say something meaningful."
 
+    cleaned = command.strip()
     acquired = PROCESS_LOCK.acquire(timeout=API_LOCK_WAIT_SECONDS)
     if not acquired:
-        return "Jarvis is still finishing the previous command. Try again in a moment."
+        response = "Jarvis is still finishing the previous command. Try again in a moment."
+        _remember_exchange(cleaned, response, status="busy")
+        return response
 
+    intent_data: dict | None = None
+    response = "System error occurred."
     try:
-        cleaned = command.strip()
         print(f"[BRAIN:UI] Heard → {cleaned}")
+        set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "nlu"})
 
-        intent_data = detect_intent(cleaned)
+        memory_context = get_nlu_context()
+        intent_data = detect_intent(cleaned, memory_context=memory_context)
+        set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "routing", "intent": intent_data.get("intent")})
 
-        response = _handle_intent(intent_data, voice_mode=False)
-
-        return response or "No response generated."
+        response = _handle_intent(intent_data, voice_mode=False) or "No response generated."
+        _remember_exchange(cleaned, response, intent_data=intent_data, status="success")
+        clear_working_memory()
+        return response
 
     except Exception as exc:
         print("[BRAIN:UI ERROR]", exc)
         traceback.print_exc()
-        return "System error occurred."
+        _remember_exchange(cleaned, response, intent_data=intent_data, status="error", error=str(exc))
+        clear_working_memory()
+        return response
     finally:
         if acquired:
             PROCESS_LOCK.release()
@@ -94,22 +132,39 @@ def _execute(command: str):
 
     acquired = PROCESS_LOCK.acquire(blocking=False)
     if not acquired:
-        speak("Still processing the previous command. Please wait.")
+        response = "Still processing the previous command. Please wait."
+        speak(response)
+        if command and command.strip():
+            _remember_exchange(command.strip(), response, status="busy")
         return
 
+    cleaned = command.strip()
+    intent_data: dict | None = None
+    response = "Something went wrong."
     try:
-        cleaned = command.strip()
         print(f"[BRAIN] Heard → {cleaned}")
+        set_working_memory(current_task={"mode": "voice", "input": cleaned, "status": "nlu"})
 
-        intent_data = detect_intent(cleaned)
+        memory_context = get_nlu_context()
+        intent_data = detect_intent(cleaned, memory_context=memory_context)
+        set_working_memory(current_task={"mode": "voice", "input": cleaned, "status": "routing", "intent": intent_data.get("intent")})
 
         # 🔥 NO ASYNC (prevents duplicate execution bugs)
-        _handle_intent(intent_data, voice_mode=True)
+        response = _handle_intent(intent_data, voice_mode=True) or "No response generated."
+        _remember_exchange(cleaned, response, intent_data=intent_data, status="success")
+        clear_working_memory()
 
+    except SystemExit:
+        response = "Shutting down, sir."
+        _remember_exchange(cleaned, response, intent_data=intent_data, status="success")
+        clear_working_memory()
+        raise
     except Exception as exc:
         print("[BRAIN ERROR]", exc)
         traceback.print_exc()
-        speak("Something went wrong.")
+        speak(response)
+        _remember_exchange(cleaned, response, intent_data=intent_data, status="error", error=str(exc))
+        clear_working_memory()
     finally:
         if acquired:
             PROCESS_LOCK.release()
