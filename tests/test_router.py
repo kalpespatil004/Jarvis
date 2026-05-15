@@ -109,11 +109,26 @@ def test_chat_intent_uses_explicit_response_without_calling_llm(monkeypatch):
 
     response = router.route(
         {
+            "type": "command",
             "intent": "chat",
-            "response": "Do you mean Chrome window or VS Code window?",
-            "disambiguation_needed": True,
+            "slots": {},
+            "metadata": {
+                "response": "Do you mean Chrome window or VS Code window?",
+                "disambiguation_needed": True,
+            },
         },
         return_response=True,
     )
 
     assert response == "Do you mean Chrome window or VS Code window?"
+
+
+def test_router_rejects_flat_intent_payload(monkeypatch):
+    router = _import_router(monkeypatch)
+
+    try:
+        router.route({"intent": "get_time"}, return_response=True)
+    except ValueError as exc:
+        assert "structured command" in str(exc)
+    else:
+        raise AssertionError("router should reject flat intent payloads")

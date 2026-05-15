@@ -116,13 +116,22 @@ from services.automation.scheduler import schedule_task
 # =========================
 # ROUTER
 # =========================
-def route(intent_data: dict, return_response: bool = False) -> str:
+def route(command: dict, return_response: bool = False) -> str:
     """
-    Route intent to the correct service.
+    Route a fully structured command object to the correct service.
 
+    Command shape: {"type": "command", "intent": str, "slots": dict, "metadata": dict}.
     If return_response=True → returns text (UI/API mode).
     Otherwise → speaks the response (voice mode).
     """
+
+    if not isinstance(command, dict) or command.get("type") != "command" or not isinstance(command.get("slots"), dict):
+        raise ValueError("Router accepts only structured command objects with type='command' and a slots dict.")
+
+    metadata = command.get("metadata") if isinstance(command.get("metadata"), dict) else {}
+    intent_data = {**metadata, **command["slots"]}
+    intent_data["intent"] = command.get("intent", "unknown")
+    intent_data["text"] = command.get("text", metadata.get("text", ""))
 
     intent = intent_data.get("intent", "unknown")
     reply = ""
