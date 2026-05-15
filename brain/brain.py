@@ -9,6 +9,7 @@ from body.wake_word import listen_for_wake_word
 
 from brain.intent_engine import detect_intent
 from brain.router import route
+from brain.dialogue_manager import dialogue_manager
 
 from brain.context import context
 from brain.events import trigger_event
@@ -39,11 +40,20 @@ def _handle_intent(intent_data: dict, voice_mode: bool = False):
         print("[BRAIN] Low confidence → fallback to chat")
         intent_data["intent"] = "chat"
 
+    # ---------- DIALOGUE MANAGEMENT ----------
+    dialogue = dialogue_manager.handle(intent_data, context)
+
+    if dialogue.action in {"follow_up", "cancelled"}:
+        if voice_mode:
+            speak(dialogue.response or "Please clarify.")
+            return None
+        return dialogue.response or "Please clarify."
+
     # ---------- EXECUTION ----------
     if voice_mode:
-        route(intent_data)
+        route(dialogue.command)
     else:
-        return route(intent_data, return_response=True)
+        return route(dialogue.command, return_response=True)
 
 
 # =========================

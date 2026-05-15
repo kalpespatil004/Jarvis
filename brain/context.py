@@ -18,6 +18,11 @@ class ContextManager:
         self.last_intent = None
         self.active_domain = None  # "volume" | "brightness" | None
         self.last_slots: dict = {}
+        self.pending_intent: str | None = None
+        self.pending_missing_slots: list[str] = []
+        self.pending_slots: dict = {}
+        self.pending_intent_data: dict = {}
+        self.pending_confirmation: dict | None = None
 
     def update(self, intent_data: dict):
         intent = intent_data.get("intent")
@@ -43,6 +48,24 @@ class ContextManager:
         else:
             self.active_domain = None
             self.last_slots = {}
+
+    def set_pending_intent(self, *, intent: str, missing_slots: list[str], slots: dict, intent_data: dict):
+        self.pending_intent = intent
+        self.pending_missing_slots = list(missing_slots)
+        self.pending_slots = dict(slots)
+        self.pending_intent_data = dict(intent_data)
+
+    def clear_pending_intent(self):
+        self.pending_intent = None
+        self.pending_missing_slots = []
+        self.pending_slots = {}
+        self.pending_intent_data = {}
+
+    def set_pending_confirmation(self, command: dict):
+        self.pending_confirmation = dict(command)
+
+    def clear_pending_confirmation(self):
+        self.pending_confirmation = None
 
     def get_last_intent(self):
         return self.last_intent
