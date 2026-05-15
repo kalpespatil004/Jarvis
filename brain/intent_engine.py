@@ -8,6 +8,7 @@ from LLM.offlineLLM import chat as llm_chat
 
 from brain.context import context
 from brain.followup_resolver import FOLLOWUP_RESOLVER
+from services.time_date.temporal_reasoner import TEMPORAL_REASONER
 from system.laptop.app_launcher import canonicalize_app_name
 
 
@@ -262,17 +263,19 @@ def _resolve_active_domain_followup(raw: str, norm: str) -> dict[str, Any] | Non
 
 
 def _resolve_relative_date_followup(raw: str, norm: str) -> dict[str, Any] | None:
-    """Handle short follow-ups around date/day queries, including common misspellings."""
-    if context.get_last_intent() != "get_date":
+    """Handle short temporal follow-ups using the shared temporal reasoner."""
+    resolution = TEMPORAL_REASONER.resolve_followup(
+        raw,
+        last_intent=context.get_last_intent(),
+        last_date_ref=context.get_last_date_ref(),
+    )
+    if resolution is None:
         return None
+    return _intent("get_date", raw, norm, 0.95, **resolution.as_slots())
 
-    if re.search(r"\b(and\s+)?(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", norm):
-        return _intent("get_date", raw, norm, 0.95, date_ref="tomorrow")
-    if re.search(r"\b(and\s+)?(today|todays|todays\s+day|today\s+day)\b", norm):
-        return _intent("get_date", raw, norm, 0.95, date_ref="today")
-    if re.search(r"\b(and\s+)?(yesterday|yestarday)\b", norm):
-        return _intent("get_date", raw, norm, 0.95, date_ref="yesterday")
-    return None
+
+def _resolve_temporal_slots(raw: str) -> dict[str, Any]:
+    return TEMPORAL_REASONER.resolve(raw).as_slots()
 
 
 # =========================
@@ -312,7 +315,7 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
         r")\b",
         normalized,
     ):
-        return _intent("get_time", raw_text, normalized, 0.96)
+        return _intent("get_time", raw_text, normalized, 0.96, **_resolve_temporal_slots(raw_text))
 
     # =========================
     # DATE QUERY
@@ -322,16 +325,13 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
         r"what\s+date\s+is\s+it|what\s+is\s+the\s+date|what\s+is\s+today\s+s\s+date|"
         r"today\s+s\s+date|today'?s\s+date|current\s+date|date\s+today|"
         r"what\s+day\s+is\s+it|what\s+is\s+today\s+day|today\s+day|"
-        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day|tommorow|tomarow|tomarrows|tomorrows|todays\s+day"
+        r"date\s+tomorrow|what\s+is\s+tomorrow|tomorrow\s+date|tomorrow\s+day|"
+        r"day\s+after\s+tomorrow|next\s+week|next\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|"
+        r"tommorow|tomarow|tomarrows|tomorrows|todays\s+day"
         r")\b",
         normalized,
     ):
-        date_ref = "today"
-        if re.search(r"\b(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", normalized):
-            date_ref = "tomorrow"
-        elif re.search(r"\b(yesterday|yestarday)\b", normalized):
-            date_ref = "yesterday"
-        return _intent("get_date", raw_text, normalized, 0.96, date_ref=date_ref)
+        return _intent("get_date", raw_text, normalized, 0.96, **_resolve_temporal_slots(raw_text))
 
     # =========================
     # ADVICE TIME

@@ -4,6 +4,7 @@ import re
 from typing import Any
 
 from system.laptop.app_launcher import canonicalize_app_name
+from services.time_date.temporal_reasoner import TEMPORAL_REASONER
 
 
 class SlotFiller:
@@ -28,12 +29,10 @@ class SlotFiller:
                 slots["level"] = level
 
         elif intent == "get_date":
-            if re.search(r"\b(tomorrow|tommorow|tomarow|tomarrows|tomorrows)\b", normalized):
-                slots["date_ref"] = "tomorrow"
-            elif re.search(r"\b(yesterday|yestarday)\b", normalized):
-                slots["date_ref"] = "yesterday"
-            else:
-                slots["date_ref"] = "today"
+            slots.update(TEMPORAL_REASONER.resolve(raw_text).as_slots())
+
+        elif intent == "get_time":
+            slots.update(TEMPORAL_REASONER.resolve(raw_text).as_slots())
 
         elif intent == "get_weather":
             city_match = re.search(r"\b(?:in|for|at)\s+([a-z]+(?:\s+[a-z]+)?)", normalized)

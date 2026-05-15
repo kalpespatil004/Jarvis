@@ -18,7 +18,7 @@ from brain.nlu.schema import AVAILABLE_INTENTS
 from LLM.chatbot import chat as llm_chat
 
 # ── Time & Date ───────────────────────────────
-from services.time_date.time_utils import current_time_only, current_date, current_weekday
+from services.time_date.temporal_reasoner import TEMPORAL_REASONER
 from services.time_date.timezone import convert_timezone
 
 # ── System (aligned with system/router.py) ───────────────────────────────
@@ -160,13 +160,26 @@ def route(command: dict, return_response: bool = False) -> str:
     # TIME & DATE                                  ← FIXED: were missing
     # ─────────────────────────────────────────
     elif intent == "get_time":
-        reply = f"Current time is {current_time_only()}."
+        resolution = TEMPORAL_REASONER.resolve(
+            intent_data.get("text"),
+            date_ref=intent_data.get("date_ref"),
+            tz_name=intent_data.get("timezone") or intent_data.get("resolved_timezone"),
+        )
+        time_value = TEMPORAL_REASONER.format_time(tz_name=resolution.timezone)
+        rendered_date = TEMPORAL_REASONER.format_date(resolution)
+        reply = f"Current time is {time_value} on {rendered_date} ({resolution.timezone})."
 
     elif intent == "get_date":
-        date_ref = intent_data.get("date_ref", "today")
-        date_value = current_date(date_ref)
-        weekday = current_weekday(date_ref)
-        reply = f"{date_ref.capitalize()} is {weekday}, {date_value}."
+        resolution = TEMPORAL_REASONER.resolve(
+            intent_data.get("text"),
+            date_ref=intent_data.get("date_ref"),
+            tz_name=intent_data.get("timezone") or intent_data.get("resolved_timezone"),
+        )
+        rendered_date = TEMPORAL_REASONER.format_date(resolution)
+        if resolution.kind == "date_range":
+            reply = f"{resolution.label.capitalize()} is {rendered_date} ({resolution.timezone})."
+        else:
+            reply = f"{resolution.label.capitalize()} is {rendered_date} ({resolution.timezone})."
 
     elif intent == "advice_time":
         reply = llm_chat(intent_data.get("topic", intent_data.get("text", "")))

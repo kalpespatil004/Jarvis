@@ -23,6 +23,7 @@ class ContextManager:
         self.pending_slots: dict = {}
         self.pending_intent_data: dict = {}
         self.pending_confirmation: dict | None = None
+        self.last_date_ref: str | None = None
 
     def update(self, intent_data: dict):
         intent = intent_data.get("intent")
@@ -49,6 +50,11 @@ class ContextManager:
             self.active_domain = None
             self.last_slots = {}
 
+        if intent in {"get_date", "get_time"}:
+            date_ref = intent_data.get("date_ref") or intent_data.get("resolved_date_label")
+            if date_ref:
+                self.last_date_ref = str(date_ref)
+
     def set_pending_intent(self, *, intent: str, missing_slots: list[str], slots: dict, intent_data: dict):
         self.pending_intent = intent
         self.pending_missing_slots = list(missing_slots)
@@ -66,6 +72,12 @@ class ContextManager:
 
     def clear_pending_confirmation(self):
         self.pending_confirmation = None
+
+    def set_last_date_ref(self, date_ref: str | None):
+        self.last_date_ref = str(date_ref) if date_ref else None
+
+    def get_last_date_ref(self):
+        return self.last_date_ref
 
     def get_last_intent(self):
         return self.last_intent

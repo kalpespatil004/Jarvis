@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from brain.context import context
+from services.time_date.temporal_reasoner import TEMPORAL_REASONER
 
 _ANAPHORA_RE = re.compile(r"\b(it|that|same|there)\b")
 
@@ -52,33 +52,19 @@ class FollowupResolver:
         return merged, meta
 
     def resolve_temporal_followup(self, raw_text: str, normalized: str, last_intent: str | None) -> dict[str, Any] | None:
-        if not re.search(r"\b(today|tomorrow|next day|same time)\b", normalized):
+        resolution = TEMPORAL_REASONER.resolve_followup(
+            raw_text,
+            last_intent=last_intent,
+            last_date_ref=context.get_last_date_ref(),
+        )
+        if resolution is None:
             return None
-
-        if last_intent == "get_date":
-            if "tomorrow" in normalized or "next day" in normalized:
-                return {"intent": "get_date", "date_ref": "tomorrow"}
-            if "today" in normalized:
-                return {"intent": "get_date", "date_ref": "today"}
-
-        if last_intent == "get_time" and "same time" in normalized:
-            now_utc = datetime.now(timezone.utc)
-            tomorrow_utc = now_utc + timedelta(days=1)
-            return {
-                "intent": "get_time",
-                "date_ref": "tomorrow",
-                "same_time": now_utc.strftime("%H:%M"),
-                "same_time_utc_date": tomorrow_utc.strftime("%Y-%m-%d"),
-            }
-
-        if normalized.strip().startswith("tell me tomorrow"):
-            return {"intent": "get_date", "date_ref": "tomorrow"}
-        return None
+        return {"intent": "get_date", **resolution.as_slots()}
 
     @staticmethod
     def _looks_elliptical(normalized: str) -> bool:
         return bool(
-            re.match(r"^(set\s+\d{1,3}%|set\s+to\s+\d{1,3}%|maximize\s+it|tell\s+me\s+tomorrow\s*s?)$", normalized)
+            re.match(r"^(set\s+\d{1,3}%|set\s+to\s+\d{1,3}%|maximize\s+it|tell\s+me\s+tomorrow\s*s?|what\s+about\s+next\s+week|tomorrow\s*s?)$", normalized)
         )
 
     @staticmethod
