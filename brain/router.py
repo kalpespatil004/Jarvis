@@ -143,7 +143,9 @@ def route(intent_data: dict, return_response: bool = False) -> str:
     # CHAT / LLM FALLBACK                          ← FIXED: was missing
     # ─────────────────────────────────────────
     elif intent == "chat":
-        reply = llm_chat(intent_data.get("text", ""))
+        reply = intent_data.get("response")
+        if reply is None:
+            reply = llm_chat(intent_data.get("text", ""))
 
     # ─────────────────────────────────────────
     # TIME & DATE                                  ← FIXED: were missing
