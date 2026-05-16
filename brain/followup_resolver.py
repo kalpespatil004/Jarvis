@@ -104,11 +104,21 @@ class FollowupResolver:
         for turn in reversed(memory_context.get("recent_turns", []) or []):
             if not isinstance(turn, dict):
                 continue
-            user_msg = turn.get("user") or {}
-            metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
+
+            # New memory turns are stored as {user_text, assistant_text, time, metadata}
+            # with user metadata nested under metadata.user. Accept the legacy
+            # {user, assistant} shape as a compatibility fallback.
+            turn_metadata = turn.get("metadata") if isinstance(turn.get("metadata"), dict) else {}
+            metadata = turn_metadata.get("user") if isinstance(turn_metadata.get("user"), dict) else None
+            user_text = turn.get("user_text", "")
+            if metadata is None:
+                user_msg = turn.get("user") or {}
+                metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
+                user_text = user_msg.get("text", "") if isinstance(user_msg, dict) else ""
+
             if isinstance(metadata, dict):
                 frame = dict(metadata)
-                frame.setdefault("text", user_msg.get("text", ""))
+                frame.setdefault("text", user_text)
                 add_frame(frame)
             if len(frames) == 3:
                 break
