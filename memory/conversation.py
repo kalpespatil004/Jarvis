@@ -16,6 +16,15 @@ SUMMARY_KEY = "conversation_summary"
 WORKING_MEMORY_KEY = "working_memory"
 LONG_TERM_PREFERENCES_KEY = "user_profile"
 
+CONVERSATIONAL_INTENTS = {
+    "chat",
+    "question",
+    "general_qa",
+    "greeting",
+}
+CONVERSATION_KIND = "conversation"
+COMMAND_KINDS = {"action", "command"}
+
 
 def _now() -> str:
     return datetime.now().isoformat()
@@ -50,6 +59,36 @@ def _safe_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     return safe
 
 
+def _metadata_kind(metadata: dict[str, Any] | None) -> str | None:
+    if not isinstance(metadata, dict):
+        return None
+    kind = metadata.get("kind")
+    return str(kind).strip().lower() if kind is not None else None
+
+
+def _is_conversation_turn(
+    user_metadata: dict[str, Any] | None,
+    assistant_metadata: dict[str, Any] | None = None,
+) -> bool:
+    """Return True only for normal conversational exchanges worth remembering."""
+    user_kind = _metadata_kind(user_metadata)
+    assistant_kind = _metadata_kind(assistant_metadata)
+    if user_kind == CONVERSATION_KIND or assistant_kind == CONVERSATION_KIND:
+        return True
+    if user_kind in COMMAND_KINDS or assistant_kind in COMMAND_KINDS:
+        return False
+
+    intent = None
+    if isinstance(user_metadata, dict):
+        intent = user_metadata.get("intent")
+    if intent is None and isinstance(assistant_metadata, dict):
+        intent = assistant_metadata.get("intent")
+    if intent is None:
+        return False
+
+    return str(intent).strip().lower() in CONVERSATIONAL_INTENTS
+
+
 def add_message(role: str, text: str, metadata: dict[str, Any] | None = None):
     """Append one message and compact old history when needed."""
     data = read_cache()
@@ -67,7 +106,16 @@ def add_turn(
     user_metadata: dict[str, Any] | None = None,
     assistant_metadata: dict[str, Any] | None = None,
 ):
-    """Persist a complete user/assistant exchange with one cache write."""
+    """Persist a complete user/assistant exchange with one cache write.
+
+    Only conversational turns are written to local memory. Because ``write_cache``
+    also schedules the remote Firebase/Firestore-style sync, returning before the
+    write prevents action commands from being persisted locally or pushed to
+    Firebase/Firestore.
+    """
+    if not _is_conversation_turn(user_metadata, assistant_metadata):
+        return
+
     data = read_cache()
     history = data.get(KEY, [])
     history.append(_message("user", user_text, user_metadata))
