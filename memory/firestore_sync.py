@@ -95,6 +95,57 @@ def _turn_time(turn: dict[str, Any]) -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _message_from_turn(turn: dict[str, Any], role: str) -> dict[str, Any] | None:
+    legacy_message = turn.get(role)
+    if isinstance(legacy_message, dict):
+        return legacy_message
+
+    text_key = "user_text" if role == "user" else "assistant_text"
+    text = turn.get(text_key)
+    if text is None:
+        return None
+
+    message: dict[str, Any] = {
+        "role": role,
+        "text": str(text),
+        "time": _turn_time(turn),
+    }
+    metadata = turn.get("metadata")
+    if isinstance(metadata, dict) and isinstance(metadata.get(role), dict):
+        message["metadata"] = metadata[role]
+    return message
+
+
+def _conversation_turn_from_cloud(turn: dict[str, Any]) -> dict[str, Any] | None:
+    if not isinstance(turn, dict):
+        return None
+    if "user_text" in turn or "assistant_text" in turn:
+        return {
+            "user_text": str(turn.get("user_text", "")),
+            "assistant_text": str(turn.get("assistant_text", "")),
+            "time": _turn_time(turn),
+            "metadata": turn.get("metadata") if isinstance(turn.get("metadata"), dict) else {},
+        }
+
+    user_message = turn.get("user")
+    assistant_message = turn.get("assistant")
+    if not isinstance(user_message, dict):
+        return None
+
+    metadata: dict[str, Any] = {}
+    if isinstance(user_message.get("metadata"), dict):
+        metadata["user"] = user_message["metadata"]
+    if isinstance(assistant_message, dict) and isinstance(assistant_message.get("metadata"), dict):
+        metadata["assistant"] = assistant_message["metadata"]
+
+    return {
+        "user_text": str(user_message.get("text", "")),
+        "assistant_text": str(assistant_message.get("text", "")) if isinstance(assistant_message, dict) else "",
+        "time": _turn_time(turn),
+        "metadata": metadata,
+    }
+
+
 def _turn_document_id(turn: dict[str, Any]) -> str:
     existing_id = turn.get("id") or turn.get("turn_id")
     if existing_id:
@@ -143,30 +194,37 @@ def pull_last_conversation_turns(limit: int = DEFAULT_PULL_LIMIT) -> list[dict[s
 
 
 def overwrite_local_conversation_from_cloud(limit: int = DEFAULT_PULL_LIMIT) -> bool:
-    """Replace local conversation_history with the latest Firestore conversation turns."""
-    turns = pull_last_conversation_turns(limit)
+    """Replace local conversation turns with the latest Firestore conversation turns."""
+    cloud_turns = pull_last_conversation_turns(limit)
+    if not cloud_turns:
+        return False
+
+    turns: list[dict[str, Any]] = []
+    history: list[dict[str, Any]] = []
+    for cloud_turn in cloud_turns:
+        turn = _conversation_turn_from_cloud(cloud_turn)
+        if turn is not None:
+            turns.append(turn)
+
+        user_message = _message_from_turn(cloud_turn, "user")
+        if user_message is not None:
+            history.append(user_message)
+
+        assistant_message = _message_from_turn(cloud_turn, "assistant")
+        if assistant_message is not None:
+            history.append(assistant_message)
+
     if not turns:
         return False
 
-    history: list[dict[str, Any]] = []
-    for turn in turns:
-        user_message = turn.get("user")
-        if isinstance(user_message, dict):
-            history.append(user_message)
-
-        assistant_message = turn.get("assistant")
-        if isinstance(assistant_message, dict):
-            history.append(assistant_message)
-
-    if not history:
-        return False
-
     try:
-        from memory.conversation import KEY
+        from memory.conversation import CONVERSATION_TURNS_KEY, KEY, MAX_CONVERSATION_TURNS
         from memory.local_cache import read_cache, write_cache
 
         data = read_cache()
-        data[KEY] = history
+        data[CONVERSATION_TURNS_KEY] = turns[-MAX_CONVERSATION_TURNS:]
+        if history:
+            data[KEY] = history
         write_cache(data)
         return True
 
