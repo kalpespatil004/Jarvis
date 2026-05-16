@@ -4,6 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+from memory.firestore_sync import push_conversation_turn
 from memory.local_cache import read_cache, write_cache
 
 # Keep enough verbatim context for follow-ups while compacting older sessions.
@@ -30,11 +31,17 @@ def _now() -> str:
     return datetime.now().isoformat()
 
 
-def _message(role: str, text: str, metadata: dict[str, Any] | None = None) -> dict[str, Any]:
+def _message(
+    role: str,
+    text: str,
+    metadata: dict[str, Any] | None = None,
+    *,
+    timestamp: str | None = None,
+) -> dict[str, Any]:
     item: dict[str, Any] = {
         "role": role,
         "text": text,
-        "time": _now(),
+        "time": timestamp or _now(),
     }
     if metadata:
         item["metadata"] = _safe_metadata(metadata)
@@ -118,12 +125,16 @@ def add_turn(
 
     data = read_cache()
     history = data.get(KEY, [])
-    history.append(_message("user", user_text, user_metadata))
-    history.append(_message("assistant", assistant_text, assistant_metadata))
+    timestamp = _now()
+    user_message = _message("user", user_text, user_metadata, timestamp=timestamp)
+    assistant_message = _message("assistant", assistant_text, assistant_metadata, timestamp=timestamp)
+    history.append(user_message)
+    history.append(assistant_message)
     data[KEY] = history
     _capture_preferences(data, user_text)
     _compact_history(data)
     write_cache(data)
+    push_conversation_turn({"time": timestamp, "user": user_message, "assistant": assistant_message})
 
 
 def get_history() -> list:
