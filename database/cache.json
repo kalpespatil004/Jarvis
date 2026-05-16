@@ -104,6 +104,110 @@
         "status": "success",
         "intent": "chat"
       }
+    },
+    {
+      "role": "user",
+      "text": "hello",
+      "time": "2026-05-15T13:43:57.752433",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hello",
+        "normalized_text": "hello",
+        "confidence": 0.98,
+        "source": "regex_fallback",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-05-15T13:43:57.752433",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is time now",
+      "time": "2026-05-15T13:44:07.244550",
+      "metadata": {
+        "intent": "get_time",
+        "text": "what is time now",
+        "normalized_text": "what is time now",
+        "confidence": 0.9,
+        "source": "keyword_classifier",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "date_ref": "today",
+        "resolved_date": "2026-05-15",
+        "resolved_date_label": "today",
+        "resolved_timezone": "UTC",
+        "temporal_kind": "date",
+        "temporal_followup": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Current time is 08:14:07 on Friday, May 15, 2026 (UTC).",
+      "time": "2026-05-15T13:44:07.244550",
+      "metadata": {
+        "status": "success",
+        "intent": "get_time"
+      }
+    },
+    {
+      "role": "user",
+      "text": "set brightness to 100",
+      "time": "2026-05-15T13:44:26.416944",
+      "metadata": {
+        "intent": "set_brightness",
+        "text": "set brightness to 100",
+        "normalized_text": "set brightness to 100",
+        "confidence": 0.8,
+        "source": "keyword_classifier",
+        "model_confidence": 0.8,
+        "disambiguation_needed": false,
+        "level": 100,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "\ud83d\udca1 Brightness set to 100%",
+      "time": "2026-05-15T13:44:26.416944",
+      "metadata": {
+        "status": "success",
+        "intent": "set_brightness"
+      }
+    },
+    {
+      "role": "user",
+      "text": "set to 20%",
+      "time": "2026-05-15T13:44:37.752869",
+      "metadata": {
+        "intent": "set_brightness",
+        "text": "set to 20%",
+        "normalized_text": "set to 20 ",
+        "confidence": 0.92,
+        "source": "unknown",
+        "model_confidence": 0.92,
+        "disambiguation_needed": false,
+        "level": 20,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "\ud83d\udca1 Brightness set to 20%",
+      "time": "2026-05-15T13:44:37.752869",
+      "metadata": {
+        "status": "success",
+        "intent": "set_brightness"
+      }
     }
   ]
 }

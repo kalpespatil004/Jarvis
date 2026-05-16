@@ -436,6 +436,12 @@
       "tag": "dev"
     },
     {
+      "name": "vscode",
+      "location": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+      "source": "builtin",
+      "tag": "dev"
+    },
+    {
       "name": "codesetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561.exe",
       "source": "program_files",

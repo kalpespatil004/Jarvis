@@ -88,8 +88,10 @@ class FollowupResolver:
 
         def add_frame(frame: dict[str, Any]):
             key = (str(frame.get("intent", "")), str(frame.get("text", "")))
-            if key in seen or frame.get("intent") != intent:
+
+            if key in seen:
                 return
+
             if all(frame.get(k) for k in missing):
                 frames.append(frame)
                 seen.add(key)
