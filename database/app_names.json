@@ -1,12 +1,24 @@
 {
-  "generated_at": "2026-06-01T06:33:19.432678+00:00",
+  "generated_at": "2026-06-25T10:41:42.726888+00:00",
   "platform": "Windows",
-  "count": 702,
+  "count": 737,
   "apps": [
     {
       "name": "${{arpdisplayname}}",
       "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
       "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "4omgvr5k",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\TempState\\4omgvr5k.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "4omgvr5k",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\4omgvr5k.exe",
+      "source": "program_files",
       "tag": "utility"
     },
     {
@@ -449,7 +461,7 @@
     },
     {
       "name": "chrome_pwa_launcher",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\chrome_pwa_launcher.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\chrome_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -484,8 +496,8 @@
       "tag": "dev"
     },
     {
-      "name": "codesetup-stable-8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e.exe",
+      "name": "codesetup-stable-fcf604774b9f2674b473065736ee75077e256353",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-fcf604774b9f2674b473065736ee75077e256353.exe",
       "source": "program_files",
       "tag": "dev"
     },
@@ -551,25 +563,31 @@
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -581,7 +599,7 @@
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -599,13 +617,13 @@
     },
     {
       "name": "copilot_setup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\Installer\\copilot_setup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\Installer\\copilot_setup.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "copilot_setup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\Installer\\copilot_setup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\Installer\\copilot_setup.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -623,7 +641,7 @@
     },
     {
       "name": "copilotupdate",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\CopilotUpdate.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\CopilotUpdate.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -971,31 +989,37 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1007,37 +1031,43 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\elevation_service.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1049,7 +1079,7 @@
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1141,6 +1171,24 @@
       "name": "file explorer",
       "location": "Microsoft.Windows.Explorer",
       "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "filecoauth",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\FileCoAuth.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "filesyncconfig",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\FileSyncConfig.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "filesynchelper",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\FileSyncHelper.exe",
+      "source": "program_files",
       "tag": "utility"
     },
     {
@@ -1289,25 +1337,31 @@
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1319,7 +1373,7 @@
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1337,13 +1391,13 @@
     },
     {
       "name": "ie_to_edge_stub",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\BHO\\ie_to_edge_stub.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\BHO\\ie_to_edge_stub.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "ie_to_edge_stub",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\BHO\\ie_to_edge_stub.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\BHO\\ie_to_edge_stub.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1421,6 +1475,18 @@
     },
     {
       "name": "instagram",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\_crx_akpamiohjfcnimfljfndmaldlcfphjmp\\Instagram.ico",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "instagram",
+      "location": "Chrome._crx_akpamiohjfjfndmaldlcfphjmp",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "instagram",
       "location": "www.instagram.com-E4B7766F_ysfa6mcnwr1rw!App",
       "source": "uwp",
       "tag": "utility"
@@ -1464,12 +1530,6 @@
     {
       "name": "kilo",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\JetBrains\\acp-agents\\kilo\\7.1.20\\kilo.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "l3zsvyam",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\TempState\\l3zsvyam.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1864,6 +1924,12 @@
       "tag": "productivity"
     },
     {
+      "name": "microsoft onedrive",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveSetup.exe,-101",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
       "name": "microsoft store",
       "location": "Microsoft.WindowsStore_8wekyb3d8bbwe!App",
       "source": "uwp",
@@ -1942,6 +2008,12 @@
       "tag": "dev"
     },
     {
+      "name": "microsoft.sharepoint.nativemessagingclient",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\Microsoft.SharePoint.NativeMessagingClient.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "microsoft.visualstudio.setup.toastnotification",
       "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\Microsoft.VisualStudio.Setup.ToastNotification.exe",
       "source": "program_files",
@@ -1949,7 +2021,7 @@
     },
     {
       "name": "microsoftedgecomregistershellarm64",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeComRegisterShellARM64.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeComRegisterShellARM64.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1961,37 +2033,37 @@
     },
     {
       "name": "microsoftedgeupdate",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdate.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdate.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatebroker",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateBroker.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdateBroker.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatecomregistershell64",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateComRegisterShell64.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdateComRegisterShell64.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatecore",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateCore.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdateCore.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdateondemand",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateOnDemand.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdateOnDemand.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatesetup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateSetup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.241.15\\MicrosoftEdgeUpdateSetup.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2129,25 +2201,31 @@
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2159,7 +2237,7 @@
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2171,7 +2249,7 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2183,19 +2261,25 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2207,13 +2291,13 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2225,19 +2309,25 @@
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2249,31 +2339,37 @@
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2285,7 +2381,7 @@
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2297,25 +2393,31 @@
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2327,7 +2429,7 @@
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2495,13 +2597,19 @@
     },
     {
       "name": "notification_click_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\notification_click_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\notification_click_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_click_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\notification_click_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\notification_click_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_click_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\notification_click_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2513,31 +2621,37 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\notification_helper.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2549,7 +2663,7 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2837,7 +2951,7 @@
     },
     {
       "name": "ollamasetup",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Ollama\\updates_v2\\0x8DEB210DCFE3975\\OllamaSetup.exe",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Ollama\\updates_v2\\0x8DECCCFC435733D\\OllamaSetup.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2848,8 +2962,74 @@
       "tag": "utility"
     },
     {
+      "name": "onedrive",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\OneDrive.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrive",
+      "location": "Microsoft.SkyDrive.Desktop",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrive.app",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\OneDrive.App.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "onedrive.app",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.App.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrive.sync.service",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDrive.Sync.Service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedriveactionhelper",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveActionHelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrivefilelauncher",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveFileLauncher.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrivelauncher",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveLauncher.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrivepatcher",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDrivePatcher.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrivesetup",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveSetup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedrivestandaloneupdater",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\OneDriveStandaloneUpdater.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "onedriveupdaterservice",
+      "location": "C:\\Program Files\\Microsoft OneDrive\\26.098.0524.0004\\OneDriveUpdaterService.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2897,7 +3077,7 @@
     },
     {
       "name": "os_update_handler",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\147.0.7727.56\\os_update_handler.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\os_update_handler.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2915,7 +3095,13 @@
     },
     {
       "name": "passkey_authenticator_plugin",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\passkey_authenticator_plugin.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\passkey_authenticator_plugin.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "passkey_authenticator_plugin",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\passkey_authenticator_plugin.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2974,6 +3160,12 @@
       "tag": "utility"
     },
     {
+      "name": "powerpnt",
+      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "powerpoint",
       "location": "Microsoft.Office.POWERPNT.EXE.15",
       "source": "uwp",
@@ -3023,7 +3215,7 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3035,19 +3227,25 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3059,7 +3257,7 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3424,6 +3622,18 @@
       "tag": "utility"
     },
     {
+      "name": "shellmcpservers.packaging",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\ShellMcpServers.Packaging.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "shellmcpservers.packaging",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\MicrosoftWindows.Client.Core_cw5n1h2txyewy\\ShellMcpServers.Packaging.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "skypeserver",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SkypeSrv\\SKYPESERVER.EXE",
       "source": "program_files",
@@ -3587,25 +3797,31 @@
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3617,7 +3833,7 @@
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3652,6 +3868,12 @@
       "tag": "utility"
     },
     {
+      "name": "updater",
+      "location": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\150.0.7863.0\\updater.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "user manual (pdf, english)",
       "location": "C:\\Oracle\\VirtualBox\\doc\\UserManual.pdf",
       "source": "uwp",
@@ -3672,18 +3894,6 @@
     {
       "name": "vantageserviceuninst",
       "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\VantageServiceUninst.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "vc_redist.x64",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Addons\\vc_redist.x64.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "vc_redist.x86",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Addons\\vc_redist.x86.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3856,8 +4066,8 @@
       "tag": "utility"
     },
     {
-      "name": "whatsapp beta",
-      "location": "5319275A.51895FA4EA97F_cv1g1gvanyjgm!App",
+      "name": "whatsapp",
+      "location": "5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App",
       "source": "uwp",
       "tag": "media"
     },
@@ -3916,13 +4126,13 @@
       "tag": "utility"
     },
     {
-      "name": "windows powershell ise",
+      "name": "windows powershell ise 5.1",
       "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe",
       "source": "uwp",
       "tag": "utility"
     },
     {
-      "name": "windows powershell ise (x86)",
+      "name": "windows powershell ise 5.1 (x86)",
       "location": "{D65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe",
       "source": "uwp",
       "tag": "utility"

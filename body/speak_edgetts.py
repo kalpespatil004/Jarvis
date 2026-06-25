@@ -21,7 +21,7 @@ import time
 warnings.filterwarnings("ignore")
 
 # Male English neural voice (change via env JARVIS_EDGE_VOICE if you prefer another).
-DEFAULT_VOICE = os.environ.get("JARVIS_EDGE_VOICE", "en-AU-WilliamNeural")
+DEFAULT_VOICE = os.environ.get("JARVIS_EDGE_VOICE", "en-GB-RyanNeural")
 
 _audio_queue: queue.Queue[str | None] = queue.Queue()
 _audio_loop_started = False

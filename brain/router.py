@@ -10,10 +10,12 @@ Router decides WHO handles it.
 from __future__ import annotations
 
 import threading
+import time
 
 from brain.response_picker import get_response
 from brain.nlu.schema import AVAILABLE_INTENTS
 from brain.context import context
+from brain.performance import log_stage
 
 # ── LLM Chat ─────────────────────────────────
 from LLM.chatbot import chat as llm_chat
@@ -21,6 +23,7 @@ from LLM.chatbot import chat as llm_chat
 # ── Time & Date ───────────────────────────────
 from services.time_date.temporal_reasoner import TEMPORAL_REASONER
 from services.time_date.timezone import convert_timezone
+from services.time_date.time_utils import current_time
 
 # ── System (aligned with system/router.py) ───────────────────────────────
 from system.laptop.app_launcher import open_app
@@ -205,6 +208,19 @@ def route(command: dict, return_response: bool = False) -> str:
     if not isinstance(command, dict) or command.get("type") != "command" or not isinstance(command.get("slots"), dict):
         raise ValueError("Router accepts only structured command objects with type='command' and a slots dict.")
 
+    route_start = time.perf_counter()
+    llm_elapsed = 0.0
+
+    def _call_llm(prompt: str) -> str:
+        nonlocal llm_elapsed
+        llm_start = time.perf_counter()
+        try:
+            return llm_chat(prompt)
+        finally:
+            elapsed = time.perf_counter() - llm_start
+            llm_elapsed += elapsed
+            log_stage("LLM", elapsed)
+
     metadata = command.get("metadata") if isinstance(command.get("metadata"), dict) else {}
     intent_data = {**metadata, **command["slots"]}
     intent_data["intent"] = command.get("intent", "unknown")
@@ -231,20 +247,17 @@ def route(command: dict, return_response: bool = False) -> str:
     elif intent == "chat":
         reply = intent_data.get("response")
         if reply is None:
-            reply = llm_chat(intent_data.get("text", ""))
+            reply = _call_llm(intent_data.get("text", ""))
 
     # ─────────────────────────────────────────
     # TIME & DATE                                  ← FIXED: were missing
     # ─────────────────────────────────────────
     elif intent == "get_time":
-        resolution = TEMPORAL_REASONER.resolve(
-            intent_data.get("text"),
-            date_ref=intent_data.get("date_ref"),
-            tz_name=intent_data.get("timezone") or intent_data.get("resolved_timezone"),
-        )
-        time_value = TEMPORAL_REASONER.format_time(tz_name=resolution.timezone)
-        rendered_date = TEMPORAL_REASONER.format_date(resolution)
-        reply = f"Current time is {time_value} on {rendered_date} ({resolution.timezone})."
+        time_data = current_time()
+        if time_data.get("success"):
+            reply = f"Current time is {time_data['time']} )."
+        else:
+            reply = f"Error getting time: {time_data.get('error')}"
 
     elif intent == "get_date":
         resolution = TEMPORAL_REASONER.resolve(
@@ -259,11 +272,11 @@ def route(command: dict, return_response: bool = False) -> str:
             reply = f"{resolution.label.capitalize()} is {rendered_date} ({resolution.timezone})."
 
     elif intent == "advice_time":
-        reply = llm_chat(intent_data.get("topic", intent_data.get("text", "")))
+        reply = _call_llm(intent_data.get("topic", intent_data.get("text", "")))
 
     elif intent == "convert_timezone":
         # Pass raw query to LLM — timezone parsing needs NLP
-        reply = llm_chat(intent_data.get("query", intent_data.get("text", "")))
+        reply = _call_llm(intent_data.get("query", intent_data.get("text", "")))
 
     # ─────────────────────────────────────────
     # WEATHER
@@ -736,23 +749,25 @@ def route(command: dict, return_response: bool = False) -> str:
     # AUTOMATION                                   ← FIXED: were missing
     # ─────────────────────────────────────────
     elif intent == "evaluate_trigger":
-        reply = llm_chat(intent_data.get("query", intent_data.get("text", "")))
+        reply = _call_llm(intent_data.get("query", intent_data.get("text", "")))
 
     elif intent == "apply_rules":
-        reply = llm_chat(intent_data.get("query", intent_data.get("text", "")))
+        reply = _call_llm(intent_data.get("query", intent_data.get("text", "")))
 
     # ─────────────────────────────────────────
     # UNKNOWN FALLBACK
     # ─────────────────────────────────────────
     else:
         text = intent_data.get("text", "")
-        reply = llm_chat(text) if text else get_response("fallback")
+        reply = _call_llm(text) if text else get_response("fallback")
 
     # ─────────────────────────────────────────
     # RESPOND
     # ─────────────────────────────────────────
     if not reply:
         reply = get_response("fallback")
+
+    log_stage("ROUTER", max(time.perf_counter() - route_start - llm_elapsed, 0.0))
 
     if return_response:
         return reply

@@ -10,6 +10,7 @@ from body.wake_word import listen_for_wake_word
 from brain.intent_engine import detect_intent
 from brain.router import route
 from brain.dialogue_manager import dialogue_manager
+from brain.performance import log_stage
 
 from brain.context import context
 from brain.events import trigger_event
@@ -23,6 +24,14 @@ from memory.conversation import (
 CONFIDENCE_THRESHOLD = 0.6
 PROCESS_LOCK = threading.Lock()
 API_LOCK_WAIT_SECONDS = 30
+
+
+def _detect_intent_timed(command: str, memory_context: dict) -> dict:
+    start = time.perf_counter()
+    try:
+        return detect_intent(command, memory_context=memory_context)
+    finally:
+        log_stage("INTENT", time.perf_counter() - start)
 
 
 # =========================
@@ -105,11 +114,14 @@ def process_text(command: str) -> str:
         print(f"[BRAIN:UI] Heard → {cleaned}")
         set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "nlu"})
 
+        print("a")
         memory_context = get_nlu_context()
+        print("b")
         intent_data = detect_intent(cleaned, memory_context=memory_context)
         set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "routing", "intent": intent_data.get("intent")})
-
+        print("c")
         response = _handle_intent(intent_data, voice_mode=False) or "No response generated."
+        print("d")
         _remember_exchange(cleaned, response, intent_data=intent_data, status="success")
         clear_working_memory()
         return response

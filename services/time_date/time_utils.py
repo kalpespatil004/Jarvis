@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 def current_time(format: str = "%Y-%m-%d %H:%M:%S") -> dict:
     """
-    Get current system time.
+    Get current system time in local timezone.
 
     Args:
         format (str): Datetime format string
@@ -21,13 +21,15 @@ def current_time(format: str = "%Y-%m-%d %H:%M:%S") -> dict:
     """
 
     try:
-        now = datetime.now()
+        # Use astimezone() to properly handle Windows timezones
+        now = datetime.now().astimezone()
         return {
             "success": True,
             "timestamp": now.timestamp(),
             "formatted": now.strftime(format),
             "date": now.strftime("%Y-%m-%d"),
-            "time": now.strftime("%H:%M:%S")
+            "time": now.strftime("%H:%M:%S"),
+            "timezone": now.strftime("%Z")
         }
 
     except Exception as e:

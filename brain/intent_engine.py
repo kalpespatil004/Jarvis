@@ -1,10 +1,7 @@
 from __future__ import annotations
 
 import re
-import json
 from typing import Any
-
-from LLM.offlineLLM import chat as llm_chat
 
 from brain.context import context
 from brain.followup_resolver import FOLLOWUP_RESOLVER
@@ -14,11 +11,12 @@ from system.laptop.app_launcher import canonicalize_app_name
 
 from brain.nlu.classifier import IntentClassifier
 from brain.nlu.slot_filler import SlotFiller
-from brain.nlu.schema import LLM_CLASSIFIER_INTENTS, LLM_CLASSIFIER_INTENTS_SET, REQUIRED_SLOTS
+from brain.nlu.schema import REQUIRED_SLOTS
 
 
 NLU_CLASSIFIER = IntentClassifier()
 SLOT_FILLER = SlotFiller()
+LOCAL_INTENT_THRESHOLD = 0.62
 
 # Chat: conversational Q&A, trivia, explanations (not device commands or tool intents).
 _CHAT_START = re.compile(
@@ -330,7 +328,7 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
         r"tommorow|tomarow|tomarrows|tomorrows|todays\s+day"
         r")\b",
         normalized,
-    ):
+    ) and not re.search(r"\b(weather|temperature|forecast|humidity|climate)\b", normalized):
         return _intent("get_date", raw_text, normalized, 0.96, **_resolve_temporal_slots(raw_text))
 
     # =========================
@@ -701,7 +699,7 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
         return _intent("chat", raw_text, normalized, 0.9)
 
     # =========================
-    # LLM INTENT CLASSIFIER (commands / ambiguous phrasing not matched above)
+    # LOCAL CLASSIFIER FALLBACK (commands / ambiguous phrasing not matched above)
     # =========================
     return None
 
@@ -753,6 +751,13 @@ def detect_intent(text: str, memory_context: dict[str, Any] | None = None) -> di
             **{k: v for k, v in temporal_follow.items() if k != "intent"},
         )
 
+    regex_hit = _regex_fallback_intent(raw_text)
+    if regex_hit is not None:
+        regex_hit["source"] = "regex"
+        regex_hit["model_confidence"] = regex_hit.get("confidence", 0.0)
+        regex_hit["disambiguation_needed"] = False
+        return regex_hit
+
     cls = NLU_CLASSIFIER.classify(raw_text, normalized)
     slots = SLOT_FILLER.fill(intent=cls.intent, raw_text=raw_text, normalized=normalized)
 
@@ -778,26 +783,7 @@ def detect_intent(text: str, memory_context: dict[str, Any] | None = None) -> di
         )
     disambiguation_needed = any(not slots.get(key) for key in required)
 
-    if cls.confidence >= 0.78 and not disambiguation_needed:
-        return _intent(
-            cls.intent,
-            raw_text,
-            normalized,
-            cls.confidence,
-            source=cls.source,
-            model_confidence=cls.confidence,
-            disambiguation_needed=False,
-            **slots,
-        )
-
-    regex_hit = _regex_fallback_intent(raw_text)
-    if regex_hit is not None:
-        regex_hit["source"] = "regex_fallback"
-        regex_hit["model_confidence"] = regex_hit.get("confidence", 0.0)
-        regex_hit["disambiguation_needed"] = False
-        return regex_hit
-
-    if cls.confidence >= 0.62:
+    if cls.confidence >= LOCAL_INTENT_THRESHOLD:
         return _intent(
             cls.intent,
             raw_text,
@@ -809,91 +795,15 @@ def detect_intent(text: str, memory_context: dict[str, Any] | None = None) -> di
             **slots,
         )
 
-    llm = _llm_fallback(raw_text, memory_context=memory_context)
-    llm["source"] = "llm_fallback"
-    llm["model_confidence"] = llm.get("confidence", 0.0)
-    llm["disambiguation_needed"] = False
-    return llm
-
-
-# =========================
-# LLM INTENT CLASSIFIER
-# =========================
-def _llm_fallback(text: str, memory_context: dict[str, Any] | None = None) -> dict:
-
-    context_block = _format_memory_context(memory_context or {})
-    prompt = f"""
-You are an intent classifier for a personal AI assistant called Jarvis.
-
-Allowed intents (exact strings only):
-{LLM_CLASSIFIER_INTENTS}
-
-Recent conversation context (use only to resolve references/follow-ups, not to invent slots):
-{context_block}
-
-Decision policy:
-1) Prefer a specific tool intent only when the user is clearly giving a COMMAND or requesting a
-   built-in service (open app, set volume, weather in a city, play music, reminder, etc.).
-2) Use "chat" when the user wants conversation: opinions, stories, how/why questions, homework-style
-   questions, "what should I…", small talk, or anything that is not clearly one of the tools above.
-3) If unsure between a tool and "chat", choose "chat".
-4) Never output "lookup_word" or any intent not in the allowed list.
-
-Return ONLY valid JSON with no extra text, no markdown, no explanation.
-
-Format:
-{{
-  "intent": "intent_name",
-  "parameters": {{}}
-}}
-
-Examples:
-User: set brightness to max
-Output:
-{{"intent": "set_brightness", "parameters": {{"level": 100}}}}
-
-User: open chrome
-Output:
-{{"intent": "open_app", "parameters": {{"app": "chrome"}}}}
-
-User: what is the price of ethereum in usd
-Output:
-{{"intent": "get_crypto_price", "parameters": {{"symbol": "ethereum", "currency": "usd"}}}}
-
-User: weather in mumbai
-Output:
-{{"intent": "get_weather", "parameters": {{"city": "mumbai"}}}}
-
-User: what is the full form of NASA and why was it created
-Output:
-{{"intent": "chat", "parameters": {{}}}}
-
-User: {text}
-Output:
-"""
-
-    response = llm_chat(prompt)
-
-    try:
-        clean = re.sub(r"```(?:json)?|```", "", response).strip()
-        parsed = json.loads(clean)
-        intent_name = parsed.get("intent", "chat")
-        if intent_name == "lookup_word" or intent_name not in LLM_CLASSIFIER_INTENTS_SET:
-            intent_name = "chat"
-            params: dict[str, Any] = {}
-        else:
-            params = parsed.get("parameters", {}) or {}
-        if intent_name == "open_app" and isinstance(params.get("app"), str):
-            params = {**params, "app": canonicalize_app_name(params["app"])}
-        return _intent(
-            intent_name,
-            text,
-            _normalize(text),
-            0.6,
-            **params
-        )
-    except Exception:
-        return _intent("chat", text, _normalize(text), 0.3, text=text)
+    return _intent(
+        "chat",
+        raw_text,
+        normalized,
+        cls.confidence,
+        source="local_classifier_fallback",
+        model_confidence=cls.confidence,
+        disambiguation_needed=False,
+    )
 
 
 # =========================
@@ -909,40 +819,6 @@ def _last_intent_from_memory(memory_context: dict[str, Any]) -> str | None:
             return str(intent)
     return None
 
-
-def _format_memory_context(memory_context: dict[str, Any]) -> str:
-    parts: list[str] = []
-    summary = str(memory_context.get("summary") or "").strip()
-    if summary:
-        parts.append(f"Summary: {summary[:1000]}")
-
-    preferences = memory_context.get("preferences")
-    if isinstance(preferences, dict) and preferences:
-        pref_list = preferences.get("preferences")
-        if isinstance(pref_list, list) and pref_list:
-            parts.append("Long-term preferences: " + "; ".join(str(p)[:120] for p in pref_list[-5:]))
-
-    turns = memory_context.get("recent_turns") or []
-    if turns:
-        lines = []
-        for turn in turns[-6:]:
-            if not isinstance(turn, dict):
-                continue
-            user_msg = turn.get("user") or {}
-            assistant_msg = turn.get("assistant") or {}
-            user_text = str(user_msg.get("text", "")).strip()[:160]
-            assistant_text = str(assistant_msg.get("text", "")).strip()[:160] if isinstance(assistant_msg, dict) else ""
-            metadata = user_msg.get("metadata") if isinstance(user_msg, dict) else {}
-            intent = metadata.get("intent") if isinstance(metadata, dict) else None
-            suffix = f" [intent={intent}]" if intent else ""
-            if user_text:
-                lines.append(f"User: {user_text}{suffix}")
-            if assistant_text:
-                lines.append(f"Assistant: {assistant_text}")
-        if lines:
-            parts.append("Recent turns:\n" + "\n".join(lines))
-
-    return "\n".join(parts) if parts else "No prior context."
 
 def _normalize(text: str) -> str:
     text = text.lower().strip()

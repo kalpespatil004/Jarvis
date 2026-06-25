@@ -7,546 +7,6 @@
   "conversation_history": [
     {
       "role": "user",
-      "text": "hey",
-      "time": "2026-05-15T13:05:23.123545",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-05-15T13:05:23.123545",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "open vscode",
-      "time": "2026-05-15T13:05:53.871973",
-      "metadata": {
-        "intent": "open_app",
-        "text": "open vscode",
-        "normalized_text": "open vscode",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "app": "vscode",
-        "post_actions": [],
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\u2705 Trying to open vscode",
-      "time": "2026-05-15T13:05:53.871973",
-      "metadata": {
-        "status": "success",
-        "intent": "open_app"
-      }
-    },
-    {
-      "role": "user",
-      "text": "open calculator",
-      "time": "2026-05-15T13:06:12.936575",
-      "metadata": {
-        "intent": "open_app",
-        "text": "open calculator",
-        "normalized_text": "open calculator",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "app": "calculator",
-        "post_actions": [],
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\u2705 Opening calculator",
-      "time": "2026-05-15T13:06:12.936575",
-      "metadata": {
-        "status": "success",
-        "intent": "open_app"
-      }
-    },
-    {
-      "role": "user",
-      "text": "what is time",
-      "time": "2026-05-15T13:06:33.827735",
-      "metadata": {
-        "intent": "chat",
-        "text": "what is time",
-        "normalized_text": "what is time",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Time, Sir, is the fundamental dimension that orders the sequence of events. It quantifies duration and change, an intrinsic component of our universe's fabric.",
-      "time": "2026-05-15T13:06:33.827735",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hello",
-      "time": "2026-05-15T13:43:57.752433",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hello",
-        "normalized_text": "hello",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-05-15T13:43:57.752433",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "what is time now",
-      "time": "2026-05-15T13:44:07.244550",
-      "metadata": {
-        "intent": "get_time",
-        "text": "what is time now",
-        "normalized_text": "what is time now",
-        "confidence": 0.9,
-        "source": "keyword_classifier",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "date_ref": "today",
-        "resolved_date": "2026-05-15",
-        "resolved_date_label": "today",
-        "resolved_timezone": "UTC",
-        "temporal_kind": "date",
-        "temporal_followup": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Current time is 08:14:07 on Friday, May 15, 2026 (UTC).",
-      "time": "2026-05-15T13:44:07.244550",
-      "metadata": {
-        "status": "success",
-        "intent": "get_time"
-      }
-    },
-    {
-      "role": "user",
-      "text": "set brightness to 100",
-      "time": "2026-05-15T13:44:26.416944",
-      "metadata": {
-        "intent": "set_brightness",
-        "text": "set brightness to 100",
-        "normalized_text": "set brightness to 100",
-        "confidence": 0.8,
-        "source": "keyword_classifier",
-        "model_confidence": 0.8,
-        "disambiguation_needed": false,
-        "level": 100,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\ud83d\udca1 Brightness set to 100%",
-      "time": "2026-05-15T13:44:26.416944",
-      "metadata": {
-        "status": "success",
-        "intent": "set_brightness"
-      }
-    },
-    {
-      "role": "user",
-      "text": "set to 20%",
-      "time": "2026-05-15T13:44:37.752869",
-      "metadata": {
-        "intent": "set_brightness",
-        "text": "set to 20%",
-        "normalized_text": "set to 20 ",
-        "confidence": 0.92,
-        "source": "unknown",
-        "model_confidence": 0.92,
-        "disambiguation_needed": false,
-        "level": 20,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\ud83d\udca1 Brightness set to 20%",
-      "time": "2026-05-15T13:44:37.752869",
-      "metadata": {
-        "status": "success",
-        "intent": "set_brightness"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T08:39:11.093084",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T08:39:11.093084",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "tell me about wheather",
-      "time": "2026-06-01T08:39:40.748192",
-      "metadata": {
-        "intent": "chat",
-        "text": "tell me about wheather",
-        "normalized_text": "tell me about wheather",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Weather describes the atmospheric conditions at a specific location and time, encompassing factors such as temperature, humidity, precipitation, wind, and atmospheric pressure. It is primarily driven by solar energy and Earth's rotation, significantly impacting daily life. I maintain constant access to global meteorological data for precise updates and predictive analysis.",
-      "time": "2026-06-01T08:39:40.748192",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:13:56.356852",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:13:56.356852",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:22:30.369636",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:22:30.369636",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:30:59.598697",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:30:59.598697",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-01T09:40:15.975072",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:40:15.975072",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:47:04.340983",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:47:04.340983",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "pune",
-      "time": "2026-06-01T09:53:49.147397",
-      "metadata": {
-        "intent": "chat",
-        "text": "pune",
-        "normalized_text": "pune",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Pune. How may I assist you regarding this location, sir?",
-      "time": "2026-06-01T09:53:49.147397",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:54:57.597403",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:54:57.597403",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T09:57:52.609702",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:57:52.609702",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T10:28:55.523449",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T10:28:55.523449",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-01T11:57:20.563385",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T11:57:20.563385",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-01T12:00:23.539450",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T12:00:23.539450",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "current temrature in nashik",
-      "time": "2026-06-01T12:02:04.792336",
-      "metadata": {
-        "intent": "chat",
-        "text": "current temrature in nashik",
-        "normalized_text": "current temrature in nashik",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "The temperature in Nashik is currently 29 degrees Celsius.",
-      "time": "2026-06-01T12:02:04.792336",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
       "text": "temrature in nashik",
       "time": "2026-06-01T12:02:52.592926",
       "metadata": {
@@ -640,18 +100,639 @@
         "status": "success",
         "intent": "greeting"
       }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-25T16:10:32.668282",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex_fallback",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T16:10:32.668282",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-25T17:04:01.003262",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex_fallback",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T17:04:01.003262",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "chrome",
+      "time": "2026-06-25T17:04:53.921745",
+      "metadata": {
+        "intent": "chat",
+        "text": "chrome",
+        "normalized_text": "chrome",
+        "confidence": 0.3,
+        "source": "llm_fallback",
+        "model_confidence": 0.3,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, Google Chrome is a web browser developed by Google, renowned for its speed, simplicity, and vast extension capabilities. Do you have a specific task in mind?",
+      "time": "2026-06-25T17:04:53.921745",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-25T18:19:31.333910",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex_fallback",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T18:19:31.333910",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "st to 100",
+      "time": "2026-06-25T18:20:29.943540",
+      "metadata": {
+        "intent": "chat",
+        "text": "st to 100",
+        "normalized_text": "st to 100",
+        "confidence": 0.3,
+        "source": "llm_fallback",
+        "model_confidence": 0.3,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100.",
+      "time": "2026-06-25T18:20:29.943540",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "set to 100",
+      "time": "2026-06-25T18:21:31.473417",
+      "metadata": {
+        "intent": "chat",
+        "text": "set to 100",
+        "normalized_text": "set to 100",
+        "confidence": 0.3,
+        "source": "llm_fallback",
+        "model_confidence": 0.3,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Acknowledged.",
+      "time": "2026-06-25T18:21:31.473417",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is ai",
+      "time": "2026-06-25T18:26:24.542485",
+      "metadata": {
+        "intent": "chat",
+        "text": "what is ai",
+        "normalized_text": "what is ai",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Artificial intelligence refers to the simulation of human intelligence processes by machines, particularly computer systems. Key processes include learning, reasoning, and self-correction.",
+      "time": "2026-06-25T18:26:24.542485",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "where is mangi tungi",
+      "time": "2026-06-25T18:26:53.342356",
+      "metadata": {
+        "intent": "chat",
+        "text": "where is mangi tungi",
+        "normalized_text": "where is mangi tungi",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Mangi Tungi is a prominent twin-pinnacled peak and a significant Jain pilgrimage site. It is located in the Nashik district of Maharashtra, India, within the Satpura mountain range.",
+      "time": "2026-06-25T18:26:53.342356",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "how many step or staire are there",
+      "time": "2026-06-25T18:27:32.536142",
+      "metadata": {
+        "intent": "chat",
+        "text": "how many step or staire are there",
+        "normalized_text": "how many step or staire are there",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Reports indicate there are approximately 3,500 steps to ascend to the Mangi Tungi peaks.",
+      "time": "2026-06-25T18:27:32.536142",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
+      "time": "2026-06-25T18:28:32.395519",
+      "metadata": {
+        "intent": "chat",
+        "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
+        "normalized_text": "which is harder to trek brahmha giri or mangi tungi and compare stair",
+        "confidence": 0.9,
+        "source": "regex_fallback",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Comparing the two:\n\n**Mangi Tungi:**\n*   **Stairs:** Approximately 3,500 steps.\n*   **Difficulty:** Considered challenging, primarily due to the extensive number of steps leading to both peaks. It is a sustained ascent.\n\n**Brahmagiri:**\n*   **Stairs:** Typically around 700-800 steps to reach the top.\n*   **Difficulty:** Also considered moderately challenging, offering a mix of steps and rocky paths, leading to the source of the Godavari.\n\n**Comparison:**\nBased purely on the number of stairs, **Mangi Tungi** presents a significantly harder ascent due to its much higher stair count, requiring greater endurance for the continuous climb. While both are treks, the sheer volume of steps makes Mangi Tungi more arduous in that specific aspect.",
+      "time": "2026-06-25T18:28:32.395519",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-25T19:42:57.295438",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T19:42:57.295438",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "chrome",
+      "time": "2026-06-25T19:43:22.311517",
+      "metadata": {
+        "intent": "chat",
+        "text": "chrome",
+        "normalized_text": "chrome",
+        "confidence": 0.575,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.575,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Opening Google Chrome for you now, Sir.",
+      "time": "2026-06-25T19:43:22.311517",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "notepad",
+      "time": "2026-06-25T19:43:38.951472",
+      "metadata": {
+        "intent": "chat",
+        "text": "notepad",
+        "normalized_text": "notepad",
+        "confidence": 0.35,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.35,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Opening Notepad for you now, Sir.",
+      "time": "2026-06-25T19:43:38.951472",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-25T20:45:28.038818",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T20:45:28.038818",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-25T20:48:02.785311",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-25T20:48:02.785311",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "where is iffile tower",
+      "time": "2026-06-25T20:48:30.142486",
+      "metadata": {
+        "intent": "chat",
+        "text": "where is iffile tower",
+        "normalized_text": "where is iffile tower",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Stark Tower, sir, is located in Midtown Manhattan, New York City.",
+      "time": "2026-06-25T20:48:30.142486",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "kutub minar",
+      "time": "2026-06-25T20:48:48.228809",
+      "metadata": {
+        "intent": "chat",
+        "text": "kutub minar",
+        "normalized_text": "kutub minar",
+        "confidence": 0.35,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.35,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "The Qutub Minar is a UNESCO World Heritage Site located in Delhi, India.",
+      "time": "2026-06-25T20:48:48.228809",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is hieght of it",
+      "time": "2026-06-25T20:49:12.878758",
+      "metadata": {
+        "intent": "chat",
+        "text": "what is hieght of it",
+        "normalized_text": "what is hieght of it",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Its height is 73 meters (240 feet), sir.",
+      "time": "2026-06-25T20:49:12.878758",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Hello can you listen me",
+      "time": "2026-06-25T20:49:42.797684",
+      "metadata": {
+        "intent": "chat",
+        "text": "Hello can you listen me",
+        "normalized_text": "hello can you listen me",
+        "confidence": 0.40625,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.40625,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Yes, sir, I can hear you clearly.",
+      "time": "2026-06-25T20:49:42.797684",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Tell me what is my name",
+      "time": "2026-06-25T20:49:59.994862",
+      "metadata": {
+        "intent": "chat",
+        "text": "Tell me what is my name",
+        "normalized_text": "tell me what is my name",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Your name is Kalpesh, sir.",
+      "time": "2026-06-25T20:49:59.994862",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "who are you",
+      "time": "2026-06-25T20:50:17.357790",
+      "metadata": {
+        "intent": "chat",
+        "text": "who are you",
+        "normalized_text": "who are you",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "I am JARVIS, your personal AI, sir.",
+      "time": "2026-06-25T20:50:17.357790",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "close chrome",
+      "time": "2026-06-25T20:50:42.157654",
+      "metadata": {
+        "intent": "chat",
+        "text": "close chrome",
+        "normalized_text": "close chrome",
+        "confidence": 0.5,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.5,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Closing Google Chrome now, sir.",
+      "time": "2026-06-25T20:50:42.157654",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "close it",
+      "time": "2026-06-25T20:51:17.176294",
+      "metadata": {
+        "intent": "chat",
+        "text": "close it",
+        "normalized_text": "close it",
+        "confidence": 0.46249999999999997,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.46249999999999997,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Closing Chrome now, sir.",
+      "time": "2026-06-25T20:51:17.176294",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "close this window",
+      "time": "2026-06-25T20:52:28.557941",
+      "metadata": {
+        "intent": "chat",
+        "text": "close this window",
+        "normalized_text": "close this window",
+        "confidence": 0.35,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.35,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Closing this window, sir.",
+      "time": "2026-06-25T20:52:28.557941",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "in nashik",
+      "time": "2026-06-25T21:05:53.739046",
+      "metadata": {
+        "intent": "chat",
+        "text": "in nashik",
+        "normalized_text": "in nashik",
+        "confidence": 0.46249999999999997,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.46249999999999997,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Understood, Sir. I am ready to assist you in Nashik.",
+      "time": "2026-06-25T21:05:53.739046",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
     }
   ],
   "conversation_turns": [
     {
-      "user_text": "what is time",
-      "assistant_text": "Time, Sir, is the fundamental dimension that orders the sequence of events. It quantifies duration and change, an intrinsic component of our universe's fabric.",
-      "time": "2026-05-15T13:06:33.827735",
+      "user_text": "set to 100",
+      "assistant_text": "Acknowledged.",
+      "time": "2026-06-25T18:21:31.473417",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "what is time",
-          "normalized_text": "what is time",
+          "text": "set to 100",
+          "normalized_text": "set to 100",
+          "confidence": 0.3,
+          "source": "llm_fallback",
+          "model_confidence": 0.3,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "what is ai",
+      "assistant_text": "Artificial intelligence refers to the simulation of human intelligence processes by machines, particularly computer systems. Key processes include learning, reasoning, and self-correction.",
+      "time": "2026-06-25T18:26:24.542485",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "what is ai",
+          "normalized_text": "what is ai",
           "confidence": 0.9,
           "source": "regex_fallback",
           "model_confidence": 0.9,
@@ -665,56 +746,14 @@
       }
     },
     {
-      "user_text": "hello",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-05-15T13:43:57.752433",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hello",
-          "normalized_text": "hello",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T08:39:11.093084",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "tell me about wheather",
-      "assistant_text": "Weather describes the atmospheric conditions at a specific location and time, encompassing factors such as temperature, humidity, precipitation, wind, and atmospheric pressure. It is primarily driven by solar energy and Earth's rotation, significantly impacting daily life. I maintain constant access to global meteorological data for precise updates and predictive analysis.",
-      "time": "2026-06-01T08:39:40.748192",
+      "user_text": "where is mangi tungi",
+      "assistant_text": "Mangi Tungi is a prominent twin-pinnacled peak and a significant Jain pilgrimage site. It is located in the Nashik district of Maharashtra, India, within the Satpura mountain range.",
+      "time": "2026-06-25T18:26:53.342356",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "tell me about wheather",
-          "normalized_text": "tell me about wheather",
+          "text": "where is mangi tungi",
+          "normalized_text": "where is mangi tungi",
           "confidence": 0.9,
           "source": "regex_fallback",
           "model_confidence": 0.9,
@@ -728,79 +767,58 @@
       }
     },
     {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:13:56.356852",
+      "user_text": "how many step or staire are there",
+      "assistant_text": "Reports indicate there are approximately 3,500 steps to ascend to the Mangi Tungi peaks.",
+      "time": "2026-06-25T18:27:32.536142",
       "metadata": {
         "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
+          "intent": "chat",
+          "text": "how many step or staire are there",
+          "normalized_text": "how many step or staire are there",
+          "confidence": 0.9,
           "source": "regex_fallback",
-          "model_confidence": 0.98,
+          "model_confidence": 0.9,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
         "assistant": {
           "status": "success",
-          "intent": "greeting"
+          "intent": "chat"
         }
       }
     },
     {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:22:30.369636",
+      "user_text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
+      "assistant_text": "Comparing the two:\n\n**Mangi Tungi:**\n*   **Stairs:** Approximately 3,500 steps.\n*   **Difficulty:** Considered challenging, primarily due to the extensive number of steps leading to both peaks. It is a sustained ascent.\n\n**Brahmagiri:**\n*   **Stairs:** Typically around 700-800 steps to reach the top.\n*   **Difficulty:** Also considered moderately challenging, offering a mix of steps and rocky paths, leading to the source of the Godavari.\n\n**Comparison:**\nBased purely on the number of stairs, **Mangi Tungi** presents a significantly harder ascent due to its much higher stair count, requiring greater endurance for the continuous climb. While both are treks, the sheer volume of steps makes Mangi Tungi more arduous in that specific aspect.",
+      "time": "2026-06-25T18:28:32.395519",
       "metadata": {
         "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
+          "intent": "chat",
+          "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
+          "normalized_text": "which is harder to trek brahmha giri or mangi tungi and compare stair",
+          "confidence": 0.9,
           "source": "regex_fallback",
-          "model_confidence": 0.98,
+          "model_confidence": 0.9,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
         "assistant": {
           "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:30:59.598697",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
+          "intent": "chat"
         }
       }
     },
     {
       "user_text": "hi",
       "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:40:15.975072",
+      "time": "2026-06-25T19:42:57.295438",
       "metadata": {
         "user": {
           "intent": "greeting",
           "text": "hi",
           "normalized_text": "hi",
           "confidence": 0.98,
-          "source": "regex_fallback",
+          "source": "regex",
           "model_confidence": 0.98,
           "disambiguation_needed": false,
           "execution_status": "success"
@@ -812,38 +830,17 @@
       }
     },
     {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:47:04.340983",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "pune",
-      "assistant_text": "Pune. How may I assist you regarding this location, sir?",
-      "time": "2026-06-01T09:53:49.147397",
+      "user_text": "chrome",
+      "assistant_text": "Opening Google Chrome for you now, Sir.",
+      "time": "2026-06-25T19:43:22.311517",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "pune",
-          "normalized_text": "pune",
-          "confidence": 0.3,
-          "source": "llm_fallback",
-          "model_confidence": 0.3,
+          "text": "chrome",
+          "normalized_text": "chrome",
+          "confidence": 0.575,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.575,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
@@ -854,100 +851,37 @@
       }
     },
     {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:54:57.597403",
+      "user_text": "notepad",
+      "assistant_text": "Opening Notepad for you now, Sir.",
+      "time": "2026-06-25T19:43:38.951472",
       "metadata": {
         "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
+          "intent": "chat",
+          "text": "notepad",
+          "normalized_text": "notepad",
+          "confidence": 0.35,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.35,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
         "assistant": {
           "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T09:57:52.609702",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T10:28:55.523449",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T11:57:20.563385",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hey",
-          "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
+          "intent": "chat"
         }
       }
     },
     {
       "user_text": "hi",
       "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-01T12:00:23.539450",
+      "time": "2026-06-25T20:45:28.038818",
       "metadata": {
         "user": {
           "intent": "greeting",
           "text": "hi",
           "normalized_text": "hi",
           "confidence": 0.98,
-          "source": "regex_fallback",
+          "source": "regex",
           "model_confidence": 0.98,
           "disambiguation_needed": false,
           "execution_status": "success"
@@ -955,62 +889,20 @@
         "assistant": {
           "status": "success",
           "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "current temrature in nashik",
-      "assistant_text": "The temperature in Nashik is currently 29 degrees Celsius.",
-      "time": "2026-06-01T12:02:04.792336",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "current temrature in nashik",
-          "normalized_text": "current temrature in nashik",
-          "confidence": 0.3,
-          "source": "llm_fallback",
-          "model_confidence": 0.3,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "temrature in nashik",
-      "assistant_text": "I thought about it, but got nothing.",
-      "time": "2026-06-01T12:02:52.592926",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "temrature in nashik",
-          "normalized_text": "temrature in nashik",
-          "confidence": 0.3,
-          "source": "llm_fallback",
-          "model_confidence": 0.3,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
         }
       }
     },
     {
       "user_text": "hey",
       "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-24T22:06:59.471821",
+      "time": "2026-06-25T20:48:02.785311",
       "metadata": {
         "user": {
           "intent": "greeting",
           "text": "hey",
           "normalized_text": "hey",
           "confidence": 0.98,
-          "source": "regex_fallback",
+          "source": "regex",
           "model_confidence": 0.98,
           "disambiguation_needed": false,
           "execution_status": "success"
@@ -1022,17 +914,17 @@
       }
     },
     {
-      "user_text": "Hello Jarvis how are you",
-      "assistant_text": "Good morning, Tony. I'm functioning within optimal parameters, thank you for asking. Systems check confirms all is well across the mansion and suit. Shall I brief you on today's schedule or would you prefer to start with a system update?",
-      "time": "2026-06-24T22:08:04.122509",
+      "user_text": "where is iffile tower",
+      "assistant_text": "Stark Tower, sir, is located in Midtown Manhattan, New York City.",
+      "time": "2026-06-25T20:48:30.142486",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "Hello Jarvis how are you",
-          "normalized_text": "hello jarvis how are you",
-          "confidence": 0.3,
-          "source": "llm_fallback",
-          "model_confidence": 0.3,
+          "text": "where is iffile tower",
+          "normalized_text": "where is iffile tower",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
@@ -1043,25 +935,194 @@
       }
     },
     {
-      "user_text": "Hello Jarvis",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-24T22:08:46.178683",
+      "user_text": "kutub minar",
+      "assistant_text": "The Qutub Minar is a UNESCO World Heritage Site located in Delhi, India.",
+      "time": "2026-06-25T20:48:48.228809",
       "metadata": {
         "user": {
-          "intent": "greeting",
-          "text": "Hello Jarvis",
-          "normalized_text": "hello jarvis",
-          "confidence": 0.98,
-          "source": "regex_fallback",
-          "model_confidence": 0.98,
+          "intent": "chat",
+          "text": "kutub minar",
+          "normalized_text": "kutub minar",
+          "confidence": 0.35,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.35,
           "disambiguation_needed": false,
           "execution_status": "success"
         },
         "assistant": {
           "status": "success",
-          "intent": "greeting"
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "what is hieght of it",
+      "assistant_text": "Its height is 73 meters (240 feet), sir.",
+      "time": "2026-06-25T20:49:12.878758",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "what is hieght of it",
+          "normalized_text": "what is hieght of it",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Hello can you listen me",
+      "assistant_text": "Yes, sir, I can hear you clearly.",
+      "time": "2026-06-25T20:49:42.797684",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "Hello can you listen me",
+          "normalized_text": "hello can you listen me",
+          "confidence": 0.40625,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.40625,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Tell me what is my name",
+      "assistant_text": "Your name is Kalpesh, sir.",
+      "time": "2026-06-25T20:49:59.994862",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "Tell me what is my name",
+          "normalized_text": "tell me what is my name",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "who are you",
+      "assistant_text": "I am JARVIS, your personal AI, sir.",
+      "time": "2026-06-25T20:50:17.357790",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "who are you",
+          "normalized_text": "who are you",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "close chrome",
+      "assistant_text": "Closing Google Chrome now, sir.",
+      "time": "2026-06-25T20:50:42.157654",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "close chrome",
+          "normalized_text": "close chrome",
+          "confidence": 0.5,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.5,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "close it",
+      "assistant_text": "Closing Chrome now, sir.",
+      "time": "2026-06-25T20:51:17.176294",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "close it",
+          "normalized_text": "close it",
+          "confidence": 0.46249999999999997,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.46249999999999997,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "close this window",
+      "assistant_text": "Closing this window, sir.",
+      "time": "2026-06-25T20:52:28.557941",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "close this window",
+          "normalized_text": "close this window",
+          "confidence": 0.35,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.35,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "in nashik",
+      "assistant_text": "Understood, Sir. I am ready to assist you in Nashik.",
+      "time": "2026-06-25T21:05:53.739046",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "in nashik",
+          "normalized_text": "in nashik",
+          "confidence": 0.46249999999999997,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.46249999999999997,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
         }
       }
     }
-  ]
+  ],
+  "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey."
 }
