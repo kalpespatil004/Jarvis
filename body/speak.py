@@ -5,7 +5,8 @@ Hybrid TTS router for Jarvis.
 - Offline: use ``body.speak_TTS`` (local Coqui backend)
 
 Public API mirrors both backends: ``speak``, ``ensure_audio_loop_started``,
-``audio_loop``, ``warm_up``.
+``audio_loop``, ``warm_up``, ``interrupt``, ``stop``, ``cancel_all``,
+``is_speaking``.
 """
 
 from __future__ import annotations
@@ -98,6 +99,30 @@ def _get_backend() -> tuple[str, ModuleType]:
         return chosen, module
 
 
+
+def _loaded_backends() -> list[ModuleType]:
+    """Return TTS backends that are already loaded without importing heavy deps."""
+    modules: list[ModuleType] = []
+    with _state_lock:
+        if _backend_module is not None:
+            modules.append(_backend_module)
+    for module_name in ("body.speak_edgetts", "body.speak_TTS"):
+        module = sys.modules.get(module_name)
+        if module is not None and module not in modules:
+            modules.append(module)
+    return modules
+
+
+def _call_loaded_backends(function_name: str) -> bool:
+    """Call a lifecycle function on loaded backends; return True if any ran."""
+    called = False
+    for backend in _loaded_backends():
+        fn = getattr(backend, function_name, None)
+        if callable(fn):
+            fn()
+            called = True
+    return called
+
 def ensure_audio_loop_started() -> None:
     _, backend = _get_backend()
     fn = getattr(backend, "ensure_audio_loop_started", None)
@@ -146,6 +171,49 @@ def wait_until_done(timeout: float | None = None) -> bool:
         return bool(fn(timeout=timeout))
     return True
 
+
+
+def interrupt() -> None:
+    """Stop playback, clear queued speech, and invalidate pending synthesis."""
+    if not _call_loaded_backends("interrupt"):
+        _, backend = _get_backend()
+        fn = getattr(backend, "interrupt", None)
+        if callable(fn):
+            fn()
+
+
+def stop() -> None:
+    """Stop current audio playback only."""
+    if not _call_loaded_backends("stop"):
+        _, backend = _get_backend()
+        fn = getattr(backend, "stop", None)
+        if callable(fn):
+            fn()
+
+
+def cancel_all() -> None:
+    """Clear queued speech without stopping current playback."""
+    if not _call_loaded_backends("cancel_all"):
+        _, backend = _get_backend()
+        fn = getattr(backend, "cancel_all", None)
+        if callable(fn):
+            fn()
+
+
+def is_speaking() -> bool:
+    """Return True when any loaded backend is synthesizing or playing audio."""
+    checked = False
+    for backend in _loaded_backends():
+        fn = getattr(backend, "is_speaking", None)
+        if callable(fn):
+            checked = True
+            if bool(fn()):
+                return True
+    if checked:
+        return False
+    _, backend = _get_backend()
+    fn = getattr(backend, "is_speaking", None)
+    return bool(fn()) if callable(fn) else False
 
 def stop_audio_loop() -> None:
     _, backend = _get_backend()

@@ -464,6 +464,13 @@ class MainWindow(QWidget):
             self._wake_worker.resume_listening()
 
     def _start_command_cycle(self, text: str, return_to_wake: bool):
+        try:
+            from body.speak import interrupt
+
+            interrupt()
+        except Exception as exc:
+            print(f"[TTS] Interrupt failed: {exc}")
+
         if self._command_thread is not None:
             return
 
@@ -519,7 +526,15 @@ class MainWindow(QWidget):
 
     def send_message(self):
         text = self.input_box.text().strip()
-        if not text or self._command_thread is not None:
+        if not text:
+            return
+        if self._command_thread is not None:
+            try:
+                from body.speak import interrupt
+
+                interrupt()
+            except Exception as exc:
+                print(f"[TTS] Interrupt failed: {exc}")
             return
 
         self.input_box.clear()

@@ -4,7 +4,7 @@ import time
 import threading
 
 from body.listen import listen_command
-from body.speak import speak
+from body.speak import interrupt, speak
 from body.wake_word import listen_for_wake_word
 
 from brain.intent_engine import detect_intent
@@ -98,6 +98,8 @@ def _remember_exchange(
 # =========================
 def process_text(command: str) -> str:
 
+    interrupt()
+
     if not command or not command.strip():
         return "Say something meaningful."
 
@@ -141,6 +143,8 @@ def process_text(command: str) -> str:
 # VOICE EXECUTION (SYNC)
 # =========================
 def _execute(command: str):
+
+    interrupt()
 
     acquired = PROCESS_LOCK.acquire(blocking=False)
     if not acquired:
@@ -203,6 +207,7 @@ def brain_loop():
             # 🧠 ACTIVE MODE (ONE COMMAND ONLY)
             # =========================
             command = input("[BRAIN] Type a command: ").strip()
+            interrupt()
             if not command:
                 print("[BRAIN] No command detected.")
                 speak("I didn't catch that.")
