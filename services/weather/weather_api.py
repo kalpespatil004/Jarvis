@@ -8,7 +8,7 @@ import requests
 
 
 # ===================== CONFIG =====================
-API_KEY = "YOUR_OPENWEATHER_API_KEY"   # 🔑 Replace with your API key
+API_KEY = "7f707ac3f9be40f199197a2579d54a5b"   # 🔑 Replace with your API key
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 TIMEOUT = 5
 

@@ -106,13 +106,16 @@ micButton.addEventListener("click", () => {
 
 voiceToggle.addEventListener("click", () => {
     voiceOutputEnabled = !voiceOutputEnabled;
+
     voiceToggle.classList.toggle("active", voiceOutputEnabled);
     voiceToggle.setAttribute("aria-pressed", String(voiceOutputEnabled));
     voiceToggle.innerText = voiceOutputEnabled ? "Enabled" : "Muted";
 
-    if (!voiceOutputEnabled && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-    }
+    console.log(
+        voiceOutputEnabled
+            ? "Backend voice enabled"
+            : "Backend voice muted"
+    );
 });
 
 async function send() {
@@ -152,7 +155,7 @@ async function send() {
 
         connectionStatus.innerText = "Online";
         addMessage(reply, "bot");
-        speak(reply);
+        
     } catch (error) {
         if (requestId !== latestRequestId) return;
 
@@ -185,18 +188,6 @@ function addMessage(text, type) {
     msg.appendChild(body);
     chat.appendChild(msg);
     chat.scrollTop = chat.scrollHeight;
-}
-
-function speak(text) {
-    if (!voiceOutputEnabled || !("speechSynthesis" in window)) return;
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.95;
-    utterance.pitch = 0.9;
-    utterance.volume = 0.9;
-    window.speechSynthesis.speak(utterance);
 }
 
 function setBusy(busy) {

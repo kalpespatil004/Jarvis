@@ -1,7 +1,7 @@
 # for start server : uvicorn api.main:app --reload 
 from concurrent.futures import ThreadPoolExecutor
 import asyncio
-
+from body.speak import speak
 from fastapi import FastAPI
 from brain.brain import process_text
 from fastapi.middleware.cors import CORSMiddleware
@@ -30,7 +30,11 @@ async def ask(query: str):
             loop.run_in_executor(executor, process_text, query),
             timeout=ASK_TIMEOUT_SECONDS,
         )
+
     except asyncio.TimeoutError:
         response = "Jarvis took too long to respond. Please try a shorter command."
+
+    # Speak using Python TTS
+    speak(response)
 
     return {"response": response}

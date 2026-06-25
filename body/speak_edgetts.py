@@ -75,6 +75,7 @@ def _tts_worker(text: str, voice: str) -> None:
 
 
 def speak(text: str, voice: str | None = None) -> None:
+    print("EDGE TTS SPEAKING:", text)
     """Queue speech synthesis and playback without blocking the caller (e.g. Qt UI thread)."""
     ensure_audio_loop_started()
     text = text.replace("*", "")

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-15T07:35:53.851522+00:00",
+  "generated_at": "2026-06-01T06:33:19.432678+00:00",
   "platform": "Windows",
-  "count": 649,
+  "count": 702,
   "apps": [
     {
       "name": "${{arpdisplayname}}",
@@ -11,19 +11,25 @@
     },
     {
       "name": "7zr",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\arm64\\7zr.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\arm64\\7zr.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "7zr",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\x64\\7zr.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\x64\\7zr.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "__nvcc_device_query",
       "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\__nvcc_device_query.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\aapt.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -47,6 +53,12 @@
     },
     {
       "name": "aapt2",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\aapt2.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aapt2",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aapt2.exe",
       "source": "program_files",
       "tag": "utility"
@@ -60,6 +72,12 @@
     {
       "name": "aapt2",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\aapt2.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aarch64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\aarch64-linux-android-ld.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -97,6 +115,18 @@
       "name": "adb",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe",
       "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adb appcontrol",
+      "location": "C:\\ADB_AppControl\\ADBAppControl.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "adb appcontrol version 1.8.6",
+      "location": "C:\\ADB_AppControl\\",
+      "source": "registry",
       "tag": "utility"
     },
     {
@@ -203,6 +233,12 @@
     },
     {
       "name": "aidl",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\aidl.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "aidl",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\aidl.exe",
       "source": "program_files",
       "tag": "utility"
@@ -293,6 +329,12 @@
     },
     {
       "name": "arm-linux-androideabi-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\arm-linux-androideabi-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "arm-linux-androideabi-ld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\arm-linux-androideabi-ld.exe",
       "source": "program_files",
       "tag": "utility"
@@ -312,6 +354,12 @@
     {
       "name": "armsvc",
       "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\ARM\\1.0\\armsvc.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "bcc_compat",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\bcc_compat.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -436,14 +484,8 @@
       "tag": "dev"
     },
     {
-      "name": "vscode",
-      "location": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-      "source": "builtin",
-      "tag": "dev"
-    },
-    {
-      "name": "codesetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-974500e64f0d1cfdf7c9821a2a51c2cb3bf0e561.exe",
+      "name": "codesetup-stable-8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-8761a5560cfd65fdd19ce7e2bd18dab5c0a4d84e.exe",
       "source": "program_files",
       "tag": "dev"
     },
@@ -485,7 +527,7 @@
     },
     {
       "name": "configserviceagent",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ConfigServiceAgent.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\ConfigServiceAgent.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -509,13 +551,25 @@
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -527,13 +581,31 @@
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot",
+      "location": "Microsoft.Copilot_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot_setup",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\Installer\\copilot_setup.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "copilot_setup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\Installer\\copilot_setup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\Installer\\copilot_setup.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -551,7 +623,7 @@
     },
     {
       "name": "copilotupdate",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\CopilotUpdate.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\CopilotUpdate.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -576,12 +648,6 @@
     {
       "name": "crashpad_handler",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\emulator\\crashpad_handler.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "crashpad_handler",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\uninstaller_804e345e\\data\\installer_uninstaller_windows.assets\\crashpad_handler.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -797,6 +863,12 @@
     },
     {
       "name": "dexdump",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\dexdump.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dexdump",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\dexdump.exe",
       "source": "program_files",
       "tag": "utility"
@@ -905,13 +977,25 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -923,7 +1007,7 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -935,13 +1019,25 @@
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -953,7 +1049,7 @@
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1084,12 +1180,6 @@
       "tag": "utility"
     },
     {
-      "name": "gfw-install-azrmobez",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\gfw-install-azrmoBEZ.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "git",
       "location": "C:\\Git\\",
       "source": "registry",
@@ -1175,6 +1265,12 @@
     },
     {
       "name": "i686-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\i686-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "i686-linux-android-ld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\i686-linux-android-ld.exe",
       "source": "program_files",
       "tag": "utility"
@@ -1193,13 +1289,25 @@
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1211,7 +1319,7 @@
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1229,7 +1337,13 @@
     },
     {
       "name": "ie_to_edge_stub",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\BHO\\ie_to_edge_stub.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\BHO\\ie_to_edge_stub.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "ie_to_edge_stub",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\BHO\\ie_to_edge_stub.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1354,6 +1468,18 @@
       "tag": "utility"
     },
     {
+      "name": "l3zsvyam",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\TempState\\l3zsvyam.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "l3zsvyam",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\l3zsvyam.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "lenovo vantage",
       "location": "E046963F.LenovoCompanion_k1h2ywk1493x8!App",
       "source": "uwp",
@@ -1361,235 +1487,235 @@
     },
     {
       "name": "lenovo vantage service",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\\\4.2601.21.0",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\\\4.2601.31.0",
       "source": "registry",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantage.addinhost",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.Vantage.AddinHost.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantage.addinhost.amd64",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.Amd64.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.Vantage.AddinHost.Amd64.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantage.addinhost.x86",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHost.x86.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.Vantage.AddinHost.x86.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantage.addinhostex",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinHostEx.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.Vantage.AddinHostEx.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantage.addininstaller",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.Vantage.AddinInstaller.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.Vantage.AddinInstaller.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovo.vantageservice.installerhelper",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\Lenovo.VantageService.InstallerHelper.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\Lenovo.VantageService.InstallerHelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(batterywidgetaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(BatteryWidgetAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(BatteryWidgetAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(consumeraddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ConsumerAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(ConsumerAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(devicesettingsheartbeataddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(DeviceSettingsHeartbeatAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(DeviceSettingsHeartbeatAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(devicesettingssystemaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(DeviceSettingsSystemAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(DeviceSettingsSystemAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(genericmessagingaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(GenericMessagingAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(GenericMessagingAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(generictelemetryaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(GenericTelemetryAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(GenericTelemetryAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(ideakbdmanageraddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(IdeaKBDManagerAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(IdeaKBDManagerAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(ideanotebookaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(IdeaNotebookAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(IdeaNotebookAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovoaccountaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoAccountAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoAccountAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovoauthenticationaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoAuthenticationAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoAuthenticationAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovocompanionappaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoCompanionAppAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoCompanionAppAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovogamingsystemaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoGamingSystemAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoGamingSystemAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovogaminguseraddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoGamingUserAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoGamingUserAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovohardwarescanaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoHardwareScanAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoHardwareScanAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovoproductivitysystemaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoProductivitySystemAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoProductivitySystemAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovosecurityaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoSecurityAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoSecurityAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovoservicebridgeaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoServiceBridgeAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoServiceBridgeAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(lenovosystemupdateaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(LenovoSystemUpdateAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(LenovoSystemUpdateAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(modernpreloadaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ModernPreloadAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(ModernPreloadAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(multimediaaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(MultimediaAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(MultimediaAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(seheartbeataddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SEHeartBeatAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SEHeartBeatAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(settingswidgetaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SettingsWidgetAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SettingsWidgetAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartbeaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartBEAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartBEAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartdisplayaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartDisplayAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartDisplayAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartinteractaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartInteractAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartInteractAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartnoisecancelledaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartNoiseCancelledAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartNoiseCancelledAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartpaneladdin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPanelAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartPanelAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartperformanceaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPerformanceAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartPerformanceAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(smartperformanceuseraddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(SmartPerformanceUserAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(SmartPerformanceUserAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(thinksmartsenseaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(ThinkSmartSenseAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(ThinkSmartSenseAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantage-(vantagecoreaddin)",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantage-(VantageCoreAddin).exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantage-(VantageCoreAddin).exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "lenovovantageservice",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\LenovoVantageService.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\LenovoVantageService.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1625,6 +1751,12 @@
     },
     {
       "name": "lld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\lld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "lld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\lld.exe",
       "source": "program_files",
       "tag": "utility"
@@ -1638,6 +1770,12 @@
     {
       "name": "lld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\37.0.0\\lld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "llvm-rs-cc",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\llvm-rs-cc.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1693,6 +1831,12 @@
       "name": "mavinject32",
       "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\MavInject32.exe",
       "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "microsoft 365 copilot",
+      "location": "Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe!Microsoft.MicrosoftOfficeHub",
+      "source": "uwp",
       "tag": "utility"
     },
     {
@@ -1805,7 +1949,7 @@
     },
     {
       "name": "microsoftedgecomregistershellarm64",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeComRegisterShellARM64.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeComRegisterShellARM64.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1817,37 +1961,37 @@
     },
     {
       "name": "microsoftedgeupdate",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdate.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdate.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatebroker",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateBroker.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateBroker.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatecomregistershell64",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateComRegisterShell64.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateComRegisterShell64.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatecore",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateCore.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateCore.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdateondemand",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateOnDemand.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateOnDemand.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "microsoftedgeupdatesetup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.233.3\\MicrosoftEdgeUpdateSetup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeUpdate\\1.3.237.7\\MicrosoftEdgeUpdateSetup.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1884,6 +2028,12 @@
     {
       "name": "mipdlp",
       "location": "C:\\Program Files\\Windows Defender\\MipDlp.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mipsel-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\mipsel-linux-android-ld.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1973,13 +2123,31 @@
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1991,9 +2159,21 @@
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
+    },
+    {
+      "name": "mscopilot_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\mscopilot_proxy.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
     },
     {
       "name": "msedge",
@@ -2003,13 +2183,19 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2021,7 +2207,13 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2033,13 +2225,19 @@
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2051,19 +2249,31 @@
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2075,7 +2285,7 @@
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2087,13 +2297,25 @@
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2105,7 +2327,7 @@
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2273,7 +2495,13 @@
     },
     {
       "name": "notification_click_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\notification_click_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\notification_click_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_click_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\notification_click_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2291,13 +2519,25 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2309,7 +2549,7 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2596,6 +2836,12 @@
       "tag": "utility"
     },
     {
+      "name": "ollamasetup",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Ollama\\updates_v2\\0x8DEB210DCFE3975\\OllamaSetup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "on-screen keyboard",
       "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\osk.exe",
       "source": "uwp",
@@ -2669,7 +2915,7 @@
     },
     {
       "name": "passkey_authenticator_plugin",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\passkey_authenticator_plugin.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\passkey_authenticator_plugin.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2728,12 +2974,6 @@
       "tag": "utility"
     },
     {
-      "name": "powerpnt",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "powerpoint",
       "location": "Microsoft.Office.POWERPNT.EXE.15",
       "source": "uwp",
@@ -2783,19 +3023,31 @@
     },
     {
       "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2807,7 +3059,7 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3076,6 +3328,12 @@
       "tag": "utility"
     },
     {
+      "name": "rg",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\OpenAI\\Codex\\bin\\ada252862d154cdd\\rg.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "run",
       "location": "Microsoft.Windows.Shell.RunDialog",
       "source": "uwp",
@@ -3089,7 +3347,7 @@
     },
     {
       "name": "scheduleeventaction",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ScheduleEventAction.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\ScheduleEventAction.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3113,13 +3371,19 @@
     },
     {
       "name": "sendctrlc.x64.b02191cb70385b094c410a8c27775aba",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\AndroidStudio2025.3.4\\tmp\\sendctrlc.x64.B02191CB70385B094C410A8C27775ABA.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "sendctrlc.x64.b02191cb70385b094c410a8c27775aba",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\JetBrains\\PyCharm2026.1\\tmp\\sendctrlc.x64.B02191CB70385B094C410A8C27775ABA.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "servicecontroller",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\ServiceController.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\ServiceController.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3178,9 +3442,27 @@
       "tag": "utility"
     },
     {
-      "name": "spider-man remastered",
-      "location": "C:\\Spider-man Remastered\\",
-      "source": "registry",
+      "name": "snipping tool",
+      "location": "Microsoft.ScreenSketch_8wekyb3d8bbwe!App",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "snippingtool",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\SnippingTool.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "snippingtool",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.ScreenSketch_8wekyb3d8bbwe\\SnippingTool.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "split-select",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\split-select.exe",
+      "source": "program_files",
       "tag": "utility"
     },
     {
@@ -3299,13 +3581,31 @@
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.54\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.54\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\148.0.3967.70\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\148.0.3967.96\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.70\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\148.0.3967.96\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3317,7 +3617,7 @@
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.54\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\148.0.3967.96\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3365,13 +3665,13 @@
     },
     {
       "name": "vantageservicesetup",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\VantageServiceSetup.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\VantageServiceSetup.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "vantageserviceuninst",
-      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.21.0\\VantageServiceUninst.exe",
+      "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\VantageServiceUninst.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3827,6 +4127,12 @@
     },
     {
       "name": "x86_64-linux-android-ld",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\x86_64-linux-android-ld.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "x86_64-linux-android-ld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\36.0.0\\x86_64-linux-android-ld.exe",
       "source": "program_files",
       "tag": "utility"
@@ -3884,6 +4190,12 @@
       "location": "Chrome._crx_cinhimbnkkghhklpknlkffjgod",
       "source": "uwp",
       "tag": "media"
+    },
+    {
+      "name": "zipalign",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\zipalign.exe",
+      "source": "program_files",
+      "tag": "utility"
     },
     {
       "name": "zipalign",

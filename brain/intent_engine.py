@@ -346,16 +346,44 @@ def _regex_fallback_intent(text: str) -> dict[str, Any] | None:
     if re.search(r"\b(convert|change)\b.*(time|timezone|zone)\b", normalized) or \
        re.search(r"\b(ist|utc|gmt|pst|est|cst)\b.*\bto\b.*\b(ist|utc|gmt|pst|est|cst)\b", normalized):
         return _intent("convert_timezone", raw_text, normalized, 0.85, query=raw_text)
-
+    
     # =========================
     # WEATHER
-    # e.g. "weather in pune", "what's the weather"
     # =========================
-    if re.search(r"\b(weather|temperature|forecast|humidity|climate)\b", normalized):
-        city_match = re.search(r"\b(?:in|for|at)\s+([a-z]+(?:\s+[a-z]+)?)", normalized)
-        city = city_match.group(1).strip() if city_match else None
-        return _intent("get_weather", raw_text, normalized, 0.93, city=city)
 
+    if re.search(
+        r"\b(weather|temperature|forecast|humidity|climate)\b",
+        normalized
+    ):
+        # Remove filler words
+        cleaned = re.sub(
+            r"\b(today|todays|tomorrow|current|now|please|tell me|what is|whats|show)\b",
+            "",
+            normalized
+        ).strip()
+
+        city = None
+
+        # weather in pune
+        match = re.search(r"\b(?:in|for|at)\s+([a-z ]+)", cleaned)
+        if match:
+            city = match.group(1).strip()
+
+        # remove extra weather-related words accidentally captured
+        if city:
+            city = re.sub(
+                r"\b(weather|temperature|forecast|humidity|climate)\b",
+                "",
+                city
+            ).strip()
+
+        return _intent(
+            "get_weather",
+            raw_text,
+            normalized,
+            0.95,
+            city=city
+        )
     # =========================
     # NEWS
     # e.g. "latest news", "show me tech news"

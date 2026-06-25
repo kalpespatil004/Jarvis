@@ -17,6 +17,11 @@ import time
 from pathlib import Path
 from types import ModuleType
 from typing import Optional
+import re
+import unicodedata
+
+
+
 
 # Repo root must be on path so ``body.speak_TTS`` / ``body.speak_edgetts`` always
 # resolve to this project (not a third-party ``speak_TTS`` on sys.path).
@@ -111,11 +116,6 @@ def audio_loop() -> None:
         fn()
 
 
-def speak(text: str) -> None:
-    _, backend = _get_backend()
-    fn = getattr(backend, "speak")
-    fn(text)
-
 
 def warm_up(force: bool = False) -> None:
     """
@@ -154,9 +154,56 @@ def stop_audio_loop() -> None:
         fn()
 
 
+
+def clean_for_speech(text: str) -> str:
+    if not text:
+        return ""
+
+    # Remove emojis
+    text = re.sub(
+        "["
+        "\U0001F600-\U0001F64F"
+        "\U0001F300-\U0001F5FF"
+        "\U0001F680-\U0001F6FF"
+        "\U0001F700-\U0001F77F"
+        "\U0001F780-\U0001F7FF"
+        "\U0001F800-\U0001F8FF"
+        "\U0001F900-\U0001F9FF"
+        "\U0001FA00-\U0001FA6F"
+        "\U00002700-\U000027BF"
+        "\U00002600-\U000026FF"
+        "]+",
+        "",
+        text
+    )
+
+    text = "".join(
+        ch for ch in text
+        if unicodedata.category(ch) != "Cf"
+    )
+    return text.strip()
+
+def speak(text: str):
+    print("BEFORE:", repr(text))
+
+    text = clean_for_speech(text)
+
+    print("AFTER :", repr(text))
+
+    
+    if not text:
+        return
+
+    print(f"[TTS] {text}")  # Debug
+
+    _, backend = _get_backend()
+
+    fn = getattr(backend, "speak")
+    fn(text)
+
 if __name__ == "__main__":
     warm_up()
-    speak("Hello. Hybrid TTS is online.")
     speak("If internet is available, I use Edge voice.")
     speak("If internet is unavailable, I switch to offline TTS.")
+    speak("Hello. Hybrid TTS is online🤣😘🤷💕.")
     wait_until_done(timeout=120.0)
