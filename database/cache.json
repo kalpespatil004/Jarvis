@@ -7,383 +7,287 @@
   "conversation_history": [
     {
       "role": "user",
-      "text": "temrature in nashik",
-      "time": "2026-06-01T12:02:52.592926",
+      "text": "What is Object-Oriented Programming?",
+      "time": "2026-06-27T01:48:00.609319",
       "metadata": {
-        "intent": "chat",
-        "text": "temrature in nashik",
-        "normalized_text": "temrature in nashik",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
+        "text": "What is Object-Oriented Programming?",
+        "execution_status": "success",
         "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "I thought about it, but got nothing.",
-      "time": "2026-06-01T12:02:52.592926",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey",
-      "time": "2026-06-24T22:06:59.471821",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hey",
-        "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-24T22:06:59.471821",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hello Jarvis how are you",
-      "time": "2026-06-24T22:08:04.122509",
-      "metadata": {
-        "intent": "chat",
-        "text": "Hello Jarvis how are you",
-        "normalized_text": "hello jarvis how are you",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Good morning, Tony. I'm functioning within optimal parameters, thank you for asking. Systems check confirms all is well across the mansion and suit. Shall I brief you on today's schedule or would you prefer to start with a system update?",
-      "time": "2026-06-24T22:08:04.122509",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hello Jarvis",
-      "time": "2026-06-24T22:08:46.178683",
-      "metadata": {
-        "intent": "greeting",
-        "text": "Hello Jarvis",
-        "normalized_text": "hello jarvis",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-24T22:08:46.178683",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-25T16:10:32.668282",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T16:10:32.668282",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-25T17:04:01.003262",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T17:04:01.003262",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "chrome",
-      "time": "2026-06-25T17:04:53.921745",
-      "metadata": {
-        "intent": "chat",
-        "text": "chrome",
-        "normalized_text": "chrome",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, Google Chrome is a web browser developed by Google, renowned for its speed, simplicity, and vast extension capabilities. Do you have a specific task in mind?",
-      "time": "2026-06-25T17:04:53.921745",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-25T18:19:31.333910",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex_fallback",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T18:19:31.333910",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "st to 100",
-      "time": "2026-06-25T18:20:29.943540",
-      "metadata": {
-        "intent": "chat",
-        "text": "st to 100",
-        "normalized_text": "st to 100",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100.",
-      "time": "2026-06-25T18:20:29.943540",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "set to 100",
-      "time": "2026-06-25T18:21:31.473417",
-      "metadata": {
-        "intent": "chat",
-        "text": "set to 100",
-        "normalized_text": "set to 100",
-        "confidence": 0.3,
-        "source": "llm_fallback",
-        "model_confidence": 0.3,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Acknowledged.",
-      "time": "2026-06-25T18:21:31.473417",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "what is ai",
-      "time": "2026-06-25T18:26:24.542485",
-      "metadata": {
-        "intent": "chat",
-        "text": "what is ai",
-        "normalized_text": "what is ai",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Artificial intelligence refers to the simulation of human intelligence processes by machines, particularly computer systems. Key processes include learning, reasoning, and self-correction.",
-      "time": "2026-06-25T18:26:24.542485",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "where is mangi tungi",
-      "time": "2026-06-25T18:26:53.342356",
-      "metadata": {
-        "intent": "chat",
-        "text": "where is mangi tungi",
-        "normalized_text": "where is mangi tungi",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Mangi Tungi is a prominent twin-pinnacled peak and a significant Jain pilgrimage site. It is located in the Nashik district of Maharashtra, India, within the Satpura mountain range.",
-      "time": "2026-06-25T18:26:53.342356",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "how many step or staire are there",
-      "time": "2026-06-25T18:27:32.536142",
-      "metadata": {
-        "intent": "chat",
-        "text": "how many step or staire are there",
-        "normalized_text": "how many step or staire are there",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Reports indicate there are approximately 3,500 steps to ascend to the Mangi Tungi peaks.",
-      "time": "2026-06-25T18:27:32.536142",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
-      "time": "2026-06-25T18:28:32.395519",
-      "metadata": {
-        "intent": "chat",
-        "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
-        "normalized_text": "which is harder to trek brahmha giri or mangi tungi and compare stair",
-        "confidence": 0.9,
-        "source": "regex_fallback",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Comparing the two:\n\n**Mangi Tungi:**\n*   **Stairs:** Approximately 3,500 steps.\n*   **Difficulty:** Considered challenging, primarily due to the extensive number of steps leading to both peaks. It is a sustained ascent.\n\n**Brahmagiri:**\n*   **Stairs:** Typically around 700-800 steps to reach the top.\n*   **Difficulty:** Also considered moderately challenging, offering a mix of steps and rocky paths, leading to the source of the Godavari.\n\n**Comparison:**\nBased purely on the number of stairs, **Mangi Tungi** presents a significantly harder ascent due to its much higher stair count, requiring greater endurance for the continuous climb. While both are treks, the sheer volume of steps makes Mangi Tungi more arduous in that specific aspect.",
-      "time": "2026-06-25T18:28:32.395519",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hi",
-      "time": "2026-06-25T19:42:57.295438",
-      "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
         "source": "regex",
-        "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
+        "intent": "chat",
+        "normalized_text": "what is object oriented programming ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
       }
     },
     {
       "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T19:42:57.295438",
+      "text": "Sir, Object-Oriented Programming is a paradigm that organizes software design around \"objects\" that encapsulate data and methods for modular and reusable code.",
+      "time": "2026-06-27T01:48:00.609319",
       "metadata": {
         "status": "success",
-        "intent": "greeting"
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "What is Natural Language Processing?",
+      "time": "2026-06-27T01:50:34.683963",
+      "metadata": {
+        "text": "What is Natural Language Processing?",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "what is natural language processing ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, Natural Language Processing is an artificial intelligence field that enables computers to understand, interpret, and generate human language.",
+      "time": "2026-06-27T01:50:34.683963",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Explain Retrieval-Augmented Generation (RAG).",
+      "time": "2026-06-27T01:50:57.493093",
+      "metadata": {
+        "text": "Explain Retrieval-Augmented Generation (RAG).",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "explain retrieval augmented generation rag ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from a knowledge base before generating a response.",
+      "time": "2026-06-27T01:50:57.493093",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Write a Python program to reverse a string.",
+      "time": "2026-06-27T01:51:54.577631",
+      "metadata": {
+        "text": "Write a Python program to reverse a string.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "write a python program to reverse a string ",
+        "model_confidence": 0.39499999999999996,
+        "confidence": 0.39499999999999996
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, a Python program to reverse a string can be `def reverse_string(s): return s[::-1]`.",
+      "time": "2026-06-27T01:51:54.577631",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Explain binary search with Python code.",
+      "time": "2026-06-27T01:53:09.992333",
+      "metadata": {
+        "text": "Explain binary search with Python code.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "explain binary search with python code ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `low, high = 0, len(arr)-1; while low <= high: mid = (low+high)//2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid+1; else: high = mid-1`.",
+      "time": "2026-06-27T01:53:09.992333",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Write a Java program for a binary search.",
+      "time": "2026-06-27T01:53:38.674710",
+      "metadata": {
+        "text": "Write a Java program for a binary search.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "write a java program for a binary search ",
+        "model_confidence": 0.44999999999999996,
+        "confidence": 0.44999999999999996
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
+      "time": "2026-06-27T01:53:38.674710",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Write a Java program for a binary search.",
+      "time": "2026-06-27T01:53:50.102287",
+      "metadata": {
+        "text": "Write a Java program for a binary search.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "write a java program for a binary search ",
+        "model_confidence": 0.44999999999999996,
+        "confidence": 0.44999999999999996
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
+      "time": "2026-06-27T01:53:50.102287",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Explain binary search with Python code.",
+      "time": "2026-06-27T01:54:03.165008",
+      "metadata": {
+        "text": "Explain binary search with Python code.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "explain binary search with python code ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `def binary_search(arr, target): low, high = 0, len(arr)-1; while low <= high: mid = (low + high) // 2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid + 1; else: high = mid - 1; return -1`.",
+      "time": "2026-06-27T01:54:03.165008",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey whats your real name",
+      "time": "2026-06-27T01:55:25.092525",
+      "metadata": {
+        "text": "hey whats your real name",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "hey whats your real name",
+        "model_confidence": 0.35,
+        "confidence": 0.35
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, my designation and identity is JARVIS.",
+      "time": "2026-06-27T01:55:25.092525",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
+      "time": "2026-06-27T01:56:30.978475",
+      "metadata": {
+        "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "explain how a modern ai assistant like jarvis processes a user s voice command from speech recognition to response generation including the role of stt intent detection memory llms and tts ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, I process voice commands by converting speech to text via STT, then detecting intent, leveraging memory for context, generating responses with LLMs, and vocalizing them through TTS.",
+      "time": "2026-06-27T01:56:30.978475",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Explain the future of human-AI collaboration.",
+      "time": "2026-06-27T01:57:41.367070",
+      "metadata": {
+        "text": "Explain the future of human-AI collaboration.",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "chat",
+        "normalized_text": "explain the future of human ai collaboration ",
+        "model_confidence": 0.9,
+        "confidence": 0.9
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Sir, the future of human-AI collaboration will foster a symbiotic relationship, enhancing human capabilities and driving innovation through shared problem-solving and mutual augmentation.",
+      "time": "2026-06-27T01:57:41.367070",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
       }
     },
     {
       "role": "user",
       "text": "chrome",
-      "time": "2026-06-25T19:43:22.311517",
+      "time": "2026-06-27T02:14:36.321165",
       "metadata": {
-        "intent": "chat",
         "text": "chrome",
-        "normalized_text": "chrome",
-        "confidence": 0.575,
-        "source": "local_classifier_fallback",
-        "model_confidence": 0.575,
+        "execution_status": "success",
         "disambiguation_needed": false,
-        "execution_status": "success"
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "chrome",
+        "model_confidence": 0.575,
+        "confidence": 0.575
       }
     },
     {
       "role": "assistant",
-      "text": "Opening Google Chrome for you now, Sir.",
-      "time": "2026-06-25T19:43:22.311517",
+      "text": "\u2705 Opening chrome",
+      "time": "2026-06-27T02:14:36.321165",
       "metadata": {
         "status": "success",
         "intent": "chat"
@@ -392,22 +296,22 @@
     {
       "role": "user",
       "text": "notepad",
-      "time": "2026-06-25T19:43:38.951472",
+      "time": "2026-06-27T02:14:57.342293",
       "metadata": {
-        "intent": "chat",
         "text": "notepad",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
         "normalized_text": "notepad",
-        "confidence": 0.35,
-        "source": "local_classifier_fallback",
         "model_confidence": 0.35,
-        "disambiguation_needed": false,
-        "execution_status": "success"
+        "confidence": 0.35
       }
     },
     {
       "role": "assistant",
-      "text": "Opening Notepad for you now, Sir.",
-      "time": "2026-06-25T19:43:38.951472",
+      "text": "\u2705 Opening notepad",
+      "time": "2026-06-27T02:14:57.342293",
       "metadata": {
         "status": "success",
         "intent": "chat"
@@ -415,23 +319,95 @@
     },
     {
       "role": "user",
-      "text": "hi",
-      "time": "2026-06-25T20:45:28.038818",
+      "text": "create a file",
+      "time": "2026-06-27T02:16:46.239732",
       "metadata": {
-        "intent": "greeting",
-        "text": "hi",
-        "normalized_text": "hi",
-        "confidence": 0.98,
-        "source": "regex",
-        "model_confidence": 0.98,
+        "text": "create a file",
+        "execution_status": "success",
         "disambiguation_needed": false,
-        "execution_status": "success"
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "create a file",
+        "model_confidence": 0.425,
+        "confidence": 0.425
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Certainly, what should the file be named and where would you like it stored?",
+      "time": "2026-06-27T02:16:46.239732",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "jarvis.py",
+      "time": "2026-06-27T02:17:06.740774",
+      "metadata": {
+        "text": "jarvis.py",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "jarvis py",
+        "model_confidence": 0.35,
+        "confidence": 0.35
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Understood, 'jarvis.py' it is; please indicate the desired storage location for this file, sir.",
+      "time": "2026-06-27T02:17:06.740774",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "downloads",
+      "time": "2026-06-27T02:17:19.529349",
+      "metadata": {
+        "text": "downloads",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "local_classifier_fallback",
+        "intent": "chat",
+        "normalized_text": "downloads",
+        "model_confidence": 0.35,
+        "confidence": 0.35
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Creating 'jarvis.py' in your Downloads folder now, sir.",
+      "time": "2026-06-27T02:17:19.529349",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Hello",
+      "time": "2026-06-27T10:13:57.678232",
+      "metadata": {
+        "text": "Hello",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "greeting",
+        "normalized_text": "hello",
+        "model_confidence": 0.98,
+        "confidence": 0.98
       }
     },
     {
       "role": "assistant",
       "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T20:45:28.038818",
+      "time": "2026-06-27T10:13:57.678232",
       "metadata": {
         "status": "success",
         "intent": "greeting"
@@ -439,23 +415,47 @@
     },
     {
       "role": "user",
-      "text": "hey",
-      "time": "2026-06-25T20:48:02.785311",
+      "text": "Hello",
+      "time": "2026-06-27T10:14:40.391162",
       "metadata": {
+        "text": "Hello",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
         "intent": "greeting",
-        "text": "hey",
+        "normalized_text": "hello",
+        "model_confidence": 0.98,
+        "confidence": 0.98
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-27T10:14:40.391162",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Hey",
+      "time": "2026-06-27T15:09:30.144387",
+      "metadata": {
+        "text": "Hey",
+        "execution_status": "success",
+        "disambiguation_needed": false,
+        "source": "regex",
+        "intent": "greeting",
         "normalized_text": "hey",
-        "confidence": 0.98,
-        "source": "regex",
         "model_confidence": 0.98,
-        "disambiguation_needed": false,
-        "execution_status": "success"
+        "confidence": 0.98
       }
     },
     {
       "role": "assistant",
       "text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T20:48:02.785311",
+      "time": "2026-06-27T15:09:30.144387",
       "metadata": {
         "status": "success",
         "intent": "greeting"
@@ -463,239 +463,23 @@
     },
     {
       "role": "user",
-      "text": "where is iffile tower",
-      "time": "2026-06-25T20:48:30.142486",
+      "text": "Hey can you hear me",
+      "time": "2026-06-27T15:09:46.501098",
       "metadata": {
-        "intent": "chat",
-        "text": "where is iffile tower",
-        "normalized_text": "where is iffile tower",
-        "confidence": 0.9,
-        "source": "regex",
-        "model_confidence": 0.9,
+        "text": "Hey can you hear me",
+        "execution_status": "success",
         "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Stark Tower, sir, is located in Midtown Manhattan, New York City.",
-      "time": "2026-06-25T20:48:30.142486",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "kutub minar",
-      "time": "2026-06-25T20:48:48.228809",
-      "metadata": {
-        "intent": "chat",
-        "text": "kutub minar",
-        "normalized_text": "kutub minar",
-        "confidence": 0.35,
         "source": "local_classifier_fallback",
-        "model_confidence": 0.35,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "The Qutub Minar is a UNESCO World Heritage Site located in Delhi, India.",
-      "time": "2026-06-25T20:48:48.228809",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "what is hieght of it",
-      "time": "2026-06-25T20:49:12.878758",
-      "metadata": {
         "intent": "chat",
-        "text": "what is hieght of it",
-        "normalized_text": "what is hieght of it",
-        "confidence": 0.9,
-        "source": "regex",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Its height is 73 meters (240 feet), sir.",
-      "time": "2026-06-25T20:49:12.878758",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hello can you listen me",
-      "time": "2026-06-25T20:49:42.797684",
-      "metadata": {
-        "intent": "chat",
-        "text": "Hello can you listen me",
-        "normalized_text": "hello can you listen me",
-        "confidence": 0.40625,
-        "source": "local_classifier_fallback",
+        "normalized_text": "hey can you hear me",
         "model_confidence": 0.40625,
-        "disambiguation_needed": false,
-        "execution_status": "success"
+        "confidence": 0.40625
       }
     },
     {
       "role": "assistant",
-      "text": "Yes, sir, I can hear you clearly.",
-      "time": "2026-06-25T20:49:42.797684",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Tell me what is my name",
-      "time": "2026-06-25T20:49:59.994862",
-      "metadata": {
-        "intent": "chat",
-        "text": "Tell me what is my name",
-        "normalized_text": "tell me what is my name",
-        "confidence": 0.9,
-        "source": "regex",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Your name is Kalpesh, sir.",
-      "time": "2026-06-25T20:49:59.994862",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "who are you",
-      "time": "2026-06-25T20:50:17.357790",
-      "metadata": {
-        "intent": "chat",
-        "text": "who are you",
-        "normalized_text": "who are you",
-        "confidence": 0.9,
-        "source": "regex",
-        "model_confidence": 0.9,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "I am JARVIS, your personal AI, sir.",
-      "time": "2026-06-25T20:50:17.357790",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "close chrome",
-      "time": "2026-06-25T20:50:42.157654",
-      "metadata": {
-        "intent": "chat",
-        "text": "close chrome",
-        "normalized_text": "close chrome",
-        "confidence": 0.5,
-        "source": "local_classifier_fallback",
-        "model_confidence": 0.5,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Closing Google Chrome now, sir.",
-      "time": "2026-06-25T20:50:42.157654",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "close it",
-      "time": "2026-06-25T20:51:17.176294",
-      "metadata": {
-        "intent": "chat",
-        "text": "close it",
-        "normalized_text": "close it",
-        "confidence": 0.46249999999999997,
-        "source": "local_classifier_fallback",
-        "model_confidence": 0.46249999999999997,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Closing Chrome now, sir.",
-      "time": "2026-06-25T20:51:17.176294",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "close this window",
-      "time": "2026-06-25T20:52:28.557941",
-      "metadata": {
-        "intent": "chat",
-        "text": "close this window",
-        "normalized_text": "close this window",
-        "confidence": 0.35,
-        "source": "local_classifier_fallback",
-        "model_confidence": 0.35,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Closing this window, sir.",
-      "time": "2026-06-25T20:52:28.557941",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "in nashik",
-      "time": "2026-06-25T21:05:53.739046",
-      "metadata": {
-        "intent": "chat",
-        "text": "in nashik",
-        "normalized_text": "in nashik",
-        "confidence": 0.46249999999999997,
-        "source": "local_classifier_fallback",
-        "model_confidence": 0.46249999999999997,
-        "disambiguation_needed": false,
-        "execution_status": "success"
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Understood, Sir. I am ready to assist you in Nashik.",
-      "time": "2026-06-25T21:05:53.739046",
+      "text": "I hear you clearly, Kalpesh.",
+      "time": "2026-06-27T15:09:46.501098",
       "metadata": {
         "status": "success",
         "intent": "chat"
@@ -704,145 +488,250 @@
   ],
   "conversation_turns": [
     {
-      "user_text": "set to 100",
-      "assistant_text": "Acknowledged.",
-      "time": "2026-06-25T18:21:31.473417",
+      "user_text": "What is Object-Oriented Programming?",
+      "assistant_text": "Sir, Object-Oriented Programming is a paradigm that organizes software design around \"objects\" that encapsulate data and methods for modular and reusable code.",
+      "time": "2026-06-27T01:48:00.609319",
       "metadata": {
         "user": {
-          "intent": "chat",
-          "text": "set to 100",
-          "normalized_text": "set to 100",
-          "confidence": 0.3,
-          "source": "llm_fallback",
-          "model_confidence": 0.3,
+          "text": "What is Object-Oriented Programming?",
+          "execution_status": "success",
           "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "what is ai",
-      "assistant_text": "Artificial intelligence refers to the simulation of human intelligence processes by machines, particularly computer systems. Key processes include learning, reasoning, and self-correction.",
-      "time": "2026-06-25T18:26:24.542485",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "what is ai",
-          "normalized_text": "what is ai",
-          "confidence": 0.9,
-          "source": "regex_fallback",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "where is mangi tungi",
-      "assistant_text": "Mangi Tungi is a prominent twin-pinnacled peak and a significant Jain pilgrimage site. It is located in the Nashik district of Maharashtra, India, within the Satpura mountain range.",
-      "time": "2026-06-25T18:26:53.342356",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "where is mangi tungi",
-          "normalized_text": "where is mangi tungi",
-          "confidence": 0.9,
-          "source": "regex_fallback",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "how many step or staire are there",
-      "assistant_text": "Reports indicate there are approximately 3,500 steps to ascend to the Mangi Tungi peaks.",
-      "time": "2026-06-25T18:27:32.536142",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "how many step or staire are there",
-          "normalized_text": "how many step or staire are there",
-          "confidence": 0.9,
-          "source": "regex_fallback",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
-      "assistant_text": "Comparing the two:\n\n**Mangi Tungi:**\n*   **Stairs:** Approximately 3,500 steps.\n*   **Difficulty:** Considered challenging, primarily due to the extensive number of steps leading to both peaks. It is a sustained ascent.\n\n**Brahmagiri:**\n*   **Stairs:** Typically around 700-800 steps to reach the top.\n*   **Difficulty:** Also considered moderately challenging, offering a mix of steps and rocky paths, leading to the source of the Godavari.\n\n**Comparison:**\nBased purely on the number of stairs, **Mangi Tungi** presents a significantly harder ascent due to its much higher stair count, requiring greater endurance for the continuous climb. While both are treks, the sheer volume of steps makes Mangi Tungi more arduous in that specific aspect.",
-      "time": "2026-06-25T18:28:32.395519",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "which is harder to trek brahmha giri or mangi tungi , and compare stair",
-          "normalized_text": "which is harder to trek brahmha giri or mangi tungi and compare stair",
-          "confidence": 0.9,
-          "source": "regex_fallback",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "hi",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T19:42:57.295438",
-      "metadata": {
-        "user": {
-          "intent": "greeting",
-          "text": "hi",
-          "normalized_text": "hi",
-          "confidence": 0.98,
           "source": "regex",
-          "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
+          "intent": "chat",
+          "normalized_text": "what is object oriented programming ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
         },
         "assistant": {
           "status": "success",
-          "intent": "greeting"
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "What is Natural Language Processing?",
+      "assistant_text": "Sir, Natural Language Processing is an artificial intelligence field that enables computers to understand, interpret, and generate human language.",
+      "time": "2026-06-27T01:50:34.683963",
+      "metadata": {
+        "user": {
+          "text": "What is Natural Language Processing?",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "what is natural language processing ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Explain Retrieval-Augmented Generation (RAG).",
+      "assistant_text": "Sir, Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from a knowledge base before generating a response.",
+      "time": "2026-06-27T01:50:57.493093",
+      "metadata": {
+        "user": {
+          "text": "Explain Retrieval-Augmented Generation (RAG).",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "explain retrieval augmented generation rag ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Write a Python program to reverse a string.",
+      "assistant_text": "Sir, a Python program to reverse a string can be `def reverse_string(s): return s[::-1]`.",
+      "time": "2026-06-27T01:51:54.577631",
+      "metadata": {
+        "user": {
+          "text": "Write a Python program to reverse a string.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "write a python program to reverse a string ",
+          "model_confidence": 0.39499999999999996,
+          "confidence": 0.39499999999999996
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Explain binary search with Python code.",
+      "assistant_text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `low, high = 0, len(arr)-1; while low <= high: mid = (low+high)//2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid+1; else: high = mid-1`.",
+      "time": "2026-06-27T01:53:09.992333",
+      "metadata": {
+        "user": {
+          "text": "Explain binary search with Python code.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "explain binary search with python code ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Write a Java program for a binary search.",
+      "assistant_text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
+      "time": "2026-06-27T01:53:38.674710",
+      "metadata": {
+        "user": {
+          "text": "Write a Java program for a binary search.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "write a java program for a binary search ",
+          "model_confidence": 0.44999999999999996,
+          "confidence": 0.44999999999999996
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Write a Java program for a binary search.",
+      "assistant_text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
+      "time": "2026-06-27T01:53:50.102287",
+      "metadata": {
+        "user": {
+          "text": "Write a Java program for a binary search.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "write a java program for a binary search ",
+          "model_confidence": 0.44999999999999996,
+          "confidence": 0.44999999999999996
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Explain binary search with Python code.",
+      "assistant_text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `def binary_search(arr, target): low, high = 0, len(arr)-1; while low <= high: mid = (low + high) // 2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid + 1; else: high = mid - 1; return -1`.",
+      "time": "2026-06-27T01:54:03.165008",
+      "metadata": {
+        "user": {
+          "text": "Explain binary search with Python code.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "explain binary search with python code ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "hey whats your real name",
+      "assistant_text": "Sir, my designation and identity is JARVIS.",
+      "time": "2026-06-27T01:55:25.092525",
+      "metadata": {
+        "user": {
+          "text": "hey whats your real name",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "hey whats your real name",
+          "model_confidence": 0.35,
+          "confidence": 0.35
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
+      "assistant_text": "Sir, I process voice commands by converting speech to text via STT, then detecting intent, leveraging memory for context, generating responses with LLMs, and vocalizing them through TTS.",
+      "time": "2026-06-27T01:56:30.978475",
+      "metadata": {
+        "user": {
+          "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "explain how a modern ai assistant like jarvis processes a user s voice command from speech recognition to response generation including the role of stt intent detection memory llms and tts ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Explain the future of human-AI collaboration.",
+      "assistant_text": "Sir, the future of human-AI collaboration will foster a symbiotic relationship, enhancing human capabilities and driving innovation through shared problem-solving and mutual augmentation.",
+      "time": "2026-06-27T01:57:41.367070",
+      "metadata": {
+        "user": {
+          "text": "Explain the future of human-AI collaboration.",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "chat",
+          "normalized_text": "explain the future of human ai collaboration ",
+          "model_confidence": 0.9,
+          "confidence": 0.9
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
         }
       }
     },
     {
       "user_text": "chrome",
-      "assistant_text": "Opening Google Chrome for you now, Sir.",
-      "time": "2026-06-25T19:43:22.311517",
+      "assistant_text": "\u2705 Opening chrome",
+      "time": "2026-06-27T02:14:36.321165",
       "metadata": {
         "user": {
-          "intent": "chat",
           "text": "chrome",
-          "normalized_text": "chrome",
-          "confidence": 0.575,
-          "source": "local_classifier_fallback",
-          "model_confidence": 0.575,
+          "execution_status": "success",
           "disambiguation_needed": false,
-          "execution_status": "success"
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "chrome",
+          "model_confidence": 0.575,
+          "confidence": 0.575
         },
         "assistant": {
           "status": "success",
@@ -852,18 +741,18 @@
     },
     {
       "user_text": "notepad",
-      "assistant_text": "Opening Notepad for you now, Sir.",
-      "time": "2026-06-25T19:43:38.951472",
+      "assistant_text": "\u2705 Opening notepad",
+      "time": "2026-06-27T02:14:57.342293",
       "metadata": {
         "user": {
-          "intent": "chat",
           "text": "notepad",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
           "normalized_text": "notepad",
-          "confidence": 0.35,
-          "source": "local_classifier_fallback",
           "model_confidence": 0.35,
-          "disambiguation_needed": false,
-          "execution_status": "success"
+          "confidence": 0.35
         },
         "assistant": {
           "status": "success",
@@ -872,19 +761,82 @@
       }
     },
     {
-      "user_text": "hi",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T20:45:28.038818",
+      "user_text": "create a file",
+      "assistant_text": "Certainly, what should the file be named and where would you like it stored?",
+      "time": "2026-06-27T02:16:46.239732",
       "metadata": {
         "user": {
-          "intent": "greeting",
-          "text": "hi",
-          "normalized_text": "hi",
-          "confidence": 0.98,
-          "source": "regex",
-          "model_confidence": 0.98,
+          "text": "create a file",
+          "execution_status": "success",
           "disambiguation_needed": false,
-          "execution_status": "success"
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "create a file",
+          "model_confidence": 0.425,
+          "confidence": 0.425
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "jarvis.py",
+      "assistant_text": "Understood, 'jarvis.py' it is; please indicate the desired storage location for this file, sir.",
+      "time": "2026-06-27T02:17:06.740774",
+      "metadata": {
+        "user": {
+          "text": "jarvis.py",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "jarvis py",
+          "model_confidence": 0.35,
+          "confidence": 0.35
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "downloads",
+      "assistant_text": "Creating 'jarvis.py' in your Downloads folder now, sir.",
+      "time": "2026-06-27T02:17:19.529349",
+      "metadata": {
+        "user": {
+          "text": "downloads",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "local_classifier_fallback",
+          "intent": "chat",
+          "normalized_text": "downloads",
+          "model_confidence": 0.35,
+          "confidence": 0.35
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      }
+    },
+    {
+      "user_text": "Hello",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-27T10:13:57.678232",
+      "metadata": {
+        "user": {
+          "text": "Hello",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "greeting",
+          "normalized_text": "hello",
+          "model_confidence": 0.98,
+          "confidence": 0.98
         },
         "assistant": {
           "status": "success",
@@ -893,19 +845,40 @@
       }
     },
     {
-      "user_text": "hey",
+      "user_text": "Hello",
       "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-25T20:48:02.785311",
+      "time": "2026-06-27T10:14:40.391162",
       "metadata": {
         "user": {
+          "text": "Hello",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
           "intent": "greeting",
-          "text": "hey",
+          "normalized_text": "hello",
+          "model_confidence": 0.98,
+          "confidence": 0.98
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      }
+    },
+    {
+      "user_text": "Hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-27T15:09:30.144387",
+      "metadata": {
+        "user": {
+          "text": "Hey",
+          "execution_status": "success",
+          "disambiguation_needed": false,
+          "source": "regex",
+          "intent": "greeting",
           "normalized_text": "hey",
-          "confidence": 0.98,
-          "source": "regex",
           "model_confidence": 0.98,
-          "disambiguation_needed": false,
-          "execution_status": "success"
+          "confidence": 0.98
         },
         "assistant": {
           "status": "success",
@@ -914,208 +887,19 @@
       }
     },
     {
-      "user_text": "where is iffile tower",
-      "assistant_text": "Stark Tower, sir, is located in Midtown Manhattan, New York City.",
-      "time": "2026-06-25T20:48:30.142486",
+      "user_text": "Hey can you hear me",
+      "assistant_text": "I hear you clearly, Kalpesh.",
+      "time": "2026-06-27T15:09:46.501098",
       "metadata": {
         "user": {
-          "intent": "chat",
-          "text": "where is iffile tower",
-          "normalized_text": "where is iffile tower",
-          "confidence": 0.9,
-          "source": "regex",
-          "model_confidence": 0.9,
+          "text": "Hey can you hear me",
+          "execution_status": "success",
           "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "kutub minar",
-      "assistant_text": "The Qutub Minar is a UNESCO World Heritage Site located in Delhi, India.",
-      "time": "2026-06-25T20:48:48.228809",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "kutub minar",
-          "normalized_text": "kutub minar",
-          "confidence": 0.35,
           "source": "local_classifier_fallback",
-          "model_confidence": 0.35,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "what is hieght of it",
-      "assistant_text": "Its height is 73 meters (240 feet), sir.",
-      "time": "2026-06-25T20:49:12.878758",
-      "metadata": {
-        "user": {
           "intent": "chat",
-          "text": "what is hieght of it",
-          "normalized_text": "what is hieght of it",
-          "confidence": 0.9,
-          "source": "regex",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Hello can you listen me",
-      "assistant_text": "Yes, sir, I can hear you clearly.",
-      "time": "2026-06-25T20:49:42.797684",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "Hello can you listen me",
-          "normalized_text": "hello can you listen me",
-          "confidence": 0.40625,
-          "source": "local_classifier_fallback",
+          "normalized_text": "hey can you hear me",
           "model_confidence": 0.40625,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Tell me what is my name",
-      "assistant_text": "Your name is Kalpesh, sir.",
-      "time": "2026-06-25T20:49:59.994862",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "Tell me what is my name",
-          "normalized_text": "tell me what is my name",
-          "confidence": 0.9,
-          "source": "regex",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "who are you",
-      "assistant_text": "I am JARVIS, your personal AI, sir.",
-      "time": "2026-06-25T20:50:17.357790",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "who are you",
-          "normalized_text": "who are you",
-          "confidence": 0.9,
-          "source": "regex",
-          "model_confidence": 0.9,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "close chrome",
-      "assistant_text": "Closing Google Chrome now, sir.",
-      "time": "2026-06-25T20:50:42.157654",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "close chrome",
-          "normalized_text": "close chrome",
-          "confidence": 0.5,
-          "source": "local_classifier_fallback",
-          "model_confidence": 0.5,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "close it",
-      "assistant_text": "Closing Chrome now, sir.",
-      "time": "2026-06-25T20:51:17.176294",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "close it",
-          "normalized_text": "close it",
-          "confidence": 0.46249999999999997,
-          "source": "local_classifier_fallback",
-          "model_confidence": 0.46249999999999997,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "close this window",
-      "assistant_text": "Closing this window, sir.",
-      "time": "2026-06-25T20:52:28.557941",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "close this window",
-          "normalized_text": "close this window",
-          "confidence": 0.35,
-          "source": "local_classifier_fallback",
-          "model_confidence": 0.35,
-          "disambiguation_needed": false,
-          "execution_status": "success"
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "in nashik",
-      "assistant_text": "Understood, Sir. I am ready to assist you in Nashik.",
-      "time": "2026-06-25T21:05:53.739046",
-      "metadata": {
-        "user": {
-          "intent": "chat",
-          "text": "in nashik",
-          "normalized_text": "in nashik",
-          "confidence": 0.46249999999999997,
-          "source": "local_classifier_fallback",
-          "model_confidence": 0.46249999999999997,
-          "disambiguation_needed": false,
-          "execution_status": "success"
+          "confidence": 0.40625
         },
         "assistant": {
           "status": "success",
@@ -1124,5 +908,5 @@
       }
     }
   ],
-  "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey."
+  "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x12, greeting x10.\nOlder user requests included: temrature in nashik; hey; Hello Jarvis how are you; Hello Jarvis; hi; hi; chrome; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: where is mangi tungi; how many step or staire are there; which is harder to trek brahmha giri or mangi tungi , and compare stair; hi; chrome; notepad; hi; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: Hello can you listen me; Tell me what is my name; who are you; close chrome; close it; close this window; in nashik; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: who are you; hi; who are you; where is tajmahal; and where is kutub minar; hii; hello; who are you.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: what is capital of india; what is my name; who are you; hi; who are you; who are you; hi how are you; what is my name.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: what is most famous spot there; hi; where is kutub minar; what is height of it; wo asked the hieght of stark tower; hi; what is capital of france; hello jarvis."
 }

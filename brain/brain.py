@@ -186,8 +186,10 @@ def _execute(command: str):
 # MAIN LOOP (STATE CONTROL)
 # =========================
 def brain_loop():
-
-    speak("Jarvis online.")
+    # Speak startup greeting only once per process run
+    if not getattr(brain_loop, "_greeted", False):
+        speak("Jarvis online.")
+        setattr(brain_loop, "_greeted", True)
 
     while True:
         try:

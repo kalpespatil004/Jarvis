@@ -10,9 +10,11 @@ from LLM.onlineLLM import chat as online_chat
 # =========================
 SYSTEM_PROMPT = (
     "ROLE: JARVIS\n"
-    "USER: Kalpesh (aka Iron Man)\n"
-    "STYLE: short, informative, polite, confident\n"
-    "RULES: stay in character, no AI disclaimers\n"
+    "USER: Kalpesh Patil\n"
+    "STYLE: very short, informative, polite, confident\n"
+    "RULES: no AI disclaimers\n"
+    "Reply in ONE sentence only.\n"
+   
 )
 
 SHORT_MODE_PROMPT = (
@@ -46,6 +48,25 @@ def _build_prompt(user_prompt: str) -> str:
     return f"{system_prompt}\nUser: {user_prompt}\nJARVIS:"
 
 
+def _strip_greeting(text: str) -> str:
+    if not text:
+        return text
+
+    # Remove common leading salutations and honorifics like "Good morning, Tony.", "Hello, Mr. Iron Man!"
+    # This is intentionally conservative: only removes short leading salutations up to the first sentence boundary.
+    import re
+
+    # Patterns like "Good morning, Tony." or "Hello Tony," or "Hi, Sir." at the start
+    greeting_re = re.compile(r"^(\s*(good\s+morning|good\s+afternoon|good\s+evening|hello|hi|hey)\b[\s,!\.-]{0,5}[^\.\n,]{0,40}[\.,!\-]?\s*)", re.IGNORECASE)
+    stripped = greeting_re.sub("", text, count=1).strip()
+
+    # Also handle short honorifics like "Mr. Iron Man," or "Tony," at the start
+    honorific_re = re.compile(r"^(\s*(mr|mrs|ms|sir|madam|dr)\.?\s+[^,\n]{1,40},\s*)", re.IGNORECASE)
+    stripped = honorific_re.sub("", stripped, count=1).strip()
+
+    return stripped or text
+
+
 # =========================
 # MAIN CHAT FUNCTION
 # =========================
@@ -62,12 +83,13 @@ def chat(prompt: str) -> str:
 
         # If online fails, fallback
         if reply in ("OPENROUTER_UNAVAILABLE", None, ""):
-            return offline_chat(final_prompt)
+            offline_reply = offline_chat(final_prompt)
+            return _strip_greeting(offline_reply)
 
-        return reply
+        return _strip_greeting(reply)
 
     # ---------- OFFLINE PATH ----------
-    return offline_chat(final_prompt)
+    return _strip_greeting(offline_chat(final_prompt))
 
 
 # =========================

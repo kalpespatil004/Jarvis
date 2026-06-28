@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-25T10:41:42.726888+00:00",
+  "generated_at": "2026-06-26T20:44:36.302608+00:00",
   "platform": "Windows",
-  "count": 737,
+  "count": 736,
   "apps": [
     {
       "name": "${{arpdisplayname}}",
@@ -461,7 +461,7 @@
     },
     {
       "name": "chrome_pwa_launcher",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\chrome_pwa_launcher.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\chrome_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -496,8 +496,8 @@
       "tag": "dev"
     },
     {
-      "name": "codesetup-stable-fcf604774b9f2674b473065736ee75077e256353",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-fcf604774b9f2674b473065736ee75077e256353.exe",
+      "name": "codesetup-stable-7e7950df89d055b5a378379db9ee14290772148a",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Temp\\vscode-stable-user-x64\\CodeSetup-stable-7e7950df89d055b5a378379db9ee14290772148a.exe",
       "source": "program_files",
       "tag": "dev"
     },
@@ -989,7 +989,7 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1037,7 +1037,7 @@
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\elevation_service.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1482,12 +1482,6 @@
     {
       "name": "instagram",
       "location": "Chrome._crx_akpamiohjfjfndmaldlcfphjmp",
-      "source": "uwp",
-      "tag": "utility"
-    },
-    {
-      "name": "instagram",
-      "location": "www.instagram.com-E4B7766F_ysfa6mcnwr1rw!App",
       "source": "uwp",
       "tag": "utility"
     },
@@ -2621,7 +2615,7 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\notification_helper.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3077,7 +3071,7 @@
     },
     {
       "name": "os_update_handler",
-      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.116\\os_update_handler.exe",
+      "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\os_update_handler.exe",
       "source": "program_files",
       "tag": "utility"
     },

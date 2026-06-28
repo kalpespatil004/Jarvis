@@ -41,5 +41,8 @@ def chat(prompt: str) -> str:
         return openrouter_chat(prompt)
 
 if __name__ == "__main__":
-    test_prompt = "What is the capital of France?"
-    print(chat(test_prompt))
+    while True:
+        test_prompt = input("Test prompt: ")
+        if test_prompt.lower() in ("exit", "quit"):
+            break
+        print(chat(test_prompt))
