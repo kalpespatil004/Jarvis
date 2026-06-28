@@ -14,6 +14,7 @@ from brain.performance import log_stage
 
 from brain.context import context
 from brain.events import trigger_event
+from memory.sync_manager import start_sync
 from memory.conversation import (
     add_turn,
     clear_working_memory,
@@ -186,10 +187,9 @@ def _execute(command: str):
 # MAIN LOOP (STATE CONTROL)
 # =========================
 def brain_loop():
-    # Speak startup greeting only once per process run
-    if not getattr(brain_loop, "_greeted", False):
-        speak("Jarvis online.")
-        setattr(brain_loop, "_greeted", True)
+
+    start_sync()
+    speak("Jarvis online.")
 
     while True:
         try:
