@@ -44,12 +44,12 @@ MOOD_MAP = {
     "study":         "lofi hip hop study beats",
     "studying":      "lofi beats study music",
     "concentration": "concentration music brain power",
-    "work":          "background music for work focus",
+   
     "coding":        "coding music lofi programming beats",
     "productive":    "productive background music",
 
     # Energy / Workout
-    "workout":       "workout gym motivation music",
+   
     "gym":           "gym pump up music energy",
     "energy":        "high energy pump up songs",
     "morning":       "morning motivation music positive",

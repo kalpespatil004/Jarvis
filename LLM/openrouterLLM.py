@@ -12,7 +12,11 @@ from openai import OpenAI
 load_dotenv()
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "google/gemma-4-31b-it:free")
 
+# Simple cooldown after failures to avoid spamming unavailable service
+_last_failure = 0.0
+_cooldown_s = 60.0
 
 if API_KEY:
     client = OpenAI(
@@ -28,7 +32,16 @@ else:
 
 
 def chat(prompt: str) -> str:
+    import time
+
+    global _last_failure
+
+    # If we previously failed recently, skip attempting
+    if time.time() - _last_failure < _cooldown_s:
+        return "OPENROUTER_UNAVAILABLE"
+
     if not client:
+        _last_failure = time.time()
         return "OPENROUTER_UNAVAILABLE"
 
     if not prompt or not prompt.strip():
@@ -36,9 +49,9 @@ def chat(prompt: str) -> str:
 
     try:
         response = client.chat.completions.create(
-            model="arcee-ai/trinity-large-preview:free",
+            model=OPENROUTER_MODEL,
             messages=[
-                {"role": "system", "content": "You are JARVIS. Be concise, calm, intelligent."},
+                {"role": "system", "content": "You are JARVIS. Be concise, calm, intelligent. Do not start replies with salutations."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.6,
@@ -46,10 +59,13 @@ def chat(prompt: str) -> str:
         )
         return response.choices[0].message.content.strip() # type: ignore
     except Exception as e:
-       
         print("OPENROUTER_UNAVAILABLE", e)
-        return 
+        _last_failure = time.time()
+        return "OPENROUTER_UNAVAILABLE"
 
 if __name__ == "__main__":
-    test_prompt = "what is the capital of France? and what is the capital of Germany?"
-    print(chat(test_prompt))
+    while True:
+        test_prompt = input("Test prompt: ")
+        if test_prompt.lower() in ("exit", "quit"):
+            break
+        print(chat(test_prompt))
