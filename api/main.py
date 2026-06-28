@@ -4,12 +4,18 @@ import asyncio
 from body.speak import speak
 from fastapi import FastAPI
 from brain.brain import process_text
+from memory.sync_manager import start_sync
 from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 executor = ThreadPoolExecutor(max_workers=1)
 ASK_TIMEOUT_SECONDS = 25
+
+
+@app.on_event("startup")
+def startup_sync():
+    start_sync()
 
 app.add_middleware(
     CORSMiddleware,

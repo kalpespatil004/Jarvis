@@ -163,13 +163,17 @@ def push_conversation_turn(turn: dict):
     try:
         payload = dict(turn)
         payload["time"] = _turn_time(payload)
+        payload["timestamp"] = str(payload.get("timestamp") or payload["time"])
+        payload.setdefault("conversation_id", _turn_document_id(payload))
         payload["synced_at"] = _firestore().SERVER_TIMESTAMP
 
-        ref = _conversations_collection().document(_turn_document_id(payload))
+        ref = _conversations_collection().document(str(payload["conversation_id"]))
         ref.set(payload, merge=True)
+        return True
 
     except Exception as exc:
         print("[FIRESTORE PUSH ERROR]", exc)
+        return False
 
 
 def pull_last_conversation_turns(limit: int = DEFAULT_PULL_LIMIT) -> list[dict[str, Any]]:
@@ -231,3 +235,81 @@ def overwrite_local_conversation_from_cloud(limit: int = DEFAULT_PULL_LIMIT) -> 
     except Exception as exc:
         print("[FIRESTORE LOCAL OVERWRITE ERROR]", exc)
         return False
+
+
+def _normalize_cloud_turn(turn: dict[str, Any], document_id: str | None = None) -> dict[str, Any]:
+    payload = dict(turn or {})
+    if document_id:
+        payload.setdefault("conversation_id", document_id)
+        payload.setdefault("id", document_id)
+    timestamp = _turn_time(payload)
+    payload["timestamp"] = str(payload.get("timestamp") or timestamp)
+    payload.setdefault("time", payload["timestamp"])
+    payload.setdefault("conversation_id", payload.get("id") or payload.get("turn_id") or document_id or _turn_document_id(payload))
+    return payload
+
+
+def pull_new_conversation_turns(since_timestamp: str | None = None, limit: int = 200) -> list[dict[str, Any]]:
+    """Return cloud turns newer than ``since_timestamp`` in chronological order."""
+    try:
+        safe_limit = max(1, int(limit or 200))
+        query = _conversations_collection().order_by("timestamp", direction=_firestore().Query.ASCENDING)
+        if since_timestamp:
+            query = query.where("timestamp", ">", str(since_timestamp))
+        query = query.limit(safe_limit)
+        turns: list[dict[str, Any]] = []
+        for snapshot in query.stream():
+            turns.append(_normalize_cloud_turn(snapshot.to_dict() or {}, snapshot.id))
+        return turns
+    except Exception as exc:
+        print("[FIRESTORE INCREMENTAL PULL ERROR]", exc)
+        return []
+
+
+def append_cloud_conversation_to_local(cloud_turn: dict[str, Any]) -> bool:
+    """Incrementally append one cloud turn to local cache without overwriting history."""
+    try:
+        from memory.local_cache import append_turn
+
+        turn = _conversation_turn_from_cloud(_normalize_cloud_turn(cloud_turn))
+        if turn is None:
+            return False
+        turn.update({
+            "conversation_id": cloud_turn.get("conversation_id") or cloud_turn.get("id") or cloud_turn.get("turn_id"),
+            "device_id": cloud_turn.get("device_id"),
+            "timestamp": cloud_turn.get("timestamp") or cloud_turn.get("time"),
+        })
+        return append_turn(turn)
+    except Exception as exc:
+        print("[FIRESTORE LOCAL APPEND ERROR]", exc)
+        return False
+
+
+def merge_cloud_conversations(cloud_turns: list[dict[str, Any]]) -> int:
+    """Incrementally merge cloud turns into local cache."""
+    merged = 0
+    for cloud_turn in cloud_turns or []:
+        if append_cloud_conversation_to_local(cloud_turn):
+            merged += 1
+    return merged
+
+
+def start_realtime_listener(callback, device_id: str | None = None) -> Any | None:
+    """Start a Firestore snapshot listener and call back for new remote turns."""
+    try:
+        query = _conversations_collection().order_by("timestamp", direction=_firestore().Query.ASCENDING)
+
+        def _on_snapshot(_snapshots, changes, _read_time):
+            for change in changes:
+                if getattr(change, "type", None).name not in {"ADDED", "MODIFIED"}:
+                    continue
+                snapshot = change.document
+                turn = _normalize_cloud_turn(snapshot.to_dict() or {}, snapshot.id)
+                if device_id and turn.get("device_id") == device_id:
+                    continue
+                callback(turn)
+
+        return query.on_snapshot(_on_snapshot)
+    except Exception as exc:
+        print("[FIRESTORE LISTENER ERROR]", exc)
+        return None

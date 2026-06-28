@@ -14,6 +14,7 @@ from brain.performance import log_stage
 
 from brain.context import context
 from brain.events import trigger_event
+from memory.sync_manager import start_sync
 from memory.conversation import (
     add_turn,
     clear_working_memory,
@@ -187,6 +188,7 @@ def _execute(command: str):
 # =========================
 def brain_loop():
 
+    start_sync()
     speak("Jarvis online.")
 
     while True:

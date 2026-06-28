@@ -4,7 +4,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from memory.firestore_sync import push_conversation_turn
+from memory.sync_manager import ensure_turn_identity, upload_turn
+
+# Backward-compatible alias for older imports/tests; synchronization is delegated to SyncManager.
+push_conversation_turn = upload_turn
 from memory.local_cache import read_cache, write_cache
 
 # Keep enough verbatim context for follow-ups while compacting older sessions.
@@ -238,6 +241,7 @@ def add_turn(
         _turn_metadata(user_metadata, assistant_metadata),
         timestamp=timestamp,
     )
+    turn = ensure_turn_identity(turn)
     turns = _get_conversation_turns(data)
     turns.append(turn)
     data[CONVERSATION_TURNS_KEY] = _trim_conversation_turns(turns)
