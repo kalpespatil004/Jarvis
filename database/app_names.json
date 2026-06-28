@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-26T20:44:36.302608+00:00",
+  "generated_at": "2026-06-28T14:35:06.535081+00:00",
   "platform": "Windows",
-  "count": 736,
+  "count": 673,
   "apps": [
     {
       "name": "${{arpdisplayname}}",
@@ -160,6 +160,12 @@
       "tag": "utility"
     },
     {
+      "name": "adobe desktop service",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\ADS\\Adobe Desktop Service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "adobe illustrator 2026",
       "location": "C:\\illustrater\\Adobe Illustrator 2026",
       "source": "registry",
@@ -180,6 +186,24 @@
     {
       "name": "adobe photoshop 2021",
       "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Adobe\\Adobe Photoshop 2021\\Photoshop.exe",
+      "source": "uwp",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe premiere pro",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\Adobe Premiere Pro.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe premiere pro 2026",
+      "location": "C:\\Program Files\\Adobe",
+      "source": "registry",
+      "tag": "utility"
+    },
+    {
+      "name": "adobe premiere pro 2026",
+      "location": "{6D809377-6AF0-444B-8957-A3773F02200E}\\Adobe\\Adobe Premiere Pro 2026\\Adobe Premiere Pro.exe",
       "source": "uwp",
       "tag": "utility"
     },
@@ -304,42 +328,6 @@
       "tag": "utility"
     },
     {
-      "name": "appvcleaner",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\appvcleaner.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "appvdllsurrogate",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "appvdllsurrogate32",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate32.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "appvdllsurrogate64",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVDllSurrogate64.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "appvlp",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Client\\AppVLP.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "appvshnotify",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\AppVShNotify.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "arm-linux-androideabi-ld",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\build-tools\\34.0.0\\arm-linux-androideabi-ld.exe",
       "source": "program_files",
@@ -424,6 +412,12 @@
       "tag": "utility"
     },
     {
+      "name": "cephtmlengine",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\CEPHtmlEngine\\CEPHtmlEngine.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "character map",
       "location": "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\\charmap.exe",
       "source": "uwp",
@@ -472,21 +466,9 @@
       "tag": "utility"
     },
     {
-      "name": "clview",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\CLVIEW.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "cmd",
       "location": "C:\\Windows\\system32\\cmd.exe",
       "source": "builtin",
-      "tag": "utility"
-    },
-    {
-      "name": "cnfnot32",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\CNFNOT32.EXE",
-      "source": "program_files",
       "tag": "utility"
     },
     {
@@ -563,25 +545,13 @@
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\cookie_exporter.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\cookie_exporter.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "cookie_exporter",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\cookie_exporter.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -593,37 +563,31 @@
     },
     {
       "name": "cookie_exporter",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\cookie_exporter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "cookie_exporter",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "cookie_exporter",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\cookie_exporter.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "copilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application",
-      "source": "registry",
-      "tag": "utility"
-    },
-    {
-      "name": "copilot",
-      "location": "Microsoft.Copilot_8wekyb3d8bbwe!App",
-      "source": "uwp",
-      "tag": "utility"
-    },
-    {
-      "name": "copilot_setup",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\Installer\\copilot_setup.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\cookie_exporter.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "copilot_setup",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\Installer\\copilot_setup.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "copilot_setup",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\Installer\\copilot_setup.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -683,6 +647,12 @@
     },
     {
       "name": "crlogtransport",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\ADS\\CRLogTransport.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crlogtransport",
       "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\HDBox\\CRLogTransport.exe",
       "source": "program_files",
       "tag": "utility"
@@ -713,7 +683,19 @@
     },
     {
       "name": "crwindowsclientservice",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
       "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\CRWindowsClientService.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "crwindowsclientservice",
+      "location": "C:\\Program Files (x86)\\Common Files\\Adobe\\Adobe Desktop Common\\ADS\\CRWindowsClientService.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -952,6 +934,18 @@
       "tag": "utility"
     },
     {
+      "name": "dvaapprelauncher",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\dvaapprelauncher.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dvaaudiofilterscan",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\dvaaudiofilterscan.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "dynamiclinkmanager",
       "location": "C:\\Program Files\\Adobe\\Adobe After Effects 2026\\Support Files\\dynamiclinkmanager.exe",
       "source": "program_files",
@@ -960,6 +954,12 @@
     {
       "name": "dynamiclinkmanager",
       "location": "C:\\Program Files\\Adobe\\Adobe Photoshop 2021\\Required\\DynamicLinkMediaServer\\dynamiclinkmanager.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "dynamiclinkmanager",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\dynamiclinkmanager.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -995,25 +995,13 @@
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\elevated_tracing_service.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "elevated_tracing_service",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1025,13 +1013,19 @@
     },
     {
       "name": "elevated_tracing_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\elevated_tracing_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevated_tracing_service",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevated_tracing_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\elevated_tracing_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\elevated_tracing_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1043,25 +1037,13 @@
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\elevation_service.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\elevation_service.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "elevation_service",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1073,13 +1055,19 @@
     },
     {
       "name": "elevation_service",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\elevation_service.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "elevation_service",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "elevation_service",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\elevation_service.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\elevation_service.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1122,19 +1110,7 @@
     {
       "name": "excel",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "excel",
-      "location": "Microsoft.Office.EXCEL.EXE.15",
-      "source": "uwp",
-      "tag": "productivity"
-    },
-    {
-      "name": "excelcnv",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\excelcnv.exe",
-      "source": "program_files",
+      "source": "builtin",
       "tag": "productivity"
     },
     {
@@ -1294,8 +1270,8 @@
       "tag": "utility"
     },
     {
-      "name": "graph",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\GRAPH.EXE",
+      "name": "gpusniffer",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\GPUSniffer.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1336,14 +1312,8 @@
       "tag": "utility"
     },
     {
-      "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\identity_helper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\identity_helper.exe",
+      "name": "icsconverter",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\ICSConverter.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1355,7 +1325,7 @@
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1367,13 +1337,19 @@
     },
     {
       "name": "identity_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\identity_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "identity_helper",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "identity_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\identity_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\identity_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1391,13 +1367,13 @@
     },
     {
       "name": "ie_to_edge_stub",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\BHO\\ie_to_edge_stub.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\BHO\\ie_to_edge_stub.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "ie_to_edge_stub",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.80\\BHO\\ie_to_edge_stub.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\BHO\\ie_to_edge_stub.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -1468,12 +1444,6 @@
       "tag": "utility"
     },
     {
-      "name": "inspectorofficegadget",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\InspectorOfficeGadget.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
       "name": "instagram",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\_crx_akpamiohjfcnimfljfndmaldlcfphjmp\\Instagram.ico",
       "source": "registry",
@@ -1494,24 +1464,6 @@
     {
       "name": "installcleanup",
       "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\InstallCleanup.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "integratedoffice",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\IntegratedOffice.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "integratedoffice",
-      "location": "C:\\Program Files\\Microsoft Office 15\\ClientX64\\IntegratedOffice.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "integrator",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Integration\\Integrator.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1792,12 +1744,6 @@
       "tag": "utility"
     },
     {
-      "name": "livecapture",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\livecapture.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "lively wallpaper",
       "location": "12030rocksdanister.LivelyWallpaper_97hta09mmv6hy!App",
       "source": "uwp",
@@ -1852,12 +1798,6 @@
       "tag": "utility"
     },
     {
-      "name": "logcollector",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\logcollector.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "logcollectortool",
       "location": "C:\\Program Files (x86)\\Adobe\\Adobe Sync\\CoreSync\\LogCollectorTool\\LogCollectorTool.exe",
       "source": "program_files",
@@ -1878,12 +1818,6 @@
     {
       "name": "make_f2fs_casefold",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Android\\Sdk\\platform-tools\\make_f2fs_casefold.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "mavinject32",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\MavInject32.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -1910,12 +1844,6 @@
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application",
       "source": "registry",
       "tag": "browser"
-    },
-    {
-      "name": "microsoft office home and student 2021 - en-gb",
-      "location": "C:\\Program Files\\Microsoft Office",
-      "source": "registry",
-      "tag": "productivity"
     },
     {
       "name": "microsoft onedrive",
@@ -2122,12 +2050,6 @@
       "tag": "utility"
     },
     {
-      "name": "misc",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\misc.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "mixed reality portal",
       "location": "Microsoft.MixedReality.Portal_8wekyb3d8bbwe!App",
       "source": "uwp",
@@ -2189,31 +2111,13 @@
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\mscopilot.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\mscopilot.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\mscopilot.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "mscopilot",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2225,37 +2129,25 @@
     },
     {
       "name": "mscopilot",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\mscopilot.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "mscopilot",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "mscopilot",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\mscopilot.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\mscopilot.exe",
       "source": "program_files",
       "tag": "utility"
-    },
-    {
-      "name": "mscopilot_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\mscopilot_proxy.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge.exe",
-      "source": "program_files",
-      "tag": "browser"
     },
     {
       "name": "msedge",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2267,7 +2159,7 @@
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2279,19 +2171,19 @@
     },
     {
       "name": "msedge",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\msedge.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\msedge.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2303,19 +2195,13 @@
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge_proxy.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedge_proxy",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge_proxy.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2327,25 +2213,19 @@
     },
     {
       "name": "msedge_proxy",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\msedge_proxy.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_proxy",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_proxy",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge_proxy.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedge_pwa_launcher.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\msedge_proxy.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2357,7 +2237,7 @@
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2369,13 +2249,19 @@
     },
     {
       "name": "msedge_pwa_launcher",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\msedge_pwa_launcher.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedge_pwa_launcher",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedge_pwa_launcher",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedge_pwa_launcher.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\msedge_pwa_launcher.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2387,25 +2273,13 @@
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\msedgewebview2.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\msedgewebview2.exe",
-      "source": "program_files",
-      "tag": "browser"
-    },
-    {
-      "name": "msedgewebview2",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2417,13 +2291,19 @@
     },
     {
       "name": "msedgewebview2",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\msedgewebview2.exe",
+      "source": "program_files",
+      "tag": "browser"
+    },
+    {
+      "name": "msedgewebview2",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
     {
       "name": "msedgewebview2",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\msedgewebview2.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\msedgewebview2.exe",
       "source": "program_files",
       "tag": "browser"
     },
@@ -2446,36 +2326,6 @@
       "tag": "utility"
     },
     {
-      "name": "msoadfsb",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoadfsb.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "msoasb",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\msoasb.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "msohtmed",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSOHTMED.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "msosrec",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSOSREC.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "msqry32",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\MSQRY32.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "nahimic",
       "location": "A-Volute.Nahimic_w2gh52qy24etm!App",
       "source": "uwp",
@@ -2490,12 +2340,6 @@
     {
       "name": "nahimicnotifsys",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\NhNotifSys\\nahimic\\nahimicNotifSys.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "namecontrolserver",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\NAMECONTROLSERVER.EXE",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2591,19 +2435,13 @@
     },
     {
       "name": "notification_click_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\notification_click_helper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "notification_click_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\notification_click_helper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "notification_click_helper",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\notification_click_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_click_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\notification_click_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2621,25 +2459,13 @@
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\notification_helper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\notification_helper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "notification_helper",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2651,13 +2477,19 @@
     },
     {
       "name": "notification_helper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\notification_helper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "notification_helper",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "notification_helper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\notification_helper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\notification_helper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -2860,60 +2692,6 @@
       "tag": "utility"
     },
     {
-      "name": "office 16 click-to-run extensibility component",
-      "location": "",
-      "source": "registry",
-      "tag": "productivity"
-    },
-    {
-      "name": "office language preferences",
-      "location": "Microsoft.Office.SETLANG.EXE.15",
-      "source": "uwp",
-      "tag": "productivity"
-    },
-    {
-      "name": "officeappguardwin32",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\officeappguardwin32.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officec2rclient",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\OfficeC2RClient.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officeclicktorun",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\OfficeClickToRun.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officeclicktorun",
-      "location": "C:\\Program Files\\Microsoft Office 15\\ClientX64\\OfficeClickToRun.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officescrbroker",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OfficeScrBroker.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officescrsanbroker",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OfficeScrSanBroker.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "officesvcmgr",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\officesvcmgr.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
       "name": "offlinescannershell",
       "location": "C:\\Program Files\\Windows Defender\\Offline\\OfflineScannerShell.exe",
       "source": "program_files",
@@ -2945,7 +2723,7 @@
     },
     {
       "name": "ollamasetup",
-      "location": "C:\\Users\\kalpe\\AppData\\Local\\Ollama\\updates_v2\\0x8DECCCFC435733D\\OllamaSetup.exe",
+      "location": "C:\\Users\\kalpe\\AppData\\Local\\Ollama\\updates_v2\\0x8DED3B54C2D8400\\OllamaSetup.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3028,24 +2806,6 @@
       "tag": "utility"
     },
     {
-      "name": "onenote",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ONENOTE.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "onenote",
-      "location": "Microsoft.Office.ONENOTE.EXE.15",
-      "source": "uwp",
-      "tag": "utility"
-    },
-    {
-      "name": "onenotem",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ONENOTEM.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "opencl runtime",
       "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2",
       "source": "registry",
@@ -3064,20 +2824,8 @@
       "tag": "utility"
     },
     {
-      "name": "orgchart",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\ORGCHART.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "os_update_handler",
       "location": "C:\\Program Files\\Google\\Chrome\\Application\\149.0.7827.197\\os_update_handler.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "ospprearm",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OSPPREARM.EXE",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3089,25 +2837,13 @@
     },
     {
       "name": "passkey_authenticator_plugin",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\passkey_authenticator_plugin.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "passkey_authenticator_plugin",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\passkey_authenticator_plugin.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
-      "name": "pdfreflow",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PDFREFLOW.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "perfboost",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PerfBoost.exe",
+      "name": "passkey_authenticator_plugin",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\passkey_authenticator_plugin.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3154,18 +2890,6 @@
       "tag": "utility"
     },
     {
-      "name": "powerpnt",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "powerpoint",
-      "location": "Microsoft.Office.POWERPNT.EXE.15",
-      "source": "uwp",
-      "tag": "productivity"
-    },
-    {
       "name": "powerpoint",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
       "source": "builtin",
@@ -3178,20 +2902,14 @@
       "tag": "utility"
     },
     {
-      "name": "pptico",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\PPTICO.EXE",
+      "name": "pproheadless",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\PProHeadless.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "presentmon_x64",
       "location": "C:\\Program Files\\NVIDIA Corporation\\FrameViewSDK\\bin\\PresentMon_x64.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "protocolhandler",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\protocolhandler.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3209,19 +2927,7 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\pwahelper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "pwahelper",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\pwahelper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3233,7 +2939,7 @@
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3245,13 +2951,19 @@
     },
     {
       "name": "pwahelper",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\pwahelper.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "pwahelper",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "pwahelper",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\pwahelper.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\pwahelper.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3526,6 +3238,12 @@
       "tag": "utility"
     },
     {
+      "name": "rrewriter",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\RRewriter.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "run",
       "location": "Microsoft.Windows.Shell.RunDialog",
       "source": "uwp",
@@ -3540,24 +3258,6 @@
     {
       "name": "scheduleeventaction",
       "location": "C:\\Program Files (x86)\\Lenovo\\VantageService\\4.2601.31.0\\ScheduleEventAction.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "sdxhelper",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SDXHelper.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "sdxhelperbgt",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SDXHelperBgt.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "selfcert",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SELFCERT.EXE",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3592,12 +3292,6 @@
       "tag": "utility"
     },
     {
-      "name": "setlang",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SETLANG.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "settings",
       "location": "windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel",
       "source": "uwp",
@@ -3624,12 +3318,6 @@
     {
       "name": "shellmcpservers.packaging",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\MicrosoftWindows.Client.Core_cw5n1h2txyewy\\ShellMcpServers.Packaging.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "skypeserver",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\SkypeSrv\\SKYPESERVER.EXE",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3706,12 +3394,6 @@
       "tag": "utility"
     },
     {
-      "name": "sticky notes (new)",
-      "location": "Microsoft.Office.OneNote.MemoryPreview",
-      "source": "uwp",
-      "tag": "utility"
-    },
-    {
       "name": "store",
       "location": "C:\\Users\\kalpe\\AppData\\Local\\Microsoft\\WindowsApps\\store.exe",
       "source": "program_files",
@@ -3766,6 +3448,12 @@
       "tag": "utility"
     },
     {
+      "name": "teamprojectslocalhub",
+      "location": "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2026\\TeamProjectsLocalHub.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
       "name": "tileiras",
       "location": "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.2\\bin\\tileiras.exe",
       "source": "program_files",
@@ -3785,31 +3473,13 @@
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\uc_connector.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application\\149.0.4022.80\\uc_connector.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.69\\uc_connector.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "uc_connector",
       "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.80\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.69\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\149.0.4022.98\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3821,13 +3491,19 @@
     },
     {
       "name": "uc_connector",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\149.0.4022.98\\uc_connector.exe",
+      "source": "program_files",
+      "tag": "utility"
+    },
+    {
+      "name": "uc_connector",
       "location": "C:\\Program Files (x86)\\Microsoft\\EdgeCore\\Optimized\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
     {
       "name": "uc_connector",
-      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.80\\uc_connector.exe",
+      "location": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\149.0.4022.98\\uc_connector.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -3964,12 +3640,6 @@
       "tag": "utility"
     },
     {
-      "name": "vpreview",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\VPREVIEW.EXE",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
       "name": "vs_filetracker_singleton",
       "location": "",
       "source": "registry",
@@ -4008,18 +3678,6 @@
     {
       "name": "vsinstallerelevationservice",
       "location": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\VSInstallerElevationService.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "vstoinstaller",
-      "location": "C:\\Program Files\\Common Files\\microsoft shared\\VSTO\\10.0\\VSTOInstaller.exe",
-      "source": "program_files",
-      "tag": "utility"
-    },
-    {
-      "name": "vstoinstaller",
-      "location": "C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTO\\10.0\\VSTOInstaller.exe",
       "source": "program_files",
       "tag": "utility"
     },
@@ -4204,12 +3862,6 @@
       "tag": "utility"
     },
     {
-      "name": "winword",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
       "name": "wmlaunch",
       "location": "C:\\Program Files\\Windows Media Player\\wmlaunch.exe",
       "source": "program_files",
@@ -4283,33 +3935,9 @@
     },
     {
       "name": "word",
-      "location": "Microsoft.Office.WINWORD.EXE.15",
-      "source": "uwp",
-      "tag": "productivity"
-    },
-    {
-      "name": "word",
       "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
       "source": "builtin",
       "tag": "productivity"
-    },
-    {
-      "name": "wordconv",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\Wordconv.exe",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "wordicon",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WORDICON.EXE",
-      "source": "program_files",
-      "tag": "productivity"
-    },
-    {
-      "name": "writingassistant",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WritingAssistant\\WritingAssistant.exe",
-      "source": "program_files",
-      "tag": "utility"
     },
     {
       "name": "x64 native tools command prompt for vs",
@@ -4357,12 +3985,6 @@
       "name": "x86_x64 cross tools command prompt for vs",
       "location": "Microsoft.AutoGenerated.{70C6B808-39B6-1F28-0212-7F45EB21EF97}",
       "source": "uwp",
-      "tag": "utility"
-    },
-    {
-      "name": "xlicons",
-      "location": "C:\\Program Files\\Microsoft Office\\root\\Office16\\XLICONS.EXE",
-      "source": "program_files",
       "tag": "utility"
     },
     {

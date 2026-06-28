@@ -484,93 +484,105 @@
         "status": "success",
         "intent": "chat"
       }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-28T19:57:12.648738",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-28T19:57:12.648738",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "who are you",
+      "time": "2026-06-28T19:59:07.100620",
+      "metadata": {
+        "intent": "chat",
+        "text": "who are you",
+        "normalized_text": "who are you",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "I am JARVIS, at your service.",
+      "time": "2026-06-28T19:59:07.100620",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what you can do",
+      "time": "2026-06-28T19:59:23.916190",
+      "metadata": {
+        "intent": "chat",
+        "text": "what you can do",
+        "normalized_text": "what you can do",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "I can provide information, manage tasks, and execute commands.",
+      "time": "2026-06-28T19:59:23.916190",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "how fast light can travel",
+      "time": "2026-06-28T20:00:28.602249",
+      "metadata": {
+        "intent": "chat",
+        "text": "how fast light can travel",
+        "normalized_text": "how fast light can travel",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Light travels at approximately 299,792,458 meters per second in a vacuum.",
+      "time": "2026-06-28T20:00:28.602249",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
     }
   ],
   "conversation_turns": [
-    {
-      "user_text": "What is Object-Oriented Programming?",
-      "assistant_text": "Sir, Object-Oriented Programming is a paradigm that organizes software design around \"objects\" that encapsulate data and methods for modular and reusable code.",
-      "time": "2026-06-27T01:48:00.609319",
-      "metadata": {
-        "user": {
-          "text": "What is Object-Oriented Programming?",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "what is object oriented programming ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "What is Natural Language Processing?",
-      "assistant_text": "Sir, Natural Language Processing is an artificial intelligence field that enables computers to understand, interpret, and generate human language.",
-      "time": "2026-06-27T01:50:34.683963",
-      "metadata": {
-        "user": {
-          "text": "What is Natural Language Processing?",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "what is natural language processing ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Explain Retrieval-Augmented Generation (RAG).",
-      "assistant_text": "Sir, Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from a knowledge base before generating a response.",
-      "time": "2026-06-27T01:50:57.493093",
-      "metadata": {
-        "user": {
-          "text": "Explain Retrieval-Augmented Generation (RAG).",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "explain retrieval augmented generation rag ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Write a Python program to reverse a string.",
-      "assistant_text": "Sir, a Python program to reverse a string can be `def reverse_string(s): return s[::-1]`.",
-      "time": "2026-06-27T01:51:54.577631",
-      "metadata": {
-        "user": {
-          "text": "Write a Python program to reverse a string.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "write a python program to reverse a string ",
-          "model_confidence": 0.39499999999999996,
-          "confidence": 0.39499999999999996
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
     {
       "user_text": "Explain binary search with Python code.",
       "assistant_text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `low, high = 0, len(arr)-1; while low <= high: mid = (low+high)//2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid+1; else: high = mid-1`.",
@@ -906,6 +918,102 @@
           "intent": "chat"
         }
       }
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-28T19:57:12.648738",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-28T19:57:12.648738",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "edeed8e625fc403d9e43fd6cfe1239ce"
+    },
+    {
+      "user_text": "who are you",
+      "assistant_text": "I am JARVIS, at your service.",
+      "time": "2026-06-28T19:59:07.100620",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "who are you",
+          "normalized_text": "who are you",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-28T19:59:07.100620",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "32655af37a864d6985a408e94ef09bcd"
+    },
+    {
+      "user_text": "what you can do",
+      "assistant_text": "I can provide information, manage tasks, and execute commands.",
+      "time": "2026-06-28T19:59:23.916190",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "what you can do",
+          "normalized_text": "what you can do",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-28T19:59:23.916190",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "bd4de1759d1f44d9aa3e2bbe91d219c5"
+    },
+    {
+      "user_text": "how fast light can travel",
+      "assistant_text": "Light travels at approximately 299,792,458 meters per second in a vacuum.",
+      "time": "2026-06-28T20:00:28.602249",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "how fast light can travel",
+          "normalized_text": "how fast light can travel",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-28T20:00:28.602249",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "941850402e8f4c5aba6d3bc5a6218fed"
     }
   ],
   "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x12, greeting x10.\nOlder user requests included: temrature in nashik; hey; Hello Jarvis how are you; Hello Jarvis; hi; hi; chrome; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: where is mangi tungi; how many step or staire are there; which is harder to trek brahmha giri or mangi tungi , and compare stair; hi; chrome; notepad; hi; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: Hello can you listen me; Tell me what is my name; who are you; close chrome; close it; close this window; in nashik; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: who are you; hi; who are you; where is tajmahal; and where is kutub minar; hii; hello; who are you.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: what is capital of india; what is my name; who are you; hi; who are you; who are you; hi how are you; what is my name.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: what is most famous spot there; hi; where is kutub minar; what is height of it; wo asked the hieght of stark tower; hi; what is capital of france; hello jarvis."
