@@ -7,488 +7,8 @@
   "conversation_history": [
     {
       "role": "user",
-      "text": "What is Object-Oriented Programming?",
-      "time": "2026-06-27T01:48:00.609319",
-      "metadata": {
-        "text": "What is Object-Oriented Programming?",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "what is object oriented programming ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, Object-Oriented Programming is a paradigm that organizes software design around \"objects\" that encapsulate data and methods for modular and reusable code.",
-      "time": "2026-06-27T01:48:00.609319",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "What is Natural Language Processing?",
-      "time": "2026-06-27T01:50:34.683963",
-      "metadata": {
-        "text": "What is Natural Language Processing?",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "what is natural language processing ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, Natural Language Processing is an artificial intelligence field that enables computers to understand, interpret, and generate human language.",
-      "time": "2026-06-27T01:50:34.683963",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Explain Retrieval-Augmented Generation (RAG).",
-      "time": "2026-06-27T01:50:57.493093",
-      "metadata": {
-        "text": "Explain Retrieval-Augmented Generation (RAG).",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "explain retrieval augmented generation rag ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from a knowledge base before generating a response.",
-      "time": "2026-06-27T01:50:57.493093",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Write a Python program to reverse a string.",
-      "time": "2026-06-27T01:51:54.577631",
-      "metadata": {
-        "text": "Write a Python program to reverse a string.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "write a python program to reverse a string ",
-        "model_confidence": 0.39499999999999996,
-        "confidence": 0.39499999999999996
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, a Python program to reverse a string can be `def reverse_string(s): return s[::-1]`.",
-      "time": "2026-06-27T01:51:54.577631",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Explain binary search with Python code.",
-      "time": "2026-06-27T01:53:09.992333",
-      "metadata": {
-        "text": "Explain binary search with Python code.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "explain binary search with python code ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `low, high = 0, len(arr)-1; while low <= high: mid = (low+high)//2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid+1; else: high = mid-1`.",
-      "time": "2026-06-27T01:53:09.992333",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Write a Java program for a binary search.",
-      "time": "2026-06-27T01:53:38.674710",
-      "metadata": {
-        "text": "Write a Java program for a binary search.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "write a java program for a binary search ",
-        "model_confidence": 0.44999999999999996,
-        "confidence": 0.44999999999999996
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
-      "time": "2026-06-27T01:53:38.674710",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Write a Java program for a binary search.",
-      "time": "2026-06-27T01:53:50.102287",
-      "metadata": {
-        "text": "Write a Java program for a binary search.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "write a java program for a binary search ",
-        "model_confidence": 0.44999999999999996,
-        "confidence": 0.44999999999999996
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
-      "time": "2026-06-27T01:53:50.102287",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Explain binary search with Python code.",
-      "time": "2026-06-27T01:54:03.165008",
-      "metadata": {
-        "text": "Explain binary search with Python code.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "explain binary search with python code ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `def binary_search(arr, target): low, high = 0, len(arr)-1; while low <= high: mid = (low + high) // 2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid + 1; else: high = mid - 1; return -1`.",
-      "time": "2026-06-27T01:54:03.165008",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "hey whats your real name",
-      "time": "2026-06-27T01:55:25.092525",
-      "metadata": {
-        "text": "hey whats your real name",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "hey whats your real name",
-        "model_confidence": 0.35,
-        "confidence": 0.35
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, my designation and identity is JARVIS.",
-      "time": "2026-06-27T01:55:25.092525",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
-      "time": "2026-06-27T01:56:30.978475",
-      "metadata": {
-        "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "explain how a modern ai assistant like jarvis processes a user s voice command from speech recognition to response generation including the role of stt intent detection memory llms and tts ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, I process voice commands by converting speech to text via STT, then detecting intent, leveraging memory for context, generating responses with LLMs, and vocalizing them through TTS.",
-      "time": "2026-06-27T01:56:30.978475",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Explain the future of human-AI collaboration.",
-      "time": "2026-06-27T01:57:41.367070",
-      "metadata": {
-        "text": "Explain the future of human-AI collaboration.",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "chat",
-        "normalized_text": "explain the future of human ai collaboration ",
-        "model_confidence": 0.9,
-        "confidence": 0.9
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Sir, the future of human-AI collaboration will foster a symbiotic relationship, enhancing human capabilities and driving innovation through shared problem-solving and mutual augmentation.",
-      "time": "2026-06-27T01:57:41.367070",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "chrome",
-      "time": "2026-06-27T02:14:36.321165",
-      "metadata": {
-        "text": "chrome",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "chrome",
-        "model_confidence": 0.575,
-        "confidence": 0.575
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\u2705 Opening chrome",
-      "time": "2026-06-27T02:14:36.321165",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "notepad",
-      "time": "2026-06-27T02:14:57.342293",
-      "metadata": {
-        "text": "notepad",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "notepad",
-        "model_confidence": 0.35,
-        "confidence": 0.35
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "\u2705 Opening notepad",
-      "time": "2026-06-27T02:14:57.342293",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "create a file",
-      "time": "2026-06-27T02:16:46.239732",
-      "metadata": {
-        "text": "create a file",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "create a file",
-        "model_confidence": 0.425,
-        "confidence": 0.425
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Certainly, what should the file be named and where would you like it stored?",
-      "time": "2026-06-27T02:16:46.239732",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "jarvis.py",
-      "time": "2026-06-27T02:17:06.740774",
-      "metadata": {
-        "text": "jarvis.py",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "jarvis py",
-        "model_confidence": 0.35,
-        "confidence": 0.35
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Understood, 'jarvis.py' it is; please indicate the desired storage location for this file, sir.",
-      "time": "2026-06-27T02:17:06.740774",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "downloads",
-      "time": "2026-06-27T02:17:19.529349",
-      "metadata": {
-        "text": "downloads",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "downloads",
-        "model_confidence": 0.35,
-        "confidence": 0.35
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Creating 'jarvis.py' in your Downloads folder now, sir.",
-      "time": "2026-06-27T02:17:19.529349",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hello",
-      "time": "2026-06-27T10:13:57.678232",
-      "metadata": {
-        "text": "Hello",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "greeting",
-        "normalized_text": "hello",
-        "model_confidence": 0.98,
-        "confidence": 0.98
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T10:13:57.678232",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hello",
-      "time": "2026-06-27T10:14:40.391162",
-      "metadata": {
-        "text": "Hello",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "greeting",
-        "normalized_text": "hello",
-        "model_confidence": 0.98,
-        "confidence": 0.98
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T10:14:40.391162",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hey",
-      "time": "2026-06-27T15:09:30.144387",
-      "metadata": {
-        "text": "Hey",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "regex",
-        "intent": "greeting",
-        "normalized_text": "hey",
-        "model_confidence": 0.98,
-        "confidence": 0.98
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T15:09:30.144387",
-      "metadata": {
-        "status": "success",
-        "intent": "greeting"
-      }
-    },
-    {
-      "role": "user",
-      "text": "Hey can you hear me",
-      "time": "2026-06-27T15:09:46.501098",
-      "metadata": {
-        "text": "Hey can you hear me",
-        "execution_status": "success",
-        "disambiguation_needed": false,
-        "source": "local_classifier_fallback",
-        "intent": "chat",
-        "normalized_text": "hey can you hear me",
-        "model_confidence": 0.40625,
-        "confidence": 0.40625
-      }
-    },
-    {
-      "role": "assistant",
-      "text": "I hear you clearly, Kalpesh.",
-      "time": "2026-06-27T15:09:46.501098",
-      "metadata": {
-        "status": "success",
-        "intent": "chat"
-      }
-    },
-    {
-      "role": "user",
       "text": "hey",
-      "time": "2026-06-28T19:57:12.648738",
+      "time": "2026-06-29T00:26:33.665144",
       "metadata": {
         "intent": "greeting",
         "text": "hey",
@@ -503,7 +23,7 @@
     {
       "role": "assistant",
       "text": "Hello sir, how can I help you?",
-      "time": "2026-06-28T19:57:12.648738",
+      "time": "2026-06-29T00:26:33.665144",
       "metadata": {
         "status": "success",
         "intent": "greeting"
@@ -511,12 +31,132 @@
     },
     {
       "role": "user",
-      "text": "who are you",
-      "time": "2026-06-28T19:59:07.100620",
+      "text": "hey",
+      "time": "2026-06-29T00:27:54.773485",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:27:54.773485",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T00:41:17.547494",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:41:17.547494",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T00:45:24.567304",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:45:24.567304",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T00:51:46.558138",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:51:46.558138",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T01:00:42.322695",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:00:42.322695",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is specification of amd processors",
+      "time": "2026-06-29T01:01:14.520752",
       "metadata": {
         "intent": "chat",
-        "text": "who are you",
-        "normalized_text": "who are you",
+        "text": "what is specification of amd processors",
+        "normalized_text": "what is specification of amd processors",
         "confidence": 0.9,
         "source": "regex",
         "model_confidence": 0.9,
@@ -526,8 +166,8 @@
     },
     {
       "role": "assistant",
-      "text": "I am JARVIS, at your service.",
-      "time": "2026-06-28T19:59:07.100620",
+      "text": "AMD processor specifications typically encompass core count, clock speed, cache memory, and thermal design power, varying by model.",
+      "time": "2026-06-29T01:01:14.520752",
       "metadata": {
         "status": "success",
         "intent": "chat"
@@ -535,12 +175,12 @@
     },
     {
       "role": "user",
-      "text": "what you can do",
-      "time": "2026-06-28T19:59:23.916190",
+      "text": "what is your name",
+      "time": "2026-06-29T01:01:47.052258",
       "metadata": {
         "intent": "chat",
-        "text": "what you can do",
-        "normalized_text": "what you can do",
+        "text": "what is your name",
+        "normalized_text": "what is your name",
         "confidence": 0.9,
         "source": "regex",
         "model_confidence": 0.9,
@@ -550,8 +190,8 @@
     },
     {
       "role": "assistant",
-      "text": "I can provide information, manage tasks, and execute commands.",
-      "time": "2026-06-28T19:59:23.916190",
+      "text": "I am JARVIS, your intelligent and resourceful personal assistant.",
+      "time": "2026-06-29T01:01:47.052258",
       "metadata": {
         "status": "success",
         "intent": "chat"
@@ -559,12 +199,60 @@
     },
     {
       "role": "user",
-      "text": "how fast light can travel",
-      "time": "2026-06-28T20:00:28.602249",
+      "text": "hey",
+      "time": "2026-06-29T01:08:07.042743",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:08:07.042743",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T01:19:42.326234",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:19:42.326234",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is your name",
+      "time": "2026-06-29T01:20:04.094125",
       "metadata": {
         "intent": "chat",
-        "text": "how fast light can travel",
-        "normalized_text": "how fast light can travel",
+        "text": "what is your name",
+        "normalized_text": "what is your name",
         "confidence": 0.9,
         "source": "regex",
         "model_confidence": 0.9,
@@ -574,355 +262,259 @@
     },
     {
       "role": "assistant",
-      "text": "Light travels at approximately 299,792,458 meters per second in a vacuum.",
-      "time": "2026-06-28T20:00:28.602249",
+      "text": "Good day Mr. Patil, my name is JARVIS, your personal AI assistant at your service.",
+      "time": "2026-06-29T01:20:04.094125",
       "metadata": {
         "status": "success",
         "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is ollama",
+      "time": "2026-06-29T01:20:56.110846",
+      "metadata": {
+        "intent": "chat",
+        "text": "what is ollama",
+        "normalized_text": "what is ollama",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Ollama is an open-source platform for decentralized social networking and community management.",
+      "time": "2026-06-29T01:20:56.110846",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "what is ai",
+      "time": "2026-06-29T01:21:26.892412",
+      "metadata": {
+        "intent": "chat",
+        "text": "what is ai",
+        "normalized_text": "what is ai",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "artificial intelligence refers to machines designed to simulate human intelligence.",
+      "time": "2026-06-29T01:21:26.892412",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T07:15:12.893506",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T07:15:12.893506",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hi",
+      "time": "2026-06-29T10:15:27.395070",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hi",
+        "normalized_text": "hi",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T10:15:27.395070",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "I want to give presentation of me so how to how",
+      "time": "2026-06-29T10:19:44.906006",
+      "metadata": {
+        "intent": "chat",
+        "text": "I want to give presentation of me so how to how",
+        "normalized_text": "i want to give presentation of me so how to how",
+        "confidence": 0.38749999999999996,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.38749999999999996,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Certainly, structure your presentation to introduce yourself, highlight key strengths and experiences, and conclude with your aspirations.",
+      "time": "2026-06-29T10:19:44.906006",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-06-29T10:20:48.396463",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T10:20:48.396463",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
+      }
+    },
+    {
+      "role": "user",
+      "text": "full form of jarvis",
+      "time": "2026-06-29T10:21:08.212817",
+      "metadata": {
+        "intent": "chat",
+        "text": "full form of jarvis",
+        "normalized_text": "full form of jarvis",
+        "confidence": 0.9,
+        "source": "regex",
+        "model_confidence": 0.9,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "My full form is Just A Rather Very Intelligent System.",
+      "time": "2026-06-29T10:21:08.212817",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "Jarvis",
+      "time": "2026-06-29T10:22:47.075507",
+      "metadata": {
+        "intent": "chat",
+        "text": "Jarvis",
+        "normalized_text": "jarvis",
+        "confidence": 0.35,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.35,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "At your service, Mr. Patil; how may I assist you today?",
+      "time": "2026-06-29T10:22:47.075507",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "whatsapp",
+      "time": "2026-06-29T10:23:28.400857",
+      "metadata": {
+        "intent": "chat",
+        "text": "whatsapp",
+        "normalized_text": "whatsapp",
+        "confidence": 0.35,
+        "source": "local_classifier_fallback",
+        "model_confidence": 0.35,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "\u2705 Opening whatsapp",
+      "time": "2026-06-29T10:23:28.400857",
+      "metadata": {
+        "status": "success",
+        "intent": "chat"
+      }
+    },
+    {
+      "role": "user",
+      "text": "hey",
+      "time": "2026-07-01T15:23:40.109454",
+      "metadata": {
+        "intent": "greeting",
+        "text": "hey",
+        "normalized_text": "hey",
+        "confidence": 0.98,
+        "source": "regex",
+        "model_confidence": 0.98,
+        "disambiguation_needed": false,
+        "execution_status": "success"
+      }
+    },
+    {
+      "role": "assistant",
+      "text": "Hello sir, how can I help you?",
+      "time": "2026-07-01T15:23:40.109454",
+      "metadata": {
+        "status": "success",
+        "intent": "greeting"
       }
     }
   ],
   "conversation_turns": [
     {
-      "user_text": "Explain binary search with Python code.",
-      "assistant_text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `low, high = 0, len(arr)-1; while low <= high: mid = (low+high)//2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid+1; else: high = mid-1`.",
-      "time": "2026-06-27T01:53:09.992333",
-      "metadata": {
-        "user": {
-          "text": "Explain binary search with Python code.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "explain binary search with python code ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Write a Java program for a binary search.",
-      "assistant_text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
-      "time": "2026-06-27T01:53:38.674710",
-      "metadata": {
-        "user": {
-          "text": "Write a Java program for a binary search.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "write a java program for a binary search ",
-          "model_confidence": 0.44999999999999996,
-          "confidence": 0.44999999999999996
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Write a Java program for a binary search.",
-      "assistant_text": "Sir, a Java program for binary search can be implemented with the method: `public static int binarySearch(int[] arr, int target) { int low = 0, high = arr.length - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }`.",
-      "time": "2026-06-27T01:53:50.102287",
-      "metadata": {
-        "user": {
-          "text": "Write a Java program for a binary search.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "write a java program for a binary search ",
-          "model_confidence": 0.44999999999999996,
-          "confidence": 0.44999999999999996
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Explain binary search with Python code.",
-      "assistant_text": "Sir, binary search efficiently locates a target in a sorted array by repeatedly halving the search interval, with Python logic often structured as `def binary_search(arr, target): low, high = 0, len(arr)-1; while low <= high: mid = (low + high) // 2; if arr[mid] == target: return mid; elif arr[mid] < target: low = mid + 1; else: high = mid - 1; return -1`.",
-      "time": "2026-06-27T01:54:03.165008",
-      "metadata": {
-        "user": {
-          "text": "Explain binary search with Python code.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "explain binary search with python code ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "hey whats your real name",
-      "assistant_text": "Sir, my designation and identity is JARVIS.",
-      "time": "2026-06-27T01:55:25.092525",
-      "metadata": {
-        "user": {
-          "text": "hey whats your real name",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "hey whats your real name",
-          "model_confidence": 0.35,
-          "confidence": 0.35
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
-      "assistant_text": "Sir, I process voice commands by converting speech to text via STT, then detecting intent, leveraging memory for context, generating responses with LLMs, and vocalizing them through TTS.",
-      "time": "2026-06-27T01:56:30.978475",
-      "metadata": {
-        "user": {
-          "text": "Explain how a modern AI assistant like JARVIS processes a user's voice command from speech recognition to response generation, including the role of STT, intent detection, memory, LLMs, and TTS.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "explain how a modern ai assistant like jarvis processes a user s voice command from speech recognition to response generation including the role of stt intent detection memory llms and tts ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Explain the future of human-AI collaboration.",
-      "assistant_text": "Sir, the future of human-AI collaboration will foster a symbiotic relationship, enhancing human capabilities and driving innovation through shared problem-solving and mutual augmentation.",
-      "time": "2026-06-27T01:57:41.367070",
-      "metadata": {
-        "user": {
-          "text": "Explain the future of human-AI collaboration.",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "chat",
-          "normalized_text": "explain the future of human ai collaboration ",
-          "model_confidence": 0.9,
-          "confidence": 0.9
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "chrome",
-      "assistant_text": "\u2705 Opening chrome",
-      "time": "2026-06-27T02:14:36.321165",
-      "metadata": {
-        "user": {
-          "text": "chrome",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "chrome",
-          "model_confidence": 0.575,
-          "confidence": 0.575
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "notepad",
-      "assistant_text": "\u2705 Opening notepad",
-      "time": "2026-06-27T02:14:57.342293",
-      "metadata": {
-        "user": {
-          "text": "notepad",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "notepad",
-          "model_confidence": 0.35,
-          "confidence": 0.35
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "create a file",
-      "assistant_text": "Certainly, what should the file be named and where would you like it stored?",
-      "time": "2026-06-27T02:16:46.239732",
-      "metadata": {
-        "user": {
-          "text": "create a file",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "create a file",
-          "model_confidence": 0.425,
-          "confidence": 0.425
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "jarvis.py",
-      "assistant_text": "Understood, 'jarvis.py' it is; please indicate the desired storage location for this file, sir.",
-      "time": "2026-06-27T02:17:06.740774",
-      "metadata": {
-        "user": {
-          "text": "jarvis.py",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "jarvis py",
-          "model_confidence": 0.35,
-          "confidence": 0.35
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "downloads",
-      "assistant_text": "Creating 'jarvis.py' in your Downloads folder now, sir.",
-      "time": "2026-06-27T02:17:19.529349",
-      "metadata": {
-        "user": {
-          "text": "downloads",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "downloads",
-          "model_confidence": 0.35,
-          "confidence": 0.35
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
-      "user_text": "Hello",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T10:13:57.678232",
-      "metadata": {
-        "user": {
-          "text": "Hello",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "greeting",
-          "normalized_text": "hello",
-          "model_confidence": 0.98,
-          "confidence": 0.98
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "Hello",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T10:14:40.391162",
-      "metadata": {
-        "user": {
-          "text": "Hello",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "greeting",
-          "normalized_text": "hello",
-          "model_confidence": 0.98,
-          "confidence": 0.98
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "Hey",
-      "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-27T15:09:30.144387",
-      "metadata": {
-        "user": {
-          "text": "Hey",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "regex",
-          "intent": "greeting",
-          "normalized_text": "hey",
-          "model_confidence": 0.98,
-          "confidence": 0.98
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "greeting"
-        }
-      }
-    },
-    {
-      "user_text": "Hey can you hear me",
-      "assistant_text": "I hear you clearly, Kalpesh.",
-      "time": "2026-06-27T15:09:46.501098",
-      "metadata": {
-        "user": {
-          "text": "Hey can you hear me",
-          "execution_status": "success",
-          "disambiguation_needed": false,
-          "source": "local_classifier_fallback",
-          "intent": "chat",
-          "normalized_text": "hey can you hear me",
-          "model_confidence": 0.40625,
-          "confidence": 0.40625
-        },
-        "assistant": {
-          "status": "success",
-          "intent": "chat"
-        }
-      }
-    },
-    {
       "user_text": "hey",
       "assistant_text": "Hello sir, how can I help you?",
-      "time": "2026-06-28T19:57:12.648738",
+      "time": "2026-06-29T00:27:54.773485",
       "metadata": {
         "user": {
           "intent": "greeting",
@@ -939,19 +531,115 @@
           "intent": "greeting"
         }
       },
-      "timestamp": "2026-06-28T19:57:12.648738",
+      "timestamp": "2026-06-29T00:27:54.773485",
       "device_id": "desktop-Kalpesh_PC-e2269c75",
-      "conversation_id": "edeed8e625fc403d9e43fd6cfe1239ce"
+      "conversation_id": "ac6752b5b56341f3b54448ba5ea1ae1d"
     },
     {
-      "user_text": "who are you",
-      "assistant_text": "I am JARVIS, at your service.",
-      "time": "2026-06-28T19:59:07.100620",
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:41:17.547494",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T00:41:17.547494",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "a86201700dae4dfaa371553b8ab7f404"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:45:24.567304",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T00:45:24.567304",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "9983f7bf73de486685bf9949c18d849b"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T00:51:46.558138",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T00:51:46.558138",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "f1b5af1882f649b2831e0d3bb815f980"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:00:42.322695",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T01:00:42.322695",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "1396d2e8d9bf462a8d0791573512f8ab"
+    },
+    {
+      "user_text": "what is specification of amd processors",
+      "assistant_text": "AMD processor specifications typically encompass core count, clock speed, cache memory, and thermal design power, varying by model.",
+      "time": "2026-06-29T01:01:14.520752",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "who are you",
-          "normalized_text": "who are you",
+          "text": "what is specification of amd processors",
+          "normalized_text": "what is specification of amd processors",
           "confidence": 0.9,
           "source": "regex",
           "model_confidence": 0.9,
@@ -963,19 +651,19 @@
           "intent": "chat"
         }
       },
-      "timestamp": "2026-06-28T19:59:07.100620",
+      "timestamp": "2026-06-29T01:01:14.520752",
       "device_id": "desktop-Kalpesh_PC-e2269c75",
-      "conversation_id": "32655af37a864d6985a408e94ef09bcd"
+      "conversation_id": "b466082a739d49d6871451e79f0c3e96"
     },
     {
-      "user_text": "what you can do",
-      "assistant_text": "I can provide information, manage tasks, and execute commands.",
-      "time": "2026-06-28T19:59:23.916190",
+      "user_text": "what is your name",
+      "assistant_text": "I am JARVIS, your intelligent and resourceful personal assistant.",
+      "time": "2026-06-29T01:01:47.052258",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "what you can do",
-          "normalized_text": "what you can do",
+          "text": "what is your name",
+          "normalized_text": "what is your name",
           "confidence": 0.9,
           "source": "regex",
           "model_confidence": 0.9,
@@ -987,19 +675,67 @@
           "intent": "chat"
         }
       },
-      "timestamp": "2026-06-28T19:59:23.916190",
+      "timestamp": "2026-06-29T01:01:47.052258",
       "device_id": "desktop-Kalpesh_PC-e2269c75",
-      "conversation_id": "bd4de1759d1f44d9aa3e2bbe91d219c5"
+      "conversation_id": "0449d1799c32463f94dcd890064085d6"
     },
     {
-      "user_text": "how fast light can travel",
-      "assistant_text": "Light travels at approximately 299,792,458 meters per second in a vacuum.",
-      "time": "2026-06-28T20:00:28.602249",
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:08:07.042743",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T01:08:07.042743",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "d51a2c039aab479eadd3d4f29b0e470e"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T01:19:42.326234",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T01:19:42.326234",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "cd98a6af254f44e9a57d806ec67fd995"
+    },
+    {
+      "user_text": "what is your name",
+      "assistant_text": "Good day Mr. Patil, my name is JARVIS, your personal AI assistant at your service.",
+      "time": "2026-06-29T01:20:04.094125",
       "metadata": {
         "user": {
           "intent": "chat",
-          "text": "how fast light can travel",
-          "normalized_text": "how fast light can travel",
+          "text": "what is your name",
+          "normalized_text": "what is your name",
           "confidence": 0.9,
           "source": "regex",
           "model_confidence": 0.9,
@@ -1011,10 +747,250 @@
           "intent": "chat"
         }
       },
-      "timestamp": "2026-06-28T20:00:28.602249",
+      "timestamp": "2026-06-29T01:20:04.094125",
       "device_id": "desktop-Kalpesh_PC-e2269c75",
-      "conversation_id": "941850402e8f4c5aba6d3bc5a6218fed"
+      "conversation_id": "af9d9d24c514448cb7cce5185c989b83"
+    },
+    {
+      "user_text": "what is ollama",
+      "assistant_text": "Ollama is an open-source platform for decentralized social networking and community management.",
+      "time": "2026-06-29T01:20:56.110846",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "what is ollama",
+          "normalized_text": "what is ollama",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T01:20:56.110846",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "1d7389f3578140338fdc01239a14b22b"
+    },
+    {
+      "user_text": "what is ai",
+      "assistant_text": "artificial intelligence refers to machines designed to simulate human intelligence.",
+      "time": "2026-06-29T01:21:26.892412",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "what is ai",
+          "normalized_text": "what is ai",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T01:21:26.892412",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "c832304717e646578466c9b696631d5f"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T07:15:12.893506",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T07:15:12.893506",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "6d0818751ba54c389eada26bacc254db"
+    },
+    {
+      "user_text": "hi",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T10:15:27.395070",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hi",
+          "normalized_text": "hi",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T10:15:27.395070",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "b3d1f21c994043219da8fadff2b91e3c"
+    },
+    {
+      "user_text": "I want to give presentation of me so how to how",
+      "assistant_text": "Certainly, structure your presentation to introduce yourself, highlight key strengths and experiences, and conclude with your aspirations.",
+      "time": "2026-06-29T10:19:44.906006",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "I want to give presentation of me so how to how",
+          "normalized_text": "i want to give presentation of me so how to how",
+          "confidence": 0.38749999999999996,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.38749999999999996,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T10:19:44.906006",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "c759681f73d54c1ba99c796d29011cee"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-06-29T10:20:48.396463",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-06-29T10:20:48.396463",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "ccdeb9030a56431ea520ca9776021c69"
+    },
+    {
+      "user_text": "full form of jarvis",
+      "assistant_text": "My full form is Just A Rather Very Intelligent System.",
+      "time": "2026-06-29T10:21:08.212817",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "full form of jarvis",
+          "normalized_text": "full form of jarvis",
+          "confidence": 0.9,
+          "source": "regex",
+          "model_confidence": 0.9,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T10:21:08.212817",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "703506a93693497295df1abd14aeedc2"
+    },
+    {
+      "user_text": "Jarvis",
+      "assistant_text": "At your service, Mr. Patil; how may I assist you today?",
+      "time": "2026-06-29T10:22:47.075507",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "Jarvis",
+          "normalized_text": "jarvis",
+          "confidence": 0.35,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.35,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T10:22:47.075507",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "162fb4b071be464a9a165348c52b34ae"
+    },
+    {
+      "user_text": "whatsapp",
+      "assistant_text": "\u2705 Opening whatsapp",
+      "time": "2026-06-29T10:23:28.400857",
+      "metadata": {
+        "user": {
+          "intent": "chat",
+          "text": "whatsapp",
+          "normalized_text": "whatsapp",
+          "confidence": 0.35,
+          "source": "local_classifier_fallback",
+          "model_confidence": 0.35,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "chat"
+        }
+      },
+      "timestamp": "2026-06-29T10:23:28.400857",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "e95560483e7b486ea5817bdb0d4058b0"
+    },
+    {
+      "user_text": "hey",
+      "assistant_text": "Hello sir, how can I help you?",
+      "time": "2026-07-01T15:23:40.109454",
+      "metadata": {
+        "user": {
+          "intent": "greeting",
+          "text": "hey",
+          "normalized_text": "hey",
+          "confidence": 0.98,
+          "source": "regex",
+          "model_confidence": 0.98,
+          "disambiguation_needed": false,
+          "execution_status": "success"
+        },
+        "assistant": {
+          "status": "success",
+          "intent": "greeting"
+        }
+      },
+      "timestamp": "2026-07-01T15:23:40.109454",
+      "device_id": "desktop-Kalpesh_PC-e2269c75",
+      "conversation_id": "0c91817ec5b849c396027cf8444fa24d"
     }
   ],
-  "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x12, greeting x10.\nOlder user requests included: temrature in nashik; hey; Hello Jarvis how are you; Hello Jarvis; hi; hi; chrome; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: where is mangi tungi; how many step or staire are there; which is harder to trek brahmha giri or mangi tungi , and compare stair; hi; chrome; notepad; hi; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: Hello can you listen me; Tell me what is my name; who are you; close chrome; close it; close this window; in nashik; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: who are you; hi; who are you; where is tajmahal; and where is kutub minar; hii; hello; who are you.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: what is capital of india; what is my name; who are you; hi; who are you; who are you; hi how are you; what is my name.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: what is most famous spot there; hi; where is kutub minar; what is height of it; wo asked the hieght of stark tower; hi; what is capital of france; hello jarvis."
+  "conversation_summary": "Compacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x8, open_app x4, chat x4, set_brightness x4, get_time x2.\nOlder user requests included: hey; open vscode; open calculator; what is time; hello; what is time now; set brightness to 100; set to 20%.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x18, chat x4.\nOlder user requests included: hey; hey; hi; hey; pune; hey; hey; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x12, greeting x10.\nOlder user requests included: temrature in nashik; hey; Hello Jarvis how are you; Hello Jarvis; hi; hi; chrome; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: where is mangi tungi; how many step or staire are there; which is harder to trek brahmha giri or mangi tungi , and compare stair; hi; chrome; notepad; hi; hey.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: Hello can you listen me; Tell me what is my name; who are you; close chrome; close it; close this window; in nashik; hi.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: who are you; hi; who are you; where is tajmahal; and where is kutub minar; hii; hello; who are you.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x20, greeting x2.\nOlder user requests included: what is capital of india; what is my name; who are you; hi; who are you; who are you; hi how are you; what is my name.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x16, greeting x6.\nOlder user requests included: what is most famous spot there; hi; where is kutub minar; what is height of it; wo asked the hieght of stark tower; hi; what is capital of france; hello jarvis.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x22.\nOlder user requests included: What is Object-Oriented Programming?; What is Natural Language Processing?; Explain Retrieval-Augmented Generation (RAG).; Write a Python program to reverse a string.; Explain binary search with Python code.; Write a Java program for a binary search.; Write a Java program for a binary search.; Explain binary search with Python code..\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: chat x14, greeting x8.\nOlder user requests included: chrome; notepad; create a file; jarvis.py; downloads; Hello; Hello; Hey.\nCompacted 20 older messages (10 user, 10 assistant).\nCommon intents: chat x10, greeting x10.\nOlder user requests included: what you can do; how fast light can travel; Hey bro how are you; What you can do; hey; hey; hey; Hello.\nCompacted 22 older messages (11 user, 11 assistant).\nCommon intents: greeting x12, chat x10.\nOlder user requests included: what is your name; hey bro; what is your name; tell me something about you; what is capital of france; hey; hey; hey."
 }

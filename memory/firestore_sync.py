@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import os
 import re
+import socket
 from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid4
@@ -18,6 +19,19 @@ from uuid import uuid4
 
 DEFAULT_PULL_LIMIT = 20
 USER_ENV_VAR = "JARVIS_USER_ID"
+NETWORK_CHECK_HOSTS = [("8.8.8.8", 53), ("1.1.1.1", 53), ("9.9.9.9", 53)]
+NETWORK_CHECK_TIMEOUT = 1.0
+
+
+def _is_online(timeout_s: float = NETWORK_CHECK_TIMEOUT) -> bool:
+    """Quick connectivity check before attempting Firestore operations."""
+    for host, port in NETWORK_CHECK_HOSTS:
+        try:
+            with socket.create_connection((host, port), timeout=timeout_s):
+                return True
+        except OSError:
+            continue
+    return False
 
 _initialized = False
 _firestore_client: Any | None = None
@@ -160,6 +174,10 @@ def push_conversation_turn(turn: dict):
     if not isinstance(turn, dict) or not turn:
         return
 
+    if not _is_online():
+        print("[FIRESTORE PUSH SKIPPED] Offline or no network.")
+        return False
+
     try:
         payload = dict(turn)
         payload["time"] = _turn_time(payload)
@@ -178,6 +196,10 @@ def push_conversation_turn(turn: dict):
 
 def pull_last_conversation_turns(limit: int = DEFAULT_PULL_LIMIT) -> list[dict[str, Any]]:
     """Return the latest conversation turns from Firestore in chronological order."""
+    if not _is_online():
+        print("[FIRESTORE PULL SKIPPED] Offline or no network.")
+        return []
+
     try:
         safe_limit = max(1, int(limit or DEFAULT_PULL_LIMIT))
         query = (
@@ -251,6 +273,10 @@ def _normalize_cloud_turn(turn: dict[str, Any], document_id: str | None = None) 
 
 def pull_new_conversation_turns(since_timestamp: str | None = None, limit: int = 200) -> list[dict[str, Any]]:
     """Return cloud turns newer than ``since_timestamp`` in chronological order."""
+    if not _is_online():
+        print("[FIRESTORE INCREMENTAL PULL SKIPPED] Offline or no network.")
+        return []
+
     try:
         safe_limit = max(1, int(limit or 200))
         query = _conversations_collection().order_by("timestamp", direction=_firestore().Query.ASCENDING)
@@ -296,6 +322,10 @@ def merge_cloud_conversations(cloud_turns: list[dict[str, Any]]) -> int:
 
 def start_realtime_listener(callback, device_id: str | None = None) -> Any | None:
     """Start a Firestore snapshot listener and call back for new remote turns."""
+    if not _is_online():
+        print("[FIRESTORE LISTENER SKIPPED] Offline or no network.")
+        return None
+
     try:
         query = _conversations_collection().order_by("timestamp", direction=_firestore().Query.ASCENDING)
 

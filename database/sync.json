@@ -1,5 +1,15 @@
 {
   "device_id": "desktop-Kalpesh_PC-e2269c75",
-  "last_sync_time": "2026-06-28T14:30:31.806897+00:00",
-  "pending_conversation_ids": []
+  "last_sync_time": "2026-07-01T09:53:41.613417+00:00",
+  "pending_conversation_ids": [
+    "0449d1799c32463f94dcd890064085d6",
+    "1d7389f3578140338fdc01239a14b22b",
+    "9983f7bf73de486685bf9949c18d849b",
+    "af9d9d24c514448cb7cce5185c989b83",
+    "b3d1f21c994043219da8fadff2b91e3c",
+    "cd98a6af254f44e9a57d806ec67fd995",
+    "d51a2c039aab479eadd3d4f29b0e470e",
+    "f1b5af1882f649b2831e0d3bb815f980"
+  ],
+  "last_received_timestamp": "2026-06-28T14:30:31.806897+00:00"
 }

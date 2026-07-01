@@ -13,8 +13,8 @@ from memory.local_cache import read_cache, write_cache
 # Keep enough verbatim context for follow-ups while compacting older sessions.
 MAX_RECENT_MESSAGES = 40
 COMPACT_AFTER_MESSAGES = 60
-DEFAULT_CONTEXT_TURNS = 6
 MAX_CONVERSATION_TURNS = 20
+DEFAULT_CONTEXT_TURNS = 6
 
 KEY = "conversation_history"
 CONVERSATION_TURNS_KEY = "conversation_turns"

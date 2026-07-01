@@ -46,8 +46,7 @@ def chat(prompt: str) -> str:
 
 if __name__ == "__main__":
     while True:
-        print("a"   )
+       
         user_input = input("You: ")
-        print("b")
         response = chat(user_input)
         print(f"Jarvis: {response}")

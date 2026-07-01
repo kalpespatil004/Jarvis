@@ -293,12 +293,8 @@ def route(command: dict, return_response: bool = False) -> str:
         category = intent_data.get("category", "general")
         result = get_news(category=category)
         if result.get("success"):
-            articles = result.get("news", [])
-            if articles:
-                lines = [f"📰 Top {category.capitalize()} News:"]
-                for i, a in enumerate(articles, 1):
-                    lines.append(f"{i}. {a['title']} — {a['source']}")
-                reply = "\n".join(lines)
+            if result.get("count", 0) > 0:
+                reply = f"📰 Top {category.capitalize()} News:\n{result['titles_formatted']}"
             else:
                 reply = "No news articles found right now."
         else:

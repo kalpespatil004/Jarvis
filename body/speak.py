@@ -2,10 +2,7 @@
 Hybrid TTS router for Jarvis.
 
 - Online: use ``body.speak_edgetts`` (edge-tts backend)
-- Offline: use ``body.speak_TTS`` (local Coqui backend)
-
-Public API mirrors both backends: ``speak``, ``ensure_audio_loop_started``,
-``audio_loop``, ``warm_up``.
+- Offline: use ``body.speak_TTS`` (simple pyttsx3 backend)
 """
 
 from __future__ import annotations
@@ -19,12 +16,14 @@ from types import ModuleType
 from typing import Optional
 import re
 import unicodedata
+import contextlib
+import io
+import logging
 
+# Suppress logs
+logging.getLogger("TTS").setLevel(logging.ERROR)
 
-
-
-# Repo root must be on path so ``body.speak_TTS`` / ``body.speak_edgetts`` always
-# resolve to this project (not a third-party ``speak_TTS`` on sys.path).
+# Repo root must be on path
 _ROOT = Path(__file__).resolve().parent.parent
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
@@ -34,12 +33,12 @@ _backend_name: Optional[str] = None
 _backend_module: Optional[ModuleType] = None
 _warmup_done = {"edge": False, "offline": False}
 
-_connectivity_cache_ttl_s = 3.0
+_connectivity_cache_ttl_s = 5.0
 _last_connectivity_check = 0.0
 _last_connectivity_result = False
 
 
-def _internet_available(timeout_s: float = 0.8) -> bool:
+def _internet_available(timeout_s: float = 1.0) -> bool:
     """Quick internet check with short-lived cache."""
     global _last_connectivity_check, _last_connectivity_result
     now = time.monotonic()
@@ -48,9 +47,14 @@ def _internet_available(timeout_s: float = 0.8) -> bool:
 
     ok = False
     try:
-        with socket.create_connection(("1.1.1.1", 53), timeout=timeout_s):
-            ok = True
-    except OSError:
+        for dns in ["8.8.8.8", "1.1.1.1", "9.9.9.9"]:
+            try:
+                with socket.create_connection((dns, 53), timeout=timeout_s):
+                    ok = True
+                    break
+            except OSError:
+                continue
+    except Exception:
         ok = False
 
     _last_connectivity_check = now
@@ -59,18 +63,16 @@ def _internet_available(timeout_s: float = 0.8) -> bool:
 
 
 def _import_backend(name: str) -> ModuleType:
+    """Import backend module with suppressed output."""
     if name == "edge":
-        return importlib.import_module("body.speak_edgetts")
+        with contextlib.redirect_stdout(io.StringIO()):
+            module = importlib.import_module("body.speak_edgetts")
+        return module
     return importlib.import_module("body.speak_TTS")
 
 
 def _get_backend() -> tuple[str, ModuleType]:
-    """
-    Choose backend dynamically.
-    - online -> edge
-    - offline -> local TTS
-    Falls back to local TTS if edge backend import fails.
-    """
+    """Choose backend dynamically."""
     global _backend_name, _backend_module
 
     preferred = "edge" if _internet_available() else "offline"
@@ -84,11 +86,20 @@ def _get_backend() -> tuple[str, ModuleType]:
             chosen = preferred
         except Exception as exc:
             if preferred == "edge":
-                print(f"[TTS] Edge backend unavailable, falling back offline: {exc}")
-                module = _import_backend("offline")
-                chosen = "offline"
+                print(f"[TTS] Edge unavailable, falling back offline: {exc}")
+                try:
+                    module = _import_backend("offline")
+                    chosen = "offline"
+                except Exception as offline_exc:
+                    print(f"[TTS] Offline also failed: {offline_exc}")
+                    return _get_dummy_backend()
             else:
-                raise
+                print(f"[TTS] Offline failed: {exc}")
+                try:
+                    module = _import_backend("edge")
+                    chosen = "edge"
+                except Exception:
+                    return _get_dummy_backend()
 
         if chosen != _backend_name:
             print(f"[TTS] Using backend: {chosen}")
@@ -96,6 +107,20 @@ def _get_backend() -> tuple[str, ModuleType]:
         _backend_name = chosen
         _backend_module = module
         return chosen, module
+
+
+def _get_dummy_backend() -> tuple[str, ModuleType]:
+    """Return a dummy backend that does nothing."""
+    class DummyBackend:
+        def speak(self, text): pass
+        def warm_up(self): pass
+        def wait_until_done(self, timeout=None): return True
+        def ensure_audio_loop_started(self): pass
+        def stop_audio_loop(self): pass
+        def audio_loop(self): pass
+    
+    dummy = DummyBackend()
+    return "dummy", dummy
 
 
 def ensure_audio_loop_started() -> None:
@@ -106,22 +131,13 @@ def ensure_audio_loop_started() -> None:
 
 
 def audio_loop() -> None:
-    """
-    Keep compatibility with existing callers.
-    Delegates to active backend implementation.
-    """
     _, backend = _get_backend()
     fn = getattr(backend, "audio_loop", None)
     if callable(fn):
         fn()
 
 
-
 def warm_up(force: bool = False) -> None:
-    """
-    Warm up current backend once (unless force=True).
-    This avoids warming up on every function call.
-    """
     name, backend = _get_backend()
     with _state_lock:
         if _warmup_done.get(name, False) and not force:
@@ -129,17 +145,17 @@ def warm_up(force: bool = False) -> None:
 
     fn = getattr(backend, "warm_up", None)
     if callable(fn):
-        fn()
+        with contextlib.redirect_stdout(io.StringIO()):
+            try:
+                fn()
+            except Exception as exc:
+                print(f"[TTS] Warmup failed: {exc}")
 
     with _state_lock:
         _warmup_done[name] = True
 
 
 def wait_until_done(timeout: float | None = None) -> bool:
-    """
-    Wait for current backend queue to finish speaking.
-    Returns True when completed, False on timeout.
-    """
     _, backend = _get_backend()
     fn = getattr(backend, "wait_until_done", None)
     if callable(fn):
@@ -152,7 +168,6 @@ def stop_audio_loop() -> None:
     fn = getattr(backend, "stop_audio_loop", None)
     if callable(fn):
         fn()
-
 
 
 def clean_for_speech(text: str) -> str:
@@ -177,33 +192,49 @@ def clean_for_speech(text: str) -> str:
         text
     )
 
+    # Remove control characters
     text = "".join(
         ch for ch in text
         if unicodedata.category(ch) != "Cf"
     )
     return text.strip()
 
-def speak(text: str):
-    print("BEFORE:", repr(text))
 
+def speak(text: str) -> None:
+    """Speak text using the appropriate backend."""
     text = clean_for_speech(text)
-
-    print("AFTER :", repr(text))
-
     
     if not text:
         return
 
-    print(f"[TTS] {text}")  # Debug
+    print(f"Jarvis: {text}")
 
     _, backend = _get_backend()
+    
+    try:
+        fn = getattr(backend, "speak")
+        
+        if _backend_name == "offline":
+            # Simple synchronous speak
+            fn(text)
+        else:
+            with contextlib.redirect_stdout(io.StringIO()):
+                fn(text)
+    except Exception as exc:
+        print(f"[TTS] Speak error: {exc}")
 
-    fn = getattr(backend, "speak")
-    fn(text)
 
 if __name__ == "__main__":
-    warm_up()
+    from body.speak_TTS import initialize
+    initialize()
+    
+    with contextlib.redirect_stdout(io.StringIO()):
+        try:
+            warm_up()
+        except Exception as exc:
+            print(f"[TTS] Warmup failed: {exc}")
+    
     speak("If internet is available, I use Edge voice.")
     speak("If internet is unavailable, I switch to offline TTS.")
-    speak("Hello. Hybrid TTS is online🤣😘🤷💕.")
+    speak("Hello. Hybrid TTS is online.")
     wait_until_done(timeout=120.0)

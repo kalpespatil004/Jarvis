@@ -14,7 +14,7 @@ from brain.performance import log_stage
 
 from brain.context import context
 from brain.events import trigger_event
-from memory.sync_manager import start_sync
+
 from memory.conversation import (
     add_turn,
     clear_working_memory,
@@ -115,14 +115,14 @@ def process_text(command: str) -> str:
         print(f"[BRAIN:UI] Heard → {cleaned}")
         set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "nlu"})
 
-        print("a")
+        
         memory_context = get_nlu_context()
-        print("b")
+        
         intent_data = detect_intent(cleaned, memory_context=memory_context)
         set_working_memory(current_task={"mode": "text", "input": cleaned, "status": "routing", "intent": intent_data.get("intent")})
-        print("c")
+        
         response = _handle_intent(intent_data, voice_mode=False) or "No response generated."
-        print("d")
+        
         _remember_exchange(cleaned, response, intent_data=intent_data, status="success")
         clear_working_memory()
         return response
@@ -188,7 +188,7 @@ def _execute(command: str):
 # =========================
 def brain_loop():
 
-    start_sync()
+    
     speak("Jarvis online.")
 
     while True:
@@ -199,8 +199,7 @@ def brain_loop():
             
 
             # prevent wake-word bleed into command
-            time.sleep(0.5)
-
+            
             # =========================
             # 🧠 ACTIVE MODE (ONE COMMAND ONLY)
             # =========================

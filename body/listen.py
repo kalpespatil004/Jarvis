@@ -1,5 +1,5 @@
-from listen_whisper import listen as whisper_listen
-from listen_vosk import listen as vosk_listen
+from body.listen_whisper import listen as whisper_listen
+from body.listen_vosk import listen as vosk_listen
 
 
 def listen_command():
