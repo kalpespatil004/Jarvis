@@ -1,0 +1,1 @@
+Place the packaged FastAPI backend sidecar here as `backend.exe` on Windows, or `backend` on Linux/macOS. The Tauri bundle configuration includes this directory as a resource and declares the sidecar binary for production builds.
